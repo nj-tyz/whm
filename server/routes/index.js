@@ -51,6 +51,7 @@ router.get('/store/add', controllers.store.add)
 // --- 仓位接口 --- //
 router.get('/position/list', controllers.position.list)
 router.get('/position/add', controllers.position.add)
+router.get('/position/find', controllers.position.find)
 
 // --- 库存接口 --- //
 router.get('/inventory/getBySidAndPid', controllers.inventory.getBySidAndPid)
