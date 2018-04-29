@@ -23,5 +23,5 @@
 
 .icon-churuku:before { content: "\e61e"; }
 
-.icon-icon-:before { content: "\e623"; }
+.icon-icon-wz:before { content: "\e623"; }
 
