@@ -9,7 +9,7 @@ Page({
     inputShowed: false,
     inputVal: "",
     correlationData: [],
-    currentProduct: {},
+    currentPosition: {},
     //图标类型
     chartType: 0,
     sliderOffset: 0,
@@ -55,12 +55,41 @@ Page({
       }
     });
 
-    //传入查询参数,直接查询
-    if (options.barcode) {
+    console.log(options);
+
+    //传入有商铺id,按照商铺查
+    if (options.shopId) {
       var event = {
         currentTarget: {
           dataset: {
-            barcode: options.barcode
+            shopId: options.shopId,
+            chartType: 0
+          }
+        }
+      }
+      //调用显示
+      that.show(event);
+    }
+    //传入有仓库id,按照仓库查
+    if (options.storeId) {
+      var event = {
+        currentTarget: {
+          dataset: {
+            storeId: options.storeId,
+            chartType:1
+          }
+        }
+      }
+      //调用显示
+      that.show(event);
+    }
+    //传入有仓库id,按照仓库查
+    if (options.positionId) {
+      var event = {
+        currentTarget: {
+          dataset: {
+            positionid: options.positionId,
+            chartType: 2
           }
         }
       }
@@ -96,19 +125,26 @@ Page({
     var that = this;
     wx.scanCode({
       success: (res) => {
-        var barCode = res.result;
+        var positionId = 0;
+        var codeType = "";
+        try {
+          codeType = res.result.split(":")[0];
+          positionId = res.result.split(":")[1];
+        } catch (e) {
+          console.error(e);
+          positionId = 0;
+        }
 
-        if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+        if (!codeType || codeType != 'positionID' || !positionId || positionId == 0) {
+          util.showModel('提示', '二维码错误!');
           return;
         }
 
-        console.log('商品扫码结果', res)
 
         var event = {
           currentTarget: {
             dataset: {
-              barcode: barCode
+              positionid: positionId
             }
           }
         }
@@ -122,11 +158,11 @@ Page({
   search: function () {
     var that = this;
     var options = {
-      url: config.service.searchProduct,
+      url: config.service.findPosition,
       login: true,
       data: that.data,
       success(result) {
-        console.log('搜索产品成功', result)
+        console.log('搜索仓位成功', result)
         that.setData({
           correlationData: result.data.data
         })
@@ -142,101 +178,51 @@ Page({
     qcloud.request(options)
   },
 
-  //显示具体产品
+  //显示具体仓位
   show: function (event) {
-
     var that = this
+
+    var positionId = event.currentTarget.dataset.positionid;
+    var storeId = event.currentTarget.dataset.storeId;
+    var shopId = event.currentTarget.dataset.shopId;
+
     that.setData({
       correlationData: [],
-      currentProduct: {}
+      currentPosition: {},
     })
 
     that.hideInput();
 
-    var barcode = event.currentTarget.dataset.barcode;
-    //通过barcode获取商品
-    util.showBusy('正在获取商品数据')
+    
+    
+    util.showBusy('正在获取数据')
     var options = {
-      url: config.service.getProductByBarCode,
+      url: config.service.findPosition,
       login: true,
       data: {
-        barCode: barcode,
-        inventoryInShop: true,
-        inventoryInStore: true
+        positionId: positionId
       },
       success(result) {
-        if (result && result.data && result.data.data && result.data.data.id) {
+        console.log('获取成功', result.data)
+        if (result && result.data && result.data.data) {
           util.showSuccess('获取成功')
-          console.log('产品获取成功', result.data.data)
+
+          console.log("获取数据", result.data.data[0]);
           that.setData({
-            currentProduct: result.data.data
+            currentPosition: result.data.data[0]
           })
 
           //渲染图标
           that.renderChart();
         } else {
-          util.showModel('提示', "查询商品失败");
+          util.showModel('提示', "查询失败");
         }
       },
       fail(error) {
         util.showModel('获取失败', error);
-        console.log('产品获取失败', error);
+        console.log('获取失败', error);
       }
     }
     qcloud.request(options)
-  },
-  //渲染图标
-  renderChart: function () {
-    var that = this;
-
-    //店铺库存分布
-    var currentProductInventoryInShop = that.data.currentProduct.inventoryInShopResult;
-    //仓库库存分布
-    var currentProductInventoryInStore = that.data.currentProduct.inventoryInStoreResult;
-
-    var series = [];
-    inventorySum = 0;
-    if (that.data.chartType == "0") {
-      //如果当前选中渲染货架库存
-
-
-      return;
-    } else if (that.data.chartType == "1") {
-      //如果当前选中渲染仓库库存
-      for (var i = 0; i < currentProductInventoryInStore.length; i++) {
-        series.push({
-          name: currentProductInventoryInStore[i].storeName,
-          data: currentProductInventoryInStore[i].inventoryCount,
-          format: function (val, name) {
-            return parseInt(val * inventorySum) + '件';
-          }
-        })
-        inventorySum += currentProductInventoryInStore[i].inventoryCount;
-      }
-    } else if (that.data.chartType == "2") {
-      //如果当前选中渲染货架库存
-      for (var i = 0; i < currentProductInventoryInShop.length; i++) {
-        series.push({
-          name: currentProductInventoryInShop[i].shopName,
-          data: currentProductInventoryInShop[i].inventoryCount,
-          format: function (val, name) {
-            return parseInt(val * inventorySum) + '件';
-          }
-        })
-        inventorySum += currentProductInventoryInShop[i].inventoryCount;
-      }
-    }
-
-    if (series.length > 0) {
-      new Charts({
-        canvasId: 'mycanvas',
-        type: 'pie',
-        series: series,
-        width: this.data.imageWidth,
-        height: this.data.imageHeight,
-        animation: true,
-        dataLabel: true
-      });
-    }
   }
 });

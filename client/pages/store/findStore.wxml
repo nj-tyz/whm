@@ -19,51 +19,97 @@
       <image bindtap="scanCode" style="margin-left:20rpx;margin-top:10rpx;margin-right:10rpx" class="icon-40" src="../../img/scan.png" />
 
     </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0&&correlationData.length>0}}">
-      <navigator data-barcode="{{item.barcode}}" bindtap="show" wx:for="{{correlationData}}" url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <view>{{item.storeName}}</view>
-          <view>{{item.positionName}}</view>
-        </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <navigator wx:if="{{!correlationData|| correlationData.length==0}}" url="" class="weui-cell" hover-class="weui-cell_active">
+        无结果
       </navigator>
+      <view wx:else>
+        <navigator data-positionid="{{item.id}}" bindtap="show" wx:for="{{correlationData}}" url="" class="weui-cell" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">
+            <view>{{item.storeName}}-->{{item.storeName}}-->{{item.no}}</view>
+          </view>
+        </navigator>
+      </view>
     </view>
 
 
     <view hidden="{{inputVal.length > 0||correlationData.length>0||!currentPosition.id}}">
 
-      <view class="weui-cells__title">
-        <image src="{{currentPosition.img}}" style='width:100%'></image>
-      </view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view> {{currentPosition.storeName}}</view>
-            <view style="font-size: 13px;color: #888888;">${{currentPosition.positionName}}</view>
+          <view class="weui-cell__hd">
+            <text class=' iconfont icon-shop wx-text-primary .wx-50-text mr-20'></text>
           </view>
+          <view class="weui-cell__bd">{{currentPosition.shopName}}</view>
+          <view class="weui-cell__ft">店</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <text class=' iconfont icon-cangku wx-text-primary .wx-50-text mr-20'></text>
+          </view>
+          <view class="weui-cell__bd">{{currentPosition.storeName}}</view>
+          <view class="weui-cell__ft">仓</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <text class=' iconfont icon-icon-wz wx-text-primary .wx-50-text mr-20'></text>
+          </view>
+          <view class="weui-cell__bd">{{currentPosition.no}}</view>
+          <view class="weui-cell__ft">位</view>
         </view>
       </view>
+
 
 
       <view class="weui-tab">
         <view class="weui-navbar">
           <view data-charttype="0" class="weui-navbar__item {{chartType == 0 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="0">
-            <view class="weui-navbar__title">货架分布</view>
+            <view class="weui-navbar__title">本货架</view>
           </view>
           <view data-charttype="1" class="weui-navbar__item {{chartType == 1 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="1">
-            <view class="weui-navbar__title">仓库分布</view>
+            <view class="weui-navbar__title">本仓库</view>
           </view>
-           <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
-            <view class="weui-navbar__title">店铺分布</view>
+          <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
+            <view class="weui-navbar__title">本店铺</view>
           </view>
 
 
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
         <view class="weui-article">
-          <canvas style="width:{{imageWidth}}px;height:{{imageHeight}}px" canvas-id="mycanvas" disable-scroll="true"></canvas>
+
+          <view class="weui-cell" wx:for="{{currentPosition.productsInPosition}}">
+            <view class="weui-cell__hd">
+              <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
+            </view>
+            <view class="weui-cell__bd">{{item.shopName}}-{{item.storeName}}-{{item.positionName}}-{{item.productName}}</view>
+            <view class="weui-cell__ft">
+              <view class="weui-badge" style="margin-left: 5px;">{{item.inventoryCount}}件</view>
+            </view>
+          </view>
+
+
+          <view class="weui-cell" wx:for="{{currentPosition.productsInStore}}">
+            <view class="weui-cell__hd">
+              <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
+            </view>
+            <view class="weui-cell__bd">{{item.shopName}}-{{item.storeName}}-{{item.productName}}</view>
+            <view class="weui-cell__ft">
+              <view class="weui-badge" style="margin-left: 5px;">{{item.inventoryCount}}件</view>
+            </view>
+          </view>
+
+
+
+          <view class="weui-cell" wx:for="{{currentPosition.productsInShop}}">
+            <view class="weui-cell__hd">
+              <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
+            </view>
+            <view class="weui-cell__bd">{{item.shopName}}-{{item.productName}}</view>
+            <view class="weui-cell__ft">
+              <view class="weui-badge" style="margin-left: 5px;">{{item.inventoryCount}}件</view>
+            </view>
+          </view>
 
         </view>
       </view>
