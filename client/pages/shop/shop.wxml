@@ -35,7 +35,7 @@
   </view>
 
   <view class="weui-flex">
-    <view class="weui-flex__item" style='text-align:center' bindtap="scanProduct">
+    <view class="weui-flex__item" style='text-align:center' bindtap="scanCode">
       <text class="iconfont icon-saoma wx-120-text wx-text-success"></text>
       <view>扫码</view>
     </view>

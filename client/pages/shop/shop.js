@@ -157,24 +157,41 @@ Page({
   //   })
   // },
 
-  //扫描产品条码
-  scanProduct: function () {
+  //扫码
+  scanCode: function () {
     var that = this;
     wx.scanCode({
       success: (res) => {
-        var barCode = res.result;
+        console.log('扫码结果', res)
 
-        if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+        var id = 0;
+        var codeType = "";
+        if (res.result.split(":").length>1){
+          //可能是仓库二维码
+          codeType = res.result.split(":")[0];
+          id = res.result.split(":")[1];
+        }else{
+          //可能是产品条码
+          id = res.result;
+        }
+        console.log('扫码结果', id)
+        if (!id || id == "") {
+          util.showModel('提示', '扫码错误!');
           return;
         }
 
-        console.log('商品扫码结果', res)
 
-        wx.navigateTo({
-          url: '../product/findProduct?navigationBarTitle=' + that.data.currentShop.name + '查找&barcode=' + barCode
-        })
-
+        if (codeType && codeType == 'positionID'){
+         //跳转到仓库界面
+          wx.navigateTo({
+              url: '../store/stores?navigationBarTitle=仓库&inputVal=' + id
+          })
+        }else{
+           //跳转到产品查找页面
+          wx.navigateTo({
+            url: '../product/findProduct?navigationBarTitle=商品&barcode=' + id
+          })
+        }
       }
     })
   },
