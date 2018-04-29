@@ -1,12 +1,14 @@
 {
   "pages": [
+
     "pages/index/index",
     "pages/shop/shop",
     "pages/shop/addShop",
     
     "pages/store/stores",
-    "pages/store/findStore",
     "pages/store/addStore",
+    "pages/store/findStore",
+    "pages/store/storeInfo",
 
     "pages/position/positions",
     "pages/position/addPosition",
