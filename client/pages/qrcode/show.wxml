@@ -1,0 +1,23 @@
+<!--pages/main/index.wxml-->
+<view class="container-box">
+   <view class="weui-msg">
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">货架二维码</view>
+      <view class="weui-msg__desc">请点击二维码进行保存,打印并张贴到对应货架
+      </view>
+    </view>
+  </view>
+
+
+    <view class="img-box">
+        <image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image>
+    </view>
+    <form bindsubmit="formSubmit">
+       
+        <button formType="submit" class="mybtn" type="primary">关闭</button>
+    </form>
+</view>
+<view hidden="{{maskHidden}}" class="mask"></view>
+<view class="canvas-box">
+  <canvas  hidden="{{canvasHidden}}" style="width: 686rpx;height: 686rpx;background:#f1f1f1;" canvas-id="mycanvas"/>
+</view>

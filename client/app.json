@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/shop/shop",
+    "pages/shop/addShop",
+    
+    "pages/store/stores",
+    "pages/store/findStore",
+    "pages/store/addStore",
+
+    "pages/position/positions",
+    "pages/position/addPosition",
+    
+    "pages/product/products",
+    "pages/product/addProduct",
+    "pages/product/findProduct",
+    
+    "pages/inventory/inventorys",
+    "pages/inventory/outPut",
+    
+    "pages/msg/success",
+    "pages/msg/faile",
+    
+    "pages/qrcode/show",
+    
+    "pages/setting/settingCompany",
+    "pages/setting/checkCompanyName"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "条码库存管理",
+    "enablePullDownRefresh": true,
+    "navigationBarTextStyle": "black"
+  }
+}

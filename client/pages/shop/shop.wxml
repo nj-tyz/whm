@@ -1,0 +1,144 @@
+<view class="page" wx:if="{{!isLoadding}}">
+
+  <view class="page__bd">
+    <image class="shop-image" src="{{currentShop.img}}"></image>
+
+
+    <view class="weui-panel weui-panel_access" style="margin-top:-15rpx">
+      <view class="weui-flex  shop-outline">
+        <view class="weui-flex__item" bindtap="showAllStore">
+          <view class="wx-60-text wx-text-success">
+            {{currentShop.storeCount}}
+          </view>
+          <view class="wx-30-text">
+            <text>个仓库</text>
+          </view>
+        </view>
+        <view class="weui-flex__item" bindtap="showAllProduct" style='border-right:solid #eee 1px;border-left:solid #eee 1px'>
+          <view class="wx-60-text wx-text-primary">  
+            {{currentShop.productCount}}
+          </view>
+          <view class="wx-30-text">
+            <text>种商品</text>
+          </view>
+        </view>
+        <view class="weui-flex__item" bindtap="showAllInventory">
+          <view class="wx-60-text wx-text-warning">
+            {{currentShop.inventoryCount}}
+          </view>
+          <view class="wx-30-text">
+            <text>件库存</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-flex">
+    <view class="weui-flex__item" style='text-align:center' bindtap="scanProduct">
+      <text class="iconfont icon-saoma wx-120-text wx-text-success"></text>
+      <view>扫码</view>
+    </view>
+    <view class="weui-flex__item" style='text-align:center' bindtap="outPut">
+      <text class="iconfont icon-churuku wx-120-text wx-text-primary"></text>
+      <view>出入库</view>
+    </view>
+  </view>
+</view>
+
+<!--
+  <view style="border:2px solid; border-radius:50%; display: flex;width:200rpx;height:200rpx;line-height:200rpx;"  bindtap="outPut">
+    <image src="../../img/inout.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    <view>出入库</view>
+  </view>
+
+
+
+  <view style="border:2px solid; border-radius:50%; display: flex;width:200rpx;height:200rpx;line-height:200rpx;"  bindtap="scanProduct">
+    <image src="../../img/barcode.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+    <view>扫产品</view>
+  </view>-->
+
+
+
+<!--
+    <view class="page__title">
+      <view class="weui-badge weui-badge-primary" style="margin-left: 5px;" bindtap="showAllStore"> {{currentShop.storeCount}}个仓库 </view>
+      <view class="weui-badge weui-badge-primary" style="margin-left: 5px;" bindtap="showAllProduct"> {{currentShop.productCount}}个SKU </view>
+      <view class="weui-badge weui-badge-primary" style="margin-left: 5px;" bindtap="showAllInventory"> {{currentShop.inventoryCount}}件库存 </view>
+
+    </view>
+
+
+
+  <view class="weui-cells weui-cells_after-title" style="margin-top:80rpx;">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">类型:</view>
+      </view>
+      <view class="weui-cell__bd">
+        <radio-group class="radio-group" bindchange="radioChange">
+          <radio class="radio" wx:key="optionType" value="out" checked="checked">
+            <text>出库</text>
+          </radio>
+          <radio class="radio" wx:key="optionType" value="in" style='margin-left:50rpx' checked="">
+            <text>入库</text>
+          </radio>
+        </radio-group>
+      </view>
+    </view>
+
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode" bindtap='scanStore'>
+      <view class="weui-cell__hd">
+        <view class="weui-label">仓库:</view>
+      </view>
+      <view class="weui-cell__bd">
+        <image wx:if="{{currentStore.positionId}}" class="icon-image" src="{{currentStore.img}}"></image>
+        <text wx:if="{{currentStore.name}}" class="">{{currentStore.name}}</text>
+        <image wx:else class="icon-image" src="../../img/scan.png"></image>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">仓位:</view>
+      </view>
+      <view class="weui-cell__bd">NO.
+        <text wx:if="{{currentStore.positionNo}}" class="">{{currentStore.positionNo}} </text>
+      </view>
+    </view>
+
+
+
+
+    <view class="weui-cell weui-cell_input" bindtap='scanProduct'>
+      <view class="weui-cell__hd">
+        <view class="weui-label">商品:</view>
+      </view>
+      <view class="weui-cell__bd">
+        <image wx:if="{{currentProduct.img}}" class="icon-image" src="{{currentProduct.img}}"></image>
+        <text wx:if="{{currentProduct.name}}">{{currentProduct.name}}</text>
+        <image wx:else class="icon-image" src="../../img/barcode.png"></image>
+      </view>
+    </view>
+
+
+
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">数量:</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input bindinput="bingOptionCount" value="{{optionCount}}" class="weui-input" maxlength="3" type="number" placeholder="请输入数量" />
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__tips" wx:if="{{currentInventory&&currentInventory.count}}">(当前:{{currentInventory.count}})</view>
+
+
+
+  <view class="weui-btn-area">
+    <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">提交</button>
+  </view>
+  -->

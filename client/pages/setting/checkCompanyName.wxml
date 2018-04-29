@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon wx:if="{{id==0}}" type="waiting" size="93"></icon>
+      <icon wx:if="{{id==-1}}" type="success" size="93"></icon>
+      <icon wx:if="{{id>0}}" type="warn" size="93" color="#FFBE00"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">{{name}}</view>
+      <view class="weui-msg__desc" wx:if="{{id==0}}">
+        检查中...
+      </view>
+      <view class="weui-msg__desc" wx:if="{{id>0}}">
+        该公司已被其他人注册,您可以申请加入公司或更换其他公司名称
+      </view>
+      <view class="weui-msg__desc" wx:if="{{id==-1}}">
+        该公司名可用
+      </view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button bindtap="submit" wx:if="{{id>0}}" class="weui-btn" type="primary">申请加入</button>
+        <button bindtap="submit" wx:if="{{id==-1}}" class="weui-btn" type="primary">确认注册</button>
+      </view>
+    </view>
+
+  </view>
+</view>

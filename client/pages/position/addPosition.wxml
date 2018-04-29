@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="page__bd">
+
+
+   
+    <view style="margin-top:50rpx" class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">编号:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" maxlength="40" bindinput="bindChangeNo" value="{{no}}" placeholder="请输入编号" />
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+
+
+
+
+
+
+  <view class="weui-btn-area">
+    <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">提交</button>
+  </view>
+</view>

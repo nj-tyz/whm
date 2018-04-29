@@ -1,0 +1,79 @@
+<view class="page">
+
+  <!-- 用户登录测试 -->
+  <view class="userinfo" bindtap="login">
+    <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}" background-size="cover"></image>
+
+
+    <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="getUserInfo"> 登陆 </button>
+
+
+
+    <view wx:else>
+    
+
+      <!--昵称,公司-->
+      <view>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </view>
+
+      <!--有公司-->
+      <view wx:if="{{userInfo.company_name}}">
+        <!--有公司,未审核-->
+        <view wx:if="{{userInfo.company_reviewed!=1}}" class="weui-flex userinfo-companyname">
+          <icon type="waiting" style="margin-right:5rpx" size="15" color="#FFBE00"></icon>
+          (待审核){{userInfo.company_name}}
+        </view>
+
+        <!--有公司,已审核-->
+        <view wx:else class="userinfo-companyname">
+          {{userInfo.company_name}}
+
+            <!--设置按钮-->
+          <view style='position:absolute;top:30rpx;right:30rpx'>
+            <image style='width:40rpx;height:40rpx;' class="" src="../../img/setting.png" />
+            <view class="weui-badge weui-badge_dot" style="margin-left: -5px;">
+            </view>
+          </view>
+
+        </view>
+
+
+      </view>
+
+      <!--无公司-->
+      <view wx:else bindtap="settingCompany">
+        <text style='color:#FFBE00' class="userinfo-companyname">请补充公司信息</text>
+        <image style="margin-left:10rpx" class="icon-35" src="../../img/edit.png" />
+      </view>
+    </view>
+
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access" wx:if="{{!waiting}}">
+      <view class="weui-panel__hd weui-flex">进入店铺
+        <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
+      </view>
+      <view class="weui-panel__bd" wx:if="{{shopList.length>0}}">
+        <navigator url="" wx:for="{{shopList}}" data-shopid="{{item.id}}" data-shopname="{{item.name}}" bindtap='openOptions' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{item.img}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{item.name}}</view>
+            <view class="weui-media-box__desc">{{item.address}}</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+      <!--
+      <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link" bindtap='addProduct'>
+          <view class="weui-cell__bd">增加商品</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+      </view>
+      -->
+    </view>
+  </view>
+</view>

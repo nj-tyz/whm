@@ -1,0 +1,16 @@
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.weui-cell__bd{
+  padding-top:30rpx;
+  padding-bottom:30rpx
+}
+
+.cell__bd image{
+  height:50rpx;
+  width:50rpx;
+}

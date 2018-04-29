@@ -1,0 +1,17 @@
+
+<view class="page">
+  <view class="page__bd"  wx:for="{{storeMap}}" wx:for-index="storeName" wx:for-item="Inventorys">
+    <view class="weui-cells__title"> {{storeName}}</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell" wx:for="{{Inventorys}}">
+        <view class="weui-cell__hd">
+          <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
+        </view>
+        <view class="weui-cell__bd">{{item.productName}}</view>
+        <view class="weui-cell__ft">
+          <view class="weui-badge" style="margin-left: 5px;">{{item.count}}件</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
