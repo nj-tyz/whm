@@ -2,6 +2,8 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+//获取应用实例
+const app = getApp();
 Page({
 
   /**
@@ -41,7 +43,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (app.globalData.needRefresh) {
+      var that = this;
+      that.getAllStore();
+    }
   },
 
   /**
