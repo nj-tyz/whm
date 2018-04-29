@@ -162,7 +162,8 @@ Page({
       data: {
         barCode: barcode,
         inventoryInShop: true,
-        inventoryInStore: true
+        inventoryInStore: true,
+        inventoryInPosition: true,
       },
       success(result) {
         if (result && result.data && result.data.data && result.data.data.id) {
@@ -189,26 +190,29 @@ Page({
   renderChart: function () {
     var that = this;
 
+
+  
     //店铺库存分布
     var currentProductInventoryInShop = that.data.currentProduct.inventoryInShopResult;
     //仓库库存分布
     var currentProductInventoryInStore = that.data.currentProduct.inventoryInStoreResult;
+    //仓位库存分布
+    var currentProductInventoryInPosition = that.data.currentProduct.inventoryInPosition;
 
     var series = [];
     inventorySum = 0;
     if (that.data.chartType == "0") {
       //如果当前选中渲染货架库存
-      
-
+      //不需要渲染
       return;
     } else if (that.data.chartType == "1") {
-       //如果当前选中渲染仓库库存
+      //如果当前选中渲染仓库库存
       for (var i = 0; i < currentProductInventoryInStore.length; i++) {
         series.push({
           name: currentProductInventoryInStore[i].storeName,
           data: currentProductInventoryInStore[i].inventoryCount,
           format: function (val, name) {
-            return  parseInt(val * inventorySum) + '件';
+            return parseInt(val * inventorySum) + '件';
           }
         })
         inventorySum += currentProductInventoryInStore[i].inventoryCount;
@@ -226,6 +230,11 @@ Page({
         inventorySum += currentProductInventoryInShop[i].inventoryCount;
       }
     }
+
+    that.setData({
+      series: series
+    })
+
 
     if (series.length > 0) {
       new Charts({

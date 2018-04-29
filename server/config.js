@@ -30,8 +30,8 @@ const CONF = {
      * 地区简称
      * @查看 https://cloud.tencent.com/document/product/436/6224
      */ 
-    region: 'ap-guangzhou',
-    //region: 'na-toronto',
+    //region: 'ap-guangzhou',
+    region: 'na-toronto',
     // Bucket 名称
     fileBucket: 'whm',
     // 文件夹

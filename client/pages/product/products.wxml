@@ -1,25 +1,21 @@
 <view class="page">
   <view class="page__bd">
 
-    <view class="weui-cells__title"> 产品列表</view>
+    <view class="weui-cells__title"> 产品列表
+      <image bindtap='addProduct' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
+    </view>
     <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell" wx:for="{{productList}}" data-barcode="{{item.barcode}}"  data-productid="{{item.id}}" data-productname="{{item.name}}" bindtap="showProductInventory">
+      <view class="weui-cell" wx:for="{{productList}}" data-barcode="{{item.barcode}}" data-productid="{{item.id}}" data-productname="{{item.name}}" bindtap="showProductInventory">
         <view class="weui-cell__hd ">
           <image src="{{item.img}} " style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px; "></image>
         </view>
         <view class="weui-cell__bd ">
-            <view style='font-size:12px;font-color:#aaa'>{{item.barcode}}</view>
-            <view class=" ">{{item.name}}</view>
-            <view class="wx-text-success " style="font-size:15px;font-color:#aaa ">$ {{item.price}}</view>
+          <view style='font-size:12px;font-color:#aaa'>{{item.barcode}}</view>
+          <view class=" ">{{item.name}}</view>
+          <view class="wx-text-success " style="font-size:15px;font-color:#aaa ">$ {{item.price}}</view>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access ">
           <view class="weui-badge " style="margin-left: 5px; ">{{item.count}}件</view>
-        </view>
-      </view>
-      <view class="weui-panel__ft ">
-        <view class="weui-cell weui-cell_access weui-cell_link ">
-          <view class="weui-cell__bd " bindtap='addProduct'>增加产品</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access "></view>
         </view>
       </view>
     </view>

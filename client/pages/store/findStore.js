@@ -27,9 +27,6 @@ Page({
         sliderOffset: event.currentTarget.offsetLeft,
         activeIndex: event.currentTarget.id
       });
-
-      //重新渲染报表
-      this.renderChart();
     }
   },
 
@@ -211,9 +208,6 @@ Page({
           that.setData({
             currentPosition: result.data.data[0]
           })
-
-          //渲染图标
-          that.renderChart();
         } else {
           util.showModel('提示', "查询失败");
         }

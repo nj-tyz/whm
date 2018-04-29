@@ -132,5 +132,14 @@ Page({
       }
     }
     qcloud.request(options)
-  }
+  },
+
+
+  //产品库存
+  showProductInventory: function (event) {
+    var that = this;
+    wx.navigateTo({
+      url: '../product/findProduct?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
+    })
+  },
 })

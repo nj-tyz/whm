@@ -72,48 +72,80 @@
           <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
             <view class="weui-navbar__title">本店铺</view>
           </view>
-
-
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-        <view class="weui-article">
 
-          <view class="weui-cell" wx:for="{{currentPosition.productsInPosition}}">
-            <view class="weui-cell__hd">
-              <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
+
+
+
+
+        <view class="weui-tab__panel" wx:if="{{chartType==0}}">
+          <view class="weui-tab__content">
+            <view class="weui-cell" wx:for="{{currentPosition.productsInPosition}}">
+              <view class="weui-cell__hd">
+                <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
+              </view>
+              <view class="weui-cell__bd">
+                <!--<view class="wx-30-text">店铺:{{item.shopName}}</view>
+                <view class="wx-30-text">仓库:{{item.storeName}}</view>
+                <view class="wx-30-text">货位:{{item.positionName}}</view>-->
+                <view class="wx-30-text">产品:{{item.productName}}</view>
+                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+              </view>
             </view>
-            <view class="weui-cell__bd">{{item.shopName}}-{{item.storeName}}-{{item.positionName}}-{{item.productName}}</view>
-            <view class="weui-cell__ft">
-              <view class="weui-badge" style="margin-left: 5px;">{{item.inventoryCount}}件</view>
-            </view>
-          </view>
-
-
-          <view class="weui-cell" wx:for="{{currentPosition.productsInStore}}">
-            <view class="weui-cell__hd">
-              <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
-            </view>
-            <view class="weui-cell__bd">{{item.shopName}}-{{item.storeName}}-{{item.productName}}</view>
-            <view class="weui-cell__ft">
-              <view class="weui-badge" style="margin-left: 5px;">{{item.inventoryCount}}件</view>
-            </view>
-          </view>
-
-
-
-          <view class="weui-cell" wx:for="{{currentPosition.productsInShop}}">
-            <view class="weui-cell__hd">
-              <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px;"></image>
-            </view>
-            <view class="weui-cell__bd">{{item.shopName}}-{{item.productName}}</view>
-            <view class="weui-cell__ft">
-              <view class="weui-badge" style="margin-left: 5px;">{{item.inventoryCount}}件</view>
+            <view wx:if="{{currentPosition.productsInPosition.length==0}}">
+              <view class="wx-30-text">无数据</view>
             </view>
           </view>
-
         </view>
-      </view>
 
+
+
+        <view class="weui-tab__panel" wx:if="{{chartType==1}}">
+          <view class="weui-tab__content">
+            <view class="weui-cell" wx:for="{{currentPosition.productsInStore}}">
+              <view class="weui-cell__hd">
+                <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
+              </view>
+              <view class="weui-cell__bd">
+                <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
+                <view class="wx-30-text">仓库:{{item.storeName}}</view>-->
+                <view class="wx-30-text">货位:{{item.positionName}}</view>
+                <view class="wx-30-text">产品:{{item.productName}}</view>
+                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+              </view>
+            </view>
+            <view wx:if="{{currentPosition.productsInStore.length==0}}">
+              <view class="wx-30-text">无数据</view>
+            </view>
+          </view>
+        </view>
+
+
+
+        <view class="weui-tab__panel" wx:if="{{chartType==2}}">
+          <view class="weui-tab__content">
+            <view class="weui-cell" wx:for="{{currentPosition.productsInShop}}">
+              <view class="weui-cell__hd">
+                <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
+              </view>
+              <view class="weui-cell__bd">
+                <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
+                <view class="wx-30-text">仓库:{{item.storeName}}</view>
+                <view class="wx-30-text">货位:{{item.positionName}}</view>-->
+                <view class="wx-30-text">产品:{{item.productName}}</view>
+                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+              </view>
+            </view>
+            <view wx:if="{{currentPosition.productsInShop.length==0}}">
+              <view class="wx-30-text">无数据</view>
+            </view>
+          </view>
+        </view>
+
+
+
+      </view>
 
 
     </view>
