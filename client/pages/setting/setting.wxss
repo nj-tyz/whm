@@ -1,0 +1,48 @@
+@import "../../lib/zanui/card/index.wxss";
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.page__bd{
+    padding-bottom: 0;
+}
+.weui-tab__content{
+    padding-top: 60px;
+    text-align: center;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.usermotto {
+  margin-top: 150px;
+}
+.doc-title {
+  position: relative;
+  padding: 15px 0;
+  margin: 10px 15px;
+  line-height: 25px;
+  font-size: 25px;
+  color: #666;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 60%;
+}
+.mini-btn{
+    margin-right: 5px;
+}
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    background-color: #fff;
+    height: 2.3em;
+    line-height: 2.3em;
+    color: #cfcfcf;
+}

@@ -8,6 +8,7 @@ App({
     },
     globalData: {
       userInfo: null,
-      refreshIndex:false
+      refreshIndex:false,
+      needRefresh: false
     }
 })

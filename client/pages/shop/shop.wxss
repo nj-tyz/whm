@@ -1,3 +1,7 @@
+.shop-image{
+  height:200px;
+}
+
 .shop-outline .weui-flex__item {
   text-align: center;
   margin-top: 20rpx;
