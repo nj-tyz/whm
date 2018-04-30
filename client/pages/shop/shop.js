@@ -140,26 +140,8 @@ Page({
 
   //扫码
   scanCode: function () {
-    wx.setNavigationBarTitle({
-      title: "输入条码"
-    })
-
-
     var that = this;
     wx.scanCode({
-      complete: function (res){
-        console.log('结束', res);
-
-        wx.setNavigationBarTitle({
-          title: that.data.title
-        })
-
-        if (res.errMsg == "scanCode:fail cancel"){
-          wx.navigateTo({
-            url: '../product/findProduct?navigationBarTitle=查找商品'
-          })
-        }
-      },
       success: (res) => {
         console.log('扫码结果', res)
 
@@ -188,7 +170,7 @@ Page({
         }else{
            //跳转到产品查找页面
           wx.navigateTo({
-            url: '../product/findProduct?navigationBarTitle=商品&barcode=' + id
+            url: '../product/productInfo?navigationBarTitle=商品&barcode=' + id
           })
         }
       }

@@ -35,6 +35,15 @@ Page({
       inputVal: "",
       inputShowed: false
     });
+
+    //重新查询数据
+    this.setData({
+      inputVal: "",
+      pageNo: 1,
+      nomore: false,
+      productList: []
+    });
+    this.getAllProduct();
   },
   clearInput: function () {
     this.setData({
@@ -42,37 +51,21 @@ Page({
     });
   },
   inputTyping: function (e) {
+    var that = this;
     this.setData({
       inputVal: e.detail.value
     });
 
     //调用查询
-    this.search();
+    this.setData({
+      pageNo: 1,
+      nomore: false,
+      productList: []
+    });
+    that.getAllProduct();
   },
 
-  //查询产品
-  search: function () {
-    var that = this;
-    var options = {
-      url: config.service.searchProduct,
-      login: true,
-      data: that.data,
-      success(result) {
-        console.log('搜索产品成功', result)
-        that.setData({
-          correlationData: result.data.data
-        })
-
-        console.log(that.data.correlationData.length);
-        console.log(that.data.inputVal.length);
-        console.log(that.data.inputVal.length > 0 && that.data.correlationData.lenght > 0);
-      },
-      fail(error) {
-        console.log('request fail', error);
-      }
-    }
-    qcloud.request(options)
-  },
+ //扫码
   scanCode: function () {
     var that = this;
     wx.scanCode({
@@ -94,7 +87,7 @@ Page({
           }
         }
         //调用显示
-        that.show(event);
+        that.showProductInventory(event);
       }
     })
   },
@@ -178,7 +171,7 @@ Page({
   showProductInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../product/findProduct?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
+      url: '../product/productInfo?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
     })
   },
 
@@ -197,6 +190,7 @@ Page({
     var params = {
       pageSize: that.data.pageSize,
       pageNo: that.data.pageNo,
+      inputVal: that.data.inputVal
     };
     if (that.data.shopID) {
       params.shopID = that.data.shopID;
