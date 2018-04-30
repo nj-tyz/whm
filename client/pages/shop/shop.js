@@ -25,13 +25,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
-    })
-    console.log(options.shopID);
+   var that = this;
     this.setData({
+      title: options.navigationBarTitle || "条码库存管理",
       shopID: options.shopID
     });
+    wx.setNavigationBarTitle({
+      title: that.data.title
+    })
+    console.log(options.shopID);
     //获取门店
     this.getShop();
   },
@@ -165,8 +167,26 @@ Page({
 
   //扫码
   scanCode: function () {
+    wx.setNavigationBarTitle({
+      title: "输入条码"
+    })
+
+
     var that = this;
     wx.scanCode({
+      complete: function (res){
+        console.log('结束', res);
+
+        wx.setNavigationBarTitle({
+          title: that.data.title
+        })
+
+        if (res.errMsg == "scanCode:fail cancel"){
+          wx.navigateTo({
+            url: '../product/findProduct?navigationBarTitle=查找商品'
+          })
+        }
+      },
       success: (res) => {
         console.log('扫码结果', res)
 
