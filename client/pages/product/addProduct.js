@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 Page({
 
   /**
@@ -11,13 +12,17 @@ Page({
     img: "",
     barcode: "",
     price:0,
-    shopID:0
+    shopID:0,
+    currentLanguage: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      currentLanguage: currentLanguage()
+    })
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
@@ -84,7 +89,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy('正在上传')
+        util.showBusy(that.data.currentLanguage.loading)
         var filePath = res.tempFilePaths[0]
 
         // 上传图片
@@ -94,7 +99,7 @@ Page({
           name: 'file',
 
           success: function (res) {
-            util.showSuccess('上传图片成功')
+            util.showSuccess(that.data.currentLanguage.img_upload_success)
             //console.log(res)
             res = JSON.parse(res.data)
 
@@ -105,7 +110,7 @@ Page({
           },
 
           fail: function (e) {
-            util.showModel('上传图片失败')
+            util.showModel(that.data.currentLanguage.img_upload_fail)
           }
         })
 
@@ -142,7 +147,7 @@ Page({
 
 
     //提交
-    util.showBusy('正在提交')
+    util.showBusy(that.data.currentLanguage.submiting)
 
     var options = {
       url: config.service.addProduct,
@@ -165,7 +170,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel('提交失败', error);
+        util.showModel(that.data.currentLanguage.submit_fail, error);
         console.log('添加商品失败', error);
       }
     }
@@ -181,7 +186,7 @@ Page({
         var barCode = res.result;
 
         if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
           return;
         }
 
