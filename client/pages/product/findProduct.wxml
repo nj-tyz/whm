@@ -4,17 +4,17 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="请输入 条码/名称" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.Please_enter_a_barcode_name}}" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
           <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
             <icon type="clear" size="14"></icon>
           </view>
         </view>
         <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
           <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">请输入 条码/名称</view>
+          <view class="weui-search-bar__text">{{currentLanguage.Please_enter_a_barcode_name}}</view>
         </label>
       </view>
-      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">{{currentLanguage.cancel}}</view>
 
       <image bindtap="scanCode" style="margin-left:20rpx;margin-top:10rpx;margin-right:10rpx" class="icon-40" src="../../img/scan.png" />
 
@@ -50,13 +50,13 @@
       <view class="weui-tab">
         <view class="weui-navbar">
           <view data-charttype="0" class="weui-navbar__item {{chartType == 0 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="0">
-            <view class="weui-navbar__title">货架分布</view>
+            <view class="weui-navbar__title">{{currentLanguage.shelf_distribution}}</view>
           </view>
           <view data-charttype="1" class="weui-navbar__item {{chartType == 1 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="1">
-            <view class="weui-navbar__title">仓库分布</view>
+            <view class="weui-navbar__title">{{currentLanguage.warehouse_distribution}}</view>
           </view>
           <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
-            <view class="weui-navbar__title">店铺分布</view>
+            <view class="weui-navbar__title">{{currentLanguage.shop_distribution}}</view>
           </view>
 
 
@@ -66,10 +66,10 @@
           <view class="weui-tab__content" wx:if="{{chartType==0}}">
             <view class="weui-cell" wx:for="{{currentProduct.inventoryInPosition}}">
               <view class="weui-cell__bd">
-                <view class="wx-30-text">店铺:{{item.shopName}}</view>
-                <view class="wx-30-text">仓库:{{item.storeName}}</view>
-                <view class="wx-30-text">货位:{{item.positionName}}</view>
-                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+                <view class="wx-30-text">{{currentLanguage.shop}}:{{item.shopName}}</view>
+                <view class="wx-30-text">{{currentLanguage.out_put_warehouse}}:{{item.storeName}}</view>
+                <view class="wx-30-text">{{currentLanguage.out_put_position}}:{{item.positionName}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}inventory:{{item.inventoryCount}}</view>
               </view>
             </view>
           </view>

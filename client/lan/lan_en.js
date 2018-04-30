@@ -12,13 +12,14 @@ var lan_en = {
   load_fail: "Load Failed",
   success:"success",
   fail:"fail",
+  shop: "shop",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the serial number",
   input_name: "Please enter a name",
   input_price: "Please enter the price",
   input_address: "Please enter the address",
-
+  price: "price",
   submit: "submit",
   submiting: "submiting...",
   submit_fail: "Submission Failed",
@@ -78,6 +79,7 @@ var lan_en = {
   product_get_success: "success",
   product_get_fail: "fail",
   product_scan: "Scan products",
+  Please_enter_a_barcode_name: "Please enter a bar code or name",
 
   qrcode_error: "QR code is wrong",
   qrcode_generator: "QR code generator",
@@ -111,7 +113,11 @@ var lan_en = {
   store_load_local: "Get a list of this warehouse",
   store_loading: "Getting warehouse data",
   store_load_error1: "The warehouse is not in this shop, please choose the other shop!",
-  store_all: "all warehouse"
+  store_all: "all warehouse",
+
+  shelf_distribution: "shelf distribution",
+  warehouse_distribution: "warehouse distribution",
+  shop_distribution: "shop distribution"
 }
 
 module.exports = lan_en;

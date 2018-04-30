@@ -12,13 +12,14 @@ var lan_zh = {
   load_fail:"登陆失败",
   success: "成功",
   fail: "失败",
+  shop:"店铺",
 
   input_company_name:"请输入公司名称",
   input_no: "请输入编号",
   input_name: "请输入名称",
   input_price: "请输入价格",
   input_address:"请输入地址",
-
+  price:"价格",
   submit:"提交",
   submiting:"提交中...",
   submit_fail:"提交失败",
@@ -78,6 +79,7 @@ var lan_zh = {
   product_get_success:"产品获取成功",
   product_get_fail:"产品获取失败",
   product_scan:"扫产品",
+  Please_enter_a_barcode_name:"请输入 条码/名称",
 
   qrcode_error:"二维码错误",
   qrcode_generator:"二维码生成器",
@@ -111,7 +113,12 @@ var lan_zh = {
   store_load_local:"获取本店仓库列表",
   store_loading:"正在获取仓库数据",
   store_load_error1:"该仓库不在本店铺,请切换店铺!",
-  store_all:"所有仓库"
+  store_all:"所有仓库",
+
+  shelf_distribution:"货架分布",
+  warehouse_distribution:"仓库分布",
+  shop_distribution:"店铺分布"
+
 }
 
 module.exports = lan_zh;
