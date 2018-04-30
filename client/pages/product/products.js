@@ -143,6 +143,9 @@ Page({
           //标识是不是没有更多数据了
           nomore: result.data.data.length<that.data.pageSize?true:false
         })
+        
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
         util.showModel('请求失败', error);
