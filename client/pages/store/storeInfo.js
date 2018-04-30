@@ -58,10 +58,17 @@ Page({
           isLoadding: false
         })
 
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
@@ -108,16 +115,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    util.onPullDownRefresh(this.refresh);
+    var that = this;
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    that.getObj();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // complete
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+   
   },
 
   /**
@@ -140,7 +147,7 @@ Page({
   showAllInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name + '库存&storeID=' + event.currentTarget.dataset.storeid
+      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name + '库存&storeID=' + that.data.objId
     })
   },
 

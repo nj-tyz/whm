@@ -23,6 +23,16 @@ Page({
   },
 
   /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    var that = this;
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //获取门店
+    that.getShop();
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
@@ -69,10 +79,18 @@ Page({
           isLoadding: false
         })
 
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)

@@ -32,6 +32,16 @@ Page({
     }
   },
 
+
+  /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+  onPullDownRefresh: function () {
+
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -214,6 +224,7 @@ Page({
         } else {
           util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.failed_query);
         }
+
       },
       fail(error) {
         util.showModel(this.data.currentLanguage.fail, error);

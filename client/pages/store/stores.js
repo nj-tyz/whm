@@ -14,7 +14,7 @@ Page({
     shopID: 0,
     shopName: "",
     storeList: [],
-    nomore:false,
+    nomore:true,
     pageNo:1,
     pageSize:5,
     currentLanguage: {}

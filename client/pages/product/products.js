@@ -224,6 +224,9 @@ Page({
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
