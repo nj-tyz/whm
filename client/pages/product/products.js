@@ -13,6 +13,9 @@ Page({
     pageNo: 1,
     nomore: false,
 
+    inputShowed: false,
+    inputVal: "",
+
     shopID: 0,
     storeID: 0,
     shopName: "",
@@ -20,6 +23,79 @@ Page({
     productList: []
   },
 
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+
+    //调用查询
+    this.search();
+  },
+ 
+  //查询产品
+  search: function () {
+    var that = this;
+    var options = {
+      url: config.service.searchProduct,
+      login: true,
+      data: that.data,
+      success(result) {
+        console.log('搜索产品成功', result)
+        that.setData({
+          correlationData: result.data.data
+        })
+
+        console.log(that.data.correlationData.length);
+        console.log(that.data.inputVal.length);
+        console.log(that.data.inputVal.length > 0 && that.data.correlationData.lenght > 0);
+      },
+      fail(error) {
+        console.log('request fail', error);
+      }
+    }
+    qcloud.request(options)
+  },
+  scanCode: function () {
+    var that = this;
+    wx.scanCode({
+      success: (res) => {
+        var barCode = res.result;
+
+        if (!barCode || barCode == "") {
+          util.showModel('提示', '条码错误!');
+          return;
+        }
+
+        console.log('商品扫码结果', res)
+
+        var event = {
+          currentTarget: {
+            dataset: {
+              barcode: barCode
+            }
+          }
+        }
+        //调用显示
+        that.show(event);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -28,7 +104,7 @@ Page({
       title: options.navigationBarTitle || "条码库存管理"
     })
     this.setData({
-      shopID: options.shopID || 1,
+      shopID: options.shopID || 0,
       shopName: options.shopName || "",
       storeID: options.storeID || 0,
       shoreName: options.shoreName || ""

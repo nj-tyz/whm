@@ -109,6 +109,10 @@ page {
   margin-right: 20rpx;
 }
 
-.bcenter{
-  text-align: center
+.bcenter {
+  text-align: center;
+}
+
+.beright {
+  text-align: right;
 }
