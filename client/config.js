@@ -3,9 +3,12 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://t0qyjxur.qcloud.la';
+//线上
+//var host = 'https://t0qyjxur.qcloud.la';
+//测试机
 //var host = 'https://22c3ba27.ngrok.io';
-//var host = "https://4c4ac3bb.ngrok.io"
+//刀豆电脑
+var host = 'https://0bd00cae.ngrok.io';
 
 var config = {
 
@@ -39,10 +42,12 @@ var config = {
     getStore: `${host}/weapp/store/getone`,
     getStoreListByShop: `${host}/weapp/store/getListByShop`,
     addStore: `${host}/weapp/store/add`,
+    findStore: `${host}/weapp/store/find`,
 
     //仓位接口
     positionList: `${host}/weapp/position/list`,
     addPosition: `${host}/weapp/position/add`,
+    findPosition: `${host}/weapp/position/find`,
 
     // 库存接口
     getInventoryBySidAndPid: `${host}/weapp/inventory/getBySidAndPid`,

@@ -55,17 +55,30 @@
           <view data-charttype="1" class="weui-navbar__item {{chartType == 1 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="1">
             <view class="weui-navbar__title">仓库分布</view>
           </view>
-           <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
+          <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
             <view class="weui-navbar__title">店铺分布</view>
           </view>
 
 
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-        <view class="weui-article">
-          <canvas style="width:{{imageWidth}}px;height:{{imageHeight}}px" canvas-id="mycanvas" disable-scroll="true"></canvas>
+        <view class="weui-tab__panel">
+          <view class="weui-tab__content" wx:if="{{chartType==0}}">
+            <view class="weui-cell" wx:for="{{currentProduct.inventoryInPosition}}">
+              <view class="weui-cell__bd">
+                <view class="wx-30-text">店铺:{{item.shopName}}</view>
+                <view class="wx-30-text">仓库:{{item.storeName}}</view>
+                <view class="wx-30-text">货位:{{item.positionName}}</view>
+                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+              </view>
+            </view>
+          </view>
 
+          <view class="weui-article" hidden="{{chartType==0}}">
+            <canvas style="width:{{imageWidth}}px;height:{{imageHeight}}px" canvas-id="mycanvas" disable-scroll="true"></canvas>
+          </view>
         </view>
+
       </view>
 
 

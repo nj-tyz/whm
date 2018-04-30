@@ -1,7 +1,7 @@
 <view class="page" wx:if="{{!isLoadding}}">
 
   <view class="page__bd">
-    <image class="shop-image" src="{{currentShop.img}}"></image>
+    <image class="shop-image" mode="aspectFill" src="{{currentShop.img}}"></image>
 
 
     <view class="weui-panel weui-panel_access" style="margin-top:-15rpx">

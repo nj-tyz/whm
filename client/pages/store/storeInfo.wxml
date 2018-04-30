@@ -1,0 +1,31 @@
+<view class="page" wx:if="{{!isLoadding}}">
+
+  <view class="page__bd">
+    <image class="shop-image" mode="aspectFill" src="{{currentObj.img}}"></image>
+
+
+    <view class="weui-panel weui-panel_access" style="margin-top:-15rpx">
+      <view class="weui-flex  shop-outline">
+        <view class="weui-flex__item" bindtap="showAllStorePosition"  style='border-right:solid #eee 1px'>
+          <view class="wx-60-text wx-text-success bcenters">
+            {{currentObj.positionCount}}
+          </view>
+          <view class="wx-30-text bcenter">
+            <text>个仓位</text>
+          </view>
+        </view>
+       
+        <view class="weui-flex__item" bindtap="showAllInventory">
+          <view class="wx-60-text wx-text-warning bcenter">
+            {{currentObj.inventoryCount}}
+          </view>
+          <view class="wx-30-text bcenter">
+            <text>件库存</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  
+</view>

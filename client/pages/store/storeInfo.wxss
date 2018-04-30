@@ -13,7 +13,7 @@
   height: 100rpx;
 }
 
-.shop-outline view {
+.bcenter {
   text-align: center;
 }
 

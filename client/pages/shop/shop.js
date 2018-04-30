@@ -2,6 +2,8 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 
+//获取应用实例
+const app = getApp();
 
 Page({
 
@@ -88,7 +90,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (app.globalData.needRefresh) {
+      app.globalData.needRefresh = false;
+      var that = this;
+      that.getShop();
+    }
   },
 
   /**
@@ -184,7 +190,7 @@ Page({
         if (codeType && codeType == 'positionID'){
          //跳转到仓库界面
           wx.navigateTo({
-              url: '../store/stores?navigationBarTitle=仓库&inputVal=' + id
+            url: '../store/findStore?navigationBarTitle=仓位&positionId=' + id
           })
         }else{
            //跳转到产品查找页面

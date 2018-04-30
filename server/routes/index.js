@@ -47,10 +47,12 @@ router.get('/product/search', controllers.product.search)
 router.get('/store/getListByShop', controllers.store.getListByShop)
 router.get('/store/getone', controllers.store.getone)
 router.get('/store/add', controllers.store.add)
+router.get('/store/getById', controllers.store.getById)
 
 // --- 仓位接口 --- //
 router.get('/position/list', controllers.position.list)
 router.get('/position/add', controllers.position.add)
+router.get('/position/find', controllers.position.find)
 
 // --- 库存接口 --- //
 router.get('/inventory/getBySidAndPid', controllers.inventory.getBySidAndPid)

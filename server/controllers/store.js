@@ -17,6 +17,13 @@ async function getone(ctx, next) {
   ctx.state.data = item;
 }
 
+async function getById(ctx, next) {
+  var id = ctx.query.id;
+  var result =  await query("select *,(select count(0) from tb_store_position where store = store.id) positionCount ,(select ifnull(sum(count),0) from tb_inventory where storeid = store.id) inventoryCount from tb_store store where store.id= ?",[id]);
+  var item = result.length > 0 ? result[0] : {};
+  ctx.state.data = item;
+}
+
 async function add(ctx, next) {
   var no = ctx.query.no;
   var name = ctx.query.name;
@@ -31,8 +38,14 @@ async function add(ctx, next) {
 }
 
 
+
+
+
+
+
 module.exports = {
   add,
+  getById,
   getListByShop,
   getone
 }
