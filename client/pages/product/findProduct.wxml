@@ -35,7 +35,7 @@
     <view hidden="{{inputVal.length > 0||correlationData.length>0||!currentProduct.id}}">
 
       <view class="weui-cells__title">
-        <image src="{{currentProduct.img}}" style='width:100%'></image>
+        <image src="{{currentProduct.img}}" style='width:100%'  mode="widthFix" ></image>
       </view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">

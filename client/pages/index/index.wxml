@@ -5,7 +5,7 @@
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}" background-size="cover"></image>
 
 
-    <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="getUserInfo"> 登陆 </button>
+    <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="getUserInfo"> {{currentLanguage.index_logbtn}} </button>
 
 
 
@@ -19,10 +19,12 @@
 
       <!--有公司-->
       <view wx:if="{{userInfo.company_name}}">
+        
+        
         <!--有公司,未审核-->
         <view wx:if="{{userInfo.company_reviewed!=1}}" class="weui-flex userinfo-companyname">
           <icon type="waiting" style="margin-right:5rpx" size="15" color="#FFBE00"></icon>
-          (待审核){{userInfo.company_name}}
+        ({{currentLanguage.index_check_pending}}){{userInfo.company_name}}
         </view>
 
         <!--有公司,已审核-->
@@ -30,12 +32,19 @@
           {{userInfo.company_name}}
 
             <!--设置按钮-->
+          <picker bindchange="changeLanguage" value="{{index}}" range="{{array}}">  
+            <view style='position:absolute;top:30rpx;left:30rpx' >
+              <image style='width:40rpx;height:40rpx;' class="" src="../../img/setting.png" />
+              <view class="weui-badge weui-badge_dot" style="margin-left: -5px;">
+              </view>
+            </view>
+          </picker>
+
           <view style='position:absolute;top:30rpx;right:30rpx'>
             <image style='width:40rpx;height:40rpx;' class="" src="../../img/setting.png" />
             <view class="weui-badge weui-badge_dot" style="margin-left: -5px;">
             </view>
           </view>
-
         </view>
 
 
@@ -43,7 +52,7 @@
 
       <!--无公司-->
       <view wx:else bindtap="settingCompany">
-        <text style='color:#FFBE00' class="userinfo-companyname">请补充公司信息</text>
+        <text style='color:#FFBE00' class="userinfo-companyname">{{currentLanguage.index_no_company_name}}</text>
         <image style="margin-left:10rpx" class="icon-35" src="../../img/edit.png" />
       </view>
     </view>
@@ -51,7 +60,7 @@
   </view>
   <view class="page__bd">
     <view class="weui-panel weui-panel_access" wx:if="{{!waiting}}">
-      <view class="weui-panel__hd weui-flex">进入店铺
+      <view class="weui-panel__hd weui-flex">{{currentLanguage.index_in_shop}}
         <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
       </view>
       <view class="weui-panel__bd" wx:if="{{shopList.length>0}}">

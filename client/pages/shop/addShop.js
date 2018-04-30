@@ -1,6 +1,8 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
+
 Page({
 
   /**
@@ -11,16 +13,21 @@ Page({
     no: "",
     img: "",
     address: "",
-    cAddressLength: 0
+    cAddressLength: 0,
+    currentLanguage: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      currentLanguage: currentLanguage()
+    })
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
+    
   },
 
   /**

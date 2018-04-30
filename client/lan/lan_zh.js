@@ -1,4 +1,4 @@
-var lan = {
+var lan_zh = {
   name:"名称",
   product:"商品",
   serial_number:"编号",
@@ -6,6 +6,9 @@ var lan = {
   in_put:"出库",
   address:"地址",
   out_in_put:"出入库",
+  loading:"正在登陆",
+  load_success:"登陆成功",
+  load_fail:"登陆失败",
 
   input_company_name:"请输入公司名称",
   input_no: "请输入编号",
@@ -106,3 +109,4 @@ var lan = {
   store_all:"所有仓库"
 }
 
+module.exports = lan_zh;

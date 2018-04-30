@@ -2,6 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -11,11 +12,19 @@ Page({
     waiting: true,
     logged: false,
     userInfo: {},
-    shopList: []
+    shopList: [],
+    array: ['English', '中文'],
+    index: 0,
+    currentLanguage:{}
   },
   onLoad: function () {
     var that = this;
+    this.setData({
+      currentLanguage: currentLanguage()
+    })
     that.getUserInfo();
+    console.log(this.data.currentLanguage.name);
+    
   },
   /**
   * 生命周期函数--监听页面显示
@@ -37,7 +46,8 @@ Page({
     that.getUserInfo();
   },
   getUserInfo: function () {
-    util.showBusy('正在登录');
+    console.log(this.data.currentLanguage);
+    util.showBusy(this.data.currentLanguage.loading);
 
     var that = this;
 
@@ -58,20 +68,20 @@ Page({
               logged: true,
               userInfo: result1.data.data
             })
-            util.showSuccess('登陆成功')
+            util.showSuccess(that.data.currentLanguage.load_success)
             //获取门店
             that.getUserShop();
           },
 
           fail(error) {
-            util.showModel('请求失败', error)
+            util.showModel(that.data.currentLanguage.request_fail, error)
             console.log('request fail', error)
           }
         })
       },
 
       fail(error) {
-        util.showModel('登录失败', error)
+        util.showModel(that.data.currentLanguage.load_fail, error)
         console.log('登录失败', error)
       }
     })
@@ -84,12 +94,12 @@ Page({
 
     //如果没有公司id或者公司未审核,不获取数据
     if (!this.data.userInfo.company_name || this.data.userInfo.company_reviewed != 1) {
-      util.showSuccess('请完善公司信息')
+      util.showSuccess(that.data.currentLanguage.index_no_company_name)
       return;
     }
 
 
-    util.showBusy('正在获取门店数据')
+    util.showBusy(that.data.currentLanguage.shop_loading)
     var options = {
       url: config.service.shopList,
       login: true,
@@ -100,7 +110,7 @@ Page({
         that.setData({
           waiting: false
         })
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.shop_get_success)
         console.log('门店获取成功', result.data.data)
         that.setData({
           shopList: result.data.data
@@ -129,8 +139,8 @@ Page({
 
 
   requstGetStore() {
-    util.showBusy('获取仓库明细...')
     var that = this
+    util.showBusy(this.data.currentLanguage.store_loading)
     var options = {
       url: config.service.getStore,
       login: true,
@@ -138,14 +148,14 @@ Page({
         id: 1
       },
       success(result) {
-        util.showSuccess('请求成功完成')
+        util.showSuccess(that.data.currentLanguage.request_fail.success)
         console.log('request success', result)
         that.setData({
           getStoreResult: JSON.stringify(result.data)
         })
       },
       fail(error) {
-        util.showModel('请求失败', error);
+        util.showModel(that.data.currentLanguage.request_fail, error);
         console.log('request fail', error);
       }
     }
@@ -170,6 +180,20 @@ Page({
     wx.navigateTo({
       url: '../setting/settingCompany?navigationBarTitle=完善公司'
     })
+  },
+  changeLanguage:function(e){
+    console.log(JSON.stringify(this));
+    var _that = this;
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    _that.setData({
+      index: e.detail.value
+    })
+    var language = _that.data.array[_that.data.index];
+    try {
+      wx.setStorageSync('currentLanguage', language)
+    } catch (e) {
+    }
+    _that.onLoad();
   }
 
 })
