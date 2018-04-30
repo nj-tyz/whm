@@ -2,7 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 Page({
-    //刀豆增加注释
+
   /**
    * 页面的初始数据
    */
