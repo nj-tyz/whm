@@ -2,6 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var Charts = require('../../lib/wxcharts.js');
+var currentLanguage = require('../../lan/currentLanguage')
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var inventorySum = 0;
 Page({
