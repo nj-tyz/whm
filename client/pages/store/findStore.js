@@ -26,8 +26,7 @@ Page({
 
       this.setData({
         sliderOffset: event.currentTarget.offsetLeft,
-        activeIndex: event.currentTarget.id,
-        currentLanguage: currentLanguage()
+        activeIndex: event.currentTarget.id
       });
     }
   },
@@ -38,7 +37,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth * 0.9,
-      imageHeight: wx.getSystemInfoSync().windowWidth * 1.2
+      imageHeight: wx.getSystemInfoSync().windowWidth * 1.2,
+      currentLanguage: currentLanguage()
     })
     var that = this;
     wx.setNavigationBarTitle({
