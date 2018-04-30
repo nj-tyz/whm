@@ -137,31 +137,6 @@ Page({
   },
 
 
-
-  requstGetStore() {
-    var that = this
-    util.showBusy(this.data.currentLanguage.store_loading)
-    var options = {
-      url: config.service.getStore,
-      login: true,
-      data: {
-        id: 1
-      },
-      success(result) {
-        util.showSuccess(that.data.currentLanguage.request_fail.success)
-        console.log('request success', result)
-        that.setData({
-          getStoreResult: JSON.stringify(result.data)
-        })
-      },
-      fail(error) {
-        util.showModel(that.data.currentLanguage.request_fail, error);
-        console.log('request fail', error);
-      }
-    }
-    qcloud.request(options)
-  },
-
   //增加店铺
   addStore: function () {
     wx.navigateTo({
