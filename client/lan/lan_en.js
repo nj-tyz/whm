@@ -9,6 +9,8 @@ var lan_en = {
   loading: "loading",
   load_success: "Load successfully",
   load_fail: "Load Failed",
+  success:"success",
+  fail:"fail",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the serial number",

@@ -9,6 +9,8 @@ var lan_zh = {
   loading:"正在登陆",
   load_success:"登陆成功",
   load_fail:"登陆失败",
+  success: "成功",
+  fail: "失败",
 
   input_company_name:"请输入公司名称",
   input_no: "请输入编号",
