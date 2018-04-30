@@ -13,7 +13,7 @@
     
 
       <!--昵称,公司-->
-      <view>
+      <view class="bcenter">
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       </view>
 
