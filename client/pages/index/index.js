@@ -174,7 +174,9 @@ Page({
       wx.setStorageSync('currentLanguage', language)
     } catch (e) {
     }
-    _that.onLoad();
+    _that.setData({
+      currentLanguage: currentLanguage()
+    })
   },
   //翻页
   loadmore: function () {
