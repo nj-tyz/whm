@@ -140,7 +140,7 @@ Page({
   showAllInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/inventorys?navigationBarTitle=' + event.currentTarget.dataset.storename + '库存&storeID=' + event.currentTarget.dataset.storeid
+      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name + '库存&storeID=' + event.currentTarget.dataset.storeid
     })
   },
 

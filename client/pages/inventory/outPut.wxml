@@ -8,11 +8,11 @@
         </view>
         <view class="weui-cell__bd">
           <radio-group class="radio-group" bindchange="radioChange">
-            <radio class="radio" wx:key="optionType" value="out" checked="checked">
-              <text>出库</text>
-            </radio>
-            <radio class="radio" wx:key="optionType" value="in" style='margin-left:50rpx' checked="">
+            <radio class="radio" wx:key="optionType" value="in" checked="checked">
               <text>入库</text>
+            </radio>
+            <radio class="radio" wx:key="optionType" value="out" style='margin-left:50rpx' checked="">
+              <text>出库</text>
             </radio>
           </radio-group>
         </view>

@@ -12,7 +12,7 @@ Page({
   data: {
     shopID: 0,
     currentShop: {},
-    optionType: 'out',
+    optionType: 'in',
     currentStore: {},
     currentProduct: {},
     currentInventory: {},
