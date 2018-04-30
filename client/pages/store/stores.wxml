@@ -4,6 +4,7 @@
       <view class="weui-panel__hd"> {{shopName}}所有仓库
         <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
       </view>
+      
       <view class="weui-panel__bd" wx:if="storeList.length > 0">
         <navigator url="" class="weui-media-box weui-media-box_appmsg" wx:for="{{storeList}}" data-id="{{item.id}}" bindtap="showStoreInfo">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
@@ -18,11 +19,12 @@
           <view class="weui-cell__ft weui-cell__ft_in-access "></view>
         </navigator>
        
-          <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{!nomore}}" bindtap='loadmore'>
-            <view class="weui-cell__bd bcenter iconfont icon-more"></view>
-          </view>
+        <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{!nomore}}" bindtap='loadmore'>
+          <view class="weui-cell__bd bcenter iconfont icon-more"></view>
+        </view>
         
       </view>
+      
     </view>
   </view>
 </view>
