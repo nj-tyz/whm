@@ -9,6 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageSize: 5,
+    pageNo: 1,
+    nomore: false,
+
     shopID: 0,
     storeID: 0,
     shopName: "",
@@ -24,7 +28,7 @@ Page({
       title: options.navigationBarTitle || "条码库存管理"
     })
     this.setData({
-      shopID: options.shopID || 0,
+      shopID: options.shopID || 1,
       shopName: options.shopName || "",
       storeID: options.storeID || 0,
       shoreName: options.shoreName || ""
@@ -68,7 +72,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var that = this;
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.setData({
+      pageNo: 1,
+      nomore: false,
+      productList: []
+    });
+    that.getAllProduct();
   },
 
   /**
@@ -104,7 +115,10 @@ Page({
 
     var that = this;
     //组合参数
-    var params = {};
+    var params = {
+      pageSize: that.data.pageSize,
+      pageNo: that.data.pageNo,
+    };
     if (that.data.shopID) {
       params.shopID = that.data.shopID;
     }
@@ -123,9 +137,16 @@ Page({
       success(result) {
         util.showSuccess('获取成功')
         console.log('商品列表获取成功', result)
+        //有翻页,所以使用合并
         that.setData({
-          productList: result.data.data
+          productList: that.data.productList.concat(result.data.data),
+          //标识是不是没有更多数据了
+          //如果本次拿到的数量小于pagesize,则认为后面不能再翻页了
+          nomore: result.data.data.length < that.data.pageSize ? true : false
         })
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
         util.showModel('请求失败', error);
@@ -133,5 +154,14 @@ Page({
       }
     }
     qcloud.request(options)
+  },
+  //翻页
+  loadmore: function () {
+    var that = this;
+    that.setData({
+      pageNo: that.data.pageNo + 1
+    })
+    //重新查询后台
+    that.getAllProduct();
   }
 })

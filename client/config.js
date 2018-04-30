@@ -8,7 +8,7 @@
 //测试机
 //var host = 'https://22c3ba27.ngrok.io';
 //刀豆电脑
-var host = 'https://0bd00cae.ngrok.io';
+var host = 'https://deb16fa6.ngrok.io';
 
 var config = {
 
@@ -39,6 +39,7 @@ var config = {
     searchProduct: `${host}/weapp/product/search`,
 
     // 仓库接口
+    getStoreById: `${host}/weapp/store/getById`,
     getStore: `${host}/weapp/store/getone`,
     getStoreListByShop: `${host}/weapp/store/getListByShop`,
     addStore: `${host}/weapp/store/add`,

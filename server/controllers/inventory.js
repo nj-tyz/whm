@@ -7,7 +7,7 @@ async function list(ctx, next) {
   var storeID = ctx.query.storeID||0;
   var productID = ctx.query.productID||0;
 
-
+ 
   var sql = "SELECT   store. NAME AS storeName,   sposition.no as positionName,   product. NAME AS productName,   product.img AS img, product.barcode AS barcode,  sum(inventory.count)AS count FROM   tb_inventory inventory left join tb_store_position sposition on sposition.id = inventory.positionId LEFT JOIN tb_product product ON product.id = inventory.productId LEFT JOIN tb_store store ON store.id = inventory.storeId LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  (?= 0 OR shop.id = ?) AND(?= 0 OR store.id = ?) AND(?= 0 OR product.id =?) GROUP BY   inventory.productId,  inventory.storeId,  inventory.positionId ORDER BY   store.id";
   var params = [shopID,shopID,storeID,storeID,productID,productID];
 
