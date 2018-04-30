@@ -6,7 +6,7 @@ var lan_zh = {
   in_put:"出库",
   address:"地址",
   out_in_put:"出入库",
-  loading:"正在登陆",
+  loading:"正在加载",
   load_success:"登陆成功",
   load_fail:"登陆失败",
   success: "成功",
