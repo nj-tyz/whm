@@ -6,6 +6,7 @@ var lan_zh = {
   in_put:"出库",
   address:"地址",
   out_in_put:"出入库",
+  inventory:"库存",
   loading:"正在加载",
   load_success:"登陆成功",
   load_fail:"登陆失败",
@@ -24,6 +25,8 @@ var lan_zh = {
   
   system_prompt:"系统提示",
   click_return:"点击返回",
+
+  failed_query:"查询失败！",
   
   get_success:"获取成功",
   get_fail:"获取失败",

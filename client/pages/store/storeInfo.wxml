@@ -11,7 +11,7 @@
             {{currentObj.positionCount}}
           </view>
           <view class="wx-30-text bcenter">
-            <text>个仓位</text>
+            <text>{{currentLanguage.out_put_position}}</text>
           </view>
         </view>
        
@@ -20,7 +20,7 @@
             {{currentObj.inventoryCount}}
           </view>
           <view class="wx-30-text bcenter">
-            <text>件库存</text>
+            <text>{{currentLanguage.inventory}}</text>
           </view>
         </view>
       </view>

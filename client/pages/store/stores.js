@@ -100,7 +100,7 @@ Page({
 
   //获取店铺下的所有仓库
   getAllStore: function () {
-    util.showBusy('获取本店仓库列表')
+    util.showBusy(this.data.currentLanguage.loading)
     var that = this
     var options = {
       url: config.service.getStoreListByShop,
@@ -112,7 +112,7 @@ Page({
         
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('仓库列表获取成功', result)
         that.setData({
           storeList: that.data.storeList.concat(result.data.data),
@@ -120,7 +120,7 @@ Page({
         })
       },
       fail(error) {
-        util.showModel('请求失败', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
       }
     }

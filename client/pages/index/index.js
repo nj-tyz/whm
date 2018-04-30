@@ -102,7 +102,7 @@ Page({
     }
 
 
-    util.showBusy(that.data.currentLanguage.shop_loading)
+    util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.shopList,
       login: true,
@@ -115,7 +115,7 @@ Page({
         that.setData({
           waiting: false
         })
-        util.showSuccess(that.data.currentLanguage.shop_get_success)
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('门店获取成功', result.data.data)
         that.setData({
           shopList: that.data.shopList.concat(result.data.data),
@@ -126,7 +126,7 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel('获取', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
       }
     }

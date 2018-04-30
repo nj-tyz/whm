@@ -6,6 +6,7 @@ var lan_en = {
   in_put: "deliver",
   address: "address",
   out_in_put: "store and deliver",
+  inventory: "inventory",
   loading: "loading",
   load_success: "Load successfully",
   load_fail: "Load Failed",
@@ -24,6 +25,8 @@ var lan_en = {
 
   system_prompt: "system hint",
   click_return: "click to return",
+
+  failed_query: "failed_query",
 
   get_success: "success",
   get_fail: "fail",

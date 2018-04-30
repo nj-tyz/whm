@@ -13,7 +13,8 @@ Page({
     //图标类型
     chartType: 0,
     sliderOffset: 0,
-    sliderLeft: 0
+    sliderLeft: 0,
+    currentLanguage: {}
   },
 
   changeChartType: function (event) {
@@ -25,7 +26,8 @@ Page({
 
       this.setData({
         sliderOffset: event.currentTarget.offsetLeft,
-        activeIndex: event.currentTarget.id
+        activeIndex: event.currentTarget.id,
+        currentLanguage: currentLanguage()
       });
     }
   },
@@ -133,7 +135,7 @@ Page({
         }
 
         if (!codeType || codeType != 'positionID' || !positionId || positionId == 0) {
-          util.showModel('提示', '二维码错误!');
+          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.qrcode_error);
           return;
         }
 
@@ -192,7 +194,7 @@ Page({
 
     
     
-    util.showBusy('正在获取数据')
+    util.showBusy(this.data.currentLanguage.loading)
     var options = {
       url: config.service.findPosition,
       login: true,
@@ -202,18 +204,18 @@ Page({
       success(result) {
         console.log('获取成功', result.data)
         if (result && result.data && result.data.data) {
-          util.showSuccess('获取成功')
+          util.showSuccess(this.data.currentLanguage.success)
 
           console.log("获取数据", result.data.data[0]);
           that.setData({
             currentPosition: result.data.data[0]
           })
         } else {
-          util.showModel('提示', "查询失败");
+          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.failed_query);
         }
       },
       fail(error) {
-        util.showModel('获取失败', error);
+        util.showModel(this.data.currentLanguage.fail, error);
         console.log('获取失败', error);
       }
     }

@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -13,7 +14,8 @@ Page({
   data: {
     objId: 0,
     currentObj: {},
-    isLoadding: true
+    isLoadding: true,
+    currentLanguage: {}
   },
 
   /**
@@ -24,7 +26,8 @@ Page({
       title: options.navigationBarTitle || "条码库存管理"
     })
     this.setData({
-      objId: options.objId
+      objId: options.objId,
+      currentLanguage: currentLanguage()
     });
     //获取对象
     this.getObj();
@@ -32,7 +35,7 @@ Page({
 
   //通过id获取对象
   getObj: function () {
-    util.showBusy('正在获取数据')
+    util.showBusy(this.data.currentLanguage.loading)
     var that = this
     var options = {
       url: config.service.getStoreById,
@@ -41,7 +44,7 @@ Page({
         id: that.data.objId
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         util.hideLoadding();
         console.log('获取成功', result.data.data)
         wx.setNavigationBarTitle({
@@ -54,7 +57,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel('获取', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
       }
     }

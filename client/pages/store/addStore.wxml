@@ -6,26 +6,26 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">编号</view>
+          <view class="weui-label">{{currentLanguage.serial_number}}</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" maxlength="20" bindinput="bindChangeNo" value="{{no}}" placeholder="请输入编号" />
+          <input class="weui-input" maxlength="20" bindinput="bindChangeNo" value="{{no}}" placeholder="{{currentLanguage.input_no}}" />
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">名称</view>
+          <view class="weui-label">{{currentLanguage.name}}</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" maxlength="20" bindinput="bindChangeName" value="{{name}}" placeholder="请输入名称" />
+          <input class="weui-input" maxlength="20" bindinput="bindChangeName" value="{{name}}" placeholder="{{currentLanguage.input_name}}" />
         </view>
       </view>
     </view>
-    <view class="weui-cells__title">地址</view>
+    <view class="weui-cells__title">{{currentLanguage.address}}</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" bindinput="bindChangeAddress" value="{{address}}" placeholder="请输入地址" maxlength="200" style="height: 3.3em" />
+          <textarea class="weui-textarea" bindinput="bindChangeAddress" value="{{address}}" placeholder="{{currentLanguage.input_address}}" maxlength="200" style="height: 3.3em" />
           <view class="weui-textarea-counter">{{cAddressLength}}/200</view>
         </view>
       </view>
@@ -33,7 +33,7 @@
     </view>
 
     <view class="weui-btn-area">
-      <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">提交</button>
+      <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">{{currentLanguage.submit}}</button>
     </view>
   </view>
 

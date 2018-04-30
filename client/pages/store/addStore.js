@@ -1,6 +1,8 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
+
 Page({
 
   /**
@@ -12,7 +14,8 @@ Page({
     img: "",
     address: "",
     cAddressLength: 0,
-    shop:0
+    shop: 0,
+    currentLanguage: {}
   },
 
   /**
@@ -24,7 +27,8 @@ Page({
     })
 
     this.setData({
-      shop: options.shopID || 0
+      shop: options.shopID || 0,
+      currentLanguage: currentLanguage()
     });
   },
 
@@ -86,7 +90,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy('正在上传')
+        util.showBusy(this.data.currentLanguage.uploading)
         var filePath = res.tempFilePaths[0]
 
         // 上传图片
@@ -96,7 +100,7 @@ Page({
           name: 'file',
 
           success: function (res) {
-            util.showSuccess('上传图片成功')
+            util.showSuccess(that.data.currentLanguage.success)
             //console.log(res)
             res = JSON.parse(res.data)
 
@@ -107,7 +111,7 @@ Page({
           },
 
           fail: function (e) {
-            util.showModel('上传图片失败')
+            util.showModel(that.data.currentLanguage.fail)
           }
         })
 
@@ -147,7 +151,7 @@ Page({
 
 
     //提交
-    util.showBusy('正在提交')
+    util.showBusy(that.data.currentLanguage.submiting)
 
     var options = {
       url: config.service.addStore,
@@ -164,7 +168,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel('提交失败', error);
+        util.showModel(that.data.currentLanguage.submit_fail, error);
         console.log('添加仓库失败', error);
       }
     }
