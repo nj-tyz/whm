@@ -48,8 +48,8 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          sliderLeft: (res.windowWidth / 3 - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / 3 * that.data.activeIndex
+          sliderLeft: (res.windowWidth / 2 - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / 2 * that.data.activeIndex
         });
       }
     });
