@@ -1,6 +1,7 @@
 const { query } = require('../mysql')
 
 async function list(ctx, next) {
+
   //只查询当前用户有权限的店铺
   var result =  await query("select * from tb_shop ");
   //console.log(result);

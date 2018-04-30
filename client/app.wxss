@@ -108,3 +108,7 @@ page {
 .mr-20 {
   margin-right: 20rpx;
 }
+
+.bcenter{
+  text-align: center
+}

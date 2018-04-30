@@ -1,14 +1,20 @@
 <view class="page">
-  <view class="page__bd">
-    <view class="weui-cells__title"> {{storeName}}所有仓位 <image bindtap='addPosition' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" /></view>
-    <view class="weui-cells weui-cells_after-title">
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__hd">{{storeName}}所有仓位
+      <image bindtap='addPosition' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
+    </view>
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
 
-      <view bindtap='showQrCode' data-positionid="{{item.id}}" class="weui-cell" wx:for="{{positionList}}">
-        <view class="weui-cell__bd">{{item.no}}</view>
-        <view  class="weui-cell__ft"><image class="icon-image" src="../../img/scan.png"></image></view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        <view bindtap='showQrCode' data-positionid="{{item.id}}" class="weui-cell" wx:for="{{positionList}}">
+          <view class="weui-cell__bd">{{item.no}}</view>
+          <view class="weui-cell__ft">
+            <image class="icon-image" src="../../img/scan.png"></image>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+
       </view>
-
     </view>
   </view>
 </view>

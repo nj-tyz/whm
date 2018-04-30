@@ -2,17 +2,22 @@ const { mysql } = require('../qcloud.js')
 const { query } = require('../mysql')
 
 async function list(ctx, next) {
+  var pageSize = ctx.query.pageSize||5;
+  var pageNo = ctx.query.pageNo||1;
+  var e_i = pageSize*pageNo;
+  var s_i = e_i-pageSize;
+
   var shopID = ctx.query.shopID;
   var storeID = ctx.query.storeID;
 
   var result ;
   console.log("list");
   if(storeID){
-    result =  await query("SELECT product.*,sum(inventory.count) as count FROM  tb_inventory inventory LEFT JOIN tb_product product ON product.id = inventory.productId LEFT JOIN tb_store store ON inventory.storeId = store.id WHERE store.id = ? group by inventory.productId",[storeID]);
+    result =  await query("SELECT product.*,sum(inventory.count) as count FROM  tb_inventory inventory LEFT JOIN tb_product product ON product.id = inventory.productId LEFT JOIN tb_store store ON inventory.storeId = store.id WHERE store.id = ? group by inventory.productId limit ?,?",[storeID,s_i,e_i]);
   }
 
   if(shopID){
-    result =  await query("select product.*,ifnull(sum(inventory.count),0) as count from tb_product product   left join tb_shop shop  ON(   (     shop.company = product.scope_id     AND product.scope = 'company'   )   OR(     shop.id = product.scope_id    AND product.scope = 'shop'  ) ) left join tb_inventory inventory on inventory.productId = product.id where shop.id =? GROUP BY  product.id",[shopID]);
+    result =  await query("select product.*,ifnull(sum(inventory.count),0) as count from tb_product product   left join tb_shop shop  ON(   (     shop.company = product.scope_id     AND product.scope = 'company'   )   OR(     shop.id = product.scope_id    AND product.scope = 'shop'  ) ) left join tb_inventory inventory on inventory.productId = product.id where shop.id =? GROUP BY  product.id limit ?,?",[shopID,s_i,e_i]);
   }
   console.log(result);
   ctx.state.data=result;
