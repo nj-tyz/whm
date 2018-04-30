@@ -4,15 +4,15 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">类型:</view>
+          <view class="weui-label">{{currentLanguage.out_put_type}}:</view>
         </view>
         <view class="weui-cell__bd">
           <radio-group class="radio-group" bindchange="radioChange">
             <radio class="radio" wx:key="optionType" value="in" checked="checked">
-              <text>入库</text>
+              <text>{{currentLanguage.out_put}}</text>
             </radio>
             <radio class="radio" wx:key="optionType" value="out" style='margin-left:50rpx' checked="">
-              <text>出库</text>
+              <text>{{currentLanguage.in_put}}</text>
             </radio>
           </radio-group>
         </view>
@@ -21,7 +21,7 @@
 
       <view class="weui-cell weui-cell_input weui-cell_vcode" bindtap='scanStore'>
         <view class="weui-cell__hd">
-          <view class="weui-label">仓库:</view>
+          <view class="weui-label">{{currentLanguage.out_put_warehouse}}:</view>
         </view>
         <view class="weui-cell__bd">
           <image wx:if="{{currentStore.positionId}}" class="icon-image" src="{{currentStore.img}}"></image>
@@ -31,7 +31,7 @@
       </view>
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
-          <view class="weui-label">仓位:</view>
+          <view class="weui-label">{{currentLanguage.out_put_position}}:</view>
         </view>
         <view class="weui-cell__bd">NO.
           <text wx:if="{{currentStore.positionNo}}" class="">{{currentStore.positionNo}} </text>
@@ -43,7 +43,7 @@
 
       <view class="weui-cell weui-cell_input" bindtap='scanProduct'>
         <view class="weui-cell__hd">
-          <view class="weui-label">商品:</view>
+          <view class="weui-label">{{currentLanguage.product}}:</view>
         </view>
         <view class="weui-cell__bd">
           <image wx:if="{{currentProduct.img}}" class="icon-image" src="{{currentProduct.img}}"></image>
@@ -57,19 +57,19 @@
 
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">数量:</view>
+          <view class="weui-label">{{currentLanguage.quantity}}:</view>
         </view>
         <view class="weui-cell__bd">
-          <input bindinput="bingOptionCount" value="{{optionCount}}" class="weui-input" maxlength="3" type="number" placeholder="请输入数量" />
+          <input bindinput="bingOptionCount" value="{{optionCount}}" class="weui-input" maxlength="3" type="number" placeholder="{{currentLanguage.enter_quantity}}" />
         </view>
       </view>
     </view>
-    <view class="weui-cells__tips" wx:if="{{currentInventory&&currentInventory.count}}">(当前:{{currentInventory.count}})</view>
+    <view class="weui-cells__tips" wx:if="{{currentInventory&&currentInventory.count}}">({{currentLanguage.current}}:{{currentInventory.count}})</view>
 
 
 
     <view class="weui-btn-area">
-      <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">提交</button>
+      <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">{{currentLanguage.submit}}</button>
     </view>
   </view>
 </view>

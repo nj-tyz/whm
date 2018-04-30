@@ -14,7 +14,7 @@ var lan_zh = {
   success: "成功",
   fail: "失败",
   shop:"店铺",
-
+  missing_data:"数据不完整",
   input_company_name:"请输入公司名称",
   input_no: "请输入编号",
   input_name: "请输入名称",
@@ -24,6 +24,10 @@ var lan_zh = {
   submit:"提交",
   submiting:"提交中...",
   submit_fail:"提交失败",
+  cant_more:"出库数量不能大于库存数量!",
+  quantity:"数量",
+  enter_quantity:"请输入数量",
+  current:"当前",
   
   system_prompt:"系统提示",
   click_return:"点击返回",
@@ -83,6 +87,7 @@ var lan_zh = {
   Please_enter_a_barcode_name:"请输入 条码/名称",
 
   scan:"扫码",
+  scan_product_fail:"扫描商品失败",
 
   qrcode_error:"二维码错误",
   qrcode_generator:"二维码生成器",

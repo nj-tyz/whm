@@ -19,7 +19,8 @@ Page({
     currentProduct: {},
     currentInventory: {},
     optionCount: 0,
-    isLoadding: true
+    isLoadding: true,
+    currentLanguage: {}
   },
 
   /**
