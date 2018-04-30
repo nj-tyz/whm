@@ -33,11 +33,11 @@
 
             <!--设置按钮-->
           <picker bindchange="changeLanguage" value="{{index}}" range="{{array}}">  
-            <view style='position:absolute;top:30rpx;left:30rpx' wx:if="{{index=='0'}}">
-              <image style='width:40rpx;height:40rpx;' mode = "aspectFit"class="" src="../../img/Canada.jpg" />
+            <view style='position:absolute;top:30rpx;left:30rpx' wx:if="{{currentLanguage.lan=='中文'}}">
+              <image style='width:40rpx;height:40rpx;' mode = "aspectFit"class="" src="../../img/China.jpg" />
             </view>
             <view style='position:absolute;top:30rpx;left:30rpx'wx:else>
-              <image style='width:40rpx;height:40rpx;' mode = "aspectFit"class="" src="../../img/China.jpg" />
+              <image style='width:40rpx;height:40rpx;' mode = "aspectFit"class="" src="../../img/Canada.jpg" />
             </view>
           </picker>
 

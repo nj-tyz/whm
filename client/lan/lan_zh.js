@@ -1,4 +1,5 @@
 var lan_zh = {
+  lan:"中文",
   name:"名称",
   product:"商品",
   serial_number:"编号",
@@ -80,6 +81,8 @@ var lan_zh = {
   product_get_fail:"产品获取失败",
   product_scan:"扫产品",
   Please_enter_a_barcode_name:"请输入 条码/名称",
+
+  scan:"扫码",
 
   qrcode_error:"二维码错误",
   qrcode_generator:"二维码生成器",

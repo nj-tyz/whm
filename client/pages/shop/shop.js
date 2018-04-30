@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -28,7 +29,8 @@ Page({
    var that = this;
     this.setData({
       title: options.navigationBarTitle || "条码库存管理",
-      shopID: options.shopID
+      shopID: options.shopID,
+      currentLanguage: getCurrentLanguage()
     });
     wx.setNavigationBarTitle({
       title: that.data.title
@@ -47,7 +49,7 @@ Page({
 
   //通过id获取门店对象
   getShop: function () {
-    util.showBusy('正在获取门店数据')
+    util.showBusy(this.data.currentLanguage.loading)
     var that = this
     var options = {
       url: config.service.getShop,
@@ -56,7 +58,7 @@ Page({
         id: that.data.shopID
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         util.hideLoadding();
         console.log('门店获取成功', result.data.data)
         wx.setNavigationBarTitle({
@@ -69,7 +71,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel('获取', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
       }
     }
@@ -157,7 +159,7 @@ Page({
         }
         console.log('扫码结果', id)
         if (!id || id == "") {
-          util.showModel('提示', '扫码错误!');
+          util.showModel(that.data.currentLanguage.fail);
           return;
         }
 

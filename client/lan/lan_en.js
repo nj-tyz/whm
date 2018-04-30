@@ -1,4 +1,5 @@
 var lan_en = {
+  lan: "English",
   name: "name",
   product: "product",
   serial_number: "serial number",
@@ -80,6 +81,7 @@ var lan_en = {
   product_get_fail: "fail",
   product_scan: "Scan products",
   Please_enter_a_barcode_name: "Please enter a bar code or name",
+  scan: "Scan",
 
   qrcode_error: "QR code is wrong",
   qrcode_generator: "QR code generator",

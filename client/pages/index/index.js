@@ -2,7 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var currentLanguage = require('../../lan/currentLanguage')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -23,10 +23,10 @@ Page({
   onLoad: function () {
     var that = this;
     this.setData({
-      currentLanguage: currentLanguage()
+      currentLanguage: getCurrentLanguage()
     })
     that.getUserInfo();
-    console.log(this.data.currentLanguage.name);
+    //console.log(this.data.currentLanguage.name);
     
   },
   /**
@@ -193,7 +193,7 @@ Page({
     } catch (e) {
     }
     _that.setData({
-      currentLanguage: currentLanguage()
+      currentLanguage: getCurrentLanguage()
     })
   },
   //翻页
