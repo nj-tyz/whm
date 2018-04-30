@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 //获取应用实例
 const app = getApp();
 Page({
@@ -20,7 +21,8 @@ Page({
     storeID: 0,
     shopName: "",
     shoreName: "",
-    productList: []
+    productList: [],
+    currentLanguage: {}
   },
 
   showInput: function () {
@@ -78,7 +80,7 @@ Page({
         var barCode = res.result;
 
         if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.bar_code_error);
           return;
         }
 
@@ -107,7 +109,8 @@ Page({
       shopID: options.shopID || 0,
       shopName: options.shopName || "",
       storeID: options.storeID || 0,
-      shoreName: options.shoreName || ""
+      shoreName: options.shoreName || "",
+      currentLanguage: currentLanguage()
     });
     //获取门店下的所有仓库数据
     this.getAllProduct();
@@ -205,13 +208,13 @@ Page({
     console.log(params);
 
 
-    util.showBusy('获取商品列表')
+    util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.productList,
       login: true,
       data: params,
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('商品列表获取成功', result)
         //有翻页,所以使用合并
         that.setData({
@@ -225,7 +228,7 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel('请求失败', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
       }
     }
