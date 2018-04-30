@@ -24,8 +24,9 @@ Page({
     this.setData({
       currentLanguage: currentLanguage()
     })
+    var _that = this; 
     wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
+      title: options.navigationBarTitle || _that.data.currentLanguage.position_navigation_bar_title
     })
     
   },
@@ -88,7 +89,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy('正在上传')
+        util.showBusy(that.data.currentLanguage.uploading)
         var filePath = res.tempFilePaths[0]
 
         // 上传图片
@@ -98,7 +99,7 @@ Page({
           name: 'file',
 
           success: function (res) {
-            util.showSuccess('上传图片成功')
+            util.showSuccess(that.data.currentLanguage.img_upload_success)
             //console.log(res)
             res = JSON.parse(res.data)
 
@@ -109,7 +110,7 @@ Page({
           },
 
           fail: function (e) {
-            util.showModel('上传图片失败')
+            util.showModel(that.data.currentLanguage.img_upload_fail)
           }
         })
 
@@ -149,7 +150,7 @@ Page({
 
 
     //提交
-    util.showBusy('正在提交')
+    util.showBusy(that.data.currentLanguage.submiting)
 
     var options = {
       url: config.service.addShop,
@@ -171,7 +172,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel('提交失败', error);
+        util.showModel(that.data.currentLanguage.submit_fail, error);
         console.log('添加店铺失败', error);
       }
     }

@@ -9,6 +9,9 @@ const app = getApp();
 
 Page({
   data: {
+    pageSize: 5,
+    pageNo: 1,
+    nomore: false,
     waiting: true,
     logged: false,
     userInfo: {},
@@ -104,7 +107,9 @@ Page({
       url: config.service.shopList,
       login: true,
       data: {
-        id: 1
+        id: 1,
+        pageSize: that.data.pageSize,
+        pageNo: that.data.pageNo
       },
       success(result) {
         that.setData({
@@ -113,7 +118,8 @@ Page({
         util.showSuccess(that.data.currentLanguage.shop_get_success)
         console.log('门店获取成功', result.data.data)
         that.setData({
-          shopList: result.data.data
+          shopList: that.data.shopList.concat(result.data.data),
+          nomore: result.data.data.length < that.data.pageSize ? true : false
         })
 
         wx.hideNavigationBarLoading() //完成停止加载
@@ -194,6 +200,15 @@ Page({
     } catch (e) {
     }
     _that.onLoad();
+  },
+  //翻页
+  loadmore: function () {
+    var that = this;
+    that.setData({
+      pageNo: that.data.pageNo + 1
+    })
+    //重新查询后台
+    that.getUserShop();
   }
 
 })

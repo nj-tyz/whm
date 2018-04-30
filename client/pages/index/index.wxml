@@ -75,6 +75,7 @@
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
       </view>
+      
       <!--
       <view class="weui-panel__ft">
         <view class="weui-cell weui-cell_access weui-cell_link" bindtap='addProduct'>
@@ -83,6 +84,11 @@
         </view>
       </view>
       -->
+    </view>
+    <view class="weui-panel__ft">
+      <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{!nomore}}" bindtap='loadmore'>
+        <view class="weui-cell__bd bcenter iconfont icon-more"></view>
+      </view>
     </view>
   </view>
 </view>

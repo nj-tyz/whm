@@ -12,7 +12,10 @@ Page({
   data: {
     shopID: 0,
     shopName: "",
-    storeList: []
+    storeList: [],
+    nomore:false,
+    pageNo:1,
+    pageSize:5
   },
 
   /**
@@ -45,6 +48,7 @@ Page({
   onShow: function () {
     if (app.globalData.needRefresh) {
       var that = this;
+      that.data.pageNo = 1;
       that.getAllStore();
     }
   },
@@ -67,7 +71,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var that = this;
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.setData({
+      pageNo: 1,
+      nomore: false,
+      storeList: []
+    });
+    that.getAllStore();
   },
 
   /**
@@ -92,13 +103,17 @@ Page({
       url: config.service.getStoreListByShop,
       login: true,
       data: {
-        shopID: that.data.shopID
+        shopID: that.data.shopID,
+        pageSize: that.data.pageSize,
+        pageNo : that.data.pageNo
+        
       },
       success(result) {
         util.showSuccess('获取成功')
         console.log('仓库列表获取成功', result)
         that.setData({
-          storeList: result.data.data
+          storeList: that.data.storeList.concat(result.data.data),
+          nomore: result.data.data.length < that.data.pageSize ? true : false
         })
       },
       fail(error) {
@@ -133,6 +148,13 @@ Page({
       url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id
     })
   },
-
+  loadmore: function () {
+    var that = this;
+    that.setData({
+      pageNo: that.data.pageNo + 1
+    })
+    //重新查询后台
+    that.getAllStore();
+  }
 
 })
