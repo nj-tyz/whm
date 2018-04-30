@@ -14,6 +14,11 @@ var lan_en = {
   success:"success",
   fail:"fail",
   shop: "shop",
+  missing_data: "missing data",
+  cant_more: "The number of out of the warehouse should not be greater than the quantity of stock",
+  quantity: "quantity",
+  enter_quantity: "Please enter the quantity",
+  current: "current",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the serial number",
@@ -82,6 +87,7 @@ var lan_en = {
   product_scan: "Scan products",
   Please_enter_a_barcode_name: "Please enter a bar code or name",
   scan: "Scan",
+  scan_product_fail: "Scan product fail",
 
   qrcode_error: "QR code is wrong",
   qrcode_generator: "QR code generator",
