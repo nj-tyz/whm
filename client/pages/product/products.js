@@ -11,7 +11,7 @@ Page({
   data: {
     pageSize: 5,
     pageNo: 1,
-    nomore:false,
+    nomore: false,
 
     shopID: 0,
     storeID: 0,
@@ -141,9 +141,10 @@ Page({
         that.setData({
           productList: that.data.productList.concat(result.data.data),
           //标识是不是没有更多数据了
-          nomore: result.data.data.length<that.data.pageSize?true:false
+          //如果本次拿到的数量小于pagesize,则认为后面不能再翻页了
+          nomore: result.data.data.length < that.data.pageSize ? true : false
         })
-        
+
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
       },
