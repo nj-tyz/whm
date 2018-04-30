@@ -10,6 +10,7 @@ async function list(ctx, next) {
 
   var shopID = ctx.query.shopID;
   var storeID = ctx.query.storeID;
+  var inputVal = ctx.query.inputVal;
 
   var result ;
   console.log("list");
@@ -18,7 +19,23 @@ async function list(ctx, next) {
   }
 
   if(shopID){
-    result =  await query("select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? limit ?,?",[shopID,s_i,e_i]);
+    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ?";
+    var parames= [shopID];
+    if(inputVal&&inputVal!=""){
+      inputVal = "%"+ctx.query.inputVal+"%";
+      sql +=" and (barcode like ? or name like ? )";
+      parames.push(inputVal);
+      parames.push(inputVal);
+    }
+
+
+
+    sql +=" limit ?,?";
+    parames.push(s_i);
+    parames.push(e_i);
+
+
+    result =  await query(sql,parames);
   }
   console.log(result);
   ctx.state.data=result;
