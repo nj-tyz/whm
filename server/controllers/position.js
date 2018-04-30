@@ -1,4 +1,5 @@
 const { query } = require('../mysql')
+const userutil = require('./userutil.js')
 
 async function list(ctx, next) {
   var storeID = ctx.query.storeID;
@@ -9,10 +10,15 @@ async function list(ctx, next) {
 
 
 async function add(ctx, next) {
+  var userinfo =await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  var openId = userinfo.openId;
+
   var no = ctx.query.no;
   var storeID = ctx.query.storeID;
+  var shopId = ctx.query.shopID;
  
-  var result =  await query("insert into tb_store_position(no,store) values(?,?)",[no,storeID]);
+  var result =  await query("insert into tb_store_position(no,store,company,shop) values(?,?,?,?)",[no,storeID,company,shopId]);
  
   ctx.state.data = result;
 }
@@ -43,17 +49,17 @@ async function find(ctx, next) {
 
 
     //仓位内的产品分布
-    var productsInPosition =  await query("select  product.img productImage, product.name productName,sposition.no positionName, store.name storeName,shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.productId = product.id left join tb_store_position sposition on inventory.positionId=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where sposition.id = ? group by inventory.productId,store.id",[positionId]);
+    var productsInPosition =  await query("select  product.img productImage, product.name productName,sposition.no positionName, store.name storeName,shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.product = product.id left join tb_store_position sposition on inventory.position=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where sposition.id = ? group by inventory.product,store.id",[positionId]);
 
 
     //仓库内的产品分布(有可能没有传仓库参数,通过第一步的查询结果获取)
     storeId=storeId?storeId:result[0].store;
-    var productsInStore =  await query("select  product.img productImage ,product.name productName,sposition.no positionName,store.name storeName,shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.productId = product.id left join tb_store_position sposition on inventory.positionId=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where store.id =? group by inventory.productId,inventory.positionId",[storeId]);
+    var productsInStore =  await query("select  product.img productImage ,product.name productName,sposition.no positionName,store.name storeName,shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.product = product.id left join tb_store_position sposition on inventory.position=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where store.id =? group by inventory.product,inventory.position",[storeId]);
 
 
     //店铺内的产品分布(有可能没有传店铺参数,通过第一步的查询结果获取)
     shopId=shopId?shopId:result[0].shopId;
-    var productsInShop =  await query("select   product.img productImage, product.name productName, shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.productId = product.id left join tb_store_position sposition on inventory.positionId=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where shop.id = ? group by inventory.productId,shop.id",[shopId]);
+    var productsInShop =  await query("select   product.img productImage, product.name productName, shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.product = product.id left join tb_store_position sposition on inventory.position=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where shop.id = ? group by inventory.product,shop.id",[shopId]);
 
 
     result[0].productsInPosition= productsInPosition
