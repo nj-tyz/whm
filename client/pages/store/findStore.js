@@ -38,7 +38,7 @@ Page({
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth * 0.9,
       imageHeight: wx.getSystemInfoSync().windowWidth * 1.2,
-      currentLanguage: currentLanguage()
+      currentLanguage: currentLanguage() 
     })
     var that = this;
     wx.setNavigationBarTitle({
