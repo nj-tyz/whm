@@ -37,6 +37,11 @@ Page({
     if (app.globalData.needRefresh){
       app.globalData.needRefresh=false;
       var that = this;
+      that.setData({
+        pageNo: 1,
+        nomore: false,
+        shopList: []
+      })
       that.getUserInfo();
     }
   },
@@ -46,6 +51,11 @@ Page({
   onPullDownRefresh: function () {
     var that = this;
     wx.showNavigationBarLoading() //在标题栏中显示加载
+    that.setData({
+      pageNo: 1,
+      nomore:  false,
+      shopList:[]
+    })
     that.getUserInfo();
   },
   getUserInfo: function () {
@@ -74,11 +84,19 @@ Page({
             util.showSuccess(that.data.currentLanguage.load_success)
             //获取门店
             that.getUserShop();
+
+
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
           },
 
           fail(error) {
             util.showModel(that.data.currentLanguage.request_fail, error)
             console.log('request fail', error)
+
+
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
           }
         })
       },

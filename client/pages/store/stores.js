@@ -118,10 +118,18 @@ Page({
           storeList: that.data.storeList.concat(result.data.data),
           nomore: result.data.data.length < that.data.pageSize ? true : false
         })
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)

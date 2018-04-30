@@ -4,8 +4,13 @@ const userutil = require('./userutil.js')
 
 async function getListByShop(ctx, next) {
   var shopID = ctx.query.shopID;
+   var pageSize = ctx.query.pageSize||5;
+  var pageNo = ctx.query.pageNo||1;
+  var e_i = pageSize*pageNo;
+  var s_i = e_i-pageSize;
 
-  var result =  await query("SELECT   *,  ( select IFNULL(sum(inventory.count), 0) from tb_inventory inventory where inventory.store = store.id) inventoryCount,  (select count(0) from tb_store_position sposition where sposition.store = store.id) positionCount FROM  tb_store store WHERE store.shop =?",[shopID]);
+
+  var result =  await query("SELECT   *,  ( select IFNULL(sum(inventory.count), 0) from tb_inventory inventory where inventory.store = store.id) inventoryCount,  (select count(0) from tb_store_position sposition where sposition.store = store.id) positionCount FROM  tb_store store WHERE store.shop =?  limit ?,?",[shopID,s_i,e_i]);
   console.log(result);
   ctx.state.data=result;
 }
