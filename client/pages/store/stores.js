@@ -2,6 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 //获取应用实例
 const app = getApp();
 Page({
@@ -15,7 +16,8 @@ Page({
     storeList: [],
     nomore:false,
     pageNo:1,
-    pageSize:5
+    pageSize:5,
+    currentLanguage: {}
   },
 
   /**
@@ -28,6 +30,7 @@ Page({
     this.setData({
       shopID: options.shopID,
       shopName: options.shopName,
+      currentLanguage: currentLanguage()
     });
 
 
