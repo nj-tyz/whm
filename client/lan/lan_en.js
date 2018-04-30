@@ -1,4 +1,4 @@
-var lan = {
+var lan_en = {
   name: "name",
   product: "product",
   serial_number: "serial number",
@@ -6,6 +6,9 @@ var lan = {
   in_put: "deliver",
   address: "address",
   out_in_put: "store and deliver",
+  loading: "loading",
+  load_success: "Load successfully",
+  load_fail: "Load Failed",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the serial number",
@@ -106,3 +109,4 @@ var lan = {
   store_all: "all warehouse"
 }
 
+module.exports = lan_en;
