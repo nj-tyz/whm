@@ -21,7 +21,13 @@ async function getone(ctx, next) {
 async function getById(ctx, next) {
   var id = ctx.query.id;
   var result =  await query("SELECT   *,(     SELECT      IFNULL(sum(inventory.count), 0)     FROM      tb_inventory inventory    WHERE       inventory.store = store.id  )inventoryCount,  (     SELECT      count(0)    FROM      tb_store_position sposition     WHERE       sposition.store = store.id  )positionCount FROM   tb_store store WHERE  store.id =?",[id]);
+
+  //查询仓库下的库存数据
+  var productsInStore =  await query("select  product.img productImage ,product.name productName,sposition.no positionName,store.name storeName,shop.name shopName,ifnull(sum(inventory.count),0) inventoryCount from tb_inventory inventory left join tb_product product on inventory.product = product.id left join tb_store_position sposition on inventory.position=sposition.id left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where store.id =? group by inventory.product,inventory.position",[id]);
+
+
   var item = result.length > 0 ? result[0] : {};
+  item.productsInStore=productsInStore;
   ctx.state.data = item;
 }
 

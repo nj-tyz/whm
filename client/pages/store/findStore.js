@@ -204,7 +204,7 @@ Page({
       success(result) {
         console.log('获取成功', result.data)
         if (result && result.data && result.data.data) {
-          util.showSuccess(this.data.currentLanguage.success)
+          util.showSuccess(that.data.currentLanguage.success)
 
           console.log("获取数据", result.data.data[0]);
           that.setData({
