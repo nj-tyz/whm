@@ -136,34 +136,7 @@ Page({
 
   },
 
-  // //扫描仓库
-  // scanStore: function () {
-  //   wx.scanCode({
-  //     success: (res) => {
-  //       var id = 0;
-  //       var codeType = "";
-  //       try {
-  //         codeType = res.result.split(":")[0];
-  //         id = res.result.split(":")[1];
-  //       } catch (e) {
-  //         console.error(e);
-  //         id = 0;
-  //       }
-
-  //       if (!codeType || codeType != 'positionID' || !id || id == 0) {
-  //         util.showModel('提示', '二维码错误!');
-  //         return;
-  //       }
-
-  //       console.log('仓库扫码得到id', id)
-
-  //       wx.navigateTo({
-  //         url: '../store/stores?navigationBarTitle=' + that.data.currentShop.name + '查找&inputVal=' + id
-  //       })
-
-  //     }
-  //   })
-  // },
+  
 
   //扫码
   scanCode: function () {

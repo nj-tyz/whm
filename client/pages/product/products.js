@@ -47,7 +47,7 @@ Page({
     //调用查询
     this.search();
   },
- 
+
   //查询产品
   search: function () {
     var that = this;
@@ -183,7 +183,7 @@ Page({
   //增加商品
   addProduct: function () {
     wx.navigateTo({
-      url: '../product/addProduct?navigationBarTitle=增加商品'
+      url: '../product/addProduct?navigationBarTitle=增加商品' + "&shopID=" + this.data.shopID
     })
   },
   //获取所有产品

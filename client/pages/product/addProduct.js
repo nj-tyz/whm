@@ -11,6 +11,7 @@ Page({
     img: "",
     barcode: "",
     price:0,
+    shopID:0
   },
 
   /**
@@ -20,6 +21,9 @@ Page({
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
+    this.setData({
+      shopID: options.shopID || 0
+    });
   },
 
   /**
@@ -147,7 +151,8 @@ Page({
         name: that.data.name,
         barcode: that.data.barcode,
         img: that.data.img,
-        price:that.data.price
+        price:that.data.price,
+        shopID: that.data.shopID
       },
       success(result) {
 

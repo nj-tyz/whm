@@ -10,6 +10,7 @@ Page({
    */
   data: {
     storeID: 0,
+    shopID: 0,
     shoreName: "",
     positionList: []
   },
@@ -23,6 +24,7 @@ Page({
     })
     this.setData({
       storeID: options.storeID || 0,
+      shopID: options.shopID || 0,
       shoreName: options.shoreName || ""
     });
     //获取仓库下所有仓位
@@ -112,8 +114,9 @@ Page({
   //增加仓位
   addPosition: function () {
     var that = this;
+
     wx.navigateTo({
-      url: '../position/addPosition?navigationBarTitle=增加仓位&storeID=' + that.data.storeID
+      url: '../position/addPosition?navigationBarTitle=增加仓位&storeID=' + that.data.storeID + "&shopID=" + that.data.shopID
     })
   },
   //显示二维码

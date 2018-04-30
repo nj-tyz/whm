@@ -12,6 +12,7 @@ Page({
    */
   data: {
     objId: 0,
+    shopID:0,
     currentObj: {},
     isLoadding: true
   },
@@ -20,11 +21,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
     this.setData({
-      objId: options.objId
+      objId: options.objId,
+      shopID: options.shopID
     });
     //获取对象
     this.getObj();
@@ -122,9 +125,11 @@ Page({
   },
 
   showAllStorePosition: function (event) {
+
     var that = this;
+   
     wx.navigateTo({
-      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId
+      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId + "&shopID=" + that.data.shopID
     })
   },
 

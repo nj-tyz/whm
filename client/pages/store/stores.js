@@ -144,8 +144,9 @@ Page({
   //跳转到仓库明细
   showStoreInfo: function (event) {
     var that = this;
+     console.log(that.data);
     wx.navigateTo({
-      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id
+      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id + "&shopID=" + that.data.shopID
     })
   },
   loadmore: function () {
