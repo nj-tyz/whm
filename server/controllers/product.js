@@ -3,10 +3,9 @@ const { query } = require('../mysql')
 const userutil = require('./userutil.js')
 
 async function list(ctx, next) {
-  var pageSize = ctx.query.pageSize||5;
-  var pageNo = ctx.query.pageNo||1;
-  var e_i = pageSize*pageNo;
-  var s_i = e_i-pageSize;
+  var pageSize = (ctx.query.pageSize||5)*1;
+  var pageNo = (ctx.query.pageNo||1)*1;
+  var s_i = pageSize*pageNo-pageSize;
 
   var shopID = ctx.query.shopID;
   var storeID = ctx.query.storeID;
@@ -15,11 +14,11 @@ async function list(ctx, next) {
   var result ;
   console.log("list");
   if(storeID){
-    result =  await query("select product.*, (select ifnull(sum(count),0) from tb_inventory  where store = ? and product = product.id)count  from tb_product product  where product.shop = (select shop from tb_store where id = ?) limit ?,?",[storeID,storeID,s_i,e_i]);
+    result =  await query("select product.*, (select ifnull(sum(count),0) from tb_inventory  where store = ? and product = product.id)count  from tb_product product  where product.shop = (select shop from tb_store where id = ?)order by product.id limit ?,?",[storeID,storeID,s_i,pageSize]);
   }
 
   if(shopID){
-    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ?";
+    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? order by product.id";
     var parames= [shopID];
     if(inputVal&&inputVal!=""){
       inputVal = "%"+ctx.query.inputVal+"%";
@@ -32,7 +31,8 @@ async function list(ctx, next) {
 
     sql +=" limit ?,?";
     parames.push(s_i);
-    parames.push(e_i);
+    console.log(pageSize);
+    parames.push(pageSize);
 
 
     result =  await query(sql,parames);
