@@ -9,8 +9,9 @@ Page({
   data: {
     no: "",
     storeID: 0,
-    shopID:0,
-    currentLanguage:{}
+    shopID: 0,
+    currentLanguage: {}
+
   },
 
   /**
@@ -96,8 +97,10 @@ Page({
 
 
 
-    //提交
-    util.showBusy(that.data.currentLanguage.loading)
+
+
+    util.showBusy(that.data.currentLanguage.submiting)
+
     var options = {
       url: config.service.addPosition,
       login: true,
@@ -113,7 +116,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel('提交失败', error);
+        util.showModel(that.data.currentLanguage.submit_fail, error);
         console.log('添加仓位失败', error);
       }
     }
