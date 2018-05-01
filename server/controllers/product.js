@@ -109,8 +109,9 @@ async function add(ctx, next) {
 
 
   //校验barcode是否重复
-  var check = await query("select count(*)  from tb_product where barCode = ?",[barcode]);
-  if (check != 0) {
+  var check = await query("select count(*) count  from tb_product where barCode = ? and company = ?", [barcode, company]);
+  console.log(check);
+  if (check[0].count>0) {
     ctx.state.data = {
       errocode: 1,
       msg: "Product has already existed(商品已存在)!"

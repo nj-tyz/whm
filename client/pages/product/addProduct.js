@@ -161,7 +161,8 @@ Page({
       },
       success(result) {
         if (result.data.data.errocode == 1) {
-          util.showModel(that.data.currentLanguage.submit_fail, result.data.data.msg);
+          console.log(result);
+          util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.Product_existed);
         } else {
           console.log('添加商品成功', result);
           wx.navigateTo({

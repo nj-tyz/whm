@@ -85,6 +85,7 @@ var lan_en = {
   product_get_success: "success",
   product_get_fail: "fail",
   product_scan: "Scan products",
+  Product_existed: "Product has already existed",
   Please_enter_a_barcode_name: "Please enter a bar code or name",
   scan: "Scan",
   scan_product_fail: "Scan product fail",

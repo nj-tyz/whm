@@ -85,6 +85,7 @@ var lan_zh = {
   product_get_fail:"产品获取失败",
   product_scan:"扫产品",
   Please_enter_a_barcode_name:"请输入 条码/名称",
+  Product_existed:"商品已存在！",
 
   scan:"扫码",
   scan_product_fail:"扫描商品失败",
