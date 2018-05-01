@@ -113,7 +113,6 @@ Page({
         shopID: that.data.shopID,
         pageSize: that.data.pageSize,
         pageNo : that.data.pageNo
-        
       },
       success(result) {
         util.showSuccess(that.data.currentLanguage.success)
@@ -122,8 +121,6 @@ Page({
           storeList: that.data.storeList.concat(result.data.data),
           nomore: result.data.data.length < that.data.pageSize ? true : false
         })
-
-
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
       },
