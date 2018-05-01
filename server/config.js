@@ -32,8 +32,8 @@ const CONF = {
      */ 
 
     //图片服务器-开发
-    region: 'ap-guangzhou',
-    fileBucket: 'test',
+     region: 'ap-guangzhou',
+     fileBucket: 'test',
 
 
     //图片服务器-线上

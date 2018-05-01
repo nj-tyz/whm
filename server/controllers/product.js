@@ -18,7 +18,7 @@ async function list(ctx, next) {
   }
 
   if(shopID){
-    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? order by product.id";
+    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? ";
     var parames= [shopID];
     if(inputVal&&inputVal!=""){
       inputVal = "%"+ctx.query.inputVal+"%";
@@ -29,7 +29,7 @@ async function list(ctx, next) {
 
 
 
-    sql +=" limit ?,?";
+    sql +=" order by product.id limit ?,?";
     parames.push(s_i);
     console.log(pageSize);
     parames.push(pageSize);
