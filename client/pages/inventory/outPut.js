@@ -205,12 +205,13 @@ Page({
 
   //扫描产品条码
   scanProduct: function () {
+    var that = this;
     wx.scanCode({
       success: (res) => {
         var barCode = res.result;
 
         if (!barCode || barCode == "") {
-          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.qrcode_error);
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
           return;
         }
 
