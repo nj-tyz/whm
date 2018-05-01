@@ -93,8 +93,8 @@ Page({
 
     //校验数据完整
     if (!this.data.no || !this.data.storeID) {
-      //util.showModel('提示', '数据不完整!');
-      //return;
+      util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
+      return;
     }
 
 
