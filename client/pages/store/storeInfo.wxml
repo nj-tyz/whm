@@ -36,7 +36,7 @@
                 <view class="wx-30-text">仓库:{{item.storeName}}</view>-->
           <view class="wx-30-text">{{currentLanguage.cargo_position}}:{{item.positionName}}</view>
           <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
-          <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}件</view>
+          <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
         </view>
       </view>
       <view wx:if="{{currentPosition.productsInStore.length==0}}">
