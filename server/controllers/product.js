@@ -106,6 +106,22 @@ async function add(ctx, next) {
   var img = ctx.query.img;
   var price = ctx.query.price;
   console.log(ctx.query);
+
+
+  //校验barcode是否重复
+  var check = await query("select count(*) count  from tb_product where barCode = ? and company = ?", [barcode, company]);
+  console.log(check);
+  if (check[0].count>0) {
+    ctx.state.data = {
+      errocode: 1,
+      msg: "Product has already existed(商品已存在)!"
+    }
+    return;
+  }
+
+
+
+
   var result =  await query("insert into tb_product(name,barcode,img,price,company,shop) values(?,?,?,?,?,?)",[name,barcode,img,price,company,shop]);
  
   ctx.state.data = result;

@@ -160,12 +160,15 @@ Page({
         shopID: that.data.shopID
       },
       success(result) {
-
-        console.log('添加商品成功', result);
-        wx.navigateTo({
+        if (result.data.data.errocode == 1) {
+          console.log(result);
+          util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.Product_existed);
+        } else {
+          console.log('添加商品成功', result);
+          wx.navigateTo({
           url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.product_add_success + '&btn=' + that.data.currentLanguage.click_return
-        })
-
+          })
+        }
 
 
       },
@@ -184,7 +187,6 @@ Page({
     wx.scanCode({
       success: (res) => {
         var barCode = res.result;
-
         if (!barCode || barCode == "") {
           util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
           return;

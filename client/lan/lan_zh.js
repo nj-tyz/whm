@@ -87,6 +87,7 @@ var lan_zh = {
   product_get_fail:"产品获取失败",
   product_scan:"扫产品",
   Please_enter_a_barcode_name:"请输入 条码/名称",
+  Product_existed:"商品已存在！",
 
   scan:"扫码",
   scan_product_fail:"扫描商品失败",
@@ -129,7 +130,10 @@ var lan_zh = {
   warehouse_distribution:"仓库分布",
   shop_distribution:"店铺分布",
 
-  setting_tabs: ["个人", "公司", "店铺", "岗位"]
+  setting_tabs: ["个人", "公司", "店铺", "岗位"],
+  no_result:"无结果",
+  this_warehouse:"本仓库",
+  this_position:"本货架"
 
 }
 

@@ -146,7 +146,7 @@ Page({
         }
 
         if (!codeType || codeType != 'positionID' || !positionId || positionId == 0) {
-          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.qrcode_error);
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
           return;
         }
 
@@ -222,12 +222,12 @@ Page({
             currentPosition: result.data.data[0]
           })
         } else {
-          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.failed_query);
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.failed_query);
         }
 
       },
       fail(error) {
-        util.showModel(this.data.currentLanguage.fail, error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('获取失败', error);
       }
     }

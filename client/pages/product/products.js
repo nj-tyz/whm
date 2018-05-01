@@ -17,6 +17,10 @@ Page({
     inputShowed: false,
     inputVal: "",
 
+
+    //当前页面是否是一个选择器
+    isselect: false,
+
     shopID: 0,
     storeID: 0,
     shopName: "",
@@ -65,7 +69,7 @@ Page({
     that.getAllProduct();
   },
 
- //扫码
+  //扫码
   scanCode: function () {
     var that = this;
     wx.scanCode({
@@ -103,6 +107,7 @@ Page({
       shopName: options.shopName || "",
       storeID: options.storeID || 0,
       shoreName: options.shoreName || "",
+      isselect: options.isselect || false,
       currentLanguage: currentLanguage()
     });
     //获取门店下的所有仓库数据
@@ -170,9 +175,19 @@ Page({
   //产品库存
   showProductInfo: function (event) {
     var that = this;
-    wx.navigateTo({
-      url: '../product/productInfo?navigationBarTitle=产品库存&shopID=' + that.data.shopID+'&barcode=' + event.currentTarget.dataset.barcode
-    })
+
+    //如果当前页面是为了选择商品打开的,则跳回上个页面,并把当前选中的barcode放入全局变量中
+    if (this.data.isselect) {
+      //通知上个页面刷新
+      app.globalData.selectedBarcode = event.currentTarget.dataset.barcode;
+      wx.navigateBack({
+        delta: 1
+      })
+    } else {
+      wx.navigateTo({
+        url: '../product/productInfo?navigationBarTitle=产品库存&shopID=' + that.data.shopID + '&barcode=' + event.currentTarget.dataset.barcode
+      })
+    }
   },
 
 

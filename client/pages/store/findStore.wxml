@@ -4,24 +4,24 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.search}}" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
           <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
             <icon type="clear" size="14"></icon>
           </view>
         </view>
         <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
           <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">搜索</view>
+          <view class="weui-search-bar__text">{{currentLanguage.search}}</view>
         </label>
       </view>
-      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">{{currentLanguage.cancel}}</view>
 
       <image bindtap="scanCode" style="margin-left:20rpx;margin-top:10rpx;margin-right:10rpx" class="icon-40" src="../../img/scan.png" />
 
     </view>
     <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
       <navigator wx:if="{{!correlationData|| correlationData.length==0}}" url="" class="weui-cell" hover-class="weui-cell_active">
-        无结果
+        {{currentLanguage.no_result}}
       </navigator>
       <view wx:else>
         <navigator data-positionid="{{item.id}}" bindtap="show" wx:for="{{correlationData}}" url="" class="weui-cell" hover-class="weui-cell_active">
@@ -41,21 +41,21 @@
             <text class=' iconfont icon-shop wx-text-primary .wx-50-text mr-20'></text>
           </view>
           <view class="weui-cell__bd">{{currentPosition.shopName}}</view>
-          <view class="weui-cell__ft">店</view>
+          <view class="weui-cell__ft">{{currentLanguage.shop}}</view>
         </view>
         <view class="weui-cell">
           <view class="weui-cell__hd">
             <text class=' iconfont icon-cangku wx-text-primary .wx-50-text mr-20'></text>
           </view>
           <view class="weui-cell__bd">{{currentPosition.storeName}}</view>
-          <view class="weui-cell__ft">仓</view>
+          <view class="weui-cell__ft">{{currentLanguage.out_put_warehouse}}</view>
         </view>
         <view class="weui-cell">
           <view class="weui-cell__hd">
             <text class=' iconfont icon-icon-wz wx-text-primary .wx-50-text mr-20'></text>
           </view>
           <view class="weui-cell__bd">{{currentPosition.no}}</view>
-          <view class="weui-cell__ft">位</view>
+          <view class="weui-cell__ft">{{currentLanguage.out_put_position}}</view>
         </view>
       </view>
 
@@ -64,10 +64,10 @@
       <view class="weui-tab">
         <view class="weui-navbar">
           <view data-charttype="0" class="weui-navbar__item {{chartType == 0 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="0">
-            <view class="weui-navbar__title">本货架</view>
+            <view class="weui-navbar__title">{{currentLanguage.this_warehouse}}</view>
           </view>
           <view data-charttype="1" class="weui-navbar__item {{chartType == 1 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="1">
-            <view class="weui-navbar__title">本仓库</view>
+            <view class="weui-navbar__title">{{currentLanguage.this_position}}</view>
           </view>
          
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
@@ -87,12 +87,12 @@
                 <!--<view class="wx-30-text">店铺:{{item.shopName}}</view>
                 <view class="wx-30-text">仓库:{{item.storeName}}</view>
                 <view class="wx-30-text">货位:{{item.positionName}}</view>-->
-                <view class="wx-30-text">产品:{{item.productName}}</view>
-                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+                <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
               </view>
             </view>
             <view wx:if="{{currentPosition.productsInPosition.length==0}}">
-              <view class="wx-30-text">无数据</view>
+              <view class="wx-30-text">{{currentLanguage.no_result}}</view>
             </view>
           </view>
         </view>
@@ -108,13 +108,13 @@
               <view class="weui-cell__bd">
                 <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
                 <view class="wx-30-text">仓库:{{item.storeName}}</view>-->
-                <view class="wx-30-text">货位:{{item.positionName}}</view>
-                <view class="wx-30-text">产品:{{item.productName}}</view>
-                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+                <view class="wx-30-text">{{currentLanguage.out_put_position}}:{{item.positionName}}</view>
+                <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
               </view>
             </view>
             <view wx:if="{{currentPosition.productsInStore.length==0}}">
-              <view class="wx-30-text">无数据</view>
+              <view class="wx-30-text">{{currentLanguage.no_result}}</view>
             </view>
           </view>
         </view>
@@ -131,12 +131,12 @@
                 <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
                 <view class="wx-30-text">仓库:{{item.storeName}}</view>
                 <view class="wx-30-text">货位:{{item.positionName}}</view>-->
-                <view class="wx-30-text">产品:{{item.productName}}</view>
-                <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+                <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
               </view>
             </view>
             <view wx:if="{{currentPosition.productsInShop.length==0}}">
-              <view class="wx-30-text">无数据</view>
+              <view class="wx-30-text">{{currentLanguage.no_result}}</view>
             </view>
           </view>
         </view>

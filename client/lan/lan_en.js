@@ -87,6 +87,7 @@ var lan_en = {
   product_get_success: "success",
   product_get_fail: "fail",
   product_scan: "Scan products",
+  Product_existed: "Product has already existed",
   Please_enter_a_barcode_name: "Please enter a bar code or name",
   scan: "Scan",
   scan_product_fail: "Scan product fail",
@@ -129,7 +130,10 @@ var lan_en = {
   warehouse_distribution: "warehouse distribution",
   shop_distribution: "shop distribution",
 
-  setting_tabs: ["personal", "company", "shop", "position"]
+  setting_tabs: ["personal", "company", "shop", "position"],
+  no_result: "No result",
+  this_warehouse: "this warehouse",
+  this_position: "this position"
 }
 
 module.exports = lan_en;
