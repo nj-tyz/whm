@@ -127,6 +127,11 @@ Page({
   onShow: function () {
     if (app.globalData.needRefresh) {
       var that = this;
+      this.setData({
+        pageNo: 1,
+        nomore: false,
+        productList: []
+      });
       that.getAllProduct();
     }
   },
