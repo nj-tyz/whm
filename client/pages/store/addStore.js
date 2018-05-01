@@ -156,7 +156,12 @@ Page({
     var options = {
       url: config.service.addStore,
       login: true,
-      data: that.data,
+      data: {
+        name: that.data.name,
+        no: that.data.no,
+        img: that.data.img,
+        address: that.data.address
+      },
       success(result) {
 
         console.log('添加仓库成功', result);
