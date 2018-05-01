@@ -35,7 +35,7 @@
 -->
     <view hidden="{{inputVal.length > 0||correlationData.length>0||!currentProduct.id}}">
 
-      <view class="weui-cells__title" wx:if="currentProduct.img != ''" bindtap="doUpload">
+      <view class="weui-cells__title" wx:if="{{currentProduct.img != ''}}" bindtap="doUpload">
         <image src="{{currentProduct.img}}" style='width:100%'  mode="widthFix" ></image>
       </view>
       <view class="weui-cells__title" wx:else bindtap="doUpload">
