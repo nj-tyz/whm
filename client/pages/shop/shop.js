@@ -182,7 +182,7 @@ Page({
         }else{
            //跳转到产品查找页面
           wx.navigateTo({
-            url: '../product/productInfo?navigationBarTitle=商品&barcode=' + id
+            url: '../product/productInfo?navigationBarTitle=商品&barcode=' + id + '&shopID' + this.data.shopID
           })
         }
       }
