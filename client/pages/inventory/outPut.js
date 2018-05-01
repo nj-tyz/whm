@@ -137,10 +137,10 @@ Page({
             id: id
           },
           success(result) {
-            util.showSuccess(this.data.currentLanguage.success)
+            util.showSuccess(that.data.currentLanguage.success)
             console.log('仓库获取成功', result.data.data)
             if (result.data.data.shop != that.data.shopID) {
-              util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.store_load_error1);
+              util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.store_load_error1);
               return;
             } else {
               that.setData({
@@ -151,7 +151,7 @@ Page({
             }
           },
           fail(error) {
-            util.showModel(this.data.currentLanguage.fail, error);
+            util.showModel(that.data.currentLanguage.fail, error);
             console.log('仓库获取失败', error);
           }
         }
