@@ -10,14 +10,15 @@ Page({
   data: {
     no: "",
     storeID: 0,
-    shopID: 0,
-    currentLanguage: {}
+    shopID:0,
+    currentLanguage:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
@@ -98,7 +99,7 @@ Page({
 
 
     //提交
-    util.showBusy(that.data.currentLanguage.submiting)
+    util.showBusy(that.data.currentLanguage.su)
     var options = {
       url: config.service.addPosition,
       login: true,
@@ -114,7 +115,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel(that.data.currentLanguage.submit_fail, error);
+        util.showModel('提交失败', error);
         console.log('添加仓位失败', error);
       }
     }

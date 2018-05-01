@@ -18,7 +18,7 @@ async function list(ctx, next) {
   }
 
   if(shopID){
-    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? ";
+    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? order by product.id";
     var parames= [shopID];
     if(inputVal&&inputVal!=""){
       inputVal = "%"+ctx.query.inputVal+"%";
@@ -29,7 +29,7 @@ async function list(ctx, next) {
 
 
 
-    sql +=" order by product.id limit ?,?";
+    sql +=" limit ?,?";
     parames.push(s_i);
     console.log(pageSize);
     parames.push(pageSize);
@@ -108,7 +108,14 @@ async function search(ctx, next) {
   ctx.state.data = result;
 }
 
+async function updateProduct(ctx, next) {
+  console.log(ctx);
+  var id = ctx.query.id;
+  var imgurl = ctx.query.img;
+  var result = await query("update tb_product set img = ? where id = ?", [id, imgurl]);
 
+  ctx.state.data = result;
+}
 
 
 
@@ -117,5 +124,6 @@ module.exports = {
   list,
   getone,
   getByBarCode,
-  search
+  search,
+  updateProduct
 }

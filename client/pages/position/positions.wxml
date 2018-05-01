@@ -1,6 +1,6 @@
 <view class="page">
   <view class="weui-panel weui-panel_access">
-    <view class="weui-panel__hd">{{storeName}}{{currentLanguage.position_all}}
+    <view class="weui-panel__hd">{{storeName}}所有仓位
       <image bindtap='addPosition' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
     </view>
     <view class="page__bd">

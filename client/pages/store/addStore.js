@@ -101,7 +101,7 @@ Page({
 
           success: function (res) {
             util.showSuccess(that.data.currentLanguage.success)
-            //console.log(res)
+            console.log(res)
             res = JSON.parse(res.data)
 
             console.log(res)

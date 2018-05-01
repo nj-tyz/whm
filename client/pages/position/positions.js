@@ -1,7 +1,6 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var getCurrentLanguage = require('../../lan/currentLanguage')
 //获取应用实例
 const app = getApp();
 Page({
@@ -13,8 +12,7 @@ Page({
     storeID: 0,
     shopID: 0,
     shoreName: "",
-    positionList: [],
-    currentLanguage: {}
+    positionList: []
   },
 
   /**
@@ -27,8 +25,7 @@ Page({
     this.setData({
       storeID: options.storeID || 0,
       shopID: options.shopID || 0,
-      shoreName: options.shoreName || "",
-      currentLanguage: getCurrentLanguage()
+      shoreName: options.shoreName || ""
     });
     //获取仓库下所有仓位
     this.getAllPosition();
@@ -93,7 +90,7 @@ Page({
     var that = this;
 
 
-    util.showBusy(that.data.currentLanguage.loading)
+    util.showBusy('获取仓位列表')
     var options = {
       url: config.service.positionList,
       login: true,
@@ -101,7 +98,7 @@ Page({
         storeID: that.data.storeID
       },
       success(result) {
-        util.showSuccess(that.data.currentLanguage.success)
+        util.showSuccess('获取成功')
         console.log('仓位列表获取成功', result)
         that.setData({
           positionList: result.data.data
@@ -111,7 +108,7 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel(that.data.currentLanguage.request_fail, error);
+        util.showModel('请求失败', error);
         console.log('request fail', error);
 
         wx.hideNavigationBarLoading() //完成停止加载
