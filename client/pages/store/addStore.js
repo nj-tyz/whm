@@ -90,7 +90,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy(this.data.currentLanguage.uploading)
+        util.showBusy(that.data.currentLanguage.uploading)
         var filePath = res.tempFilePaths[0]
 
         // 上传图片
@@ -161,7 +161,7 @@ Page({
 
         console.log('添加仓库成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=系统提示&content=添加仓库成功&bt点击返回'
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.store_add_success + '&btn=' + that.data.currentLanguage.click_return
         })
 
 
