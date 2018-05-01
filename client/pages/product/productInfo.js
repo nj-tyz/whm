@@ -7,6 +7,7 @@ var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var inventorySum = 0;
 Page({
   data: {
+    shopID: 0,
     inputShowed: false,
     inputVal: "",
     correlationData: [],
@@ -34,7 +35,7 @@ Page({
       this.renderChart();
     }
   },
-  
+
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -65,6 +66,11 @@ Page({
           sliderOffset: res.windowWidth / 3 * that.data.activeIndex
         });
       }
+    });
+
+    //接收店铺id
+    that.setData({
+      shopID: options.shopID || 0
     });
 
     //传入查询参数,直接查询
@@ -173,6 +179,7 @@ Page({
       login: true,
       data: {
         barCode: barcode,
+        shopID: that.data.shopID,
         inventoryInShop: true,
         inventoryInStore: true,
         inventoryInPosition: true,
@@ -203,7 +210,7 @@ Page({
     var that = this;
 
 
-  
+
     //店铺库存分布
     var currentProductInventoryInShop = that.data.currentProduct.inventoryInShopResult;
     //仓库库存分布
@@ -213,6 +220,11 @@ Page({
 
     var series = [];
     inventorySum = 0;
+
+    //不用图形报表了
+    return;
+
+
     if (that.data.chartType == "0") {
       //如果当前选中渲染货架库存
       //不需要渲染
@@ -224,7 +236,7 @@ Page({
           name: currentProductInventoryInStore[i].storeName,
           data: currentProductInventoryInStore[i].inventoryCount,
           format: function (val, name) {
-            return parseInt(val * inventorySum) ;
+            return parseInt(val * inventorySum);
           }
         })
         inventorySum += currentProductInventoryInStore[i].inventoryCount;
@@ -236,7 +248,7 @@ Page({
           name: currentProductInventoryInShop[i].shopName,
           data: currentProductInventoryInShop[i].inventoryCount,
           format: function (val, name) {
-            return parseInt(val * inventorySum) ;
+            return parseInt(val * inventorySum);
           }
         })
         inventorySum += currentProductInventoryInShop[i].inventoryCount;

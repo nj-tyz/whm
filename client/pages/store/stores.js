@@ -51,7 +51,11 @@ Page({
   onShow: function () {
     if (app.globalData.needRefresh) {
       var that = this;
-      that.data.pageNo = 1;
+      this.setData({
+        pageNo: 1,
+        nomore: true,
+        storeList: []
+      });
       that.getAllStore();
     }
   },
@@ -78,7 +82,7 @@ Page({
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.setData({
       pageNo: 1,
-      nomore: false,
+      nomore: true,
       storeList: []
     });
     that.getAllStore();
@@ -109,7 +113,6 @@ Page({
         shopID: that.data.shopID,
         pageSize: that.data.pageSize,
         pageNo : that.data.pageNo
-        
       },
       success(result) {
         util.showSuccess(that.data.currentLanguage.success)
@@ -118,8 +121,6 @@ Page({
           storeList: that.data.storeList.concat(result.data.data),
           nomore: result.data.data.length < that.data.pageSize ? true : false
         })
-
-
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
       },

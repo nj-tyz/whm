@@ -100,7 +100,7 @@ Page({
 
           success: function (res) {
             util.showSuccess(that.data.currentLanguage.img_upload_success)
-            //console.log(res)
+            console.log(res)
             res = JSON.parse(res.data)
 
             console.log(res)

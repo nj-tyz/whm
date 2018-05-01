@@ -39,7 +39,7 @@ router.get('/shop/add', validationMiddleware,controllers.shop.add)
 
 // --- 产品接口 --- //
 router.get('/product/list', controllers.product.list)
-router.get('/product/getByBarCode', controllers.product.getByBarCode)
+router.get('/product/getByBarCode', validationMiddleware,controllers.product.getByBarCode)
 router.get('/product/add', validationMiddleware,controllers.product.add)
 router.get('/product/search', controllers.product.search)
 router.get('/product/updateProduct', controllers.product.updateProduct)

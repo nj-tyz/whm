@@ -15,10 +15,8 @@ Page({
 
     // 页面初始化 options为页面跳转所带来的参数
     var size = this.setCanvasSize();//动态设置画布大小
-    var initUrl = this.data.placeholder;
-    this.createQrCode(initUrl, "mycanvas", size.w, size.h);
+    this.createQrCode(this.data.placeholder, "mycanvas", size.w, size.h);
     
-
   },
   onReady:function(){
   
