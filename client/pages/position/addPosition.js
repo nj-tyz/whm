@@ -106,7 +106,12 @@ Page({
     var options = {
       url: config.service.addPosition,
       login: true,
-      data: that.data,
+      data:{
+        no: that.data.no,
+        storeID: that.data.storeID,
+        shopID: that.data.stopID
+      }, 
+      
       success(result) {
 
         console.log('添加仓位成功', result);
