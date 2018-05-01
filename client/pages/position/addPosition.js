@@ -108,7 +108,7 @@ Page({
 
         console.log('添加仓位成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&btn=' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&bt' + that.data.currentLanguage.click_return
         })
 
 

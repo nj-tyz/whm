@@ -165,7 +165,7 @@ Page({
 
         console.log('添加店铺成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.shop_add_success + '&btn=' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=系统提示&content=添加店铺成功&bt点击返回'
         })
 
 
