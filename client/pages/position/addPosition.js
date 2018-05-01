@@ -102,14 +102,14 @@ Page({
 
 
     util.showBusy(that.data.currentLanguage.submiting)
-
+    
     var options = {
       url: config.service.addPosition,
       login: true,
       data:{
         no: that.data.no,
         storeID: that.data.storeID,
-        shopID: that.data.stopID
+        shopID: that.data.shopID
       }, 
       
       success(result) {
