@@ -32,7 +32,7 @@
     </view>
     <view class="weui-cells weui-cells_after-title" wx:if="{{productList.length>0}}">
 
-      <view class="weui-cell" wx:for="{{productList}}" data-barcode="{{item.barcode}}" data-productid="{{item.id}}" data-productname="{{item.name}}" bindtap="showProductInventory">
+      <view class="weui-cell" wx:for="{{productList}}" data-barcode="{{item.barcode}}" data-productid="{{item.id}}" data-productname="{{item.name}}" bindtap="showProductInfo">
         <view class="weui-cell__hd ">
           <image src="{{item.img}} " mode="aspectFill" style="margin-right: 5px;vertical-align: middle;width:80px; height: 80px; "></image>
         </view>

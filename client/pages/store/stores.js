@@ -51,7 +51,11 @@ Page({
   onShow: function () {
     if (app.globalData.needRefresh) {
       var that = this;
-      that.data.pageNo = 1;
+      this.setData({
+        pageNo: 1,
+        nomore: true,
+        storeList: []
+      });
       that.getAllStore();
     }
   },
@@ -78,7 +82,7 @@ Page({
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.setData({
       pageNo: 1,
-      nomore: false,
+      nomore: true,
       storeList: []
     });
     that.getAllStore();

@@ -70,10 +70,28 @@
           <view class="weui-tab__content" wx:if="{{chartType==0}}">
             <view class="weui-cell" wx:for="{{currentProduct.inventoryInPosition}}">
               <view class="weui-cell__bd">
-                <view class="wx-30-text">{{currentLanguage.shop}}:{{item.shopName}}</view>
-                <view class="wx-30-text">{{currentLanguage.out_put_warehouse}}:{{item.storeName}}</view>
                 <view class="wx-30-text">{{currentLanguage.out_put_position}}:{{item.positionName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}inventory:{{item.inventoryCount}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+              </view>
+            </view>
+          </view>
+
+
+          <view class="weui-tab__content" wx:if="{{chartType==1}}">
+            <view class="weui-cell" wx:for="{{currentProduct.inventoryInStoreResult}}">
+              <view class="weui-cell__bd">
+                <view class="wx-30-text">{{currentLanguage.out_put_warehouse}}:{{item.storeName}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+              </view>
+            </view>
+          </view>
+
+
+          <view class="weui-tab__content" wx:if="{{chartType==2}}">
+            <view class="weui-cell" wx:for="{{currentProduct.inventoryInShopResult}}">
+              <view class="weui-cell__bd">
+                <view class="wx-30-text">{{currentLanguage.shop}}:{{item.shopName}}</view>
+                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
               </view>
             </view>
           </view>

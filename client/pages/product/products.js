@@ -87,7 +87,7 @@ Page({
           }
         }
         //调用显示
-        that.showProductInventory(event);
+        that.showProductInfo(event);
       }
     })
   },
@@ -168,10 +168,10 @@ Page({
 
   },
   //产品库存
-  showProductInventory: function (event) {
+  showProductInfo: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../product/productInfo?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
+      url: '../product/productInfo?navigationBarTitle=产品库存&shopID=' + that.data.shopID+'&barcode=' + event.currentTarget.dataset.barcode
     })
   },
 
