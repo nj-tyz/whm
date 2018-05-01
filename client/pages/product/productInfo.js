@@ -72,7 +72,6 @@ Page({
     that.setData({
       shopID: options.shopID || 0
     });
-
     //传入查询参数,直接查询
     if (options.barcode) {
       var event = {
@@ -84,7 +83,7 @@ Page({
       }
       //调用显示
       that.show(event);
-      
+
 
     }
   },
@@ -174,6 +173,7 @@ Page({
     that.hideInput();
 
     var barcode = event.currentTarget.dataset.barcode;
+    var shopID = that.data.shopID;
     //通过barcode获取商品
     util.showBusy(that.data.currentLanguage.loading)
     var options = {
@@ -181,7 +181,7 @@ Page({
       login: true,
       data: {
         barCode: barcode,
-        shopID: that.data.shopID,
+        shopID: shopID,
         inventoryInShop: true,
         inventoryInStore: true,
         inventoryInPosition: true,
@@ -201,6 +201,7 @@ Page({
         }
       },
       fail(error) {
+        console.log(that.data.shopID)
         util.showModel(that.data.currentLanguage.fail, error);
         console.log('产品获取失败', error);
       }
@@ -299,7 +300,7 @@ Page({
 
             var id = that.data.currentProduct.id;
             var img = res.data.imgUrl;
-            console.log("id+img"+id+"__________"+img)
+            console.log("id+img" + id + "__________" + img)
             var options = {
               url: config.service.updateProduct,
               login: true,
@@ -314,7 +315,7 @@ Page({
                 // wx.navigateTo({
                 //   url: '../msg/success?title=系统提示&content=添加商品成功&bt点击返回'
                 // })
-                
+
 
 
               },
@@ -331,7 +332,7 @@ Page({
             that.setData({
               currentProduct: product
             })
-            
+
 
           },
 
