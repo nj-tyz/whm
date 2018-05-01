@@ -5,10 +5,8 @@
 // 此处主机域名修改成腾讯云解决方案分配的域名
 //线上
 //var host = 'https://t0qyjxur.qcloud.la';
-//测试机
-//var host = 'https://22c3ba27.ngrok.io';
 //刀豆电脑
-var host = 'https://deb16fa6.ngrok.io';
+var host = 'https://a017238e.ngrok.io';
 
 var config = {
 
