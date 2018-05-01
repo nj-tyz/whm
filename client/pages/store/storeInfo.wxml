@@ -34,13 +34,13 @@
         <view class="weui-cell__bd">
           <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
                 <view class="wx-30-text">仓库:{{item.storeName}}</view>-->
-          <view class="wx-30-text">货位:{{item.positionName}}</view>
-          <view class="wx-30-text">产品:{{item.productName}}</view>
-          <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+          <view class="wx-30-text">{{currentLanguage.cargo_position}}:{{item.positionName}}</view>
+          <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
+          <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}件</view>
         </view>
       </view>
       <view wx:if="{{currentPosition.productsInStore.length==0}}">
-        <view class="wx-30-text">无数据</view>
+        <view class="wx-30-text">{{currentLanguage.no_data}}</view>
       </view>
     </view>
 

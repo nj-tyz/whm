@@ -19,6 +19,8 @@ var lan_en = {
   quantity: "quantity",
   enter_quantity: "Please enter the quantity",
   current: "current",
+  no_data:"No data",
+  cargo_position: "Cargo Position",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the number",

@@ -1,7 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var currentLanguage = require('../../lan/currentLanguage')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -24,13 +24,14 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
+    var that = this;
     wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
+      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
     this.setData({
       objId: options.objId,
       shopID: options.shopID,
-      currentLanguage: currentLanguage()
+      currentLanguage: getCurrentLanguage()
     });
     //获取对象
     this.getObj();
