@@ -271,5 +271,78 @@ Page({
         dataLabel: true
       });
     }
+  },
+  doUpload: function () {
+    var that = this
+    console.log(that.data.currentProduct);
+    // 选择图片
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        util.showBusy(that.data.currentLanguage.loading)
+        var filePath = res.tempFilePaths[0]
+        console.log(filePath);
+        // 上传图片
+        wx.uploadFile({
+          url: config.service.uploadUrl,
+          filePath: filePath,
+          name: 'file',
+
+          success: function (res) {
+            util.showSuccess(that.data.currentLanguage.img_upload_success)
+            //console.log(res)
+            res = JSON.parse(res.data)
+
+            console.log(res)
+
+            
+            
+            var options = {
+              url: config.service.updateProduct,
+              login: true,
+              data: {
+                id: that.data.currentProduct.id,
+                img: res.data.imgUrl
+              },
+              success(result) {
+
+                console.log('修改成功', result);
+                // wx.navigateTo({
+                //   url: '../msg/success?title=系统提示&content=添加商品成功&bt点击返回'
+                // })
+
+
+
+              },
+              fail(error) {
+                util.showModel(that.data.currentLanguage.submit_fail, error);
+                console.log('修改商品失败', error);
+              }
+            }
+            qcloud.request(options)
+
+
+
+
+            
+            that.setData({
+              img: res.data.imgUrl
+            })
+
+          },
+
+          fail: function (e) {
+            util.showModel(that.data.currentLanguage.img_upload_fail)
+          }
+        })
+
+      },
+      fail: function (e) {
+        console.error(e)
+      }
+
+    })
   }
 });

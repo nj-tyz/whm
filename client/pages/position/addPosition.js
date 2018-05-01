@@ -12,12 +12,14 @@ Page({
     storeID: 0,
     shopID: 0,
     currentLanguage: {}
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
@@ -97,8 +99,10 @@ Page({
 
 
 
-    //提交
+
+
     util.showBusy(that.data.currentLanguage.submiting)
+
     var options = {
       url: config.service.addPosition,
       login: true,
@@ -107,7 +111,7 @@ Page({
 
         console.log('添加仓位成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&bt' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&btn=' + that.data.currentLanguage.click_return
         })
 
 
