@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 Page({
 
   /**
@@ -14,12 +15,17 @@ Page({
     shoreName: "",
     inventoryList: [],
     storeMap: {},
+    currentLanguage: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    this.setData({
+      currentLanguage: currentLanguage()
+    })
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
@@ -100,15 +106,15 @@ Page({
     }
 
 
-    util.showBusy('获取库存列表')
+    util.showBusy(that.data.currentLanguage.loading);
 
     var options = {
       url: config.service.listInventory,
       login: true,
       data: params,
       success(result) {
-        util.showSuccess('获取成功')
-        console.log('库存列表获取成功', result)
+        util.showSuccess()
+        console.log(that.data.currentLanguage.get_success, result)
         //数据按照仓库-仓位分组
         var storeMap = that.data.storeMap;
         for (var i = 0; i < result.data.data.length; i++) {
@@ -127,7 +133,7 @@ Page({
         })
       },
       fail(error) {
-        util.showModel('请求失败', error);
+        util.showModel(that.data.currentLanguage.request_fail, error);
         console.log('request fail', error);
       }
     }
