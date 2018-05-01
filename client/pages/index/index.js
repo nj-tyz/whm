@@ -204,6 +204,16 @@ Page({
     })
     //重新查询后台
     that.getUserShop();
+  },
+  openPermissionSetting(event) {
+    var that = this;
+    var openId = that.data.userInfo.openId;
+    console.log(openId);
+    wx.navigateTo({
+      url: '../setting/setting?&openId=' + openId
+    })
+
   }
+
 
 })
