@@ -185,7 +185,7 @@ Page({
           },
           success(result) {
             if (result && result.data && result.data.data && result.data.data.id) {
-              util.showSuccess(this.data.currentLanguage.success)
+              util.showSuccess(that.data.currentLanguage.success)
               console.log('产品获取成功', result.data.data)
               that.setData({
                 currentProduct: result.data.data
@@ -194,11 +194,11 @@ Page({
               //查询本仓本品库存
               that.getInventory();
             } else {
-              util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.scan_product_fail);
+              util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.scan_product_fail);
             }
           },
           fail(error) {
-            util.showModel(this.data.currentLanguage.fail, error);
+            util.showModel(that.data.currentLanguage.fail, error);
             console.log('产品获取失败', error);
           }
         }
@@ -279,13 +279,13 @@ Page({
         optionCount: that.data.optionCount
       },
       success(result) {
-        util.showSuccess(this.data.currentLanguage.success);
+        util.showSuccess(that.data.currentLanguage.success);
         console.log('更新库存提交成功', result);
         //提交成功后初始化数据
         that.init()
       },
       fail(error) {
-        util.showModel(this.data.currentLanguage.submit_fail, error);
+        util.showModel(that.data.currentLanguage.submit_fail, error);
         console.log('更新库存提交失败', error);
       }
     }
