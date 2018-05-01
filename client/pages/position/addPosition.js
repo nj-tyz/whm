@@ -10,8 +10,9 @@ Page({
   data: {
     no: "",
     storeID: 0,
-    shopID:0,
-    currentLanguage:{}
+    shopID: 0,
+    currentLanguage: {}
+
   },
 
   /**
@@ -98,8 +99,9 @@ Page({
 
 
 
-    //提交
-    util.showBusy(that.data.currentLanguage.su)
+
+    util.showBusy(that.data.currentLanguage.submiting)
+
     var options = {
       url: config.service.addPosition,
       login: true,
@@ -108,14 +110,14 @@ Page({
 
         console.log('添加仓位成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=系统提示&content=添加仓位成功&bt点击返回'
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&bt' + that.data.currentLanguage.click_return
         })
 
 
 
       },
       fail(error) {
-        util.showModel('提交失败', error);
+        util.showModel(that.data.currentLanguage.submit_fail, error);
         console.log('添加仓位失败', error);
       }
     }
