@@ -107,7 +107,7 @@ Page({
 
         console.log('添加仓位成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=系统提示&content=添加仓位成功&bt点击返回'
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&bt' + that.data.currentLanguage.click_return
         })
 
 
