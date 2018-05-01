@@ -207,7 +207,7 @@ Page({
     
     util.showBusy(this.data.currentLanguage.loading)
     var options = {
-      url: config.service.findPosition,
+      url: config.service.getPosition,
       login: true,
       data: {
         positionId: positionId
@@ -227,7 +227,7 @@ Page({
 
       },
       fail(error) {
-        util.showModel(this.data.currentLanguage.fail, error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('获取失败', error);
       }
     }

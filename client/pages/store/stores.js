@@ -168,6 +168,13 @@ Page({
     })
     //重新查询后台
     that.getAllStore();
+  },
+  findStore:function(){
+    //跳转到仓库界面
+    wx.navigateTo({
+      url: '../store/findStore?navigationBarTitle=查找仓位'
+    })
   }
+
 
 })

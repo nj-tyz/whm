@@ -24,14 +24,35 @@ async function add(ctx, next) {
 }
 
 
-//搜索仓位对象,
+//搜索
+async function find(ctx, next) {
+
+  var userinfo =await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  var open_id = userinfo.openId;
+
+
+  var positionId = ctx.query.positionId;
+  var storeId = ctx.query.storeId;
+  var shopId = ctx.query.shopId;
+  var inputVal = ctx.query.inputVal;
+
+  
+  console.log(ctx.query)
+ 
+  var result =  await query("select sposition.*,shop.id shopId,store.name storeName ,shop.name shopName from tb_store_position sposition left join tb_store store on sposition.store = store.id left join tb_shop shop on store.shop = shop.id where sposition.company=? and (sposition.id = ? or store.id=? or shop.id=? OR sposition.no like(?) OR store.name like(?) OR shop.name like(?) ) order by sposition.id , store.id ,shop.id limit 10",[company,positionId,storeId,shopId,"%"+inputVal+"%","%"+inputVal+"%","%"+inputVal+"%"]);
+
+  ctx.state.data = result;
+}
+
+//获取仓位对象,
 //传入
 //shopId:查商铺下的
 //storeId:查仓库下的
 //positionId:查仓位下的
 //如果传入多个,以最小单位为准
 
-async function find(ctx, next) {
+async function get(ctx, next) {
   var positionId = ctx.query.positionId;
   var storeId = ctx.query.storeId;
   var shopId = ctx.query.shopId;
@@ -77,5 +98,6 @@ async function find(ctx, next) {
 module.exports = {
   add,
   list,
-  find
+  find,
+  get
 }
