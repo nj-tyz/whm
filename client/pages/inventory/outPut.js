@@ -25,8 +25,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
+      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
     console.log(options.shopID);
     this.setData({

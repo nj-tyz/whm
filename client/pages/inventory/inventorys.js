@@ -26,8 +26,9 @@ Page({
     this.setData({
       currentLanguage: currentLanguage()
     })
+    console.log(that.data.currentLanguage.position_navigation_bar_title);
     wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
+      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
     this.setData({
       shopID: options.shopID || 0,
@@ -119,8 +120,8 @@ Page({
       login: true,
       data: params,
       success(result) {
-        util.showSuccess()
-        console.log(that.data.currentLanguage.get_success, result)
+        util.showSuccess(that.data.currentLanguage.success)
+        
         //数据按照仓库-仓位分组
         var storeMap = that.data.storeMap;
         for (var i = 0; i < result.data.data.length; i++) {
