@@ -67,7 +67,6 @@ async function getByBarCode(ctx, next) {
 
   var result = await mysql('tb_product').select('*').where({ barCode: barCode });
   var item = result.length > 0 ? result[0] : {};
-
   if(inventoryInShop){
      //店内库存分布
      //公司下哪个店有货
@@ -80,7 +79,7 @@ async function getByBarCode(ctx, next) {
     //仓库库存分布
     //当前店铺的哪个仓库有货
     //仓库:数量
-     var inventoryInStoreResult =  await query("SELECT   store.NAME AS storeName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_store store ON inventory.store = store.id left join tb_product product on inventory.product= product.id WHERE   product.barcode = ? and inventory.shop = ？ GROUP BY store.id order by inventoryCount desc",[barCode,shopID]);
+     var inventoryInStoreResult =  await query("SELECT   store.NAME AS storeName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_store store ON inventory.store = store.id left join tb_product product on inventory.product= product.id WHERE   product.barcode = ? and inventory.shop = ? GROUP BY store.id order by inventoryCount desc",[barCode,shopID]);
     item.inventoryInStoreResult = inventoryInStoreResult;
   }
 
