@@ -1,7 +1,6 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var getCurrentLanguage = require('../../lan/currentLanguage')
 Page({
 
   /**
@@ -26,7 +25,6 @@ Page({
     this.setData({
       storeID: options.storeID || 0,
       shopID: options.shopID || 0,
-      currentLanguage: getCurrentLanguage()
     });
   },
 
@@ -99,7 +97,7 @@ Page({
 
 
     //提交
-    util.showBusy(that.data.currentLanguage.su)
+    util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.addPosition,
       login: true,
