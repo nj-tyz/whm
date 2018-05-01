@@ -160,7 +160,8 @@ Page({
         name: that.data.name,
         no: that.data.no,
         img: that.data.img,
-        address: that.data.address
+        address: that.data.address,
+        shop: that.data.shop
       },
       success(result) {
 
