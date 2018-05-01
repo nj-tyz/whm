@@ -108,7 +108,14 @@ async function search(ctx, next) {
   ctx.state.data = result;
 }
 
+async function updateProduct(ctx, next) {
+  console.log(ctx);
+  var id = ctx.query.id;
+  var imgurl = ctx.query.img;
+  var result = await query("update tb_product set img = ? where id = ?", [id, imgurl]);
 
+  ctx.state.data = result;
+}
 
 
 
@@ -117,5 +124,6 @@ module.exports = {
   list,
   getone,
   getByBarCode,
-  search
+  search,
+  updateProduct
 }

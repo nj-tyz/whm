@@ -90,7 +90,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        util.showBusy(this.data.currentLanguage.uploading)
+        util.showBusy(that.data.currentLanguage.uploading)
         var filePath = res.tempFilePaths[0]
 
         // 上传图片
@@ -101,7 +101,7 @@ Page({
 
           success: function (res) {
             util.showSuccess(that.data.currentLanguage.success)
-            //console.log(res)
+            console.log(res)
             res = JSON.parse(res.data)
 
             console.log(res)

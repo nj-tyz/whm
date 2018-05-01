@@ -1,7 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var currentLanguage = require('../../lan/currentLanguage')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 Page({
 
   /**
@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     this.setData({
-      currentLanguage: currentLanguage()
+      currentLanguage: getCurrentLanguage()
     })
     console.log(that.data.currentLanguage.position_navigation_bar_title);
     wx.setNavigationBarTitle({
