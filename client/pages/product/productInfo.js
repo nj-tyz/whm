@@ -273,7 +273,8 @@ Page({
     }
   },
   doUpload: function () {
-    var that = this
+    var that = this;
+    var product = that.data.currentProduct;
     console.log(that.data.currentProduct);
     // 选择图片
     wx.chooseImage({
@@ -295,16 +296,15 @@ Page({
             //console.log(res)
             res = JSON.parse(res.data)
 
-            console.log(res)
-
-            
-            
+            var id = that.data.currentProduct.id;
+            var img = res.data.imgUrl;
+            console.log("id+img"+id+"__________"+img)
             var options = {
               url: config.service.updateProduct,
               login: true,
               data: {
-                id: that.data.currentProduct.id,
-                img: res.data.imgUrl
+                id: id,
+                img: img
               },
               success(result) {
 
@@ -312,7 +312,7 @@ Page({
                 // wx.navigateTo({
                 //   url: '../msg/success?title=系统提示&content=添加商品成功&bt点击返回'
                 // })
-
+                
 
 
               },
@@ -325,11 +325,11 @@ Page({
 
 
 
-
-            
+            product.img = res.data.imgUrl
             that.setData({
-              img: res.data.imgUrl
+              currentProduct: product
             })
+            
 
           },
 

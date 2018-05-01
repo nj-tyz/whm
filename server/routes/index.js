@@ -42,6 +42,7 @@ router.get('/product/list', controllers.product.list)
 router.get('/product/getByBarCode', validationMiddleware,controllers.product.getByBarCode)
 router.get('/product/add', validationMiddleware,controllers.product.add)
 router.get('/product/search', controllers.product.search)
+router.get('/product/updateProduct', controllers.product.updateProduct)
 
 // --- 仓库接口 --- //
 router.get('/store/getListByShop', controllers.store.getListByShop)

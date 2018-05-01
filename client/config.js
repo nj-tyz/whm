@@ -35,7 +35,7 @@ var config = {
     getProductByBarCode: `${host}/weapp/product/getByBarCode`, 
     addProduct: `${host}/weapp/product/add`,
     searchProduct: `${host}/weapp/product/search`,
-
+    updateProduct: `${host}/weapp/product/updateProduct`,
     // 仓库接口
     getStoreById: `${host}/weapp/store/getById`,
     getStore: `${host}/weapp/store/getone`,
