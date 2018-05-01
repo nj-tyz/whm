@@ -34,7 +34,7 @@ Page({
       shopID: options.shopID,
       currentLanguage: getCurrentLanguage()
     });
-  
+
   },
 
   radioChange: function (e) {
@@ -44,7 +44,7 @@ Page({
     //console.log(e.detail.value)
   },
 
-  
+
 
 
   init: function () {
@@ -66,7 +66,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      app.globalData.needRefresh = true;
+    app.globalData.needRefresh = true;
   },
 
   /**
@@ -279,10 +279,16 @@ Page({
         optionCount: that.data.optionCount
       },
       success(result) {
-        util.showSuccess(that.data.currentLanguage.success);
-        console.log('更新库存提交成功', result);
-        //提交成功后初始化数据
-        that.init()
+        if (result.data.data.errocode == 1) {
+          util.showModel(that.data.currentLanguage.submit_fail, result.data.data.msg);
+          //重新查库存
+          that.getInventory();
+        } else {
+          util.showSuccess(that.data.currentLanguage.success);
+          console.log('更新库存提交成功', result);
+          //提交成功后初始化数据
+          that.init()
+        }
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.submit_fail, error);
@@ -292,5 +298,5 @@ Page({
     qcloud.request(options)
 
   },
- 
+
 })

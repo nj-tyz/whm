@@ -64,7 +64,7 @@
         </view>
       </view>
     </view>
-    <view class="weui-cells__tips" wx:if="{{currentInventory&&currentInventory.count}}">({{currentLanguage.current}}:{{currentInventory.count}})</view>
+    <view class="weui-cells__tips" wx:if="{{currentInventory&&currentInventory.id}}">({{currentLanguage.current}}:{{currentInventory.count}})</view>
 
 
 
