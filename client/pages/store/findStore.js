@@ -207,7 +207,7 @@ Page({
     
     util.showBusy(this.data.currentLanguage.loading)
     var options = {
-      url: config.service.findPosition,
+      url: config.service.getPosition,
       login: true,
       data: {
         positionId: positionId

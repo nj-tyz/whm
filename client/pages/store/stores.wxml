@@ -2,7 +2,8 @@
   <view class="page__bd">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd"> {{shopName}}  {{currentLanguage.out_put_warehouse}}
-        <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
+        <image bindtap='addStore' style="position:absolute;top:30rpx;right:100rpx" class="icon-35" src="../../img/add.png" />
+         <image bindtap='findStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/find.png" />
       </view>
       
       <view class="weui-panel__bd" wx:if="storeList.length > 0">

@@ -6,7 +6,7 @@
 //线上
 //var host = 'https://t0qyjxur.qcloud.la';
 //刀豆电脑
-var host = 'https://289d5438.ngrok.io';
+var host = 'https://a017238e.ngrok.io';
 
 var config = {
 
@@ -32,11 +32,11 @@ var config = {
 
     // 产品接口
     productList: `${host}/weapp/product/list`,
-    getProductByBarCode: `${host}/weapp/product/getByBarCode`, 
+    getProductByBarCode: `${host}/weapp/product/getByBarCode`,
     addProduct: `${host}/weapp/product/add`,
     searchProduct: `${host}/weapp/product/search`,
-    updateProduct:'${host}/weapp/product/updateProduct',
-    
+    updateProduct: '${host}/weapp/product/updateProduct',
+
     // 仓库接口
     getStoreById: `${host}/weapp/store/getById`,
     getStore: `${host}/weapp/store/getone`,
@@ -48,6 +48,7 @@ var config = {
     positionList: `${host}/weapp/position/list`,
     addPosition: `${host}/weapp/position/add`,
     findPosition: `${host}/weapp/position/find`,
+    getPosition: `${host}/weapp/position/get`,
 
     // 库存接口
     getInventoryBySidAndPid: `${host}/weapp/inventory/getBySidAndPid`,

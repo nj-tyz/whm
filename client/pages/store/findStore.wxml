@@ -4,7 +4,7 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.search}}" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.search}}" value="{{inputVal}}" focus="{{inputShowed}}" bindblur="inputTyping" />
           <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
             <icon type="clear" size="14"></icon>
           </view>
@@ -19,14 +19,14 @@
       <image bindtap="scanCode" style="margin-left:20rpx;margin-top:10rpx;margin-right:10rpx" class="icon-40" src="../../img/scan.png" />
 
     </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+    <view class="weui-cells searchbar-result" style='margin-top:-10rpx' wx:if="{{inputVal.length > 0}}">
       <navigator wx:if="{{!correlationData|| correlationData.length==0}}" url="" class="weui-cell" hover-class="weui-cell_active">
         {{currentLanguage.no_result}}
       </navigator>
       <view wx:else>
         <navigator data-positionid="{{item.id}}" bindtap="show" wx:for="{{correlationData}}" url="" class="weui-cell" hover-class="weui-cell_active">
           <view class="weui-cell__bd">
-            <view>{{item.storeName}}-->{{item.storeName}}-->{{item.no}}</view>
+            <view>{{item.shopName}}-->{{item.storeName}}-->{{item.no}}</view>
           </view>
         </navigator>
       </view>

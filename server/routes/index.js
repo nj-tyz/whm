@@ -53,7 +53,8 @@ router.get('/store/getById', controllers.store.getById)
 // --- 仓位接口 --- //
 router.get('/position/list', controllers.position.list)
 router.get('/position/add', validationMiddleware,controllers.position.add)
-router.get('/position/find', controllers.position.find)
+router.get('/position/find',validationMiddleware, controllers.position.find)
+router.get('/position/get',validationMiddleware, controllers.position.get)
 
 // --- 库存接口 --- //
 router.get('/inventory/getBySidAndPid', controllers.inventory.getBySidAndPid)
