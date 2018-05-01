@@ -23,9 +23,10 @@ async function list(ctx, next) {
 async function getBySidAndPid(ctx, next) {
   var positionId = ctx.query.positionId;
   var productId = ctx.query.productId;
-   var result =  await query("select * from tb_inventory where product = ? and position=?",[productId,positionId]);
-   var item = result.length>0?result[0]:[];
-    ctx.state.data = item;
+  var result =  await query("select * from tb_inventory where product = ? and position=?",[productId,positionId]);
+  var item = result.length>0?result[0]:{id:-1,count:0};
+  console.log(item);
+  ctx.state.data = item;
 }
 
 
@@ -64,6 +65,14 @@ async function optionInventory(ctx, next) {
      newCount = dbCount - optionCount
   } else if (optionType == "in") {
       newCount = dbCount + optionCount
+  }
+
+  if(newCount<0){
+    ctx.state.data = {
+        errocode:1,
+        msg:"Insufficient inventory(库存不足)!"
+    }
+    return;
   }
 
 
