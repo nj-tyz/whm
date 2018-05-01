@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 Page({
 
   /**
@@ -26,6 +27,7 @@ Page({
     this.setData({
       storeID: options.storeID || 0,
       shopID: options.shopID || 0,
+      currentLanguage: getCurrentLanguage()
     });
   },
 
@@ -109,7 +111,7 @@ Page({
 
         console.log('添加仓位成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&bt' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&btn=' + that.data.currentLanguage.click_return
         })
 
 
