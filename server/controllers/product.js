@@ -18,7 +18,7 @@ async function list(ctx, next) {
   }
 
   if(shopID){
-    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.shop = ? ";
+    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.company = (select company from tb_shop where tb_shop.id = ? ) ";
     var parames= [shopID];
     if(inputVal&&inputVal!=""){
       inputVal = "%"+ctx.query.inputVal+"%";

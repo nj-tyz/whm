@@ -42,6 +42,7 @@
     "navigationBarBackgroundColor": "#37373b",
     "navigationBarTextStyle": "#fff",
     "navigationBarTitleText": "条码库存管理",
+    "enablePullDownRefresh": true,
     "backgroundColor": "#efeff4",
     "backgroundTextStyle": "light"
   }

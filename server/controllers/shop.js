@@ -30,7 +30,7 @@ async function add(ctx, next) {
 
 async function getone(ctx, next) {
   var id = ctx.query.id;
-  var result =  await query(" select *, (select count(0) from tb_store store where store.shop = shop.id) storeCount, (select IFNULL(sum(inventory.count), 0) from tb_inventory inventory where inventory.shop = shop.id) inventoryCount, (select count(0) from tb_product product  where product.shop = shop.id) productCount   FROM  tb_shop shop where shop.id =?",[id]);
+  var result = await query(" select *, (select count(0) from tb_store store where store.shop = shop.id) storeCount, (select IFNULL(sum(inventory.count), 0) from tb_inventory inventory where inventory.shop = shop.id) inventoryCount, (select count(0) from tb_product product  where product.company = shop.company) productCount   FROM  tb_shop shop where shop.id =?",[id]);
   var item = result.length > 0 ? result[0] : {};
   //console.log(item);
   ctx.state.data = item;
