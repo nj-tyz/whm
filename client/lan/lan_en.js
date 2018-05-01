@@ -128,7 +128,10 @@ var lan_en = {
   warehouse_distribution: "warehouse distribution",
   shop_distribution: "shop distribution",
 
-  setting_tabs: ["personal", "company", "shop", "position"]
+  setting_tabs: ["personal", "company", "shop", "position"],
+  no_result: "No result",
+  this_warehouse: "this warehouse",
+  this_position: "this position"
 }
 
 module.exports = lan_en;

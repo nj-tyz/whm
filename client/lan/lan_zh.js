@@ -128,7 +128,10 @@ var lan_zh = {
   warehouse_distribution:"仓库分布",
   shop_distribution:"店铺分布",
 
-  setting_tabs: ["个人", "公司", "店铺", "岗位"]
+  setting_tabs: ["个人", "公司", "店铺", "岗位"],
+  no_result:"无结果",
+  this_warehouse:"本仓库",
+  this_position:"本货架"
 
 }
 
