@@ -66,7 +66,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.globalData.needRefresh = true;
+    var that = this;
+
+    //如果全局变量中有selectedBarcode,则代表是从选择产品页面返回的,直接填充产品
+    if (app.globalData.selectedBarcode && app.globalData.selectedBarcode != "") {
+      //调用查询商品bybarcode方法
+      console.log("选择到的条码:" + app.globalData.selectedBarcode);
+      that.getProductByBarcode(app.globalData.selectedBarcode);
+
+      //设置全局app.globalData.selectedBarcode为空
+      app.globalData.selectedBarcode = "";
+    }
   },
 
   /**
@@ -160,6 +170,39 @@ Page({
     })
   },
 
+  //通过条码获取产品
+  getProductByBarcode(barCode) {
+    //通过id获取商品
+    util.showBusy(this.data.currentLanguage.loading)
+    var that = this
+    var options = {
+      url: config.service.getProductByBarCode,
+      login: true,
+      data: {
+        barCode: barCode
+      },
+      success(result) {
+        if (result && result.data && result.data.data && result.data.data.id) {
+          util.showSuccess(that.data.currentLanguage.success)
+          console.log('产品获取成功', result.data.data)
+          that.setData({
+            currentProduct: result.data.data
+          })
+
+          //查询本仓本品库存
+          that.getInventory();
+        } else {
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.scan_product_fail);
+        }
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.fail, error);
+        console.log('产品获取失败', error);
+      }
+    }
+    qcloud.request(options)
+  },
+
   //扫描产品条码
   scanProduct: function () {
     wx.scanCode({
@@ -174,35 +217,8 @@ Page({
         console.log('商品扫码结果', res)
 
 
-        //通过id获取商品
-        util.showBusy(this.data.currentLanguage.loading)
-        var that = this
-        var options = {
-          url: config.service.getProductByBarCode,
-          login: true,
-          data: {
-            barCode: barCode
-          },
-          success(result) {
-            if (result && result.data && result.data.data && result.data.data.id) {
-              util.showSuccess(that.data.currentLanguage.success)
-              console.log('产品获取成功', result.data.data)
-              that.setData({
-                currentProduct: result.data.data
-              })
-
-              //查询本仓本品库存
-              that.getInventory();
-            } else {
-              util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.scan_product_fail);
-            }
-          },
-          fail(error) {
-            util.showModel(that.data.currentLanguage.fail, error);
-            console.log('产品获取失败', error);
-          }
-        }
-        qcloud.request(options)
+        //通过扫描到的条码去后台查询产品信息
+        that.getProductByBarcode(barCode);
       }
     })
   },
@@ -288,6 +304,8 @@ Page({
           console.log('更新库存提交成功', result);
           //提交成功后初始化数据
           that.init()
+          //提交成功后,标识需要刷新
+          app.globalData.needRefresh = true;
         }
       },
       fail(error) {
@@ -298,5 +316,13 @@ Page({
     qcloud.request(options)
 
   },
+
+  //跳转到选择产品页面
+  selectProduct: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../product/products?navigationBarTitle=SKU&shopID=' + that.data.shopID + "&isselect=" + true
+    })
+  }
 
 })

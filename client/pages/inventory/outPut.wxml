@@ -41,14 +41,20 @@
 
 
 
-      <view class="weui-cell weui-cell_input" bindtap='scanProduct'>
+      <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">{{currentLanguage.product}}:</view>
         </view>
-        <view class="weui-cell__bd">
-          <image wx:if="{{currentProduct.img}}" class="icon-image" src="{{currentProduct.img}}"></image>
-          <text wx:if="{{currentProduct.name}}">{{currentProduct.name}}</text>
-          <image wx:else class="icon-image" src="../../img/barcode.png"></image>
+        <view class="weui-cell__bd" bindtap='scanProduct'>
+          <view>
+            <image wx:if="{{currentProduct.img}}" class="icon-image" src="{{currentProduct.img}}"></image>
+            <text wx:if="{{currentProduct.name}}">{{currentProduct.name}}</text>
+            <image wx:else class="icon-image" src="../../img/barcode.png"></image>
+          </view>
+
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access " bindtap='selectProduct'>
+
         </view>
       </view>
 
