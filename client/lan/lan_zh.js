@@ -28,6 +28,8 @@ var lan_zh = {
   quantity:"数量",
   enter_quantity:"请输入数量",
   current:"当前",
+  no_data:"无数据",
+  cargo_position:"货位",
   
   system_prompt:"系统提示",
   click_return:"点击返回",
@@ -128,7 +130,10 @@ var lan_zh = {
   warehouse_distribution:"仓库分布",
   shop_distribution:"店铺分布",
 
-  setting_tabs: ["个人", "公司", "店铺", "岗位"]
+  setting_tabs: ["个人", "公司", "店铺", "岗位"],
+  no_result:"无结果",
+  this_warehouse:"本仓库",
+  this_position:"本货架"
 
 }
 

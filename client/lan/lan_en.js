@@ -19,6 +19,8 @@ var lan_en = {
   quantity: "quantity",
   enter_quantity: "Please enter the quantity",
   current: "current",
+  no_data:"No data",
+  cargo_position: "Cargo Position",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the number",
@@ -128,7 +130,10 @@ var lan_en = {
   warehouse_distribution: "warehouse distribution",
   shop_distribution: "shop distribution",
 
-  setting_tabs: ["personal", "company", "shop", "position"]
+  setting_tabs: ["personal", "company", "shop", "position"],
+  no_result: "No result",
+  this_warehouse: "this warehouse",
+  this_position: "this position"
 }
 
 module.exports = lan_en;
