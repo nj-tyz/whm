@@ -1,5 +1,6 @@
 <view class="page">
   <view class="page__bd">
+  <view bindtap='upl'>22222</view>
   <!--
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
@@ -35,7 +36,7 @@
 -->
     <view hidden="{{inputVal.length > 0||correlationData.length>0||!currentProduct.id}}">
 
-      <view class="weui-cells__title" wx:if="currentProduct.img != ''" bindtap="doUpload">
+      <view class="weui-cells__title" wx:if="{{currentProduct.img != ''}}" bindtap="doUpload">
         <image src="{{currentProduct.img}}" style='width:100%'  mode="widthFix" ></image>
       </view>
       <view class="weui-cells__title" wx:else bindtap="doUpload">

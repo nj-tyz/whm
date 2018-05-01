@@ -139,7 +139,7 @@ async function updateProduct(ctx, next) {
   console.log(ctx);
   var id = ctx.query.id;
   var imgurl = ctx.query.img;
-  var result = await query("update tb_product set img = ? where id = ?", [id, imgurl]);
+  var result = await query("update tb_product set img = ? where id = ?", [imgurl,id]);
 
   ctx.state.data = result;
 }

@@ -231,6 +231,7 @@ Page({
         util.showSuccess(that.data.currentLanguage.success)
         console.log('商品列表获取成功', result)
         //有翻页,所以使用合并
+        console.log(JSON.stringify(result.data.data));
         that.setData({
           productList: that.data.productList.concat(result.data.data),
           //标识是不是没有更多数据了
