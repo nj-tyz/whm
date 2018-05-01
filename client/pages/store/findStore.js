@@ -8,6 +8,10 @@ var inventorySum = 0;
 Page({
   data: {
     inputShowed: false,
+    shopID: 0,
+
+    storeId: 0,
+    positionId: 0,
     inputVal: "",
     correlationData: [],
     currentPosition: {},
@@ -49,7 +53,10 @@ Page({
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth * 0.9,
       imageHeight: wx.getSystemInfoSync().windowWidth * 1.2,
-      currentLanguage: currentLanguage() 
+      currentLanguage: currentLanguage(),
+      shopID: options.shopId || 0,
+      storeId: options.storeId || 0,
+      positionId: options.positionId || 0
     })
     var that = this;
     wx.setNavigationBarTitle({
@@ -67,32 +74,7 @@ Page({
 
     console.log(options);
 
-    //传入有商铺id,按照商铺查
-    if (options.shopId) {
-      var event = {
-        currentTarget: {
-          dataset: {
-            shopId: options.shopId,
-            chartType: 0
-          }
-        }
-      }
-      //调用显示
-      that.show(event);
-    }
-    //传入有仓库id,按照仓库查
-    if (options.storeId) {
-      var event = {
-        currentTarget: {
-          dataset: {
-            storeId: options.storeId,
-            chartType:1
-          }
-        }
-      }
-      //调用显示
-      that.show(event);
-    }
+
     //传入有仓库id,按照仓库查
     if (options.positionId) {
       var event = {
@@ -170,16 +152,19 @@ Page({
     var options = {
       url: config.service.findPosition,
       login: true,
-      data: that.data,
+      data: {
+        inputVal: that.data.inputVal,
+        shopId: that.data.shopID
+      },
       success(result) {
         console.log('搜索仓位成功', result)
         that.setData({
           correlationData: result.data.data
         })
 
-        console.log(that.data.correlationData.length);
-        console.log(that.data.inputVal.length);
-        console.log(that.data.inputVal.length > 0 && that.data.correlationData.lenght > 0);
+        //console.log(that.data.correlationData.length);
+        //console.log(that.data.inputVal.length);
+        //console.log(that.data.inputVal.length > 0 && that.data.correlationData.lenght > 0);
       },
       fail(error) {
         console.log('request fail', error);
@@ -203,8 +188,8 @@ Page({
 
     that.hideInput();
 
-    
-    
+
+
     util.showBusy(this.data.currentLanguage.loading)
     var options = {
       url: config.service.getPosition,
