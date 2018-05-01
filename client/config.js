@@ -4,9 +4,9 @@
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
 //线上
-//var host = 'https://t0qyjxur.qcloud.la';
+var host = 'https://t0qyjxur.qcloud.la';
 //刀豆电脑
-var host = 'https://a017238e.ngrok.io';
+//var host = 'https://a017238e.ngrok.io';
 
 var config = {
 
@@ -35,7 +35,7 @@ var config = {
     getProductByBarCode: `${host}/weapp/product/getByBarCode`,
     addProduct: `${host}/weapp/product/add`,
     searchProduct: `${host}/weapp/product/search`,
-    updateProduct: '${host}/weapp/product/updateProduct',
+    updateProduct: `${host}/weapp/product/updateProduct`,
 
     // 仓库接口
     getStoreById: `${host}/weapp/store/getById`,
