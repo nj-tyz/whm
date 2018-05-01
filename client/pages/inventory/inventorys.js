@@ -72,7 +72,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var that = this;
+    that.setData({
+      inventoryList: [],
+      storeMap: {}
+    })
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    that.getAllInventory();
   },
 
   /**
@@ -129,12 +135,21 @@ Page({
         }
         console.log(storeMap);
         that.setData({
+          inventoryList: result.data.data,
           storeMap: storeMap
         })
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.request_fail, error);
         console.log('request fail', error);
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
@@ -145,7 +160,7 @@ Page({
   showProductInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../product/findProduct?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
+      url: '../product/productInfo?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
     })
   },
 })

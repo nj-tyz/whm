@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 //获取应用实例
 const app = getApp();
 
@@ -12,11 +13,12 @@ Page({
   data: {
     shopID: 0,
     currentShop: {},
-    optionType: 'out',
+    optionType: 'in',
     currentStore: {},
     currentProduct: {},
     currentInventory: {},
-    optionCount: 0
+    optionCount: 0,
+    currentLanguage: {}
   },
 
   /**
@@ -28,7 +30,8 @@ Page({
     })
     console.log(options.shopID);
     this.setData({
-      shopID: options.shopID
+      shopID: options.shopID,
+      currentLanguage: getCurrentLanguage()
     });
   
   },
@@ -83,7 +86,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
 
   /**
@@ -115,7 +119,7 @@ Page({
         }
 
         if (!codeType || codeType != 'positionID' || !id || id == 0) {
-          util.showModel('提示', '二维码错误!');
+          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.qrcode_error);
           return;
         }
 
@@ -123,7 +127,7 @@ Page({
 
 
         //通过id获取仓库
-        util.showBusy('正在获取仓库数据')
+        util.showBusy(this.data.currentLanguage.loading)
         var that = this
         var options = {
           url: config.service.getStore,
@@ -132,10 +136,10 @@ Page({
             id: id
           },
           success(result) {
-            util.showSuccess('获取成功')
+            util.showSuccess(this.data.currentLanguage.success)
             console.log('仓库获取成功', result.data.data)
             if (result.data.data.shop != that.data.shopID) {
-              util.showModel('提示', '该仓库不在本店铺,请切换店铺!');
+              util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.store_load_error1);
               return;
             } else {
               that.setData({
@@ -146,7 +150,7 @@ Page({
             }
           },
           fail(error) {
-            util.showModel('获取失败', error);
+            util.showModel(this.data.currentLanguage.fail, error);
             console.log('仓库获取失败', error);
           }
         }
@@ -162,7 +166,7 @@ Page({
         var barCode = res.result;
 
         if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.qrcode_error);
           return;
         }
 
@@ -170,7 +174,7 @@ Page({
 
 
         //通过id获取商品
-        util.showBusy('正在获取商品数据')
+        util.showBusy(this.data.currentLanguage.loading)
         var that = this
         var options = {
           url: config.service.getProductByBarCode,
@@ -180,7 +184,7 @@ Page({
           },
           success(result) {
             if (result && result.data && result.data.data && result.data.data.id) {
-              util.showSuccess('获取成功')
+              util.showSuccess(this.data.currentLanguage.success)
               console.log('产品获取成功', result.data.data)
               that.setData({
                 currentProduct: result.data.data
@@ -189,11 +193,11 @@ Page({
               //查询本仓本品库存
               that.getInventory();
             } else {
-              util.showModel('提示', "扫描商品失败");
+              util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.scan_product_fail);
             }
           },
           fail(error) {
-            util.showModel('获取失败', error);
+            util.showModel(this.data.currentLanguage.fail, error);
             console.log('产品获取失败', error);
           }
         }
@@ -210,7 +214,7 @@ Page({
       return;
     }
 
-    util.showBusy('正在获取商品库存')
+    util.showBusy(that.data.currentLanguage.loading)
 
     var options = {
       url: config.service.getInventoryBySidAndPid,
@@ -220,14 +224,14 @@ Page({
         productId: that.data.currentProduct.id
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('产品库存获取成功', result.data.data)
         that.setData({
           currentInventory: result.data.data
         })
       },
       fail(error) {
-        util.showModel('获取失败', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('产品库存获取失败', error);
       }
     }
@@ -244,7 +248,7 @@ Page({
     console.log(this.data)
     //校验数据完整
     if (this.data.optionCount == 0 || !this.data.currentStore.id || !this.data.currentProduct.id) {
-      util.showModel('提示', '数据不完整!');
+      util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.missing_data);
       return;
     }
 
@@ -253,14 +257,14 @@ Page({
       //出库判断库存
       var maxCount = this.data.currentInventory.count;
       if (this.data.optionCount > maxCount) {
-        util.showModel('提示', '出库数量不能大于库存数量!');
+        util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.cant_more);
         return;
       }
     }
 
 
     //提交
-    util.showBusy('正在提交')
+    util.showBusy(this.data.currentLanguage.loading)
 
     var options = {
       url: config.service.optionInventory,
@@ -274,13 +278,13 @@ Page({
         optionCount: that.data.optionCount
       },
       success(result) {
-        util.showSuccess('提交成功');
+        util.showSuccess(this.data.currentLanguage.success);
         console.log('更新库存提交成功', result);
         //提交成功后初始化数据
         that.init()
       },
       fail(error) {
-        util.showModel('提交失败', error);
+        util.showModel(this.data.currentLanguage.submit_fail, error);
         console.log('更新库存提交失败', error);
       }
     }

@@ -1,4 +1,5 @@
 var lan_en = {
+  lan: "English",
   name: "name",
   product: "product",
   serial_number: "serial number",
@@ -6,22 +7,33 @@ var lan_en = {
   in_put: "deliver",
   address: "address",
   out_in_put: "store and deliver",
+  inventory: "inventory",
   loading: "loading",
   load_success: "Load successfully",
   load_fail: "Load Failed",
+  success:"success",
+  fail:"fail",
+  shop: "shop",
+  missing_data: "missing data",
+  cant_more: "The number of out of the warehouse should not be greater than the quantity of stock",
+  quantity: "quantity",
+  enter_quantity: "Please enter the quantity",
+  current: "current",
 
   input_company_name: "Please enter company name",
   input_no: "Please enter the serial number",
   input_name: "Please enter a name",
   input_price: "Please enter the price",
   input_address: "Please enter the address",
-
+  price: "price",
   submit: "submit",
   submiting: "submiting...",
   submit_fail: "Submission Failed",
 
   system_prompt: "system hint",
   click_return: "click to return",
+
+  failed_query: "failed_query",
 
   get_success: "success",
   get_fail: "fail",
@@ -73,6 +85,9 @@ var lan_en = {
   product_get_success: "success",
   product_get_fail: "fail",
   product_scan: "Scan products",
+  Please_enter_a_barcode_name: "Please enter a bar code or name",
+  scan: "Scan",
+  scan_product_fail: "Scan product fail",
 
   qrcode_error: "QR code is wrong",
   qrcode_generator: "QR code generator",
@@ -106,7 +121,11 @@ var lan_en = {
   store_load_local: "Get a list of this warehouse",
   store_loading: "Getting warehouse data",
   store_load_error1: "The warehouse is not in this shop, please choose the other shop!",
-  store_all: "all warehouse"
+  store_all: "all warehouse",
+
+  shelf_distribution: "shelf distribution",
+  warehouse_distribution: "warehouse distribution",
+  shop_distribution: "shop distribution"
 }
 
 module.exports = lan_en;

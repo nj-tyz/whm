@@ -13,7 +13,7 @@
     
 
       <!--昵称,公司-->
-      <view>
+      <view class="bcenter">
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
       </view>
 
@@ -33,10 +33,11 @@
 
             <!--设置按钮-->
           <picker bindchange="changeLanguage" value="{{index}}" range="{{array}}">  
-            <view style='position:absolute;top:30rpx;left:30rpx' >
-              <image style='width:40rpx;height:40rpx;' class="" src="../../img/setting.png" />
-              <view class="weui-badge weui-badge_dot" style="margin-left: -5px;">
-              </view>
+            <view style='position:absolute;top:30rpx;left:30rpx' wx:if="{{currentLanguage.lan=='中文'}}">
+              <image style='width:40rpx;height:40rpx;' mode = "aspectFit"class="" src="../../img/China.jpg" />
+            </view>
+            <view style='position:absolute;top:30rpx;left:30rpx'wx:else>
+              <image style='width:40rpx;height:40rpx;' mode = "aspectFit"class="" src="../../img/Canada.jpg" />
             </view>
           </picker>
 

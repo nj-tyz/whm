@@ -2,6 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 //获取应用实例
 const app = getApp();
 Page({
@@ -13,9 +14,10 @@ Page({
     shopID: 0,
     shopName: "",
     storeList: [],
-    nomore:false,
+    nomore:true,
     pageNo:1,
-    pageSize:5
+    pageSize:5,
+    currentLanguage: {}
   },
 
   /**
@@ -28,6 +30,7 @@ Page({
     this.setData({
       shopID: options.shopID,
       shopName: options.shopName,
+      currentLanguage: currentLanguage()
     });
 
 
@@ -97,7 +100,7 @@ Page({
 
   //获取店铺下的所有仓库
   getAllStore: function () {
-    util.showBusy('获取本店仓库列表')
+    util.showBusy(this.data.currentLanguage.loading)
     var that = this
     var options = {
       url: config.service.getStoreListByShop,
@@ -109,16 +112,24 @@ Page({
         
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('仓库列表获取成功', result)
         that.setData({
           storeList: that.data.storeList.concat(result.data.data),
           nomore: result.data.data.length < that.data.pageSize ? true : false
         })
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel('请求失败', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
@@ -144,8 +155,9 @@ Page({
   //跳转到仓库明细
   showStoreInfo: function (event) {
     var that = this;
+     console.log(that.data);
     wx.navigateTo({
-      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id
+      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id + "&shopID=" + that.data.shopID
     })
   },
   loadmore: function () {

@@ -2,7 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var currentLanguage = require('../../lan/currentLanguage')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -23,10 +23,10 @@ Page({
   onLoad: function () {
     var that = this;
     this.setData({
-      currentLanguage: currentLanguage()
+      currentLanguage: getCurrentLanguage()
     })
     that.getUserInfo();
-    console.log(this.data.currentLanguage.name);
+    //console.log(this.data.currentLanguage.name);
     
   },
   /**
@@ -37,6 +37,11 @@ Page({
     if (app.globalData.needRefresh){
       app.globalData.needRefresh=false;
       var that = this;
+      that.setData({
+        pageNo: 1,
+        nomore: false,
+        shopList: []
+      })
       that.getUserInfo();
     }
   },
@@ -46,6 +51,11 @@ Page({
   onPullDownRefresh: function () {
     var that = this;
     wx.showNavigationBarLoading() //在标题栏中显示加载
+    that.setData({
+      pageNo: 1,
+      nomore:  false,
+      shopList:[]
+    })
     that.getUserInfo();
   },
   getUserInfo: function () {
@@ -74,11 +84,19 @@ Page({
             util.showSuccess(that.data.currentLanguage.load_success)
             //获取门店
             that.getUserShop();
+
+
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
           },
 
           fail(error) {
             util.showModel(that.data.currentLanguage.request_fail, error)
             console.log('request fail', error)
+
+
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
           }
         })
       },
@@ -102,7 +120,7 @@ Page({
     }
 
 
-    util.showBusy(that.data.currentLanguage.shop_loading)
+    util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.shopList,
       login: true,
@@ -115,7 +133,7 @@ Page({
         that.setData({
           waiting: false
         })
-        util.showSuccess(that.data.currentLanguage.shop_get_success)
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('门店获取成功', result.data.data)
         that.setData({
           shopList: that.data.shopList.concat(result.data.data),
@@ -126,7 +144,7 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel('获取', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
       }
     }
@@ -175,7 +193,7 @@ Page({
     } catch (e) {
     }
     _that.setData({
-      currentLanguage: currentLanguage()
+      currentLanguage: getCurrentLanguage()
     })
   },
   //翻页

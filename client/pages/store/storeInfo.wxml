@@ -1,31 +1,51 @@
 <view class="page" wx:if="{{!isLoadding}}">
-
   <view class="page__bd">
     <image class="shop-image" mode="aspectFill" src="{{currentObj.img}}"></image>
 
 
     <view class="weui-panel weui-panel_access" style="margin-top:-15rpx">
       <view class="weui-flex  shop-outline">
-        <view class="weui-flex__item" bindtap="showAllStorePosition"  style='border-right:solid #eee 1px'>
+        <view class="weui-flex__item" bindtap="showAllStorePosition" style='border-right:solid #eee 1px'>
           <view class="wx-60-text wx-text-success bcenters">
             {{currentObj.positionCount}}
           </view>
           <view class="wx-30-text bcenter">
-            <text>个仓位</text>
+            <text>{{currentLanguage.out_put_position}}</text>
           </view>
         </view>
-       
+
         <view class="weui-flex__item" bindtap="showAllInventory">
           <view class="wx-60-text wx-text-warning bcenter">
             {{currentObj.inventoryCount}}
           </view>
           <view class="wx-30-text bcenter">
-            <text>件库存</text>
+            <text>{{currentLanguage.inventory}}</text>
           </view>
         </view>
       </view>
     </view>
-  </view>
 
-  
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-cell" wx:for="{{currentObj.productsInStore}}">
+        <view class="weui-cell__hd">
+          <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
+        </view>
+        <view class="weui-cell__bd">
+          <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
+                <view class="wx-30-text">仓库:{{item.storeName}}</view>-->
+          <view class="wx-30-text">货位:{{item.positionName}}</view>
+          <view class="wx-30-text">产品:{{item.productName}}</view>
+          <view class="wx-30-text wx-text-primary">库存:{{item.inventoryCount}}件</view>
+        </view>
+      </view>
+      <view wx:if="{{currentPosition.productsInStore.length==0}}">
+        <view class="wx-30-text">无数据</view>
+      </view>
+    </view>
+
+
+
+
+  </view>
 </view>

@@ -1,6 +1,5 @@
 {
   "pages": [
-
     "pages/index/index",
     "pages/shop/shop",
     "pages/shop/addShop",
@@ -13,9 +12,10 @@
     "pages/position/positions",
     "pages/position/addPosition",
     
-    "pages/product/products",
+   
     "pages/product/addProduct",
-    "pages/product/findProduct",
+    "pages/product/productInfo",
+    "pages/product/products",
     
     "pages/inventory/inventorys",
     "pages/inventory/outPut",

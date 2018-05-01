@@ -11,7 +11,7 @@
             {{currentShop.storeCount}}
           </view>
           <view class="wx-30-text">
-            <text>个仓库</text>
+            <text>{{currentLanguage.out_put_warehouse}}</text>
           </view>
         </view>
         <view class="weui-flex__item" bindtap="showAllProduct" style='border-right:solid #eee 1px;border-left:solid #eee 1px'>
@@ -19,7 +19,7 @@
             {{currentShop.productCount}}
           </view>
           <view class="wx-30-text">
-            <text>种商品</text>
+            <text>{{currentLanguage.product}}</text>
           </view>
         </view>
         <view class="weui-flex__item" bindtap="showAllInventory">
@@ -27,7 +27,7 @@
             {{currentShop.inventoryCount}}
           </view>
           <view class="wx-30-text">
-            <text>件库存</text>
+            <text>{{currentLanguage.inventory}}</text>
           </view>
         </view>
       </view>
@@ -37,11 +37,11 @@
   <view class="weui-flex">
     <view class="weui-flex__item" style='text-align:center' bindtap="scanCode">
       <text class="iconfont icon-saoma wx-120-text wx-text-success"></text>
-      <view>扫码</view>
+      <view>{{currentLanguage.scan}}</view>
     </view>
     <view class="weui-flex__item" style='text-align:center' bindtap="outPut">
       <text class="iconfont icon-churuku wx-120-text wx-text-primary"></text>
-      <view>出入库</view>
+      <view>{{currentLanguage.out_in_put}}</view>
     </view>
   </view>
 </view>

@@ -2,6 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var Charts = require('../../lib/wxcharts.js');
+var currentLanguage = require('../../lan/currentLanguage')
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var inventorySum = 0;
 Page({
@@ -13,7 +14,8 @@ Page({
     //图标类型
     chartType: 0,
     sliderOffset: 0,
-    sliderLeft: 0
+    sliderLeft: 0,
+    currentLanguage: {}
   },
 
   changeChartType: function (event) {
@@ -30,13 +32,24 @@ Page({
     }
   },
 
+
+  /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+  onPullDownRefresh: function () {
+
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth * 0.9,
-      imageHeight: wx.getSystemInfoSync().windowWidth * 1.2
+      imageHeight: wx.getSystemInfoSync().windowWidth * 1.2,
+      currentLanguage: currentLanguage() 
     })
     var that = this;
     wx.setNavigationBarTitle({
@@ -46,8 +59,8 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          sliderLeft: (res.windowWidth / 3 - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / 3 * that.data.activeIndex
+          sliderLeft: (res.windowWidth / 2 - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / 2 * that.data.activeIndex
         });
       }
     });
@@ -133,7 +146,7 @@ Page({
         }
 
         if (!codeType || codeType != 'positionID' || !positionId || positionId == 0) {
-          util.showModel('提示', '二维码错误!');
+          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.qrcode_error);
           return;
         }
 
@@ -192,7 +205,7 @@ Page({
 
     
     
-    util.showBusy('正在获取数据')
+    util.showBusy(this.data.currentLanguage.loading)
     var options = {
       url: config.service.findPosition,
       login: true,
@@ -202,18 +215,19 @@ Page({
       success(result) {
         console.log('获取成功', result.data)
         if (result && result.data && result.data.data) {
-          util.showSuccess('获取成功')
+          util.showSuccess(that.data.currentLanguage.success)
 
           console.log("获取数据", result.data.data[0]);
           that.setData({
             currentPosition: result.data.data[0]
           })
         } else {
-          util.showModel('提示', "查询失败");
+          util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.failed_query);
         }
+
       },
       fail(error) {
-        util.showModel('获取失败', error);
+        util.showModel(this.data.currentLanguage.fail, error);
         console.log('获取失败', error);
       }
     }

@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var getCurrentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -18,7 +19,18 @@ Page({
     currentProduct: {},
     currentInventory: {},
     optionCount: 0,
-    isLoadding: true
+    isLoadding: true,
+    currentLanguage: {}
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    var that = this;
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //获取门店
+    that.getShop();
   },
 
   /**
@@ -28,7 +40,8 @@ Page({
    var that = this;
     this.setData({
       title: options.navigationBarTitle || "条码库存管理",
-      shopID: options.shopID
+      shopID: options.shopID,
+      currentLanguage: getCurrentLanguage()
     });
     wx.setNavigationBarTitle({
       title: that.data.title
@@ -47,7 +60,7 @@ Page({
 
   //通过id获取门店对象
   getShop: function () {
-    util.showBusy('正在获取门店数据')
+    util.showBusy(this.data.currentLanguage.loading)
     var that = this
     var options = {
       url: config.service.getShop,
@@ -56,7 +69,7 @@ Page({
         id: that.data.shopID
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         util.hideLoadding();
         console.log('门店获取成功', result.data.data)
         wx.setNavigationBarTitle({
@@ -67,10 +80,18 @@ Page({
           isLoadding: false
         })
 
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel('获取', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
@@ -136,57 +157,12 @@ Page({
 
   },
 
-  // //扫描仓库
-  // scanStore: function () {
-  //   wx.scanCode({
-  //     success: (res) => {
-  //       var id = 0;
-  //       var codeType = "";
-  //       try {
-  //         codeType = res.result.split(":")[0];
-  //         id = res.result.split(":")[1];
-  //       } catch (e) {
-  //         console.error(e);
-  //         id = 0;
-  //       }
-
-  //       if (!codeType || codeType != 'positionID' || !id || id == 0) {
-  //         util.showModel('提示', '二维码错误!');
-  //         return;
-  //       }
-
-  //       console.log('仓库扫码得到id', id)
-
-  //       wx.navigateTo({
-  //         url: '../store/stores?navigationBarTitle=' + that.data.currentShop.name + '查找&inputVal=' + id
-  //       })
-
-  //     }
-  //   })
-  // },
+  
 
   //扫码
   scanCode: function () {
-    wx.setNavigationBarTitle({
-      title: "输入条码"
-    })
-
-
     var that = this;
     wx.scanCode({
-      complete: function (res){
-        console.log('结束', res);
-
-        wx.setNavigationBarTitle({
-          title: that.data.title
-        })
-
-        if (res.errMsg == "scanCode:fail cancel"){
-          wx.navigateTo({
-            url: '../product/findProduct?navigationBarTitle=查找商品'
-          })
-        }
-      },
       success: (res) => {
         console.log('扫码结果', res)
 
@@ -202,7 +178,7 @@ Page({
         }
         console.log('扫码结果', id)
         if (!id || id == "") {
-          util.showModel('提示', '扫码错误!');
+          util.showModel(that.data.currentLanguage.fail);
           return;
         }
 
@@ -215,7 +191,7 @@ Page({
         }else{
            //跳转到产品查找页面
           wx.navigateTo({
-            url: '../product/findProduct?navigationBarTitle=商品&barcode=' + id
+            url: '../product/productInfo?navigationBarTitle=商品&barcode=' + id
           })
         }
       }

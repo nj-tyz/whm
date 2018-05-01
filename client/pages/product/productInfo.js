@@ -2,6 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var Charts = require('../../lib/wxcharts.js');
+var currentLanguage = require('../../lan/currentLanguage')
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var inventorySum = 0;
 Page({
@@ -13,7 +14,8 @@ Page({
     //图标类型
     chartType: 0,
     sliderOffset: 0,
-    sliderLeft: 0
+    sliderLeft: 0,
+    currentLanguage: {}
   },
 
   changeChartType: function (event) {
@@ -32,6 +34,15 @@ Page({
       this.renderChart();
     }
   },
+  
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -39,7 +50,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth * 0.9,
-      imageHeight: wx.getSystemInfoSync().windowWidth * 1.2
+      imageHeight: wx.getSystemInfoSync().windowWidth * 1.2,
+      currentLanguage: currentLanguage()
     })
     var that = this;
     wx.setNavigationBarTitle({
@@ -99,7 +111,7 @@ Page({
         var barCode = res.result;
 
         if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
           return;
         }
 
@@ -155,7 +167,7 @@ Page({
 
     var barcode = event.currentTarget.dataset.barcode;
     //通过barcode获取商品
-    util.showBusy('正在获取商品数据')
+    util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.getProductByBarCode,
       login: true,
@@ -167,7 +179,7 @@ Page({
       },
       success(result) {
         if (result && result.data && result.data.data && result.data.data.id) {
-          util.showSuccess('获取成功')
+          util.showSuccess(that.data.currentLanguage.success)
           console.log('产品获取成功', result.data.data)
           that.setData({
             currentProduct: result.data.data
@@ -176,11 +188,11 @@ Page({
           //渲染图标
           that.renderChart();
         } else {
-          util.showModel('提示', "查询商品失败");
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.failed_query);
         }
       },
       fail(error) {
-        util.showModel('获取失败', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('产品获取失败', error);
       }
     }
@@ -212,7 +224,7 @@ Page({
           name: currentProductInventoryInStore[i].storeName,
           data: currentProductInventoryInStore[i].inventoryCount,
           format: function (val, name) {
-            return parseInt(val * inventorySum) + '件';
+            return parseInt(val * inventorySum) ;
           }
         })
         inventorySum += currentProductInventoryInStore[i].inventoryCount;
@@ -224,7 +236,7 @@ Page({
           name: currentProductInventoryInShop[i].shopName,
           data: currentProductInventoryInShop[i].inventoryCount,
           format: function (val, name) {
-            return parseInt(val * inventorySum) + '件';
+            return parseInt(val * inventorySum) ;
           }
         })
         inventorySum += currentProductInventoryInShop[i].inventoryCount;

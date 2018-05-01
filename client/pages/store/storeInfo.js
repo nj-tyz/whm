@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 
 //获取应用实例
 const app = getApp();
@@ -12,19 +13,24 @@ Page({
    */
   data: {
     objId: 0,
+    shopID:0,
     currentObj: {},
-    isLoadding: true
+    isLoadding: true,
+    currentLanguage: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
     this.setData({
-      objId: options.objId
+      objId: options.objId,
+      shopID: options.shopID,
+      currentLanguage: currentLanguage()
     });
     //获取对象
     this.getObj();
@@ -32,7 +38,7 @@ Page({
 
   //通过id获取对象
   getObj: function () {
-    util.showBusy('正在获取数据')
+    util.showBusy(this.data.currentLanguage.loading)
     var that = this
     var options = {
       url: config.service.getStoreById,
@@ -41,7 +47,7 @@ Page({
         id: that.data.objId
       },
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         util.hideLoadding();
         console.log('获取成功', result.data.data)
         wx.setNavigationBarTitle({
@@ -52,10 +58,17 @@ Page({
           isLoadding: false
         })
 
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+
       },
       fail(error) {
-        util.showModel('获取', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
@@ -102,16 +115,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    util.onPullDownRefresh(this.refresh);
+    var that = this;
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    that.getObj();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // complete
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+   
   },
 
   /**
@@ -122,9 +135,11 @@ Page({
   },
 
   showAllStorePosition: function (event) {
+
     var that = this;
+   
     wx.navigateTo({
-      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId
+      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId + "&shopID=" + that.data.shopID
     })
   },
 
@@ -132,7 +147,7 @@ Page({
   showAllInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/inventorys?navigationBarTitle=' + event.currentTarget.dataset.storename + '库存&storeID=' + event.currentTarget.dataset.storeid
+      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name + '库存&storeID=' + that.data.objId
     })
   },
 

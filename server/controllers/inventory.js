@@ -1,14 +1,16 @@
 const { mysql } = require('../qcloud.js')
 const { query } = require('../mysql')
+const userutil = require('./userutil.js')
 
 //获取所有库存
+//可以是商店,仓库,产品
 async function list(ctx, next) {
    var shopID = ctx.query.shopID||0;
   var storeID = ctx.query.storeID||0;
   var productID = ctx.query.productID||0;
 
  
-  var sql = "SELECT   store. NAME AS storeName,   sposition.no as positionName,   product. NAME AS productName,   product.img AS img, product.barcode AS barcode,  sum(inventory.count)AS count FROM   tb_inventory inventory left join tb_store_position sposition on sposition.id = inventory.positionId LEFT JOIN tb_product product ON product.id = inventory.productId LEFT JOIN tb_store store ON store.id = inventory.storeId LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  (?= 0 OR shop.id = ?) AND(?= 0 OR store.id = ?) AND(?= 0 OR product.id =?) GROUP BY   inventory.productId,  inventory.storeId,  inventory.positionId ORDER BY   store.id";
+  var sql = "SELECT   store. NAME AS storeName,   sposition. NO AS positionName,  product. NAME AS productName,   product.img AS img,   product.barcode AS barcode,   sum(inventory.count)AS count FROM   tb_inventory inventory LEFT JOIN tb_store_position sposition ON sposition.id = inventory.position LEFT JOIN tb_product product ON product.id = inventory.product LEFT JOIN tb_store store ON store.id = inventory.store LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  (?= 0 OR shop.id = ?) AND(?= 0 OR store.id = ?) AND(?= 0 OR product.id =?) GROUP BY   inventory.product,  inventory.store,  inventory.position ORDER BY   store.id";
   var params = [shopID,shopID,storeID,storeID,productID,productID];
 
   var result =  await query(sql,params);
@@ -21,7 +23,7 @@ async function list(ctx, next) {
 async function getBySidAndPid(ctx, next) {
   var positionId = ctx.query.positionId;
   var productId = ctx.query.productId;
-   var result =  await query("select * from tb_inventory where productId = ? and positionId=?",[productId,positionId]);
+   var result =  await query("select * from tb_inventory where product = ? and position=?",[productId,positionId]);
    var item = result.length>0?result[0]:[];
     ctx.state.data = item;
 }
@@ -35,6 +37,11 @@ async function getBySidAndPid(ctx, next) {
  * optionCount:操作数量
  */
 async function optionInventory(ctx, next) {
+  var userinfo =await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  var open_id = userinfo.openId;
+
+
   var shopId = ctx.query.shopId;
   var storeId = ctx.query.storeId;
   var positionId = ctx.query.positionId;
@@ -42,12 +49,12 @@ async function optionInventory(ctx, next) {
   var optionType = ctx.query.optionType;
   var optionCount = ctx.query.optionCount * 1;
 
-  var dbCount_result =await query("select * from tb_inventory where productId = ? and positionId=?",[productId,positionId]);
+  var dbCount_result =await query("select * from tb_inventory where product = ? and position=?",[productId,positionId]);
 
   console.log(dbCount_result)
 
-  var insertSql = "insert into tb_inventory(shopId,storeId,positionId,productId,count) values (?,?,?,?,?)";
-  var updateSql = "update tb_inventory set count = ? where positionId=? and productId=?";
+  var insertSql = "insert into tb_inventory(company,shop,store,position,product,count) values (?,?,?,?,?,?)";
+  var updateSql = "update tb_inventory set count = ? where position=? and product=?";
 
   var dbCount = dbCount_result.length>0?dbCount_result[0].count:0;
   var result;
@@ -64,7 +71,7 @@ async function optionInventory(ctx, next) {
 
   if(dbCount_result.length==0){
      console.log("insert")
-    params=[shopId,storeId,positionId,productId,newCount]
+    params=[company,shopId,storeId,positionId,productId,newCount]
      console.log(params)
     result =  await query(insertSql,params);
   }else{
@@ -80,36 +87,6 @@ async function optionInventory(ctx, next) {
 }
 
 
-//库存报表(店铺维度)
-async function inventoryInShop(ctx, next) {
-  var productId = ctx.query.productId;
-   var result =  await query("select shop.name as shopName,ifnull(sum(inventory.count),0) as inventoryCount  from tb_inventory inventory  left join tb_shop shop on inventory.shopId = shop.id where inventory.productId = ? group by shop.id  having inventoryCount>0",[productId]);
-   ctx.state.data = result;
-}
-
-//库存报表(店铺维度)
-async function inventoryInStore(ctx, next) {
-  var productId = ctx.query.productId;
-   var result =  await query("select store.name as storeName,ifnull(sum(inventory.count),0) as inventoryCount  from tb_inventory inventory  left join tb_store store on inventory.storeId = store.id where inventory.productId = ? group by store.id ",[productId]);
-   ctx.state.data = result;
-}
-
-
-
-//库存报表(仓位维度)
-async function inventoryInStore(ctx, next) {
-  var positionId = ctx.query.positionId;
-   var result =  await query("select product.name as productName,ifnull(sum(inventory.count),0) as inventoryCount from tb_inventory inventory left join tb_product product on inventory.productId = product.id where  inventory.positionId = ? group by product.id",[positionId]);
-   ctx.state.data = result;
-}
-
-//库存报表(仓库维度,传入仓位id)
-async function inventoryInStore(ctx, next) {
-  var positionId = ctx.query.positionId;
-   var result =  await query("select product.name as productName,ifnull(sum(inventory.count),0) as inventoryCount from tb_inventory inventory left join tb_product product on inventory.productId = product.id where  inventory.storeId in (select store from tb_store_position where id =?) group by product.id ",[positionId]);
-   ctx.state.data = result;
-}
-
 
 
 
@@ -117,7 +94,5 @@ async function inventoryInStore(ctx, next) {
 module.exports = {
   list,
   getBySidAndPid,
-  optionInventory,
-  inventoryInShop,
-  inventoryInStore
+  optionInventory
 }

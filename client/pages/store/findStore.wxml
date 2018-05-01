@@ -69,9 +69,7 @@
           <view data-charttype="1" class="weui-navbar__item {{chartType == 1 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="1">
             <view class="weui-navbar__title">本仓库</view>
           </view>
-          <view data-charttype="2" class="weui-navbar__item {{chartType == 2 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="2">
-            <view class="weui-navbar__title">本店铺</view>
-          </view>
+         
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
 

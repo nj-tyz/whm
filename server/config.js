@@ -30,10 +30,17 @@ const CONF = {
      * 地区简称
      * @查看 https://cloud.tencent.com/document/product/436/6224
      */ 
-    //region: 'ap-guangzhou',
-    region: 'na-toronto',
-    // Bucket 名称
-    fileBucket: 'whm',
+
+    //图片服务器-开发
+    region: 'ap-guangzhou',
+    fileBucket: 'test',
+
+
+    //图片服务器-线上
+    //region: 'na-toronto',
+    //fileBucket: 'whm',
+
+
     // 文件夹
     uploadFolder: ''
   },

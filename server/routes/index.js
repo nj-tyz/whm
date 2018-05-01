@@ -33,33 +33,31 @@ router.get('/message', controllers.message.get)
 router.post('/message', controllers.message.post)
 
 // --- 门店接口 --- //
-router.get('/shop/list', controllers.shop.list)
+router.get('/shop/list', validationMiddleware,controllers.shop.list)
 router.get('/shop/getone', controllers.shop.getone)
-router.get('/shop/add', controllers.shop.add)
+router.get('/shop/add', validationMiddleware,controllers.shop.add)
 
 // --- 产品接口 --- //
 router.get('/product/list', controllers.product.list)
 router.get('/product/getByBarCode', controllers.product.getByBarCode)
-router.get('/product/add', controllers.product.add)
+router.get('/product/add', validationMiddleware,controllers.product.add)
 router.get('/product/search', controllers.product.search)
 
 // --- 仓库接口 --- //
 router.get('/store/getListByShop', controllers.store.getListByShop)
 router.get('/store/getone', controllers.store.getone)
-router.get('/store/add', controllers.store.add)
+router.get('/store/add', validationMiddleware,controllers.store.add)
 router.get('/store/getById', controllers.store.getById)
 
 // --- 仓位接口 --- //
 router.get('/position/list', controllers.position.list)
-router.get('/position/add', controllers.position.add)
+router.get('/position/add', validationMiddleware,controllers.position.add)
 router.get('/position/find', controllers.position.find)
 
 // --- 库存接口 --- //
 router.get('/inventory/getBySidAndPid', controllers.inventory.getBySidAndPid)
 router.get('/inventory/list', controllers.inventory.list)
-router.get('/inventory/optionInventory', controllers.inventory.optionInventory)
-router.get('/inventory/inventoryInShop', controllers.inventory.inventoryInShop)
-router.get('/inventory/inventoryInStore', controllers.inventory.inventoryInStore)
+router.get('/inventory/optionInventory', validationMiddleware,controllers.inventory.optionInventory)
 
 // --- 公司接口 --- //
 router.get('/company/getByName', controllers.company.getByName)

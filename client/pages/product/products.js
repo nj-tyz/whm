@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 //获取应用实例
 const app = getApp();
 Page({
@@ -20,7 +21,8 @@ Page({
     storeID: 0,
     shopName: "",
     shoreName: "",
-    productList: []
+    productList: [],
+    currentLanguage: {}
   },
 
   showInput: function () {
@@ -33,6 +35,15 @@ Page({
       inputVal: "",
       inputShowed: false
     });
+
+    //重新查询数据
+    this.setData({
+      inputVal: "",
+      pageNo: 1,
+      nomore: false,
+      productList: []
+    });
+    this.getAllProduct();
   },
   clearInput: function () {
     this.setData({
@@ -40,37 +51,21 @@ Page({
     });
   },
   inputTyping: function (e) {
+    var that = this;
     this.setData({
       inputVal: e.detail.value
     });
 
     //调用查询
-    this.search();
+    this.setData({
+      pageNo: 1,
+      nomore: false,
+      productList: []
+    });
+    that.getAllProduct();
   },
- 
-  //查询产品
-  search: function () {
-    var that = this;
-    var options = {
-      url: config.service.searchProduct,
-      login: true,
-      data: that.data,
-      success(result) {
-        console.log('搜索产品成功', result)
-        that.setData({
-          correlationData: result.data.data
-        })
 
-        console.log(that.data.correlationData.length);
-        console.log(that.data.inputVal.length);
-        console.log(that.data.inputVal.length > 0 && that.data.correlationData.lenght > 0);
-      },
-      fail(error) {
-        console.log('request fail', error);
-      }
-    }
-    qcloud.request(options)
-  },
+ //扫码
   scanCode: function () {
     var that = this;
     wx.scanCode({
@@ -78,7 +73,7 @@ Page({
         var barCode = res.result;
 
         if (!barCode || barCode == "") {
-          util.showModel('提示', '条码错误!');
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.bar_code_error);
           return;
         }
 
@@ -92,7 +87,7 @@ Page({
           }
         }
         //调用显示
-        that.show(event);
+        that.showProductInventory(event);
       }
     })
   },
@@ -107,7 +102,8 @@ Page({
       shopID: options.shopID || 0,
       shopName: options.shopName || "",
       storeID: options.storeID || 0,
-      shoreName: options.shoreName || ""
+      shoreName: options.shoreName || "",
+      currentLanguage: currentLanguage()
     });
     //获取门店下的所有仓库数据
     this.getAllProduct();
@@ -175,7 +171,7 @@ Page({
   showProductInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../product/findProduct?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
+      url: '../product/productInfo?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode
     })
   },
 
@@ -183,7 +179,7 @@ Page({
   //增加商品
   addProduct: function () {
     wx.navigateTo({
-      url: '../product/addProduct?navigationBarTitle=增加商品'
+      url: '../product/addProduct?navigationBarTitle=增加商品' + "&shopID=" + this.data.shopID
     })
   },
   //获取所有产品
@@ -194,6 +190,7 @@ Page({
     var params = {
       pageSize: that.data.pageSize,
       pageNo: that.data.pageNo,
+      inputVal: that.data.inputVal
     };
     if (that.data.shopID) {
       params.shopID = that.data.shopID;
@@ -205,13 +202,13 @@ Page({
     console.log(params);
 
 
-    util.showBusy('获取商品列表')
+    util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.productList,
       login: true,
       data: params,
       success(result) {
-        util.showSuccess('获取成功')
+        util.showSuccess(that.data.currentLanguage.success)
         console.log('商品列表获取成功', result)
         //有翻页,所以使用合并
         that.setData({
@@ -225,8 +222,11 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
-        util.showModel('请求失败', error);
+        util.showModel(that.data.currentLanguage.fail, error);
         console.log('request fail', error);
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)

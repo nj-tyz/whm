@@ -9,6 +9,7 @@ Page({
   data: {
     no: "",
     storeID: 0,
+    shopID:0,
   },
 
   /**
@@ -20,7 +21,8 @@ Page({
     })
     console.log(options.storeID);
     this.setData({
-      storeID: options.storeID || 0
+      storeID: options.storeID || 0,
+      shopID: options.shopID || 0,
     });
   },
 
@@ -94,7 +96,6 @@ Page({
 
     //提交
     util.showBusy('正在提交')
-
     var options = {
       url: config.service.addPosition,
       login: true,

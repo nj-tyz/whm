@@ -10,6 +10,7 @@ Page({
    */
   data: {
     storeID: 0,
+    shopID: 0,
     shoreName: "",
     positionList: []
   },
@@ -23,6 +24,7 @@ Page({
     })
     this.setData({
       storeID: options.storeID || 0,
+      shopID: options.shopID || 0,
       shoreName: options.shoreName || ""
     });
     //获取仓库下所有仓位
@@ -64,7 +66,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    //获取仓库下所有仓位
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.getAllPosition();
   },
 
   /**
@@ -99,10 +103,16 @@ Page({
         that.setData({
           positionList: result.data.data
         })
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
       fail(error) {
         util.showModel('请求失败', error);
         console.log('request fail', error);
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     }
     qcloud.request(options)
@@ -112,8 +122,9 @@ Page({
   //增加仓位
   addPosition: function () {
     var that = this;
+
     wx.navigateTo({
-      url: '../position/addPosition?navigationBarTitle=增加仓位&storeID=' + that.data.storeID
+      url: '../position/addPosition?navigationBarTitle=增加仓位&storeID=' + that.data.storeID + "&shopID=" + that.data.shopID
     })
   },
   //显示二维码

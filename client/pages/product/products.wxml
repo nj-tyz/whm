@@ -5,38 +5,28 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="请输入 条码/名称" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.Please_enter_a_barcode_name}}" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="" bindblur="inputTyping" />
           <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
             <icon type="clear" size="14"></icon>
           </view>
         </view>
         <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
           <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">请输入 条码/名称</view>
+          <view class="weui-search-bar__text">{{currentLanguage.Please_enter_a_barcode_name}}</view>
         </label>
       </view>
-      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">{{currentLanguage.cancel}}</view>
 
       <image bindtap="scanCode" style="margin-left:20rpx;margin-top:10rpx;margin-right:10rpx" class="icon-40" src="../../img/scan.png" />
 
     </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0&&correlationData.length>0}}">
-      <navigator data-barcode="{{item.barcode}}" bindtap="show" wx:for="{{correlationData}}" url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <view>{{item.barcode}}</view>
-          <view>{{item.name}}</view>
-        </view>
-      </navigator>
-    </view>
+   
 
 
 
 
     <view class="weui-cells__title weui-flex">
-      <view class="weui-flex__item">产品列表</view>
+      <view class="weui-flex__item">{{currentLanguage.product_list}}</view>
       <view bindtap='addProduct' class="iconfont icon-add wx-text-primary weui-flex__item beright">
       </view>
     </view>
@@ -52,7 +42,7 @@
           <view class="wx-text-success " style="font-size:15px;font-color:#aaa ">$ {{item.price}}</view>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access ">
-          <view class="weui-badge " style="margin-left: 5px; ">{{item.count}}件</view>
+          <view class="weui-badge " style="margin-left: 5px; ">{{item.count}}</view>
         </view>
       </view>
       <view class="weui-panel__ft">
