@@ -2,7 +2,7 @@ var lan_en = {
   lan: "English",
   name: "name",
   product: "product",
-  serial_number: "serial number",
+  serial_number: "NO.",
   out_put: "store",
   in_put: "deliver",
   address: "address",
@@ -21,7 +21,7 @@ var lan_en = {
   current: "current",
 
   input_company_name: "Please enter company name",
-  input_no: "Please enter the serial number",
+  input_no: "Please enter the number",
   input_name: "Please enter a name",
   input_price: "Please enter the price",
   input_address: "Please enter the address",
@@ -125,7 +125,9 @@ var lan_en = {
 
   shelf_distribution: "shelf distribution",
   warehouse_distribution: "warehouse distribution",
-  shop_distribution: "shop distribution"
+  shop_distribution: "shop distribution",
+
+  setting_tabs: ["personal", "company", "shop", "position"]
 }
 
 module.exports = lan_en;

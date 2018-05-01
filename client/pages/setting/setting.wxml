@@ -31,6 +31,7 @@
                 </view>
                 <view class="" hidden="{{activeIndex != 1}}">
                     <view class="doc-title">测试公司</view>
+
                     <view class="weui-search-bar">
                       <view class="weui-search-bar__form">
                           <view class="weui-search-bar__box">
@@ -46,7 +47,8 @@
                           </label>
                       </view>
                       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
-                  </view>
+                    </view>
+                  
                   <view class="weui-cells weui-cells_after-title">
                       <view class="weui-cell">
                           <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
@@ -112,32 +114,114 @@
 
                 
                 </view>
-                <view class="" hidden="{{activeIndex != 3}}">
+                <scroll-view scroll-y style="height: {{pageHeight}}px;" class=""  hidden="{{activeIndex != 3}}">
                   <view class="page__bd page__bd_spacing">
                     <view class="weui-flex">
-                      <view class="weui-flex__item"><view class="placeholder">
-                          <view class="weui-search-bar">
-                            <view class="weui-search-bar__form">
-                                <view class="weui-search-bar__box">
-                                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-                                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                                        <icon type="clear" size="14"></icon>
-                                    </view>
-                                </view>
-                                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-                                    <icon class="weui-icon-search" type="search" size="14"></icon>
-                                    <view class="weui-search-bar__text">搜索</view>
-                                </label>
-                            </view>
-                            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+
+                      <scroll-view scroll-y style="height: {{pageHeight}}px;" class="weui-flex__item">
+                      
+                        <view class="weui-search-bar">
+                          <view class="weui-search-bar__form">
+                              <view class="weui-search-bar__box">
+                                  <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                                  <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                                  <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                                      <icon type="clear" size="14"></icon>
+                                  </view>
+                              </view>
+                              <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                                  <icon class="weui-icon-search" type="search" size="14"></icon>
+                                  <view class="weui-search-bar__text">搜索</view>
+                              </label>
+                          </view>
+                          <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
                         </view>
-                      </view>
+
+
+
+
+                          <view class="weui-cells weui-cells_after-title">
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">张三</view>
+                                
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                            <view class="weui-cell">
+                                <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <image src="../../img/user-unlogin.png" style="width: 50px; height: 50px; display: block"/>
+                                </view>
+                                <view class="weui-cell__bd">李四</view>
+                              
+                            </view>
+                          </view>
+                      </scroll-view>
+
+                      <scroll-view scroll-y style="height: {{pageHeight}}px;" class="weui-flex__item">
+                          <view class="weui-cells weui-cells_after-title">
+                            <checkbox-group bindchange="checkboxChange">
+                              <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+                                <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+                                <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                                  <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                                  <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                                </view>
+                                <view class="weui-cell__bd">{{item.name}}</view>
+                              </label>
+                            </checkbox-group>
+                            
+                          </view>
+                      
+                      </scroll-view>
                     </view>
-                      <view class="weui-flex__item"><view class="placeholder">weui</view></view>
                   </view>
-                  </view>
-                </view>
+                </scroll-view>
+
+
             </view>
         </view>
     </view>

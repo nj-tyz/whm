@@ -125,7 +125,9 @@ var lan_zh = {
 
   shelf_distribution:"货架分布",
   warehouse_distribution:"仓库分布",
-  shop_distribution:"店铺分布"
+  shop_distribution:"店铺分布",
+
+  setting_tabs: ["个人", "公司", "店铺", "岗位"]
 
 }
 

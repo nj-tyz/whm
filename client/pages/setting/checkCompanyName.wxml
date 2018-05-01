@@ -8,19 +8,19 @@
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">{{name}}</view>
       <view class="weui-msg__desc" wx:if="{{id==0}}">
-        检查中...
+        {{currentLanguage.checking}}
       </view>
       <view class="weui-msg__desc" wx:if="{{id>0}}">
-        该公司已被其他人注册,您可以申请加入公司或更换其他公司名称
+        {{currentLanguage.check_company_name_reject}}
       </view>
       <view class="weui-msg__desc" wx:if="{{id==-1}}">
-        该公司名可用
+        {{currentLanguage.check_company_name_pass}}
       </view>
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
-        <button bindtap="submit" wx:if="{{id>0}}" class="weui-btn" type="primary">申请加入</button>
-        <button bindtap="submit" wx:if="{{id==-1}}" class="weui-btn" type="primary">确认注册</button>
+        <button bindtap="submit" wx:if="{{id>0}}" class="weui-btn" type="primary">{{currentLanguage.apply_join}}</button>
+        <button bindtap="submit" wx:if="{{id==-1}}" class="weui-btn" type="primary">{{currentLanguage.regist}}</button>
       </view>
     </view>
 

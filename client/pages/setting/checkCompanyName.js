@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 const app = getApp();
 Page({
 
@@ -9,20 +10,23 @@ Page({
    */
   data: {
     id: 0,
-    name: ""
+    name: "",
+    currentLanguage:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     this.setData({
-      name: options.name
+      name: options.name,
+      currentLanguage: currentLanguage()
     });
 
-
+    console.log("条码库存管理"+that.data.currentLanguage.position_navigation_bar_title);
     wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
+      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
 
 
@@ -81,8 +85,8 @@ Page({
 
   //检查
   docheck: function () {
-    util.showBusy('检查中')
-    var that = this
+    var that = this;
+    util.showBusy(that.data.currentLanguage.checking);
     var options = {
       url: config.service.getCompanyByName,
       login: true,
@@ -90,7 +94,7 @@ Page({
         name: that.data.name
       },
       success(result) {
-        util.showSuccess('检查完成')
+        util.showSuccess(that.data.currentLanguage.check_completed);
         if (result.length > 0) {
           that.setData({
             id: result[0].id
@@ -102,7 +106,7 @@ Page({
         }
       },
       fail(error) {
-        util.showModel('检查失败,请稍后重试', error);
+        util.showModel(that.data.currentLanguage.check_fail, error);
         console.log('request fail', error);
       }
     }
@@ -111,14 +115,14 @@ Page({
 
   //处理结果
   submit: function () {
-    util.showBusy('提交中')
+    util.showBusy(this.data.currentLanguage.submiting);
     var that = this
     var options = {
       url: config.service.joinCompany,
       login: true,
       data: that.data,
       success(result) {
-        util.showSuccess('设置成功');
+        util.showSuccess(that.data.currentLanguage.setting_success);
         //通知上个页面刷新
         app.globalData.needRefresh = true;
 
@@ -127,7 +131,7 @@ Page({
         })
       },
       fail(error) {
-        util.showModel('检查失败,请稍后重试', error);
+        util.showModel(that.data.currentLanguage.check_fail, error);
         console.log('request fail', error);
       }
     }

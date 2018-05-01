@@ -1,6 +1,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var currentLanguage = require('../../lan/currentLanguage')
 Page({
 
   /**
@@ -8,13 +9,16 @@ Page({
    */
   data: {
     name: "",
+    currentLanguage:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      currentLanguage: currentLanguage()
+    })
   },
 
   /**
@@ -72,6 +76,7 @@ Page({
     })
   },
   scanCompanyCode: function () {
+    var that = this;
     wx.scanCode({
       success: (res) => {
         var name = "";
@@ -85,7 +90,8 @@ Page({
         }
 
         if (!codeType || codeType != 'companyName' || !name || name == "") {
-          util.showModel('提示', '二维码错误!');
+          console.log(that.data.currentLanguage.qrcode_error);
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
           return;
         }
 

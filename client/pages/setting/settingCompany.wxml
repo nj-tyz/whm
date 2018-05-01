@@ -2,11 +2,11 @@
   <view class="page__bd">
 
 
-    <view class="weui-cells__title">请设置公司</view>
+    <view class="weui-cells__title">{{currentLanguage.setting_company}}</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__bd">
-          <input class="weui-input" bindinput="bindChangeName" value="{{name}}" placeholder="请输入公司名称" />
+          <input class="weui-input" bindinput="bindChangeName" value="{{name}}" placeholder="{{currentLanguage.input_company_name}}" />
         </view>
         <view class="weui-cell__ft">
           <image class="icon-image" bindtap='scanCompanyCode' src="../../img/scan.png"></image>
@@ -16,7 +16,7 @@
 
 
     <view class="weui-btn-area">
-      <button style="width:90%;margin:50rpx;" bindtap='checkname' type="primary">检查</button>
+      <button style="width:90%;margin:50rpx;" bindtap='checkname' type="primary">{{currentLanguage.check}}</button>
     </view>
 
 
