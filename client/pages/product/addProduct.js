@@ -139,9 +139,9 @@ Page({
     var that = this;
 
     //校验数据完整
-    if (!this.data.name || !this.data.barcode || !this.data.img) {
-      //util.showModel('提示', '数据不完整!');
-      //return;
+    if (!this.data.name || !this.data.barcode ) {
+      util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
+      return;
     }
 
 

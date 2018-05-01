@@ -84,6 +84,8 @@ Page({
       }
       //调用显示
       that.show(event);
+      
+
     }
   },
   showInput: function () {
@@ -292,7 +294,6 @@ Page({
           name: 'file',
 
           success: function (res) {
-            util.showSuccess(that.data.currentLanguage.img_upload_success)
             //console.log(res)
             res = JSON.parse(res.data)
 
@@ -308,6 +309,7 @@ Page({
               },
               success(result) {
 
+                util.showSuccess(that.data.currentLanguage.img_upload_success)
                 console.log('修改成功', result);
                 // wx.navigateTo({
                 //   url: '../msg/success?title=系统提示&content=添加商品成功&bt点击返回'
