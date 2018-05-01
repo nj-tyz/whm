@@ -29,7 +29,7 @@ async function list(ctx, next) {
 
 
 
-    sql +=" order by product.id limit ?,?";
+    sql +=" order by count desc limit ?,?";
     parames.push(s_i);
     console.log(pageSize);
     parames.push(pageSize);
@@ -51,6 +51,12 @@ async function getone(ctx, next) {
 
 async function getByBarCode(ctx, next) {
   var barCode = ctx.query.barCode;
+  var shopID = ctx.query.shopID||0;
+
+  //当前登录用户
+  var userinfo =await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  var open_id = userinfo.openId;
 
   //店内库存分布
   var inventoryInShop = ctx.query.inventoryInShop;
@@ -64,20 +70,25 @@ async function getByBarCode(ctx, next) {
 
   if(inventoryInShop){
      //店内库存分布
-    var inventoryInShopResult =  await query("SELECT  shop.NAME AS shopName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_shop shop ON inventory.shop = shop.id left join tb_product product on inventory.product = product.id WHERE  product.barcode = ? GROUP BY  shop.id HAVING  inventoryCount > 0",[barCode]);
+     //公司下哪个店有货
+    var inventoryInShopResult =  await query("SELECT  shop.NAME AS shopName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_shop shop ON inventory.shop = shop.id left join tb_product product on inventory.product = product.id WHERE  product.barcode = ? and inventory.shop in (select shop from tb_user_shop where open_id=?) GROUP BY  shop.id HAVING  inventoryCount > 0 order by inventoryCount desc",[barCode,open_id]);
     item.inventoryInShopResult = inventoryInShopResult;
   }
 
 
   if(inventoryInStore){
     //仓库库存分布
-     var inventoryInStoreResult =  await query("SELECT   store.NAME AS storeName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_store store ON inventory.store = store.id left join tb_product product on inventory.product= product.id WHERE   product.barcode = ? GROUP BY  store.id",[barCode]);
+    //当前店铺的哪个仓库有货
+    //仓库:数量
+     var inventoryInStoreResult =  await query("SELECT   store.NAME AS storeName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_store store ON inventory.store = store.id left join tb_product product on inventory.product= product.id WHERE   product.barcode = ? and inventory.shop = 1 GROUP BY store.id order by inventoryCount desc",[barCode,shopID]);
     item.inventoryInStoreResult = inventoryInStoreResult;
   }
 
   if(inventoryInPosition){
      //货架库存分布
-     var inventoryInStoreResult =  await query("SELECT  product.NAME productName,  sposition. NO positionName,   store. NAME storeName,  shop. NAME shopName,  inventory.count inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_product product ON inventory.product = product.id LEFT JOIN tb_store_position sposition ON inventory.position = sposition.id LEFT JOIN tb_store store ON sposition.store = store.id LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  product.barcode=? order by shop.id,store.id,sposition.id,product.id",[barCode]);
+     //当前店铺的哪个货架上有货   
+     //数据  仓库-货架:数量
+     var inventoryInStoreResult =  await query("SELECT  product.NAME productName,  sposition. NO positionName,   store. NAME storeName,  shop. NAME shopName,  inventory.count inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_product product ON inventory.product = product.id LEFT JOIN tb_store_position sposition ON inventory.position = sposition.id LEFT JOIN tb_store store ON sposition.store = store.id LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  product.barcode=? and inventory.shop = ? order by inventoryCount desc",[barCode,shopID]);
     item.inventoryInPosition = inventoryInStoreResult;
   }
 
