@@ -3,10 +3,15 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-//线上
-var host = 'https://t0qyjxur.qcloud.la';
+
+//测试环境
+//var host = 'https://t0qyjxur.qcloud.la';
+
+//tyzong正式服务
+//var host ="https://whm.wenshanshan.cn";
+
 //刀豆电脑
-//var host = 'https://a017238e.ngrok.io';
+var host = 'https://a1c89d65.ngrok.io';
 
 var config = {
 
