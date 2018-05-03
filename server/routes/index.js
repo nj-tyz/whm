@@ -32,10 +32,16 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 
+
 // --- 门店接口 --- //
 router.get('/shop/list', validationMiddleware,controllers.shop.list)
 router.get('/shop/getone', controllers.shop.getone)
 router.get('/shop/add', validationMiddleware,controllers.shop.add)
+router.get('/shop/findListByCurrentCompany', validationMiddleware, controllers.shop.findListByCurrentCompany)
+router.get('/shop/shopUsers',  controllers.shop.shopUsers)
+router.get('/shop/updateShopUser', validationMiddleware, controllers.shop.updateShopUser)
+router.get('/shop/outShopUser', validationMiddleware, controllers.shop.outShopUser)
+
 
 // --- 产品接口 --- //
 router.get('/product/list', controllers.product.list)
@@ -64,6 +70,8 @@ router.get('/inventory/optionInventory', validationMiddleware,controllers.invent
 // --- 公司接口 --- //
 router.get('/company/getByName', controllers.company.getByName)
 router.get('/company/join', validationMiddleware, controllers.company.join)
+router.get('/company/companyUsers', validationMiddleware, controllers.company.companyUsers)
+router.get('/company/auditUser', validationMiddleware, controllers.company.auditUser)
 
 
 

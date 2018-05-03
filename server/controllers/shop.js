@@ -9,6 +9,14 @@ async function list(ctx, next) {
   ctx.state.data=result;
 }
 
+async function findListByCurrentCompany(ctx, next) {
+  var userinfo = await userutil.get(ctx, next);
+  var companyId = userinfo.company_id;
+  //只查询当前用户公司的所有的店铺
+  var result = await query("select * from tb_shop where company = ?", [companyId]);
+  ctx.state.data = result;
+}
+
 async function add(ctx, next) {
    var userinfo =await userutil.get(ctx, next);
   var company = userinfo.company_id;
@@ -36,10 +44,45 @@ async function getone(ctx, next) {
   ctx.state.data = item;
 }
 
+async function shopUsers(ctx, next) {
+  var shopId = ctx.query.shopId;
+  var result = await query("SELECT us.*,cs.user_info AS userInfo from tb_user_shop us LEFT JOIN csessioninfo  cs on  us.open_id = cs.open_id  where us.shop = ?", [shopId]);
+  ctx.state.data = result;
+}
 
+
+async function updateShopUser(ctx, next) {
+  var status = ctx.query.status;
+  var openid = ctx.query.openId;
+  var shopid = ctx.query.shopId;
+  var userinfo = await userutil.get(ctx, next);
+  var companyid = userinfo.company_id;
+  var id = ctx.query.usershopId;
+  var result;
+  if (status == 1){
+    result = await query("INSERT INTO tb_user_shop (company,open_id,shop)values(?,?,?)", [companyid, openid, shopid]);
+  }else{
+    result = await query("DELETE FROM tb_user_shop WHERE id = ?", [id]);
+  }
+  ctx.state.data = result;
+}
+
+async function outShopUser(ctx, next) {
+  var shopid = ctx.query.shopId;
+  var userinfo = await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  var username = "%" + ctx.query.username + "%";
+  var result = await query("SELECT cs.* FROM csessioninfo cs WHERE cs.company_id =? AND cs.company_reviewed=1 AND cs.user_info like ? and cs.open_id NOT IN (SELECT us.open_id FROM tb_user_shop us WHERE us.shop = ?) ", [company, username,shopid]);;
+  
+  ctx.state.data = result;
+}
 
 module.exports = {
   list,
   getone,
-  add
+  add,
+  findListByCurrentCompany,
+  shopUsers,
+  updateShopUser,
+  outShopUser
 }

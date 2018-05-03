@@ -11,20 +11,20 @@ var lan_en = {
   loading: "loading",
   load_success: "Load successfully",
   load_fail: "Load Failed",
-  success:"success",
-  fail:"fail",
+  success: "success",
+  fail: "fail",
   shop: "shop",
   missing_data: "missing data",
   cant_more: "The number of out of the warehouse should not be greater than the quantity of stock",
   quantity: "quantity",
   enter_quantity: "Please enter the quantity",
   current: "current",
-  no_data:"No data",
+  no_data: "No data",
   cargo_position: "Cargo Position",
 
   input_company_name: "Please enter company name",
-  no_company:"Please create or join a company first.",
-  company_no_check:"Please contact the administrator to approve your application!",
+  no_company: "Please create or join a company first.",
+  company_no_check: "Please contact the administrator to approve your application!",
   input_no: "Please enter the number",
   input_name: "Please enter a name",
   input_price: "Please enter the price",
@@ -136,7 +136,11 @@ var lan_en = {
   no_result: "No result",
   this_warehouse: "this warehouse",
   this_position: "this position",
-  no_data:"nodata",
+  no_data: "nodata",
+  audit: "Audit",
+  staffing: "staffing",
+  add: "add",
+  remove: "remove"
 }
 
 module.exports = lan_en;

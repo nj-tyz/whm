@@ -137,6 +137,11 @@ var lan_zh = {
   this_warehouse:"本仓库",
   this_position: "本货架",
   no_data: "无数据",
+  this_position:"本货架",
+  audit:"审核",
+  staffing:"分配人员",
+  add:"增加",
+  remove:"移除"
 
 }
 

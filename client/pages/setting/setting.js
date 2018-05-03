@@ -1,9 +1,12 @@
 var currentLanguage = require('../../lan/currentLanguage')
-
-var sliderWidth = 128; // 需要设置slider的宽度，用于计算中间位置
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+var util = require('../../utils/util.js')
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
+    c_user:{},
     tabs: ["个人", "公司", "店铺","岗位"],
     activeIndex: 0,
     sliderOffset: 0,
@@ -11,20 +14,28 @@ Page({
     pageHeight: 0,
     inputShowed: false,
     inputVal: "",
+    userList:[],
     checkboxItems: [
       { name: '岗位a', value: '0', checked: true },
       { name: '岗位b', value: '1' },
       { name: '岗位c', value: '2' },
       { name: '岗位d', value: '3' }
-    ]
+    ],
+    companyName:"",
+    currentLanguage:{}
   },
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
     var cl = currentLanguage();
     this.setData({
       currentLanguage: cl,
-      tabs: cl.setting_tabs
+      tabs: cl.setting_tabs,
+      companyName:options.companyName||""
     })
+    console.log(options.companyName);  
+    this.companyUsers();
+    this.companyShopList();
+
 
     wx.getSystemInfo({
       success: function (res) {
@@ -36,6 +47,9 @@ Page({
       }
     });
     console.log(this.data.pageHeight);
+
+
+
   },
   tabClick: function (e) {
     this.setData({
@@ -83,4 +97,79 @@ Page({
       checkboxItems: checkboxItems
     });
   },
+  companyUsers:function(){
+    var that = this;
+    util.showBusy(that.data.currentLanguage.loading);
+    var options = {
+      url: config.service.companyUsers,
+      login: true,
+      data: {},
+      success(result) {
+        
+        var i = 0;
+        var userList = result.data.data 
+        for (; i < userList.length;i++){
+          
+          userList[i].user_info = JSON.parse(userList[i].user_info);
+        }
+        that.setData({
+          userList: userList
+        })
+
+        util.showSuccess(that.data.currentLanguage.success)
+        
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.request_fail, error);
+      }
+    }
+    qcloud.request(options)
+  },
+  auditUser: function (event){
+    var that = this;
+    var openId = event.currentTarget.dataset.useropenid; 
+    util.showBusy(that.data.currentLanguage.loading);
+    var options = {
+      url: config.service.auditUser,
+      login: true,
+      data: {
+        openId:openId
+      },
+      success(result) {
+        //重新加载数据
+        that.companyUsers();
+
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.request_fail, error);
+      }
+    }
+    qcloud.request(options)
+
+  },
+  companyShopList: function () {
+    var that = this;
+    
+    util.showBusy(that.data.currentLanguage.loading);
+    var options = {
+      url: config.service.companyShopList,
+      login: true,
+      data: {
+      
+      },
+      success(result) {
+        //重新加载数据
+        that.setData({
+          shopList: result.data.data
+        })
+     //   console.log(that.data.shopList);
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.request_fail, error);
+      }
+    }
+    qcloud.request(options)
+
+  }
+
 });

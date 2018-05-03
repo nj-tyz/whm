@@ -27,7 +27,8 @@
     
     "pages/setting/settingCompany",
     "pages/setting/checkCompanyName",
-    "pages/setting/setting"
+    "pages/setting/setting",
+    "pages/setting/settingUser"
   ],
   "window1": {
     "backgroundColor": "#F6F6F6",

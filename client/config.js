@@ -4,6 +4,7 @@
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
 
+
 //测试环境
 //var host = 'https://t0qyjxur.qcloud.la';
 
@@ -12,6 +13,8 @@
 
 //刀豆电脑
 var host = 'https://a1c89d65.ngrok.io';
+
+
 
 var config = {
 
@@ -33,6 +36,10 @@ var config = {
     shopList: `${host}/weapp/shop/list`,
     getShop: `${host}/weapp/shop/getone`,
     addShop: `${host}/weapp/shop/add`,
+    companyShopList: `${host}/weapp/shop/findListByCurrentCompany`,
+    shopUsers: `${host}/weapp/shop/shopUsers`,
+    updateShopUser: `${host}/weapp/shop/updateShopUser`,
+    outShopUser: `${host}/weapp/shop/outShopUser`,
 
 
     // 产品接口
@@ -65,7 +72,8 @@ var config = {
     getCompanyByName: `${host}/weapp/company/getByName`,
     joinCompany: `${host}/weapp/company/join`,
     test: `${host}/weapp/company`,
-
+    companyUsers: `${host}/weapp/company/companyUsers`, 
+    auditUser: `${host}/weapp/company/auditUser`,
 
   }
 };

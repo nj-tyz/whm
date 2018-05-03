@@ -81,6 +81,7 @@ Page({
               logged: true,
               userInfo: result1.data.data
             })
+
             if (!that.data.userInfo.company_name) {
               //没有公司名
               util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.no_company, function () {
@@ -96,6 +97,7 @@ Page({
               //获取门店
               that.getUserShop();
             }
+
             wx.hideNavigationBarLoading() //完成停止加载
             wx.stopPullDownRefresh() //停止下拉刷新
           },
@@ -210,9 +212,10 @@ Page({
   openPermissionSetting(event) {
     var that = this;
     var openId = that.data.userInfo.openId;
-    console.log(openId);
+    var companyName = that.data.userInfo.company_name;
+    console.log(companyName);
     wx.navigateTo({
-      url: '../setting/setting?&openId=' + openId
+      url: '../setting/setting?&openId=' + openId + '&companyName=' + companyName
     })
 
   }

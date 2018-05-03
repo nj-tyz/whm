@@ -1,0 +1,50 @@
+<view class="page__bd">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.search}}" value="{{inputVal}}" focus="{{inputShowed}}" onblur="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">{{currentLanguage.search}}</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">{{currentLanguage.cancel}}</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+        <navigator url="" wx:for="{{searchList}}"   class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+                <view>
+                    <view class="weui-cell">
+                      <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                          <image src="{{item.user_info.avatarUrl}}" style="width: 50px; height: 50px; display: block"/>
+                      </view>
+                      <view class="weui-cell__bd">{{item.user_info.nickName}}</view>
+                      <view class="weui-cell__ft">
+                        
+                        <button class="weui-btn mini-btn" type="primary" data-openid= "{{item.open_id}}"bindtap="addUser" size="mini">{{currentLanguage.add}}</button>
+                      </view>
+                  </view>
+                </view>
+            </view>
+        </navigator>
+        
+       
+    </view>
+    <view class="weui-cells weui-cells_after-title"wx:if="{{inputVal.length <= 0}}">
+      <view class="weui-cell" wx:for="{{userList}}">
+          <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+              <image src="{{item.userInfo.avatarUrl}}" style="width: 50px; height: 50px; display: block"/>
+          </view>
+          <view class="weui-cell__bd">{{item.userInfo.nickName}}</view>
+          <view class="weui-cell__ft">
+            
+            <button class="weui-btn mini-btn" type="warn" data-id="{{item.id}}" bindtap="removeUser" size="mini">{{currentLanguage.remove}}</button>
+          </view>
+      </view>
+  </view>
+</view>
