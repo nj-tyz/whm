@@ -58,15 +58,27 @@ async function getByBarCode(ctx, next) {
   var company = userinfo.company_id;
   var open_id = userinfo.openId;
 
-  //店内库存分布
+  //是否查询店内库存分布
   var inventoryInShop = ctx.query.inventoryInShop;
-  //仓库库存分布
+  //是否查询仓库库存分布
   var inventoryInStore = ctx.query.inventoryInStore;
-  //仓位库存分布
+  //是否查询仓位库存分布
   var inventoryInPosition = ctx.query.inventoryInPosition;
 
-  var result = await mysql('tb_product').select('*').where({ barCode: barCode });
+  //查询产品对象.通过条码,以及公司
+  var result =await query("select * from tb_product where barcode = ? and company = ?",[barCode,company]);
   var item = result.length > 0 ? result[0] : {};
+
+  //如果产品不存在
+  if(!item.id){
+    ctx.state.data = {
+        errocode:"productnotfount"
+    }
+    return;
+  }
+
+
+
   if(inventoryInShop){
      //店内库存分布
      //公司下哪个店有货

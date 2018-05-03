@@ -6,7 +6,7 @@ var lan_en = {
   out_put: "store",
   in_put: "deliver",
   address: "address",
-  out_in_put: "store and deliver",
+  out_in_put: "Transfer in/out",
   inventory: "inventory",
   loading: "loading",
   load_success: "Load successfully",
@@ -90,7 +90,7 @@ var lan_en = {
   Product_existed: "Product has already existed",
   Please_enter_a_barcode_name: "Please enter a bar code or name",
   scan: "Scan",
-  scan_product_fail: "Scan product fail",
+  scan_product_fail: "Product not found!",
 
   qrcode_error: "QR code is wrong",
   qrcode_generator: "QR code generator",

@@ -90,7 +90,7 @@ var lan_zh = {
   Product_existed:"商品已存在！",
 
   scan:"扫码",
-  scan_product_fail:"扫描商品失败",
+  scan_product_fail:"产品不存在!",
 
   qrcode_error:"二维码错误",
   qrcode_generator:"二维码生成器",
