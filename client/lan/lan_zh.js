@@ -133,7 +133,14 @@ var lan_zh = {
   setting_tabs: ["个人", "公司", "店铺", "岗位"],
   no_result:"无结果",
   this_warehouse:"本仓库",
-  this_position:"本货架"
+  this_position:"本货架",
+
+  audit:"审核",
+
+  staffing:"分配人员",
+
+  add:"增加",
+  remove:"移除"
 
 }
 

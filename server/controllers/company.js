@@ -1,4 +1,5 @@
 const { query } = require('../mysql')
+const userutil = require('./userutil.js')
 
 async function getByName(ctx, next) {
   var name = ctx.query.name;
@@ -25,6 +26,22 @@ async function join(ctx, next) {
   ctx.state.data="ok";
 }
 
+async function companyUsers(ctx, next) {
+  var userinfo = await userutil.get(ctx, next);
+  var companyId = userinfo.company_id;
+  var result = await query("select * from cSessionInfo  where company_id = ? order by company_reviewed",[companyId])
+  ctx.state.data = result;
+}
+
+async function auditUser(ctx, next){
+  var openId = ctx.query.openId;
+  var userinfo = await userutil.get(ctx, next);
+  var companyId = userinfo.company_id;
+  var result = await query("update cSessionInfo set company_reviewed = 1  where open_id = ? and company_id = ? ", [openId,companyId])
+  ctx.state.data = "ok";
+}
+
+
 module.exports = {
-  join,getByName
+  join, getByName, companyUsers, auditUser
 }

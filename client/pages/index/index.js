@@ -81,6 +81,11 @@ Page({
               logged: true,
               userInfo: result1.data.data
             })
+            try {
+              wx.setStorageSync('currentUser', result1.data.data);
+            } catch (e) {
+              console.log("缓存用户信息失败")
+            }
             util.showSuccess(that.data.currentLanguage.load_success)
             //获取门店
             that.getUserShop();
@@ -208,9 +213,10 @@ Page({
   openPermissionSetting(event) {
     var that = this;
     var openId = that.data.userInfo.openId;
-    console.log(openId);
+    var companyName = that.data.userInfo.company_name;
+    console.log(companyName);
     wx.navigateTo({
-      url: '../setting/setting?&openId=' + openId
+      url: '../setting/setting?&openId=' + openId + '&companyName=' + companyName
     })
 
   }

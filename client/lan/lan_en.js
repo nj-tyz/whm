@@ -133,7 +133,12 @@ var lan_en = {
   setting_tabs: ["personal", "company", "shop", "position"],
   no_result: "No result",
   this_warehouse: "this warehouse",
-  this_position: "this position"
+  this_position: "this position",
+
+  audit:"Audit",
+  staffing:"staffing",
+  add: "add",
+  remove: "remove"
 }
 
 module.exports = lan_en;
