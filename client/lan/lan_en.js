@@ -23,6 +23,8 @@ var lan_en = {
   cargo_position: "Cargo Position",
 
   input_company_name: "Please enter company name",
+  no_company:"Please create or join a company first.",
+  company_no_check:"Please contact the administrator to approve your application!",
   input_no: "Please enter the number",
   input_name: "Please enter a name",
   input_price: "Please enter the price",
@@ -126,14 +128,15 @@ var lan_en = {
   store_load_error1: "The warehouse is not in this shop, please choose the other shop!",
   store_all: "all warehouse",
 
-  shelf_distribution: "shelf distribution",
-  warehouse_distribution: "warehouse distribution",
-  shop_distribution: "shop distribution",
+  shelf_distribution: "position",
+  warehouse_distribution: "warehouse",
+  shop_distribution: "shop",
 
   setting_tabs: ["personal", "company", "shop", "position"],
   no_result: "No result",
   this_warehouse: "this warehouse",
-  this_position: "this position"
+  this_position: "this position",
+  no_data:"nodata",
 }
 
 module.exports = lan_en;

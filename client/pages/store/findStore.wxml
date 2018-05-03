@@ -69,7 +69,7 @@
           <view data-charttype="1" class="weui-navbar__item {{chartType == 1 ? 'weui-bar__item_on' : ''}}" bindtap="changeChartType" id="1">
             <view class="weui-navbar__title">{{currentLanguage.this_warehouse}}</view>
           </view>
-         
+
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
 
@@ -77,67 +77,92 @@
 
 
 
-        <view class="weui-tab__panel" wx:if="{{chartType==0}}">
+        <view class="weui-tab__panel page__bd wbg" wx:if="{{chartType==0}}">
           <view class="weui-tab__content">
+            <view class="weui-cell" wx:if="{{currentProduct.productsInPosition.length==0}}">
+              <view class="weui-cell__bd">
+                <view class="wx-30-text cg">{{currentLanguage.no_data}}</view>
+              </view>
+            </view>
             <view class="weui-cell" wx:for="{{currentPosition.productsInPosition}}">
               <view class="weui-cell__hd">
                 <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
               </view>
-              <view class="weui-cell__bd">
+              <view class="weui-cell__bd wx-25-text">
                 <!--<view class="wx-30-text">店铺:{{item.shopName}}</view>
                 <view class="wx-30-text">仓库:{{item.storeName}}</view>
                 <view class="wx-30-text">货位:{{item.positionName}}</view>-->
-                <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.product}}:</text>
+                  <text class="weui-flex__item ">{{item.productName}}</text>
+                </view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.inventory}}:</text>
+                  <text class="weui-flex__item  wx-text-primary">{{item.inventoryCount}}</text>
+                </view>
               </view>
             </view>
-            <view wx:if="{{currentPosition.productsInPosition.length==0}}">
-              <view class="wx-30-text">{{currentLanguage.no_result}}</view>
-            </view>
+
           </view>
         </view>
 
 
 
-        <view class="weui-tab__panel" wx:if="{{chartType==1}}">
+        <view class="weui-tab__panel page__bd wbg wx-25-text" wx:if="{{chartType==1}}">
           <view class="weui-tab__content">
+            <view class="weui-cell" wx:if="{{currentProduct.productsInStore.length==0}}">
+              <view class="weui-cell__bd">
+                <view class=" cg">{{currentLanguage.no_data}}</view>
+              </view>
+            </view>
             <view class="weui-cell" wx:for="{{currentPosition.productsInStore}}">
               <view class="weui-cell__hd">
                 <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
               </view>
               <view class="weui-cell__bd">
-                <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
-                <view class="wx-30-text">仓库:{{item.storeName}}</view>-->
-                <view class="wx-30-text">{{currentLanguage.out_put_position}}:{{item.positionName}}</view>
-                <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.out_put_position}}:</text>
+                  <text class="weui-flex__item ">{{item.positionName}}</text>
+                </view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.product}}:</text>
+                  <text class="weui-flex__item ">{{item.productName}}</text>
+                </view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.inventory}}:</text>
+                  <text class="weui-flex__item  wx-text-primary">{{item.inventoryCount}}</text>
+                </view>
               </view>
             </view>
-            <view wx:if="{{currentPosition.productsInStore.length==0}}">
-              <view class="wx-30-text">{{currentLanguage.no_result}}</view>
-            </view>
+
           </view>
         </view>
 
 
 
-        <view class="weui-tab__panel" wx:if="{{chartType==2}}">
+        <view class="weui-tab__panel page__bd wbg wx-25-text" wx:if="{{chartType==2}}">
           <view class="weui-tab__content">
+            <view class="weui-cell" wx:if="{{currentProduct.productsInShop.length==0}}">
+              <view class="weui-cell__bd">
+                <view class="">{{currentLanguage.no_data}}</view>
+              </view>
+            </view>
             <view class="weui-cell" wx:for="{{currentPosition.productsInShop}}">
               <view class="weui-cell__hd">
                 <image src="{{item.productImage}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;"></image>
               </view>
               <view class="weui-cell__bd">
-                <!-- <view class="wx-30-text">店铺:{{item.shopName}}</view>
-                <view class="wx-30-text">仓库:{{item.storeName}}</view>
-                <view class="wx-30-text">货位:{{item.positionName}}</view>-->
-                <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.product}}:</text>
+                  <text class="weui-flex__item ">{{item.productName}}</text>
+                </view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.inventory}}:</text>
+                  <text class="weui-flex__item  wx-text-primary">{{item.inventoryCount}}</text>
+                </view>
               </view>
             </view>
-            <view wx:if="{{currentPosition.productsInShop.length==0}}">
-              <view class="wx-30-text">{{currentLanguage.no_result}}</view>
-            </view>
+
           </view>
         </view>
 

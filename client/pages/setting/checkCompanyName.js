@@ -95,9 +95,10 @@ Page({
       },
       success(result) {
         util.showSuccess(that.data.currentLanguage.check_completed);
-        if (result.length > 0) {
+        console.log(result);
+        if (result.data.data.length > 0) {
           that.setData({
-            id: result[0].id
+            id: result.data.data[0].id
           });
         } else {
           that.setData({

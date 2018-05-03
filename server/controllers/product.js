@@ -18,8 +18,9 @@ async function list(ctx, next) {
   }
 
   if(shopID){
-    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = product.shop and product = product.id)count  from tb_product product  where product.company = (select company from tb_shop where tb_shop.id = ? ) ";
-    var parames= [shopID];
+    //查询本店的对应公司的产品,以及这些产品在本店的库存数
+    var sql = "select product.*, (select ifnull(sum(count),0) from tb_inventory  where shop = ? and product = product.id)count  from tb_product product  where product.company = (select company from tb_shop where tb_shop.id = ? ) ";
+    var parames= [shopID,shopID];
     if(inputVal&&inputVal!=""){
       inputVal = "%"+ctx.query.inputVal+"%";
       sql +=" and (barcode like ? or name like ? )";

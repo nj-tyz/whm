@@ -34,13 +34,14 @@ var showSuccess = text => {
 }
 
 // 显示失败提示
-var showModel = (title, content) => {
+var showModel = (title, content, success) => {
   wx.hideToast();
   wx.hideLoading()
   wx.showModal({
     title,
     content: JSON.stringify(content),
-    showCancel: false
+    showCancel: false,
+    success: success
   })
 }
 

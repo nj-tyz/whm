@@ -260,6 +260,15 @@ Page({
       "optionCount": e.detail.value
     })
   },
+  //修改数字
+  checkNumber: function (e) {
+    if (e.detail.value == 0) {
+      this.setData({
+        "optionCount": ""
+      })
+    }
+  },
+
   //提交表单
   submitForm: function () {
     var that = this;
@@ -324,6 +333,9 @@ Page({
     wx.navigateTo({
       url: '../product/products?navigationBarTitle=SKU&shopID=' + that.data.shopID + "&isselect=" + true
     })
-  }
+  },
+
+
+
 
 })

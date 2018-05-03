@@ -16,6 +16,8 @@ var lan_zh = {
   shop:"店铺",
   missing_data:"数据不完整",
   input_company_name:"请输入公司名称",
+  no_company: "请先创建或加入一家公司.",
+  company_no_check: "请联系您的公司管理员审核您的加入申请.",
   input_no: "请输入编号",
   input_name: "请输入名称",
   input_price: "请输入价格",
@@ -133,7 +135,8 @@ var lan_zh = {
   setting_tabs: ["个人", "公司", "店铺", "岗位"],
   no_result:"无结果",
   this_warehouse:"本仓库",
-  this_position:"本货架"
+  this_position: "本货架",
+  no_data: "无数据",
 
 }
 

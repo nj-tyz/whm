@@ -18,7 +18,7 @@ Page({
     shopList: [],
     array: ['English', '中文'],
     index: 0,
-    currentLanguage:{}
+    currentLanguage: {}
   },
   onLoad: function () {
     var that = this;
@@ -27,15 +27,15 @@ Page({
     })
     that.getUserInfo();
     //console.log(this.data.currentLanguage.name);
-    
+
   },
   /**
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
     //判断是否需要刷新界面
-    if (app.globalData.needRefresh){
-      app.globalData.needRefresh=false;
+    if (app.globalData.needRefresh) {
+      app.globalData.needRefresh = false;
       var that = this;
       that.setData({
         pageNo: 1,
@@ -53,8 +53,8 @@ Page({
     wx.showNavigationBarLoading() //在标题栏中显示加载
     that.setData({
       pageNo: 1,
-      nomore:  false,
-      shopList:[]
+      nomore: false,
+      shopList: []
     })
     that.getUserInfo();
   },
@@ -81,11 +81,21 @@ Page({
               logged: true,
               userInfo: result1.data.data
             })
-            util.showSuccess(that.data.currentLanguage.load_success)
-            //获取门店
-            that.getUserShop();
+            if (!that.data.userInfo.company_name) {
+              //没有公司名
+              util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.no_company, function () {
+                //  跳转到公司设置界面
+                that.settingCompany();
+              });
 
-
+            } else if (that.data.userInfo.company_reviewed != 1) {
+              //有公司但是未审核
+              util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.company_no_check);
+            } else {
+              util.showSuccess(that.data.currentLanguage.load_success)
+              //获取门店
+              that.getUserShop();
+            }
             wx.hideNavigationBarLoading() //完成停止加载
             wx.stopPullDownRefresh() //停止下拉刷新
           },
@@ -111,14 +121,6 @@ Page({
   //获取用户门店
   getUserShop: function () {
     var that = this
-
-
-    //如果没有公司id或者公司未审核,不获取数据
-    if (!this.data.userInfo.company_name || this.data.userInfo.company_reviewed != 1) {
-      util.showSuccess(that.data.currentLanguage.index_no_company_name)
-      return;
-    }
-
 
     util.showBusy(that.data.currentLanguage.loading)
     var options = {
@@ -180,7 +182,7 @@ Page({
       url: '../setting/settingCompany?navigationBarTitle=完善公司'
     })
   },
-  changeLanguage:function(e){
+  changeLanguage: function (e) {
     console.log(JSON.stringify(this));
     var _that = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)

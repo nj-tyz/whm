@@ -92,11 +92,15 @@ page {
 .wx-20-text {
   font-size: 20rpx;
 }
-
+.wx-25-text {
+  font-size: 25rpx;
+}
 .wx-30-text {
   font-size: 30rpx;
 }
-
+.wx-40-text {
+  font-size: 40rpx;
+}
 .wx-50-text {
   font-size: 50rpx;
 }
@@ -115,4 +119,13 @@ page {
 
 .beright {
   text-align: right;
+}
+
+.wbg{
+  background-color:#FFFFFF
+}
+
+
+.cg{
+  color:#B7B7B7
 }
