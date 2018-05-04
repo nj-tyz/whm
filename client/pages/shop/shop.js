@@ -177,7 +177,7 @@ Page({
         if (codeType && codeType == 'positionID'){
          //跳转到仓库界面
           wx.navigateTo({
-            url: '../store/findStore?navigationBarTitle=仓位&positionId=' + id
+            url: '../store/findStore?navigationBarTitle=仓位&positionId=' + id + '&shopId=' + this.data.shopID
           })
         }else{
            //跳转到产品查找页面

@@ -171,9 +171,10 @@ Page({
   },
   findStore:function(){
     var that = this;
+    console.log("stores.findStore:" + that.data.shopID)
     //跳转到仓库界面
     wx.navigateTo({
-      url: '../store/findStore?navigationBarTitle=查找仓位&shopID=' + that.data.shopID
+      url: '../store/findStore?navigationBarTitle=查找仓位&shopId=' + that.data.shopID
     })
   }
 

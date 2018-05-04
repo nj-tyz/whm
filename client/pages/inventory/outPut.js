@@ -310,7 +310,7 @@ Page({
           //重新查库存
           that.getInventory();
         } else {
-          util.showSuccess(that.data.currentLanguage.success);
+          util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.success);
           console.log('更新库存提交成功', result);
           //提交成功后初始化数据
           that.init()

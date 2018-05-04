@@ -43,8 +43,8 @@
 
           <view bindtap="openPermissionSetting" style='position:absolute;top:30rpx;right:30rpx'>
             <image style='width:40rpx;height:40rpx;' class="" src="../../img/setting.png" />
-            <view class="weui-badge weui-badge_dot" style="margin-left: -5px;">
-            </view>
+            <!--<view class="weui-badge weui-badge_dot" style="margin-left: -5px;">
+            </view>-->
           </view>
         </view>
 
