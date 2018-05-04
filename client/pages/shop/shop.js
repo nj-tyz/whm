@@ -39,7 +39,7 @@ Page({
   onLoad: function (options) {
    var that = this;
     this.setData({
-      title: options.navigationBarTitle || "条码库存管理",
+      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title,
       shopID: options.shopID,
       currentLanguage: getCurrentLanguage()
     });
@@ -196,7 +196,7 @@ Page({
   showAllStore: function () {
     var that = this;
     wx.navigateTo({
-      url: '../store/stores?navigationBarTitle=' + that.data.currentShop.name + '仓库&shopID=' + this.data.shopID + "&shopName=" + that.data.currentShop.name
+      url: '../store/stores?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.warehouse + '&shopID=' + this.data.shopID + "&shopName=" + that.data.currentShop.name
     })
   },
 
@@ -212,7 +212,7 @@ Page({
   showAllInventory: function () {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentShop.name + '库存&shopID=' + this.data.shopID + "&shopName=" + that.data.currentShop.name
+      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.inventory+'&shopID=' + this.data.shopID + "&shopName=" + that.data.currentShop.name
     })
   },
   //增加仓库
@@ -233,7 +233,7 @@ Page({
   outPut: function () {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + '出入库&shopID=' + this.data.shopID
+      url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.out_in_put+'&shopID=' + this.data.shopID
     })
   },
 

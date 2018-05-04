@@ -25,6 +25,9 @@ Page({
     currentLanguage:{}
   },
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
+    })
     var that = this;
     var cl = currentLanguage();
     this.setData({
@@ -32,7 +35,7 @@ Page({
       tabs: cl.setting_tabs,
       companyName:options.companyName||""
     })
-    console.log(options.companyName);  
+    //console.log(options.companyName);  
     this.companyUsers();
     this.companyShopList();
 
@@ -46,11 +49,12 @@ Page({
         });
       }
     });
-    console.log(this.data.pageHeight);
+    //console.log(this.data.sliderLeft);
 
 
 
   },
+  
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,

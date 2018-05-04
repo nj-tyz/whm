@@ -1,15 +1,22 @@
 // pages/main/index.js
 var QR = require("../../lib/qrcode.js");
+var getCurrentLanguage = require('../../lan/currentLanguage')
 Page({
   data:{
     canvasHidden:false,
     maskHidden:true,
     imagePath:'',
-    placeholder:''//默认二维码生成文本
+    placeholder:'',//默认二维码生成文本
+    currentLanguage:{}
   },
   onLoad:function(options){
+    var c_language = getCurrentLanguage();
+    wx.setNavigationBarTitle({
+      title: c_language.qrcode || "条码库存管理"
+    })
     this.setData({
-      placeholder:  "positionID:" + options.id
+      placeholder:  "positionID:" + options.id,
+      currentLanguage: c_language
     });
 
 

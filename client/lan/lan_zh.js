@@ -3,8 +3,9 @@ var lan_zh = {
   name:"名称",
   product:"商品",
   serial_number:"编号",
-  out_put:"入库",
-  in_put:"出库",
+  in_put:"入库",
+  out_put:"出库",
+  
   address:"地址",
   out_in_put:"出入库",
   inventory:"库存",
@@ -53,6 +54,7 @@ var lan_zh = {
   equipment_get_fail:"获取设备信息失败",
   close:"关闭",
 
+  settings: "设置",
   setting_success:"设置成功",
 
   bar_code:"条码",
@@ -68,10 +70,16 @@ var lan_zh = {
   out_put_warehouse:"仓库",
   out_put_position:"仓位",
 
+  warehouse: "仓库",
+  warehouse_add:"增加仓库",
+  warehouse_detail:"仓库明细",
+
   position_navigation_bar_title:"条码库存管理",
+  position_search:"查找仓位",
   position_add:"增加仓位",
   position_add_success:"添加仓位成功",
   position_add_fail: "添加仓位失败",
+  position_list:"仓位列表",
   position_get_list:"获取仓位列表",
   position_get_list_success:'仓位列表获取成功',
   position_get_list_fail: '仓位列表获取失败',
@@ -79,6 +87,7 @@ var lan_zh = {
  
 
   product_list:"产品列表",
+  product_inventory:"产品库存",
   product_add: "增加产品",
   product_add_success:"添加商品成功",
   product_add_fail: "添加商品失败",
@@ -92,6 +101,7 @@ var lan_zh = {
   scan:"扫码",
   scan_product_fail:"产品不存在!",
 
+  qrcode:"二维码",
   qrcode_error:"二维码错误",
   qrcode_generator:"二维码生成器",
   qrcode_goods_shelf:"货架二维码",
@@ -110,6 +120,7 @@ var lan_zh = {
 
   setting_company:"请设置公司",
 
+  shop_add:"增加店铺",
   shop_add_success:"添加店铺成功",
   shop_add_fail: "添加店铺失败",
   shop_loading:"正在获取门店数据",
