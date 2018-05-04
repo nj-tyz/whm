@@ -9,10 +9,10 @@
         <view class="weui-cell__bd">
           <radio-group class="radio-group" bindchange="radioChange">
             <radio class="radio" wx:key="optionType" value="in" checked="checked">
-              <text>{{currentLanguage.out_put}}</text>
+              <text>{{currentLanguage.in_put}}</text>
             </radio>
             <radio class="radio" wx:key="optionType" value="out" style='margin-left:50rpx' checked="">
-              <text>{{currentLanguage.in_put}}</text>
+              <text>{{currentLanguage.out_put}}</text>
             </radio>
           </radio-group>
         </view>

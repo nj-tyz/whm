@@ -159,7 +159,7 @@ Page({
   showProductInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../product/productInfo?navigationBarTitle=产品库存&barcode=' + event.currentTarget.dataset.barcode + '&shopID=' + that.data.shopID
+      url: '../product/productInfo?navigationBarTitle=' + that.data.currentLanguage.product_inventory+'&barcode=' + event.currentTarget.dataset.barcode + '&shopID=' + that.data.shopID
     })
   },
 })

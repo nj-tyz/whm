@@ -22,8 +22,13 @@ Page({
   },
   onLoad: function () {
     var that = this;
+    var c_language = getCurrentLanguage();
     this.setData({
-      currentLanguage: getCurrentLanguage()
+      currentLanguage: c_language
+    })
+   
+    wx.setNavigationBarTitle({
+      title: c_language.position_navigation_bar_title
     })
     that.getUserInfo();
     //console.log(this.data.currentLanguage.name);
@@ -81,7 +86,6 @@ Page({
               logged: true,
               userInfo: result1.data.data
             })
-
             if (!that.data.userInfo.company_name) {
               //没有公司名
               util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.no_company, function () {
@@ -167,8 +171,9 @@ Page({
 
   //增加店铺
   addStore: function () {
+    var that = this;
     wx.navigateTo({
-      url: '../shop/addShop?navigationBarTitle=增加店铺'
+      url: '../shop/addShop?navigationBarTitle=' + that.data.currentLanguage.shop_add
     })
   },
 
@@ -184,10 +189,11 @@ Page({
       url: '../setting/settingCompany?navigationBarTitle=完善公司'
     })
   },
-  changeLanguage: function (e) {
-    console.log(JSON.stringify(this));
-    var _that = this;
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+
+  changeLanguage:function(e){
+   // console.log(JSON.stringify(this));
+   var _that = this;
+   // console.log('picker发送选择改变，携带值为', e.detail.value)
     _that.setData({
       index: e.detail.value
     })
@@ -198,6 +204,9 @@ Page({
     }
     _that.setData({
       currentLanguage: getCurrentLanguage()
+    })
+    wx.setNavigationBarTitle({
+      title: _that.data.currentLanguage.position_navigation_bar_title
     })
   },
   //翻页
@@ -215,7 +224,7 @@ Page({
     var companyName = that.data.userInfo.company_name;
     console.log(companyName);
     wx.navigateTo({
-      url: '../setting/setting?&openId=' + openId + '&companyName=' + companyName
+      url: '../setting/setting?&openId=' + openId + '&companyName=' + companyName + "&navigationBarTitle=" + that.data.currentLanguage.settings
     })
 
   }

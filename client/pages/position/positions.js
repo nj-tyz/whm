@@ -127,14 +127,15 @@ Page({
     var that = this;
 
     wx.navigateTo({
-      url: '../position/addPosition?navigationBarTitle=增加仓位&storeID=' + that.data.storeID + "&shopID=" + that.data.shopID
+      url: '../position/addPosition?navigationBarTitle=' + that.data.currentLanguage.position_add+'&storeID=' + that.data.storeID + "&shopID=" + that.data.shopID
     })
   },
   //显示二维码
   showQrCode: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../qrcode/show?navigationBarTitle=仓位二维码&storeID=' + that.data.storeID + "&id=" + event.currentTarget.dataset.positionid + "&shopName=" + event.currentTarget.dataset.shopname + "&storeName=" + event.currentTarget.dataset.storename + "&positionName=" + event.currentTarget.dataset.positionname
+      url: '../qrcode/show?navigationBarTitle=' + that.data.currentLanguage.position_qrcode +'&storeID=' + that.data.storeID + "&id=" + event.currentTarget.dataset.positionid + "&shopName=" + event.currentTarget.dataset.shopname + "&storeName=" + event.currentTarget.dataset.storename + "&positionName=" + event.currentTarget.dataset.positionname
+
     })
   }
 })

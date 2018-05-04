@@ -34,7 +34,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "条码库存管理",
+    "navigationBarTitleText": "",
     "enablePullDownRefresh": true,
     "navigationBarTextStyle": "black"
   },
@@ -42,7 +42,7 @@
   "window":{
     "navigationBarBackgroundColor": "#37373b",
     "navigationBarTextStyle": "#fff",
-    "navigationBarTitleText": "条码库存管理",
+    "navigationBarTitleText": "",
     "enablePullDownRefresh": true,
     "backgroundColor": "#efeff4",
     "backgroundTextStyle": "light"
