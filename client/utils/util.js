@@ -56,6 +56,9 @@ var hideLoadding = (title, content) => {
   wx.stopPullDownRefresh() //停止下拉刷新
 }
 
+var trim = (str) => {
+  return str.replace(/(^\s*)|(\s*$)/g, "");
+}
 
-module.exports = { formatTime, showBusy, hideBusy, showSuccess, showModel, showLoadding, hideLoadding }
+module.exports = { formatTime, showBusy, hideBusy, showSuccess, showModel, showLoadding, hideLoadding, trim }
 
