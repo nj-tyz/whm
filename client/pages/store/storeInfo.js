@@ -14,6 +14,7 @@ Page({
   data: {
     objId: 0,
     shopID: 0,
+    shopName:"",
     currentObj: {},
     isLoadding: true,
     currentLanguage: {}
@@ -29,6 +30,7 @@ Page({
       title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
     this.setData({
+      shopName: options.shopName,
       objId: options.objId,
       shopID: options.shopID,
       currentLanguage: getCurrentLanguage()
@@ -140,7 +142,7 @@ Page({
     var that = this;
 
     wx.navigateTo({
-      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId + "&shopID=" + that.data.shopID
+      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName
     })
   },
 

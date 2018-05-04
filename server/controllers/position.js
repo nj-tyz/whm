@@ -3,7 +3,7 @@ const userutil = require('./userutil.js')
 
 async function list(ctx, next) {
   var storeID = ctx.query.storeID;
-  var result =  await query("select * from tb_store_position where store =?",[storeID]);
+  var result =  await query("select sposition.*,shop.name shopName ,store.name storeName from tb_store_position sposition left JOIN tb_store store on sposition.store=store.id left JOIN tb_shop shop on sposition.shop = shop.id where store =?",[storeID]);
   console.log(result);
   ctx.state.data=result;
 }

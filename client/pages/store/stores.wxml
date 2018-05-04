@@ -7,7 +7,7 @@
       </view>
       
       <view class="weui-panel__bd" wx:if="storeList.length > 0">
-        <navigator url="" class="weui-media-box weui-media-box_appmsg" wx:for="{{storeList}}" data-id="{{item.id}}" bindtap="showStoreInfo">
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" wx:for="{{storeList}}" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="showStoreInfo">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.img}}" mode="scaleToFill" />
           </view>

@@ -14,9 +14,9 @@ Page({
     shopID: 0,
     shopName: "",
     storeList: [],
-    nomore:true,
-    pageNo:1,
-    pageSize:5,
+    nomore: true,
+    pageNo: 1,
+    pageSize: 5,
     currentLanguage: {}
   },
 
@@ -112,7 +112,7 @@ Page({
       data: {
         shopID: that.data.shopID,
         pageSize: that.data.pageSize,
-        pageNo : that.data.pageNo
+        pageNo: that.data.pageNo
       },
       success(result) {
         util.showSuccess(that.data.currentLanguage.success)
@@ -144,7 +144,7 @@ Page({
     })
   },
 
- 
+
 
   //增加仓库
   addStore: function () {
@@ -156,9 +156,9 @@ Page({
   //跳转到仓库明细
   showStoreInfo: function (event) {
     var that = this;
-     console.log(that.data);
+    console.log(that.data);
     wx.navigateTo({
-      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id + "&shopID=" + that.data.shopID
+      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName + "&storeName=" + event.currentTarget.dataset.name
     })
   },
   loadmore: function () {
@@ -169,7 +169,7 @@ Page({
     //重新查询后台
     that.getAllStore();
   },
-  findStore:function(){
+  findStore: function () {
     var that = this;
     console.log("stores.findStore:" + that.data.shopID)
     //跳转到仓库界面
