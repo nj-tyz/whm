@@ -9,7 +9,7 @@ Page({
    */
   data: {
     name: "",
-    currentLanguage:{}
+    currentLanguage: {}
   },
 
   /**
@@ -109,8 +109,13 @@ Page({
 
   checkname: function () {
     var that = this;
-    wx.navigateTo({
-      url: '../setting/checkCompanyName?name=' + this.data.name
-    })
+    if (!this.data.name || util.trim(this.data.name) == "") {
+      util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
+      return;
+    }else{
+      wx.navigateTo({
+        url: '../setting/checkCompanyName?name=' + this.data.name
+      })
+    }
   }
 })

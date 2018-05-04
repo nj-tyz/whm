@@ -22,7 +22,7 @@ const CONF = {
     user: 'root',
     db: 'cAuth', 
     pass: 'Ttyyzz123',
-    char: 'utf8'
+    char: 'utf8mb4'
   },
 
   cos: {
@@ -32,13 +32,13 @@ const CONF = {
      */ 
 
     //图片服务器-开发
-     region: 'ap-guangzhou',
-     fileBucket: 'test',
+     //region: 'ap-guangzhou',
+     //fileBucket: 'test',
 
 
     //图片服务器-线上
-    //region: 'na-toronto',
-    //fileBucket: 'whm',
+    region: 'na-toronto',
+    fileBucket: 'whm-1255998511',
 
 
     // 文件夹
@@ -50,7 +50,7 @@ const CONF = {
   wxMessageToken: 'abcdefgh',
 
   // 其他配置 ...
-  serverHost: 'https://83e1b607.ngrok.io',
+  serverHost: 'https://whm.wenshanshan.cn',
   tunnelServerUrl: 'https://tunnel.ws.qcloud.la',
   tunnelSignatureKey: '27fb7d1c161b7ca52d73cce0f1d833f9f5b5ec89',
   // 腾讯云相关配置可以查看云 API 秘钥控制台：https://console.qcloud.com/capi
