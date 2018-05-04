@@ -9,10 +9,10 @@
 //var host = 'https://t0qyjxur.qcloud.la';
 
 //tyzong正式服务
-//var host ="https://whm.wenshanshan.cn";
+var host ="https://whm.wenshanshan.cn";
 
 //刀豆电脑
-var host = 'https://a1c89d65.ngrok.io';
+//var host = 'https://a1c89d65.ngrok.io';
 
 
 
