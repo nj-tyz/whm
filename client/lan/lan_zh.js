@@ -17,6 +17,8 @@ var lan_zh = {
   shop:"店铺",
   missing_data:"数据不完整",
   input_company_name:"请输入公司名称",
+  no_company: "请先创建或加入一家公司.",
+  company_no_check: "请联系您的公司管理员审核您的加入申请.",
   input_no: "请输入编号",
   input_name: "请输入名称",
   input_price: "请输入价格",
@@ -84,7 +86,7 @@ var lan_zh = {
   position_get_list_success:'仓位列表获取成功',
   position_get_list_fail: '仓位列表获取失败',
   position_all:"所有仓位",
- 
+  position_qrcode: "仓位二维码",
 
   product_list:"产品列表",
   product_inventory:"产品库存",
@@ -144,14 +146,14 @@ var lan_zh = {
   setting_tabs: ["个人", "公司", "店铺", "岗位"],
   no_result:"无结果",
   this_warehouse:"本仓库",
+  this_position: "本货架",
+  no_data: "无数据",
   this_position:"本货架",
-
   audit:"审核",
-
   staffing:"分配人员",
-
   add:"增加",
   remove:"移除"
+
 
 }
 

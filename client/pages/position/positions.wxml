@@ -6,7 +6,7 @@
     <view class="page__bd">
       <view class="weui-cells weui-cells_after-title">
 
-        <view bindtap='showQrCode' data-positionid="{{item.id}}" class="weui-cell" wx:for="{{positionList}}">
+        <view bindtap='showQrCode' data-positionid="{{item.id}}" data-shopname="{{item.shopName}}" data-storename="{{item.storeName}}" data-positionname="{{item.no}}" class="weui-cell" wx:for="{{positionList}}">
           <view class="weui-cell__bd">{{item.no}}</view>
           <view class="weui-cell__ft">
             <image class="icon-image" src="../../img/scan.png"></image>

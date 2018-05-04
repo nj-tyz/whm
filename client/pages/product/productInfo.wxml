@@ -1,51 +1,19 @@
 <view class="page">
   <view class="page__bd">
-  <!--
-    <view class="weui-search-bar">
-      <view class="weui-search-bar__form">
-        <view class="weui-search-bar__box">
-          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="{{currentLanguage.Please_enter_a_barcode_name}}" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-            <icon type="clear" size="14"></icon>
-          </view>
-        </view>
-        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-          <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">{{currentLanguage.Please_enter_a_barcode_name}}</view>
-        </label>
-      </view>
-      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">{{currentLanguage.cancel}}</view>
 
-      <image bindtap="scanCode" style="margin-left:20rpx;margin-top:10rpx;margin-right:10rpx" class="icon-40" src="../../img/scan.png" />
-
-    </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0&&correlationData.length>0}}">
-      <navigator data-barcode="{{item.barcode}}" bindtap="show" wx:for="{{correlationData}}" url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <view>{{item.barcode}}</view>
-          <view>{{item.name}}</view>
-        </view>
-      </navigator>
-    </view>
-
--->
     <view hidden="{{inputVal.length > 0||correlationData.length>0||!currentProduct.id}}">
 
       <view class="weui-cells__title" wx:if="{{currentProduct.img != ''}}" bindtap="doUpload">
-        <image src="{{currentProduct.img}}" style='width:100%'  mode="widthFix" ></image>
+        <image src="{{currentProduct.img}}" style='width:100%' mode="widthFix"></image>
       </view>
       <view class="weui-cells__title" wx:else bindtap="doUpload">
-        <image src="../../img/img.png" style='width:100%'  mode="widthFix" ></image>
+        <image src="../../img/img.png" style='width:100%' mode="widthFix"></image>
       </view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <view> {{currentProduct.name}}</view>
-            <view style="font-size: 13px;color: #888888;">${{currentProduct.price}}</view>
+            <view class="wx-30-text"> {{currentProduct.name}}</view>
+            <view class="wx-40-text wx-text-success">$ {{currentProduct.price}}</view>
           </view>
         </view>
       </view>
@@ -67,37 +35,78 @@
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
         <view class="weui-tab__panel">
-          <view class="weui-tab__content" wx:if="{{chartType==0}}">
+
+          <view class="weui-tab__content page__bd wbg wx-25-text" style="" wx:if="{{chartType==0}}">
+            <view class="weui-cell" wx:if="{{currentProduct.inventoryInPosition.length==0}}">
+              <view class="weui-cell__bd">
+                <view class="">{{currentLanguage.no_data}}</view>
+              </view>
+            </view>
             <view class="weui-cell" wx:for="{{currentProduct.inventoryInPosition}}">
               <view class="weui-cell__bd">
-                <view class="wx-30-text">{{currentLanguage.out_put_warehouse}}:{{item.storeName}}</view>
-                <view class="wx-30-text">{{currentLanguage.out_put_position}}:{{item.positionName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.out_put_warehouse}}:</text>
+                  <text class="weui-flex__item ">{{item.storeName}}</text>
+                </view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.out_put_position}}:</text>
+                  <text class="weui-flex__item ">{{item.positionName}}</text>
+                </view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.inventory}}:</text>
+                  <text class="weui-flex__item  wx-text-primary">{{item.inventoryCount}}</text>
+                </view>
               </view>
             </view>
           </view>
 
 
-          <view class="weui-tab__content" wx:if="{{chartType==1}}">
+          <view class="weui-tab__content page__bd wbg wx-25-text" wx:if="{{chartType==1}}">
+            <view class="weui-cell" wx:if="{{currentProduct.inventoryInStoreResult.length==0}}">
+              <view class="weui-cell__bd">
+                <view class="">{{currentLanguage.no_data}}</view>
+              </view>
+            </view>
             <view class="weui-cell" wx:for="{{currentProduct.inventoryInStoreResult}}">
               <view class="weui-cell__bd">
-                <view class="wx-30-text">{{currentLanguage.out_put_warehouse}}:{{item.storeName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.out_put_warehouse}}:</text>
+                  <text class="weui-flex__item ">{{item.storeName}}</text>
+                </view>
+
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.inventory}}:</text>
+                  <text class="weui-flex__item  wx-text-primary">{{item.inventoryCount}}</text>
+                </view>
+
               </view>
             </view>
           </view>
 
 
-          <view class="weui-tab__content" wx:if="{{chartType==2}}">
+          <view class="weui-tab__content page__bd wbg wx-25-text" wx:if="{{chartType==2}}">
+            <view class="weui-cell" wx:if="{{currentProduct.inventoryInShopResult.length==0}}">
+              <view class="weui-cell__bd">
+                <view class="">{{currentLanguage.no_data}}</view>
+              </view>
+            </view>
             <view class="weui-cell" wx:for="{{currentProduct.inventoryInShopResult}}">
               <view class="weui-cell__bd">
-                <view class="wx-30-text">{{currentLanguage.shop}}:{{item.shopName}}</view>
-                <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.inventoryCount}}</view>
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.shop}}:</text>
+                  <text class="weui-flex__item ">{{item.shopName}}</text>
+                </view>
+
+                <view class=" wx-flex">
+                  <text class="weui-flex__item  cg mr-10">{{currentLanguage.inventory}}:</text>
+                  <text class="weui-flex__item  wx-text-primary">{{item.inventoryCount}}</text>
+                </view>
+
               </view>
             </view>
           </view>
 
-          <view class="weui-article" hidden="{{chartType==0}}">
+          <view class="weui-article" hidden="{{chartType!=20}}">
             <canvas style="width:{{imageWidth}}px;height:{{imageHeight}}px" canvas-id="mycanvas" disable-scroll="true"></canvas>
           </view>
         </view>

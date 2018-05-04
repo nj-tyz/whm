@@ -100,18 +100,16 @@ Page({
     var that = this
     //组合参数
     var params = {};
-    if (that.data.shopID) {
-      params.shopID = that.data.shopID;
-    }
-
-    if (that.data.storeID) {
-      params.storeID = that.data.storeID;
-    }
-
+    //此组合参数一定要注意
+    //产品,仓库,店铺
+    //如果有最小单位,则传最小单位,如果三个都传,返回的是店铺下的数据
     if (that.data.productID) {
       params.productID = that.data.productID;
+    } else if (that.data.storeID) {
+      params.storeID = that.data.storeID;
+    }else if (that.data.shopID) {
+      params.shopID = that.data.shopID;
     }
-
 
     util.showBusy(that.data.currentLanguage.loading);
 

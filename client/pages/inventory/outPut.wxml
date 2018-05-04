@@ -48,13 +48,13 @@
         <view class="weui-cell__bd" bindtap='scanProduct'>
           <view>
             <image wx:if="{{currentProduct.img}}" class="icon-image" src="{{currentProduct.img}}"></image>
-            <text wx:if="{{currentProduct.name}}">{{currentProduct.name}}</text>
+            <text class="wx-30-text" wx:if="{{currentProduct.name}}">{{currentProduct.name}}</text>
             <image wx:else class="icon-image" src="../../img/barcode.png"></image>
           </view>
 
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access " bindtap='selectProduct'>
-
+          <image class="icon-image" src="../../img/find.png"></image>
         </view>
       </view>
 
@@ -66,7 +66,7 @@
           <view class="weui-label">{{currentLanguage.quantity}}:</view>
         </view>
         <view class="weui-cell__bd">
-          <input bindinput="bingOptionCount" value="{{optionCount}}" class="weui-input" maxlength="3" type="number" placeholder="{{currentLanguage.enter_quantity}}" />
+          <input bindinput="bingOptionCount" value="{{optionCount}}" class="weui-input" maxlength="3" type="number" bindfocus="checkNumber"  placeholder="{{currentLanguage.enter_quantity}}" />
         </view>
       </view>
     </view>

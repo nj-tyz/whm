@@ -260,6 +260,15 @@ Page({
       "optionCount": e.detail.value
     })
   },
+  //修改数字
+  checkNumber: function (e) {
+    if (e.detail.value == 0) {
+      this.setData({
+        "optionCount": ""
+      })
+    }
+  },
+
   //提交表单
   submitForm: function () {
     var that = this;
@@ -301,7 +310,7 @@ Page({
           //重新查库存
           that.getInventory();
         } else {
-          util.showSuccess(that.data.currentLanguage.success);
+          util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.request_success);
           console.log('更新库存提交成功', result);
           //提交成功后初始化数据
           that.init()
@@ -324,6 +333,9 @@ Page({
     wx.navigateTo({
       url: '../product/products?navigationBarTitle=SKU&shopID=' + that.data.shopID + "&isselect=" + true
     })
-  }
+  },
+
+
+
 
 })

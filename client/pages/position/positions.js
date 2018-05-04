@@ -134,7 +134,8 @@ Page({
   showQrCode: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../qrcode/show?navigationBarTitle=' + that.data.currentLanguage.position_add +'&storeID=' + that.data.storeID + "&id=" + event.currentTarget.dataset.positionid
+      url: '../qrcode/show?navigationBarTitle=' + that.data.currentLanguage.position_qrcode +'&storeID=' + that.data.storeID + "&id=" + event.currentTarget.dataset.positionid + "&shopName=" + event.currentTarget.dataset.shopname + "&storeName=" + event.currentTarget.dataset.storename + "&positionName=" + event.currentTarget.dataset.positionname
+
     })
   }
 })

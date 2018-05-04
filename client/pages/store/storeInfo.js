@@ -13,7 +13,8 @@ Page({
    */
   data: {
     objId: 0,
-    shopID:0,
+    shopID: 0,
+    shopName:"",
     currentObj: {},
     isLoadding: true,
     currentLanguage: {}
@@ -29,6 +30,7 @@ Page({
       title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
     this.setData({
+      shopName: options.shopName,
       objId: options.objId,
       shopID: options.shopID,
       currentLanguage: getCurrentLanguage()
@@ -125,7 +127,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-   
+
   },
 
   /**
@@ -138,9 +140,11 @@ Page({
   showAllStorePosition: function (event) {
 
     var that = this;
-   
+
     wx.navigateTo({
-      url: '../position/positions?navigationBarTitle=' + that.data.currentLanguage.position_list +'&storeID=' + that.data.objId + "&shopID=" + that.data.shopID
+
+      url: '../position/positions?navigationBarTitle='+ that.data.currentLanguage.position_list +'&storeID=' + that.data.objId + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName
+
     })
   },
 
@@ -148,7 +152,8 @@ Page({
   showAllInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name +" "+ that.data.currentLanguage.inventory +'&storeID=' + that.data.objId
+ url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name +" "+ that.data.currentLanguage.inventory +'&storeID=' + that.data.objId + '&shopID=' + that.data.shopID
+
     })
   },
 

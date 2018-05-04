@@ -149,6 +149,7 @@ Page({
   //查询产品
   search: function () {
     var that = this;
+    console.log("aaa" + that.data.shopID)
     var options = {
       url: config.service.findPosition,
       login: true,
@@ -195,11 +196,12 @@ Page({
       url: config.service.getPosition,
       login: true,
       data: {
-        positionId: positionId
+        positionId: positionId,
+        shopId: that.data.shopID
       },
       success(result) {
         console.log('获取成功', result.data)
-        if (result && result.data && result.data.data) {
+        if (result.data.data.length > 0) {
           util.showSuccess(that.data.currentLanguage.success)
 
           console.log("获取数据", result.data.data[0]);
@@ -207,7 +209,7 @@ Page({
             currentPosition: result.data.data[0]
           })
         } else {
-          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.failed_query);
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.no_data);
         }
 
       },

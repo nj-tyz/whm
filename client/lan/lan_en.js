@@ -12,6 +12,7 @@ var lan_en = {
   loading: "Loading",
   load_success: "Load Successfully",
   load_fail: "Load Failed",
+
   success:"Success",
   fail:"Fail",
   shop: "Shop",
@@ -31,6 +32,7 @@ var lan_en = {
   price: "Price",
   submit: "Submit",
   submiting: "Submiting...",
+
   submit_fail: "Submission Failed",
 
   system_prompt: "Hint",
@@ -85,6 +87,7 @@ var lan_en = {
   position_get_list_success: 'Success',
   position_get_list_fail: 'Fail',
   position_all: "All Position",
+  position_qrcode: "Qrcode of Position",
 
 
   product_list: "Product List",
@@ -137,6 +140,7 @@ var lan_en = {
   store_load_error1: "The warehouse is not in this shop, please choose the other shop!",
   store_all: "All Warehouse",
 
+
   shelf_distribution: "Shelf Distribution",
   warehouse_distribution: "Warehouse Distribution",
   shop_distribution: "Shop Distribution",
@@ -150,6 +154,7 @@ var lan_en = {
   staffing:"Staffing",
   add: "Add",
   remove: "Remove"
+
 }
 
 module.exports = lan_en;

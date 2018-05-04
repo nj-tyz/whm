@@ -749,8 +749,8 @@
     },
     /**
      * 新增$this参数，传入组件的this,兼容在组件中生成
-     */ 
-    draw: function (str, canvas, cavW, cavH, $this, ecc) {
+     */
+    draw: function (str, canvas, cavW, cavH, text, $this, ecc) {
       var that = this;
       ecclevel = ecc || ecclevel;
       canvas = canvas || _canvas;
@@ -764,7 +764,7 @@
 
       var frame = that.getFrame(str),
         // 组件中生成qrcode需要绑定this 
-        ctx = wx.createCanvasContext(canvas,$this),
+        ctx = wx.createCanvasContext(canvas, $this),
         px = Math.round(size / (width + 8));
       var roundedSize = px * (width + 8),
         offset = Math.floor((size - roundedSize) / 2);
@@ -773,6 +773,12 @@
       ctx.setFillStyle('#ffffff')
       ctx.fillRect(0, 0, cavW, cavW);
       ctx.setFillStyle('#000000');
+      
+      //增加文字显示 add by daodou
+      ctx.font = "20px Arial";
+      ctx.fillText(text, cavW / 2 - ctx.measureText(text).width / 2, cavW-20 );
+
+
       for (var i = 0; i < width; i++) {
         for (var j = 0; j < width; j++) {
           if (frame[j * width + i]) {
