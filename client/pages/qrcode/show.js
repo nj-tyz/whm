@@ -1,6 +1,8 @@
 // pages/main/index.js
 var QR = require("../../lib/qrcode.js");
+var getCurrentLanguage = require('../../lan/currentLanguage')
 Page({
+
   data: {
     canvasHidden: false,
     maskHidden: true,
@@ -17,6 +19,7 @@ Page({
     this.setData({
       text: options.shopName + "-" + options.storeName + "-" + options.positionName,
       placeholder: "positionID:" + options.id
+
     });
 
 

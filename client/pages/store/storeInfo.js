@@ -142,7 +142,9 @@ Page({
     var that = this;
 
     wx.navigateTo({
-      url: '../position/positions?navigationBarTitle=仓位列表&storeID=' + that.data.objId + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName
+
+      url: '../position/positions?navigationBarTitle='+ that.data.currentLanguage.position_list +'&storeID=' + that.data.objId + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName
+
     })
   },
 
@@ -150,7 +152,8 @@ Page({
   showAllInventory: function (event) {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name + ' 库存&storeID=' + that.data.objId + '&shopID=' + that.data.shopID
+ url: '../inventory/inventorys?navigationBarTitle=' + that.data.currentObj.name +" "+ that.data.currentLanguage.inventory +'&storeID=' + that.data.objId + '&shopID=' + that.data.shopID
+
     })
   },
 

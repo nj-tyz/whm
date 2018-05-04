@@ -24,14 +24,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
-    })
     this.setData({
       shopID: options.shopID,
       shopName: options.shopName,
       currentLanguage: currentLanguage()
     });
+    var that= this;
+    wx.setNavigationBarTitle({
+      title: options.navigationBarTitle  || this.data.currentLanguage.position_navigation_bar_title
+    })
 
 
     //获取门店下的所有仓库数据
@@ -150,7 +151,7 @@ Page({
   addStore: function () {
     var that = this;
     wx.navigateTo({
-      url: '../store/addStore?navigationBarTitle=' + that.data.shopName + '增加仓库&shopID=' + that.data.shopID
+      url: '../store/addStore?navigationBarTitle=' + that.data.shopName + that.data.currentLanguage.warehouse_add+'&shopID=' + that.data.shopID
     })
   },
   //跳转到仓库明细
@@ -158,7 +159,7 @@ Page({
     var that = this;
     console.log(that.data);
     wx.navigateTo({
-      url: '../store/storeInfo?navigationBarTitle=仓库明细&objId=' + event.currentTarget.dataset.id + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName + "&storeName=" + event.currentTarget.dataset.name
+      url: '../store/storeInfo?navigationBarTitle='+that.data.currentLanguage.warehouse_detail+'&objId=' + event.currentTarget.dataset.id + "&shopID=" + that.data.shopID + "&shopName=" + that.data.shopName + "&storeName=" + event.currentTarget.dataset.name
     })
   },
   loadmore: function () {
@@ -174,7 +175,7 @@ Page({
     console.log("stores.findStore:" + that.data.shopID)
     //跳转到仓库界面
     wx.navigateTo({
-      url: '../store/findStore?navigationBarTitle=查找仓位&shopId=' + that.data.shopID
+      url: '../store/findStore?navigationBarTitle=' + that.data.currentLanguage.position_search + '&shopId=' + that.data.shopID
     })
   }
 

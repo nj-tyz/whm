@@ -2,8 +2,8 @@
 <view class="container-box">
    <view class="weui-msg">
     <view class="weui-msg__text-area">
-      <view class="weui-msg__title">货架二维码</view>
-      <view class="weui-msg__desc">请点击二维码进行保存,打印并张贴到对应货架
+      <view class="weui-msg__title">{{currentLanguage.qrcode_goods_shelf}}</view>
+      <view class="weui-msg__desc">{{currentLanguage.qrcode_goods_shelf_info1}}
       </view>
     </view>
   </view>
@@ -14,7 +14,7 @@
     </view>
     <form bindsubmit="formSubmit">
        
-        <button formType="submit" class="mybtn" type="primary">关闭</button>
+        <button formType="submit" class="mybtn" type="primary">{{currentLanguage.close}}</button>
     </form>
 </view>
 <view hidden="{{maskHidden}}" class="mask"></view>
