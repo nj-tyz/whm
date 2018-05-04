@@ -4,6 +4,8 @@ const userutil = require('./userutil.js')
 
 //获取所有库存
 //可以是商店,仓库,产品
+////此组合参数一定要注意
+//如果有最小单位,前台传最小单位,如果三个都传,返回的是店铺下的数据
 async function list(ctx, next) {
    var shopID = ctx.query.shopID||0;
   var storeID = ctx.query.storeID||0;
