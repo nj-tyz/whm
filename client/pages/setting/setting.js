@@ -2,7 +2,7 @@ var currentLanguage = require('../../lan/currentLanguage')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var sliderWidth = 64; // 需要设置slider的宽度，用于计算中间位置
 
 Page({
   data: {
@@ -11,6 +11,7 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+    sliderWidth:16,
     pageHeight: 0,
     inputShowed: false,
     inputVal: "",
@@ -49,7 +50,7 @@ Page({
         });
       }
     });
-    //console.log(this.data.sliderLeft);
+    
 
 
 
