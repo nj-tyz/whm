@@ -3,8 +3,8 @@ var lan_en = {
   name: "Name",
   product: "Product",
   serial_number: "NO.",
-  in_put: "Store",
-  out_put: "Deliver",
+  in_put: "Transfer In",
+  out_put: "Transfer Out",
   
   address: "Address",
   out_in_put: "Transfer In/Out",
