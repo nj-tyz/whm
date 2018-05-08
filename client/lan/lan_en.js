@@ -88,6 +88,7 @@ var lan_en = {
   position_get_list_fail: 'Fail',
   position_all: "All Position",
   position_qrcode: "Qrcode of Position",
+  input_position: "Please enter the position name!",
 
 
   product_list: "Product List",
