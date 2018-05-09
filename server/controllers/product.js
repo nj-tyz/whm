@@ -117,6 +117,7 @@ async function add(ctx, next) {
   var name = ctx.query.name;
   var img = ctx.query.img;
   var price = ctx.query.price;
+  var currencyType = ctx.query.currencyType;
   console.log(ctx.query);
 
 
@@ -134,7 +135,7 @@ async function add(ctx, next) {
 
 
 
-  var result =  await query("insert into tb_product(name,barcode,img,price,company,shop) values(?,?,?,?,?,?)",[name,barcode,img,price,company,shop]);
+  var result = await query("insert into tb_product(name,barcode,img,price,company,shop,currencyType) values(?,?,?,?,?,?,?)", [name, barcode, img, price, company, shop, currencyType]);
  
   ctx.state.data = result;
 }

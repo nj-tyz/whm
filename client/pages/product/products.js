@@ -26,7 +26,8 @@ Page({
     shopName: "",
     shoreName: "",
     productList: [],
-    currentLanguage: {}
+    currentLanguage: {},
+    currencyType: '$'
   },
 
   showInput: function () {
