@@ -7,14 +7,8 @@
           <view class="weui-label">{{currentLanguage.out_put_type}}:</view>
         </view>
         <view class="weui-cell__bd">
-          <radio-group class="radio-group" bindchange="radioChange">
-            <radio class="radio" wx:key="optionType" value="in" checked="checked">
-              <text>{{currentLanguage.in_put}}</text>
-            </radio>
-            <radio class="radio" wx:key="optionType" value="out" style='margin-left:50rpx' checked="">
-              <text>{{currentLanguage.out_put}}</text>
-            </radio>
-          </radio-group>
+            <text wx:if = "{{optionType=='in'}}">{{currentLanguage.in_put}}</text>
+            <text wx:else>{{currentLanguage.out_put}}</text>
         </view>
       </view>
 

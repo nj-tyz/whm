@@ -91,6 +91,7 @@ var lan_zh = {
   position_get_list_fail: '仓位列表获取失败',
   position_all:"所有仓位",
   position_qrcode: "仓位二维码",
+  input_position:"请输入仓位名称",
 
   product_list:"产品列表",
   product_inventory:"产品库存",

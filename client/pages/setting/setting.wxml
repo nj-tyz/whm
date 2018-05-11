@@ -13,11 +13,10 @@
 
 
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          No entries
-          <!--
-                  <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}"   background-size="cover"></image>  
+                  <image class="userinfo-avatar" src="{{userimg}}"   background-size="cover"></image>  
                   <view>
-                    <text class="userinfo-nickname">用户姓名</text>
+                    <text class="userinfo-nickname">{{username}}</text>
+                    <image  style='width:20rpx;height:20rpx;'  src="{{userimg}}" bindtap="modifyUsername"  background-size="cover"></image>  
                   </view>
 
                   <view class="usermotto">
@@ -25,11 +24,16 @@
                         <button type="primary" >OK</button>
                     </view>
                   </view>
--->
+
         </view>
 
         <view class="" hidden="{{activeIndex != 1}}">
-          <view class="doc-title">{{companyName}}</view>
+          <view class="doc-title">{{companyName}}
+            
+              <image bindtap="openQr" style="position:absolute;top: 20px;right:0px"class="icon-image" src="../../img/scan.png"></image>
+            
+          
+          </view>
           <!-- 
                     <view class="weui-search-bar">
                       <view class="weui-search-bar__form">
@@ -56,7 +60,7 @@
               <view class="weui-cell__bd">{{item.user_info.nickName}}</view>
               <view class="weui-cell__ft">
                 <button class="weui-btn mini-btn" data-useropenid="{{item.open_id}}" type="primary" size="mini" bindtap="auditUser" wx:if="{{item.company_reviewed == 0}}">{{currentLanguage.audit}}</button>
-
+                <button class="weui-btn mini-btn" data-useropenid="{{item.open_id}}" type="warn" size="mini" bindtap="removeUser" wx:if="{{item.company_reviewed == 1 && item.open_id != c_openId}}">{{currentLanguage.remove}}</button>
               </view>
             </view>
 

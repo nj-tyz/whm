@@ -96,14 +96,35 @@ async function optionInventory(ctx, next) {
 
   ctx.state.data = result;
 }
+async function listInventoryByPosition(ctx, next) {
+  var positionId = ctx.query.positionId;
+  var result = await query("SELECT   store. NAME AS storeName,   sposition. NO AS positionName,  product. NAME AS productName,   product.img AS img,   product.barcode AS barcode,   sum(inventory.count)AS count FROM   tb_inventory inventory LEFT JOIN tb_store_position sposition ON sposition.id = inventory.position LEFT JOIN tb_product product ON product.id = inventory.product LEFT JOIN tb_store store ON store.id = inventory.store LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE inventory.position=?  GROUP BY   inventory.product,  inventory.store,  inventory.position ORDER BY   store.id", [positionId]);
+ 
+  ctx.state.data = result;
+}
 
-
-
+async function deleteInventory(ctx, next) {
+  var shopID = ctx.query.shopID || 0;
+  var storeID = ctx.query.storeID || 0;
+  var positionID = ctx.query.positionID || 0;
+  var productID = ctx.query.productID || 0;
+  var result;
+  if (shopID != 0){
+    result = await query("DELETE FROM tb_inventory WHERE shop = ?;DELETE FROM tb_store_position  where shop = ?;DELETE FROM tb_store WHERE shop = ?;DELETE FROM tb_user_shop WHERE shop = ?;DELETE FROM tb_shop WHERE id = ?;", [shopID,shopID, shopID, shopID, shopID],true );
+  } else if (storeID != 0){
+    result = await query("DELETE FROM tb_inventory WHERE store = ?; DELETE FROM tb_store_position where store = ?;DELETE FROM tb_store WHERE id = ?;", [storeID, storeID, storeID], true);
+  } else if (positionID != 0){
+    result = await query("DELETE FROM tb_inventory where position = ? ;DELETE FROM tb_store_position WHERE id = ?;", [positionID, positionID], true);
+  }
+  ctx.state.data = result;
+}
 
 
 
 module.exports = {
   list,
   getBySidAndPid,
-  optionInventory
+  optionInventory,
+  deleteInventory,
+  listInventoryByPosition
 }

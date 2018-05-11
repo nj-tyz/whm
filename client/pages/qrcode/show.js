@@ -8,19 +8,36 @@ Page({
     maskHidden: true,
     imagePath: '',
     text: "",
-    placeholder: ''//默认二维码生成文本
+    placeholder: '',//默认二维码生成文本
+    currentLanguage:{},
+    qrcodeType:""
   },
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
-    })
-
-
+    var type = options.qrcodeType;
+    var that = this;
     this.setData({
-      text: options.shopName + "-" + options.storeName + "-" + options.positionName,
-      placeholder: "positionID:" + options.id
-
+      currentLanguage: getCurrentLanguage(),
     });
+    if (type === 'company'){
+      wx.setNavigationBarTitle({
+        title: that.data.currentLanguage.company +" "+ that.data.currentLanguage.qrcode
+      })
+      this.setData({
+        text: options.companyName,
+        placeholder: "companyId:" + options.companyId,
+        qrcodeType: type
+      });
+    }else{
+      wx.setNavigationBarTitle({
+        title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
+      })
+      this.setData({
+        text: options.shopName + "-" + options.storeName + "-" + options.positionName,
+        placeholder: "positionID:" + options.id
+
+      });
+    }
+
 
 
     // 页面初始化 options为页面跳转所带来的参数

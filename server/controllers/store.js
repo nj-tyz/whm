@@ -51,7 +51,22 @@ async function add(ctx, next) {
   ctx.state.data = result;
 }
 
+async function updateStoreInfo(ctx, next) {
+  var userinfo = await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  var openId = userinfo.openId;
+  
+  var id = ctx.query.id;
+  var no = ctx.query.no;
+  var name = ctx.query.name;
+  var address = ctx.query.address;
+  var img = ctx.query.img;
+  var shop = ctx.query.shop;
+  console.log(ctx.query);
+  var result = await query("update tb_store set no=?,name=?,address=?,img=?,openId=?,shop=?,company=? where id =?", [no, name, address, img, openId, shop, company,id]);
 
+  ctx.state.data = result;
+}
 
 
 
@@ -61,5 +76,6 @@ module.exports = {
   add,
   getById,
   getListByShop,
-  getone
+  getone,
+  updateStoreInfo
 }

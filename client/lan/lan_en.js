@@ -3,9 +3,11 @@ var lan_en = {
   name: "Name",
   product: "Product",
   serial_number: "NO.",
+
   in_put: "Store",
   out_put: "Deliver",
   company:"Company",
+
   
   address: "Address",
   out_in_put: "Transfer In/Out",
@@ -92,6 +94,7 @@ var lan_en = {
   position_get_list_fail: 'Fail',
   position_all: "All Position",
   position_qrcode: "Qrcode of Position",
+  input_position: "Please enter the position name!",
 
 
   product_list: "Product List",

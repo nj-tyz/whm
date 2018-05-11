@@ -34,10 +34,26 @@
 
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">{{currentLanguage.price}}$:</view>
+          <view class="weui-label">{{currentLanguage.price}}:</view>
         </view>
         <view class="weui-cell__bd">
           <input class="weui-input" maxlength="20" bindinput="bindChangePrice" value="{{price}}" placeholder="{{currentLanguage.input_price}}" />
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">货币类别:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <radio-group class="radio-group" bindchange="radioChange">
+            <radio class="radio"  value="$" checked="checked">
+              <text>$</text>
+            </radio>
+            <radio class="radio"  value="¥" style='margin-left:50rpx' checked="">
+              <text>¥</text>
+            </radio>
+          </radio-group>
         </view>
       </view>
     </view>

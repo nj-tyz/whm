@@ -40,8 +40,12 @@
       <view>{{currentLanguage.scan}}</view>
     </view>
     <view class="weui-flex__item" style='text-align:center' bindtap="outPut">
-      <text class="iconfont icon-churuku wx-120-text wx-text-primary"></text>
-      <view>{{currentLanguage.out_in_put}}</view>
+      <text class="iconfont .icon-chukudengji wx-120-text wx-text-primary"></text>
+      <view>{{currentLanguage.out_put}}</view>
+    </view>
+    <view class="weui-flex__item" style='text-align:center' bindtap="inPut">
+      <text class="iconfont icon-rukudengji wx-120-text wx-text-primary"></text>
+      <view>{{currentLanguage.in_put}}</view>
     </view>
   </view>
 </view>

@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="warn" size="93"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">{{title}}</view>
+      <view class="weui-msg__desc">{{content}}
+      </view>
+    </view>
+    <view class="weui-cell" wx:key="{{item.id}}" wx:for="{{inventoryList}}" >
+      <view class="weui-cell__hd">
+        <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;" mode="aspectFill"></image>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
+        <view class="wx-30-text">{{currentLanguage.product}}:{{item.storeName}}-{{item.positionName}}</view>
+        <view class="wx-30-text wx-text-primary">{{currentLanguage.inventory}}:{{item.count}}</view>
+      </view>
+      
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button bindtap="openWarn" class="weui-btn" type="warn">{{btn}}</button>
+      </view>
+    </view>
+
+  </view>
+</view>

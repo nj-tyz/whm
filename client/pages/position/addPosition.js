@@ -11,8 +11,8 @@ Page({
     no: "",
     storeID: 0,
     shopID: 0,
-    currentLanguage: {}
-
+    currentLanguage: {},
+    id:""
   },
 
   /**
@@ -20,15 +20,21 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.setNavigationBarTitle({
-      title: options.navigationBarTitle || "条码库存管理"
-    })
-    console.log(options.storeID);
-    this.setData({
+    var cz = options.cz
+    var params = {
       storeID: options.storeID || 0,
       shopID: options.shopID || 0,
       currentLanguage: getCurrentLanguage()
-    });
+    }
+    if (cz == 1){
+      params.id = options.id; 
+      params.no = options.no;
+    }
+    wx.setNavigationBarTitle({
+      title: options.navigationBarTitle || "条码库存管理"
+    })
+    
+    this.setData(params);
   },
 
   /**
@@ -90,13 +96,30 @@ Page({
   //提交表单
   submitForm: function () {
     var that = this;
-
     //校验数据完整
     if (!this.data.no || !this.data.storeID) {
       util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
       return;
     }
-
+    var parmas;
+    var url;
+    var content;
+    if(that.data.id !=""){
+      parmas={
+        id: that.data.id,
+        no: that.data.no,
+      }
+      url = config.service.updatePositionNo
+      content = that.data.currentLanguage.position_modify_success
+    }else{
+      parmas = {
+        no: that.data.no,
+        storeID: that.data.storeID,
+        shopID: that.data.shopID
+      };
+      url = config.service.addPosition
+      content = that.data.currentLanguage.position_add_success
+    }
 
 
 
@@ -104,19 +127,15 @@ Page({
     util.showBusy(that.data.currentLanguage.submiting)
     
     var options = {
-      url: config.service.addPosition,
+      url: url,
       login: true,
-      data:{
-        no: that.data.no,
-        storeID: that.data.storeID,
-        shopID: that.data.shopID
-      }, 
+      data: parmas, 
       
       success(result) {
 
         console.log('添加仓位成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.position_add_success + '&btn=' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + content + '&btn=' + that.data.currentLanguage.click_return
         })
 
 

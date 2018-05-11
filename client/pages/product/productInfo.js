@@ -16,7 +16,8 @@ Page({
     chartType: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    currentLanguage: {}
+    currentLanguage: {},
+    currencyType:'$'
   },
 
   changeChartType: function (event) {

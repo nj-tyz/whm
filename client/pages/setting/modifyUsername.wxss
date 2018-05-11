@@ -1,0 +1,17 @@
+.weui-icon-clear2 {
+  position:absolute;
+  top:0;
+  right: 0;
+  padding: 7px 8px;
+
+}
+
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 50%;
+    text-align: center
+}
+.mini-btn{
+    margin-right: 5px;
+}
