@@ -14,8 +14,7 @@ const { auth: { authorizationMiddleware, validationMiddleware } } = require('../
 // 登录接口
 router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态）
-router.get('/user/userInfo', validationMiddleware, controllers.user.userInfo)
-router.get('/user/modifyUsername',  controllers.user.modifyUsername)
+router.get('/user', validationMiddleware, controllers.user)
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中
@@ -42,9 +41,7 @@ router.get('/shop/findListByCurrentCompany', validationMiddleware, controllers.s
 router.get('/shop/shopUsers',  controllers.shop.shopUsers)
 router.get('/shop/updateShopUser', validationMiddleware, controllers.shop.updateShopUser)
 router.get('/shop/outShopUser', validationMiddleware, controllers.shop.outShopUser)
-router.get('/shop/getShopInfo', controllers.shop.getShopInfo)
-router.get('/shop/updateShopInfo', validationMiddleware, controllers.shop.updateShopInfo)
-router.get('/shop/deleteShop', validationMiddleware, controllers.shop.deleteShop)
+
 
 // --- 产品接口 --- //
 router.get('/product/list', controllers.product.list)
@@ -58,28 +55,24 @@ router.get('/store/getListByShop', controllers.store.getListByShop)
 router.get('/store/getone', controllers.store.getone)
 router.get('/store/add', validationMiddleware,controllers.store.add)
 router.get('/store/getById', controllers.store.getById)
-router.get('/store/updateStoreInfo', validationMiddleware,controllers.store.updateStoreInfo)
 
 // --- 仓位接口 --- //
 router.get('/position/list', controllers.position.list)
 router.get('/position/add', validationMiddleware,controllers.position.add)
 router.get('/position/find',validationMiddleware, controllers.position.find)
 router.get('/position/get',validationMiddleware, controllers.position.get)
-router.get('/position/update', controllers.position.update)
 
 // --- 库存接口 --- //
 router.get('/inventory/getBySidAndPid', controllers.inventory.getBySidAndPid)
 router.get('/inventory/list', controllers.inventory.list)
 router.get('/inventory/optionInventory', validationMiddleware,controllers.inventory.optionInventory)
-router.get('/inventory/deleteInventory', validationMiddleware, controllers.inventory.deleteInventory)
-router.get('/inventory/listInventoryByPosition', controllers.inventory.listInventoryByPosition)
 
 // --- 公司接口 --- //
 router.get('/company/getByName', controllers.company.getByName)
 router.get('/company/join', validationMiddleware, controllers.company.join)
 router.get('/company/companyUsers', validationMiddleware, controllers.company.companyUsers)
 router.get('/company/auditUser', validationMiddleware, controllers.company.auditUser)
-router.get('/company/removeUser',validationMiddleware, controllers.company.removeUser)
+
 
 
 module.exports = router
