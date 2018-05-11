@@ -5,7 +5,8 @@ var lan_zh = {
   serial_number:"编号",
   in_put:"入库",
   out_put:"出库",
-  
+  company:"公司",
+
   address:"地址",
   out_in_put:"出入库",
   inventory:"库存",
@@ -78,6 +79,9 @@ var lan_zh = {
 
   position_navigation_bar_title:"条码库存管理",
   position_search:"查找仓位",
+  position_modify: "修改仓位",
+  position_modify_success: "修改仓位成功",
+  position_modify_fail: "修改仓位失败",
   position_add:"增加仓位",
   position_add_success:"添加仓位成功",
   position_add_fail: "添加仓位失败",
@@ -122,6 +126,9 @@ var lan_zh = {
 
   setting_company:"请设置公司",
 
+  shop_modify:"修改店铺",
+  shop_modify_success:"修改店铺成功",
+  shop_modify_fail:"修改店铺失败",
   shop_add:"增加店铺",
   shop_add_success:"添加店铺成功",
   shop_add_fail: "添加店铺失败",
@@ -131,6 +138,9 @@ var lan_zh = {
   
 
   store:"仓库",
+  store_modify: "修改仓库",
+  store_modify_success: "修改仓库成功",
+  store_modify_fail: "修改仓库失败",
   store_add:"添加仓库",
   store_add_success:"添加仓库成功",
   store_add_fail:"添加仓库失败",
