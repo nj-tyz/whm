@@ -5,8 +5,8 @@
         <image bindtap='addPosition' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
       </view>
       <view class="weui-panel__bd" wx:if="positionList.length > 0">
-      
-          <!--
+
+        <!--
           <view bindtap='showQrCode' data-positionid="{{item.id}}" data-shopname="{{item.shopName}}" data-storename="{{item.storeName}}" data-positionname="{{item.no}}" class="weui-cell" wx:for="{{positionList}}">
             <view class="weui-cell__bd">{{item.no}}</view>
             <view class="weui-cell__ft">
@@ -15,33 +15,34 @@
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
   -->
-          <scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}' class='msg-list' bindscroll = 'onScroll'>
-            <view wx:for="{{positionList}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-              <view id='{{item.id}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend' data-id="{{item.id}}" data-name="{{item.name}}" bindtap='showQrCode'>
-                  
-                  <text class='user-name'>{{item.no}}</text>
-                  <image class='msg-img' src="../../img/scan.png"/>
-                  
+        <scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}' class='msg-list' bindscroll='onScroll'>
+          <view wx:for="{{positionList}}" wx:key="id" class='msg-item' animation='{{item.wrapAnimation}}'>
+            <view id='{{item.id}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend' bindtap='showQrCode' data-positionid="{{item.id}}" data-shopname="{{item.shopName}}"
+              data-storename="{{item.storeName}}" data-positionname="{{item.no}}" >
+
+              <text class='user-name'>{{item.no}}</text>
+              <image class='msg-img' src="../../img/scan.png" />
+
+            </view>
+            <view class='msg-menu'>
+
+              <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" c class='menu-delete' bindtap='deletePosition'>
+                删除
               </view>
-              <view class='msg-menu'>
-                
-                  <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" c class='menu-delete' bindtap='deletePosition' >
-                      删除
-                  </view>
-                  <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" class='menu-mark' bindtap='updatePosition' >
-                      修改
-                  </view>
-                  <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' >
-                    已默认
-                  </view>
-                  <view id='{{item.id}}' wx:else data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' >
-                    设默认
-                  </view>
+              <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" class='menu-mark' bindtap='updatePosition'>
+                修改
+              </view>
+              <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}' data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop'>
+                已默认
+              </view>
+              <view id='{{item.id}}' wx:else data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop'>
+                设默认
               </view>
             </view>
-        
-          </scroll-view>
-          
+          </view>
+
+        </scroll-view>
+
       </view>
     </view>
   </view>

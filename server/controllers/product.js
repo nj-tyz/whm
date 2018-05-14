@@ -92,7 +92,7 @@ async function getByBarCode(ctx, next) {
     //仓库库存分布
     //当前店铺的哪个仓库有货
     //仓库:数量
-     var inventoryInStoreResult =  await query("SELECT   store.NAME AS storeName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_store store ON inventory.store = store.id left join tb_product product on inventory.product= product.id WHERE   product.barcode = ? and inventory.shop = ? GROUP BY store.id order by inventoryCount desc",[barCode,shopID]);
+     var inventoryInStoreResult =  await query("SELECT   store.NAME AS storeName,   ifnull(sum(inventory.count), 0)AS inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_store store ON inventory.store = store.id left join tb_product product on inventory.product= product.id WHERE  product.barcode = ? and inventory.shop = ? GROUP BY store.id HAVING  inventoryCount > 0 order by inventoryCount desc",[barCode,shopID]);
     item.inventoryInStoreResult = inventoryInStoreResult;
   }
 
@@ -100,7 +100,7 @@ async function getByBarCode(ctx, next) {
      //货架库存分布
      //当前店铺的哪个货架上有货   
      //数据  仓库-货架:数量
-     var inventoryInStoreResult =  await query("SELECT  product.NAME productName,  sposition. NO positionName,   store. NAME storeName,  shop. NAME shopName,  inventory.count inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_product product ON inventory.product = product.id LEFT JOIN tb_store_position sposition ON inventory.position = sposition.id LEFT JOIN tb_store store ON sposition.store = store.id LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  product.barcode=? and inventory.shop = ? order by inventoryCount desc",[barCode,shopID]);
+     var inventoryInStoreResult =  await query("SELECT  product.NAME productName,  sposition. NO positionName,   store. NAME storeName,  shop. NAME shopName,  inventory.count inventoryCount FROM   tb_inventory inventory LEFT JOIN tb_product product ON inventory.product = product.id LEFT JOIN tb_store_position sposition ON inventory.position = sposition.id LEFT JOIN tb_store store ON sposition.store = store.id LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE  inventory.count>0 and product.barcode=? and inventory.shop = ? order by inventoryCount desc",[barCode,shopID]);
     item.inventoryInPosition = inventoryInStoreResult;
   }
 
