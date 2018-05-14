@@ -14,7 +14,9 @@ Page({
     img: "",
     address: "",
     cAddressLength: 0,
-    currentLanguage: {}
+    currentLanguage: {},
+    shopId:"",
+    cz:""
   },
 
   /**
@@ -25,6 +27,17 @@ Page({
       currentLanguage: currentLanguage()
     })
     var _that = this; 
+    var cz = options.cz;
+    if(cz == 1){
+      this.setData({
+        shopId: options.shopId,
+        cz:cz
+      })
+      this.loadShopInfo();
+
+    }
+
+
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || _that.data.currentLanguage.position_navigation_bar_title
     })
@@ -152,21 +165,31 @@ Page({
 
     //提交
     util.showBusy(that.data.currentLanguage.submiting)
+    var url;
+    var content;
+    if(that.data.cz == 1){
+      url = config.service.updateShopInfo 
+      content = that.data.currentLanguage.shop_modify_success;
+    }else{
+      url = config.service.addShop 
+      content = that.data.currentLanguage.shop_add_success;
+    }
 
     var options = {
-      url: config.service.addShop,
+      url: url,
       login: true,
       data: {
         no: that.data.no,
         name: that.data.name,
         address: that.data.address,
         img: that.data.img,
+        id: that.data.shopId
       },
       success(result) {
 
         console.log('添加店铺成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.shop_add_success + '&btn=' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + content + '&btn=' + that.data.currentLanguage.click_return
         })
 
 
@@ -180,5 +203,34 @@ Page({
     qcloud.request(options)
 
   },
+  loadShopInfo:function(){
+    util.showBusy(this.data.currentLanguage.loading)
+    var that = this;
+    var options = {
+      url: config.service.getShopInfo,
+      login: true,
+      data: {
+        id: that.data.shopId,
+      },
+      success(result) {
+        console.log(result.data.data);
+        var shopInfo = result.data.data[0];
+        that.setData({
+          name: shopInfo.name,
+          no: shopInfo.no,
+          img: shopInfo.img,
+          address: shopInfo.address,
+        })
+        util.showSuccess(that.data.currentLanguage.success)
+      //  wx.hideNavigationBarLoading() //完成停止加载
+       // wx.stopPullDownRefresh() //停止下拉刷新
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.submit_fail, error);
+        console.log('获取店铺失败', error);
+      }
+    }
+    qcloud.request(options)
+  }
 
 })

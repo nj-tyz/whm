@@ -1,5 +1,6 @@
 <view class="page">
 
+
   <!-- 用户登录测试 -->
   <view class="userinfo" bindtap="login">
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}" background-size="cover"></image>
@@ -65,6 +66,7 @@
         <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
       </view>
       <view class="weui-panel__bd" wx:if="{{shopList.length>0}}">
+        <!--
         <navigator url="" wx:for="{{shopList}}" data-shopid="{{item.id}}" data-shopname="{{item.name}}" bindtap='openOptions' class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" mode="aspectFill" src="{{item.img}}" />
@@ -75,6 +77,36 @@
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
+      -->
+        <scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}' class='msg-list' bindscroll = 'onScroll'>
+          
+          <view wx:for="{{shopList}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
+            <view id='{{item.id}}' class='msg' animation='{{item.animation}}'bindtap='showst' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend' data-shopid="{{item.id}}" data-shopname="{{item.name}}" bindtap='openOptions'>
+                <image class='header-img' src="{{item.img}}" ></image>
+                <text class='user-name'>{{item.name}}</text>
+                <text class='msg-text'>{{item.address}}</text>
+                
+            </view>
+            <view class='msg-menu'>
+              
+                <view id='{{item.id}}' data-shopid="{{item.id}}" data-shopname="{{item.name}}" class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
+                    删除
+                </view>
+                <view id='{{item.id}}' data-shopid="{{item.id}}" class='menu-mark' bindtap='updateShop' bindlongtap='onMarkMsgLongtap'>
+                    修改
+                </view>
+                <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-shopid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
+                   已默认
+                </view>
+                <view id='{{item.id}}' wx:else data-shopid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
+                   设默认
+                </view>
+            </view>
+          </view>
+        </scroll-view>
+       <!--
+-->
+
         <view class="weui-panel__ft">
           <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{!nomore}}" bindtap='loadmore'>
             <view class="weui-cell__bd bcenter iconfont icon-more"></view>
@@ -92,4 +124,5 @@
       -->
     </view>
   </view>
+
 </view>

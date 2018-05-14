@@ -13,7 +13,7 @@
         <view class="weui-cell">
           <view class="weui-cell__bd">
             <view class="wx-30-text"> {{currentProduct.name}}</view>
-            <view class="wx-40-text wx-text-success">$ {{currentProduct.price}}</view>
+            <view class="wx-40-text wx-text-success">{{currentProduct.currencyType}} {{currentProduct.price}}</view>
           </view>
         </view>
       </view>

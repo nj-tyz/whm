@@ -5,14 +5,14 @@
 // 此处主机域名修改成腾讯云解决方案分配的域名
 
 //tyzong正式服务
-var host ="https://whm.wenshanshan.cn";
+//var host ="https://whm.wenshanshan.cn";
 
 //测试环境
 //var host ="https://t0qyjxur.qcloud.la";
 
 //刀豆电脑
 //var host = 'https://a1c89d65.ngrok.io';
-
+var host = 'https://b00d4b96.ngrok.io';
 
 var config = {
 
@@ -24,8 +24,8 @@ var config = {
     loginUrl: `${host}/weapp/login`,
 
     // 获取当前用户信息，用于测试会话
-    getLoginUserUrl: `${host}/weapp/user`,
-
+    getLoginUserUrl: `${host}/weapp/user/userInfo`,
+    modifyUsername: `${host}/weapp/user/modifyUsername`,
 
     // 上传图片接口
     uploadUrl: `${host}/weapp/upload`,
@@ -38,7 +38,9 @@ var config = {
     shopUsers: `${host}/weapp/shop/shopUsers`,
     updateShopUser: `${host}/weapp/shop/updateShopUser`,
     outShopUser: `${host}/weapp/shop/outShopUser`,
-
+    getShopInfo: `${host}/weapp/shop/getShopInfo`,
+    updateShopInfo: `${host}/weapp/shop/updateShopInfo`,
+    deleteShop: `${host}/weapp/shop/deleteShop`,
 
     // 产品接口
     productList: `${host}/weapp/product/list`,
@@ -53,25 +55,27 @@ var config = {
     getStoreListByShop: `${host}/weapp/store/getListByShop`,
     addStore: `${host}/weapp/store/add`,
     findStore: `${host}/weapp/store/find`,
+    updateStoreInfo: `${host}/weapp/store/updateStoreInfo`,
 
     //仓位接口
     positionList: `${host}/weapp/position/list`,
     addPosition: `${host}/weapp/position/add`,
     findPosition: `${host}/weapp/position/find`,
     getPosition: `${host}/weapp/position/get`,
-
+    updatePositionNo: `${host}/weapp/position/update`,
     // 库存接口
     getInventoryBySidAndPid: `${host}/weapp/inventory/getBySidAndPid`,
     listInventory: `${host}/weapp/inventory/list`,
     optionInventory: `${host}/weapp/inventory/optionInventory`,
-
-
+    deleteInventory: `${host}/weapp/inventory/deleteInventory`,
+    listInventoryByPosition: `${host}/weapp/inventory/listInventoryByPosition`,
     //公司接口
     getCompanyByName: `${host}/weapp/company/getByName`,
     joinCompany: `${host}/weapp/company/join`,
     test: `${host}/weapp/company`,
     companyUsers: `${host}/weapp/company/companyUsers`, 
     auditUser: `${host}/weapp/company/auditUser`,
+    removeUser: `${host}/weapp/company/removeUser`,
 
   }
 };

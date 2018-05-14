@@ -60,5 +60,17 @@ var trim = (str) => {
   return str.replace(/(^\s*)|(\s*$)/g, "");
 }
 
+var getSystemInfo = function(){
+  var info = {};
+  wx.getSystemInfo({
+    success: function (res) {
+      info = res;
+      console.log(res.model)
+    }
+  })
+  return info;
+}
+
+
 module.exports = { formatTime, showBusy, hideBusy, showSuccess, showModel, showLoadding, hideLoadding, trim }
 

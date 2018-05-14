@@ -29,20 +29,21 @@ Page({
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
-    console.log(options.shopID);
+    console.log(options.optionType);
     this.setData({
       shopID: options.shopID,
+      optionType: options.optionType,
       currentLanguage: getCurrentLanguage()
     });
 
   },
 
-  radioChange: function (e) {
-    this.setData({
-      "optionType": e.detail.value
-    })
+ // radioChange: function (e) {
+ //   this.setData({
+ //     "optionType": e.detail.value
+ //   })
     //console.log(e.detail.value)
-  },
+  //},
 
 
 

@@ -4,8 +4,12 @@ const userutil = require('./userutil.js')
 async function list(ctx, next) {
   var userinfo =await userutil.get(ctx, next);
   var open_id = userinfo.openId;
+  var pageSize = (ctx.query.pageSize || 5) * 1;
+  var pageNo = (ctx.query.pageNo || 1) * 1;
+  var s_i = pageSize * pageNo - pageSize;
+  
   //只查询当前用户有权限的店铺
-  var result =  await query("select * from tb_shop where id in(select shop from tb_user_shop where open_id = ?)",[open_id]);
+  var result = await query("select * from tb_shop where id in(select shop from tb_user_shop where open_id = ? ) limit ?,?", [open_id, s_i, pageSize]);
   ctx.state.data=result;
 }
 
@@ -42,6 +46,34 @@ async function getone(ctx, next) {
   var item = result.length > 0 ? result[0] : {};
   //console.log(item);
   ctx.state.data = item;
+}
+
+async function getShopInfo(ctx, next){
+  var id = ctx.query.id;
+  var result = await query("SELECT * FROM tb_shop WHERE id = ?;", [id]);
+  ctx.state.data = result; 
+}
+
+async function updateShopInfo(ctx, next) {
+  var userinfo = await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  
+  var id = ctx.query.id;
+  var no = ctx.query.no;
+  var name = ctx.query.name;
+  var address = ctx.query.address;
+  var img = ctx.query.img;
+
+
+  var result = await query("UPDATE tb_shop set no=?,name=?,address=?,img=?,company=? WHERE id = ?", [no, name, address, img,company,id]);
+  ctx.state.data = result;
+}
+
+async function deleteShop(ctx, next) {
+  var shopID = ctx.query.shopID || 0;
+  var  result = await query("DELETE FROM tb_inventory WHERE shop = ?;DELETE FROM tb_store_position  where shop = ?;DELETE FROM tb_store WHERE shop = ?;DELETE FROM tb_user_shop WHERE shop = ?;DELETE FROM tb_shop WHERE id = ?;", [shopID, shopID, shopID, shopID, shopID], true);
+  
+  ctx.state.data = result;
 }
 
 async function shopUsers(ctx, next) {
@@ -84,5 +116,8 @@ module.exports = {
   findListByCurrentCompany,
   shopUsers,
   updateShopUser,
-  outShopUser
+  outShopUser,
+  getShopInfo,
+  updateShopInfo,
+  deleteShop
 }

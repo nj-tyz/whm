@@ -26,7 +26,8 @@ Page({
     shopName: "",
     shoreName: "",
     productList: [],
-    currentLanguage: {}
+    currentLanguage: {},
+    currencyType: '$'
   },
 
   showInput: function () {
@@ -190,7 +191,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '../product/productInfo?navigationBarTitle=产品库存&shopID=' + that.data.shopID + '&barcode=' + event.currentTarget.dataset.barcode
+        url: '../product/productInfo?navigationBarTitle=' + that.data.currentLanguage.product_inventory +'&shopID=' + that.data.shopID + '&barcode=' + event.currentTarget.dataset.barcode
       })
     }
   },
@@ -198,8 +199,9 @@ Page({
 
   //增加商品
   addProduct: function () {
+    var that = this;
     wx.navigateTo({
-      url: '../product/addProduct?navigationBarTitle=增加商品' + "&shopID=" + this.data.shopID
+      url: '../product/addProduct?navigationBarTitle=' + that.data.currentLanguage.product_add + "&shopID=" + this.data.shopID
     })
   },
   //获取所有产品

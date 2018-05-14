@@ -13,6 +13,7 @@ Page({
     barcode: "",
     price:0,
     shopID:0,
+    currencyType:'$',
     currentLanguage: {}
   },
 
@@ -27,7 +28,9 @@ Page({
       title: options.navigationBarTitle || "条码库存管理"
     })
     this.setData({
-      shopID: options.shopID || 0
+      shopID: options.shopID || 0,
+      currencyType: options.currencyType || '$',
+
     });
   },
 
@@ -134,10 +137,17 @@ Page({
     })
   },
  
+
+  radioChange: function (e) {
+    this.setData({
+      "currencyType": e.detail.value
+    })
+    console.log(this.data.currencyType)
+  },
   //提交表单
   submitForm: function () {
     var that = this;
-
+    console.log(this.data.currencyType);
     //校验数据完整
     if (!this.data.name || !this.data.barcode ) {
       util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
@@ -157,14 +167,15 @@ Page({
         barcode: that.data.barcode,
         img: that.data.img,
         price:that.data.price,
-        shopID: that.data.shopID
+        shopID: that.data.shopID,
+        currencyType: that.data.currencyType
       },
       success(result) {
         if (result.data.data.errocode == 1) {
           console.log(result);
           util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.Product_existed);
         } else {
-          console.log('添加商品成功', result);
+          console.log('添加商品成功', that.data.currencyType);
           wx.navigateTo({
           url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.product_add_success + '&btn=' + that.data.currentLanguage.click_return
           })

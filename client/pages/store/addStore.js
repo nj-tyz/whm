@@ -12,19 +12,30 @@ Page({
     name: "",
     no: "",
     img: "",
+    id:"",
     address: "",
     cAddressLength: 0,
     shop: 0,
-    currentLanguage: {}
+    currentLanguage: {},
+    cz:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var cz = options.cz;
+
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
+    if(cz == '1'){
+      this.setData({
+        id: options.storeID,
+        cz:cz
+      });
+      this.loadData();
+    }
 
     this.setData({
       shop: options.shopID || 0,
@@ -141,33 +152,42 @@ Page({
   //提交表单
   submitForm: function () {
     var that = this;
-
+    var url ;
+    var content;
+    var params = { 
+      name: that.data.name,
+      no: that.data.no,
+      img: that.data.img,
+      address: that.data.address,
+      shop: that.data.shop
+    }
     //校验数据完整
     if (!this.data.no || !this.data.name || !this.data.address || !this.data.img) {
       util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
       return;
     }
 
-
+    if(that.data.cz == '1'){
+      url = config.service.updateStoreInfo
+      content = that.data.currentLanguage.store_modify_success
+      params.id = that.data.id
+    }else{
+      content = that.data.currentLanguage.store_add_success
+      url = config.service.addStore
+    }
 
     //提交
     util.showBusy(that.data.currentLanguage.submiting)
 
     var options = {
-      url: config.service.addStore,
+      url: url,
       login: true,
-      data: {
-        name: that.data.name,
-        no: that.data.no,
-        img: that.data.img,
-        address: that.data.address,
-        shop: that.data.shop
-      },
+      data: params,
       success(result) {
 
         console.log('添加仓库成功', result);
         wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.store_add_success + '&btn=' + that.data.currentLanguage.click_return
+          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + content + '&btn=' + that.data.currentLanguage.click_return
         })
 
 
@@ -181,5 +201,30 @@ Page({
     qcloud.request(options)
 
   },
+  loadData:function(){
+    var that = this;
+    var options = {
+      url: config.service.getStoreById,
+      login: true,
+      data: {
+        id:that.data.id
+      },
+      success(result) {
+        console.log(result.data);
+        that.setData({
+          name: result.data.data.name,
+          no: result.data.data.no,
+          img: result.data.data.img,
+          address: result.data.data.address,
+          shop: result.data.data.shop,
+        })
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.submit_fail, error);
+        console.log('添加仓库失败', error);
+      }
+    }
+    qcloud.request(options)    
 
+  }
 })

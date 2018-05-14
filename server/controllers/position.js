@@ -84,12 +84,20 @@ async function get(ctx, next) {
   ctx.state.data = result;
 }
 
+async function update(ctx, next) {
+ 
+  var no = ctx.query.no;
+  var id = ctx.query.id;
+  var result = await query("update tb_store_position set no=?where id =?", [no, id]);
 
+  ctx.state.data = result;
+}
 
 
 module.exports = {
   add,
   list,
   find,
-  get
+  get,
+  update
 }

@@ -2,9 +2,11 @@
 <view class="container-box">
    <view class="weui-msg">
     <view class="weui-msg__text-area">
-      <view class="weui-msg__title">{{currentLanguage.qrcode_goods_shelf}}</view>
-      <view class="weui-msg__desc">{{currentLanguage.qrcode_goods_shelf_info1}}
+    
+      <view wx:if="{{qrcodeType!='company'}}" class="weui-msg__title">{{currentLanguage.qrcode_goods_shelf}}</view>
+      <view wx:if="{{qrcodeType!='company'}}" class="weui-msg__desc">{{currentLanguage.qrcode_goods_shelf_info1}}
       </view>
+    
     </view>
   </view>
 

@@ -12,6 +12,7 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     sliderWidth:16,
+    c_openId:"",
     pageHeight: 0,
     inputShowed: false,
     inputVal: "",
@@ -23,7 +24,10 @@ Page({
       { name: '岗位d', value: '3' }
     ],
     companyName:"",
-    currentLanguage:{}
+    companyId:"",
+    currentLanguage:{},
+    username:"",
+    userimg:""
   },
   onLoad: function (options) {
     wx.setNavigationBarTitle({
@@ -34,7 +38,11 @@ Page({
     this.setData({
       currentLanguage: cl,
       tabs: cl.setting_tabs,
-      companyName:options.companyName||""
+      companyName:options.companyName||"",
+      c_openId: options.openId,
+      companyId: options.companyId,
+      username: options.username,
+      userimg: options.img
     })
     //console.log(options.companyName);  
     this.companyUsers();
@@ -152,6 +160,28 @@ Page({
     qcloud.request(options)
 
   },
+  removeUser: function (event){
+    var that = this;
+    var openId = event.currentTarget.dataset.useropenid;
+    util.showBusy(that.data.currentLanguage.loading);
+    var options = {
+      url: config.service.removeUser,
+      login: true,
+      data: {
+        openId: openId
+      },
+      success(result) {
+        //重新加载数据
+        that.companyUsers();
+
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.request_fail, error);
+      }
+    }
+    qcloud.request(options)
+
+  },
   companyShopList: function () {
     var that = this;
     
@@ -175,6 +205,20 @@ Page({
     }
     qcloud.request(options)
 
+  },
+  openQr:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '../qrcode/show?companyId=' + that.data.companyId + "&qrcodeType=company&companyName=" + that.data.companyName 
+    })
+  },
+  //修改用户名
+  modifyUsername:function(){
+    var that = this;
+    console.log(1111);
+    wx.navigateTo({
+      url: './modifyUsername?username=' + that.data.username + "&openId=" + that.data.c_openId
+    })
   }
 
 });

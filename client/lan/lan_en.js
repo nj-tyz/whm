@@ -3,8 +3,11 @@ var lan_en = {
   name: "Name",
   product: "Product",
   serial_number: "NO.",
+
   in_put: "Store",
   out_put: "Deliver",
+  company:"Company",
+
   
   address: "Address",
   out_in_put: "Transfer In/Out",
@@ -79,6 +82,9 @@ var lan_en = {
 
   position_navigation_bar_title: "Barcode Inventory Management",
   position_search: "Search Position",
+  position_modify: "Modify Position",
+  position_modify_success: "Modify Position Successfully",
+  position_modify_fail: "Failed to Modify Positiony",
   position_add: "Add Position",
   position_add_success: "Add Position Successfully",
   position_add_fail: "Failed to Add Positiony",
@@ -88,6 +94,7 @@ var lan_en = {
   position_get_list_fail: 'Fail',
   position_all: "All Position",
   position_qrcode: "Qrcode of Position",
+  input_position: "Please enter the position name!",
 
 
   product_list: "Product List",
@@ -123,6 +130,10 @@ var lan_en = {
 
   setting_company: "Please set up the company",
 
+  
+  shop_modify:"Modify Shop",
+  shop_modify_success: "Modify Shop Successfully",
+  shop_modify_fail: "Failed to Modify Shop",
   shop_add: "Add Shop",
   shop_add_success: "Add Shop Successfully",
   shop_add_fail: "Failed to Add Shop",
@@ -132,6 +143,9 @@ var lan_en = {
 
 
   store: "Warehouse",
+  store_modify: "Modify Warehouse",
+  store_modify_success: "Modify Warehouse Successfully",
+  store_modify_fail: "Fail to Modify Warehouse",
   store_add: "Add Warehouse",
   store_add_success: "Add Warehouse Successfully",
   store_add_fail: "Fail to Add Warehouse",

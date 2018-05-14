@@ -6,10 +6,10 @@
     <view style="margin-top:50rpx" class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">{{currentLanguage.serial_number}}</view>
+          <view class="weui-label">{{currentLanguage.name}}</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" maxlength="40" bindinput="bindChangeNo" value="{{no}}" placeholder="{{currentLanguage.input_no}}" />
+          <input class="weui-input" maxlength="40" bindinput="bindChangeNo" value="{{no}}" placeholder="{{currentLanguage.input_position}}" />
         </view>
 
       </view>

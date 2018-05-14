@@ -229,11 +229,18 @@ Page({
       url: '../product/addProduct?shopID=' + this.data.shopID
     })
   },
-  //出入库
+  //出库
   outPut: function () {
     var that = this;
     wx.navigateTo({
-      url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.out_in_put+'&shopID=' + this.data.shopID
+      url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.out_in_put + '&shopID=' + this.data.shopID +'&optionType='+ 'out'
+    })
+  },
+  //入库
+  inPut: function () {
+    var that = this;
+    wx.navigateTo({
+      url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.out_in_put + '&shopID=' + this.data.shopID + '&optionType=' + 'in'
     })
   },
   //收银

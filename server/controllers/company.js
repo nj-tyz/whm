@@ -42,7 +42,14 @@ async function auditUser(ctx, next){
   ctx.state.data = "ok";
 }
 
+async function removeUser(ctx, next) {
+  var openId = ctx.query.openId;
+  var userinfo = await userutil.get(ctx, next);
+  var companyId = userinfo.company_id;
+  var result = await query("delete from cSessionInfo  where open_id = ? and company_id = ? ", [openId, companyId])
+  ctx.state.data = "ok";
+}
 
 module.exports = {
-  join, getByName, companyUsers, auditUser
+  join, getByName, companyUsers, auditUser, removeUser
 }

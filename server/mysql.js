@@ -8,15 +8,20 @@ const pool = mysql.createPool({
   port            : configs.mysql.port,  
   user            : configs.mysql.user,  
   password        : configs.mysql.pass, 
-  database        : configs.mysql.db
+  database        : configs.mysql.db,
+  multipleStatements: true
 })
 
-let query = function( sql, values ) {
+let query = function( sql, values, tran) {
   return new Promise(( resolve, reject ) => {
     pool.getConnection(function(err, connection) {
+      if (tran){
+        sql = "SET AUTOCOMMIT=0;" + sql +"commit;SET AUTOCOMMIT=1;";
+      }
       if (err) {
         reject( err )
       } else {
+        
         var log = connection.query(sql, values, ( err, rows) => {
 
           if ( err ) {
