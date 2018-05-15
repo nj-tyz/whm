@@ -31,10 +31,10 @@
                   <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" class='menu-mark' bindtap='updatePosition' >
                       修改
                   </view>
-                  <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' >
+                  <view id='{{item.id}}' wx:if='{{item.id == defaultPosition}}'data-id="{{item.id}}" class='menu-mark2' bindtap='cancelDefault' >
                     已默认
                   </view>
-                  <view id='{{item.id}}' wx:else data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' >
+                  <view id='{{item.id}}' wx:else data-id="{{item.id}}" class='menu-mark2' bindtap='setDefault' >
                     设默认
                   </view>
               </view>

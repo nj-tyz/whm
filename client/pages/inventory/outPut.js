@@ -35,7 +35,10 @@ Page({
       optionType: options.optionType,
       currentLanguage: getCurrentLanguage()
     });
-
+    var position = wx.getStorageSync("defaultPosition");
+    if (position != ''){
+      this.getPositionById(position);
+    }
   },
 
  // radioChange: function (e) {
@@ -137,40 +140,43 @@ Page({
 
         console.log('仓库扫码得到id', id)
 
-
+        this.getPositionById(id);
         //通过id获取仓库
-        util.showBusy(this.data.currentLanguage.loading)
-        var that = this
-        var options = {
-          url: config.service.getStore,
-          login: true,
-          data: {
-            id: id
-          },
-          success(result) {
-            util.showSuccess(that.data.currentLanguage.success)
-            console.log('仓库获取成功', result.data.data)
-            if (result.data.data.shop != that.data.shopID) {
-              util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.store_load_error1);
-              return;
-            } else {
-              that.setData({
-                currentStore: result.data.data
-              })
-              //查询本仓本品库存
-              that.getInventory();
-            }
-          },
-          fail(error) {
-            util.showModel(that.data.currentLanguage.fail, error);
-            console.log('仓库获取失败', error);
-          }
-        }
-        qcloud.request(options)
+        
       }
     })
   },
-
+  //通过id获取仓位
+  getPositionById:function(id){
+    util.showBusy(this.data.currentLanguage.loading)
+    var that = this
+    var options = {
+      url: config.service.getStore,
+      login: true,
+      data: {
+        id: id
+      },
+      success(result) {
+        util.showSuccess(that.data.currentLanguage.success)
+        console.log('仓库获取成功', result.data.data)
+        if (result.data.data.shop != that.data.shopID) {
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.store_load_error1);
+          return;
+        } else {
+          that.setData({
+            currentStore: result.data.data
+          })
+          //查询本仓本品库存
+          that.getInventory();
+        }
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.fail, error);
+        console.log('仓库获取失败', error);
+      }
+    }
+    qcloud.request(options)
+  },
   //通过条码获取产品
   getProductByBarcode(barCode) {
     //通过id获取商品
