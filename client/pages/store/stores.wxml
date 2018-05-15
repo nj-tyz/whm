@@ -23,7 +23,7 @@
 -->
         
           
-        <scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}' class='msg-list' bindscroll = 'onScroll'>
+        <scroll-view style='height:{{height}}px;' scroll-y='{{scrollY}}'  bindscrolltolower='{{nomore?"nomoreData":"loadmore"}}' class='msg-list' bindscroll = 'onScroll'>
           <view wx:for="{{storeList}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
             <view id='{{item.id}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend' data-id="{{item.id}}" data-name="{{item.name}}" bindtap='showStoreInfo'>
                 <image class='header-img' src="{{item.img}}" ></image>
@@ -34,10 +34,10 @@
             <view class='msg-menu'>
               
                 <view id='{{item.id}}' data-storeid="{{item.id}}" data-storename="{{item.name}}" class='menu-delete' bindtap='deleteStore' >
-                    删除
+                    {{currentLanguage.sdelete}}
                 </view>
                 <view id='{{item.id}}' data-storeid="{{item.id}}" class='menu-mark' bindtap='updateStoreInfo' bindlongtap='onMarkMsgLongtap'>
-                    修改
+                    {{currentLanguage.smodify}}
                 </view>
                <!--
                 <view id='{{item.id}}' wx:if='{{item.id == defaultStoreId}}'data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultStroe' bindlongtap='onMarkMsgLongtap'>
@@ -52,10 +52,11 @@
           </view>
        
         </scroll-view>
+         <!--
           <view class="weui-cell weui-cell_access weui-cell_link" wx:if="{{!nomore}}" bindtap='loadmore'>
             <view class="weui-cell__bd bcenter iconfont icon-more"></view>
           </view>
-        
+        -->
       </view>
       
     </view>

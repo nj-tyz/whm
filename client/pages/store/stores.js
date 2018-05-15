@@ -152,6 +152,7 @@ Page({
         console.log(height+"hhhhh"+that.data.height);
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({ scrollY: true })
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
@@ -192,11 +193,24 @@ Page({
   },
   loadmore: function () {
     var that = this;
+    that.setData({ scrollY:false})
     that.setData({
       pageNo: that.data.pageNo + 1
     })
     //重新查询后台
     that.getAllStore();
+  },
+  nomoreData:function(){
+    var that = this;
+    wx.showModal({
+      content: that.data.currentLanguage.end_of_list,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+         
+        }
+      }
+    });
   },
   findStore: function () {
     var that = this;

@@ -6,6 +6,10 @@ var lan_zh = {
   in_put:"入库",
   out_put:"出库",
   company:"公司",
+  smodify:"修改",
+  sdelete:"删除",
+  set_default: "设默认",
+  sdefault: "已默认",
 
   address:"地址",
   out_in_put:"出入库",
@@ -167,7 +171,9 @@ var lan_zh = {
   remove:"移除",
 
   modify_username: "修改用户名",
-  username:"用户名"
+  username:"用户名",
+
+  end_of_list: "没有更多了!"
 }
 
 module.exports = lan_zh;

@@ -26,16 +26,16 @@
               <view class='msg-menu'>
                 
                   <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" c class='menu-delete' bindtap='deletePosition' >
-                      删除
+                      {{currentLanguage.sdelete}}
                   </view>
                   <view id='{{item.id}}' data-id="{{item.id}}" data-no="{{item.no}}" class='menu-mark' bindtap='updatePosition' >
-                      修改
+                      {{currentLanguage.smodify}}
                   </view>
                   <view id='{{item.id}}' wx:if='{{item.id == defaultPosition}}'data-id="{{item.id}}" class='menu-mark2' bindtap='cancelDefault' >
-                    已默认
+                    {{currentLanguage.sdefault}}
                   </view>
                   <view id='{{item.id}}' wx:else data-id="{{item.id}}" class='menu-mark2' bindtap='setDefault' >
-                    设默认
+                    {{currentLanguage.set_default}}
                   </view>
               </view>
             </view>
