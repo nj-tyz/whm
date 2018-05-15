@@ -23,7 +23,7 @@
 
       <!--昵称,公司-->
       <view class="bcenter">
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <text class="userinfo-nickname">{{userInfo.username||userInfo.nickName}}</text>
       </view>
 
       <!--有公司-->
@@ -95,7 +95,7 @@
                 <view id='{{item.id}}' data-shopid="{{item.id}}" class='menu-mark' bindtap='updateShop' bindlongtap='onMarkMsgLongtap'>
                     修改
                 </view>
-                <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-shopid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
+                <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-shopid="{{item.id}}" class='menu-mark2' bindtap='cancelDefault' bindlongtap='onMarkMsgLongtap'>
                    已默认
                 </view>
                 <view id='{{item.id}}' wx:else data-shopid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>

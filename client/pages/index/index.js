@@ -300,6 +300,21 @@ Page({
     }
     
   },
+  cancelDefault:function(){
+    
+    try {
+      wx.setStorageSync('defaultShopId', '')
+      this.setData({
+        defaultShopId: ''
+      })
+    } catch (e) {
+    }
+  },
+
+
+
+
+
   // 以下为左移删除模块js
   ontouchstart: function (e) {
     if (this.showState === 1) {

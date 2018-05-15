@@ -2,7 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var currentLanguage = require('../../lan/currentLanguage')
-
+const app = getApp();
 
 Page({
 
@@ -19,15 +19,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: "修改用户名"
-    })
+    var that = this;
     this.setData({
       currentLanguage: currentLanguage(),
       username: options.username,
       openId: options.openId
     })
-    console.log(options.username + "+++++" + options.openId);
+    wx.setNavigationBarTitle({
+      title: that.data.currentLanguage.modify_username
+    })
+    
   },
 
   /**
@@ -83,6 +84,7 @@ Page({
     this.setData({
       username: e.detail.value
     })
+    console.log("用户名变化了"+ this.data.username);
   },
   clearInput:function(){
     this.setData({
@@ -91,6 +93,7 @@ Page({
   },
   modifyUsername:function(){
     var that= this;
+    console.log("修改用户名开始" + this.data.username);
     util.showBusy(that.data.currentLanguage.loading);
     var options = {
       url: config.service.modifyUsername,
@@ -100,8 +103,12 @@ Page({
         username:that.data.username
       },
       success(result) {
+        console.log(1111);
         util.showSuccess(that.data.currentLanguage.img_upload_success)
-
+        app.globalData.needRefresh = true;
+        wx.navigateBack({
+          delta: 2
+        })
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.request_fail, error);

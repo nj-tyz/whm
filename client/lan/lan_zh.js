@@ -24,6 +24,7 @@ var lan_zh = {
   input_name: "请输入名称",
   input_price: "请输入价格",
   input_address:"请输入地址",
+  input_username: "请输入用户名",
   price:"价格",
   submit:"提交",
   submiting:"提交中...",
@@ -163,9 +164,10 @@ var lan_zh = {
   audit:"审核",
   staffing:"分配人员",
   add:"增加",
-  remove:"移除"
+  remove:"移除",
 
-
+  modify_username: "修改用户名",
+  username:"用户名"
 }
 
 module.exports = lan_zh;
