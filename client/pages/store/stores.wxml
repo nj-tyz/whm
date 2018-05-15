@@ -39,12 +39,15 @@
                 <view id='{{item.id}}' data-storeid="{{item.id}}" class='menu-mark' bindtap='updateStoreInfo' bindlongtap='onMarkMsgLongtap'>
                     修改
                 </view>
-                <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
+               <!--
+                <view id='{{item.id}}' wx:if='{{item.id == defaultStoreId}}'data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultStroe' bindlongtap='onMarkMsgLongtap'>
                    已默认
                 </view>
-                <view id='{{item.id}}' wx:else data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
+                <view id='{{item.id}}' wx:else data-storeid="{{item.id}}" class='menu-mark2' bindtap='setDefaultStroe' bindlongtap='onMarkMsgLongtap'>
                    设默认
                 </view>
+              -->
+
             </view>
           </view>
        
