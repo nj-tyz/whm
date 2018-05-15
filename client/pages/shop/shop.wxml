@@ -15,7 +15,7 @@
           </view>
         </view>
         <view class="weui-flex__item" bindtap="showAllProduct" style='border-right:solid #eee 1px;border-left:solid #eee 1px'>
-          <view class="wx-60-text wx-text-primary">  
+          <view class="wx-60-text wx-text-primary">
             {{currentShop.productCount}}
           </view>
           <view class="wx-30-text">
@@ -47,6 +47,11 @@
       <text class="iconfont icon-rukudengji wx-120-text wx-text-primary"></text>
       <view>{{currentLanguage.in_put}}</view>
     </view>
+    <!--
+    <view class="weui-flex__item" style='text-align:center' bindtap="cashier">
+      <text class="iconfont icon-churuku wx-120-text wx-text-primary"></text>
+      <view>收银</view>
+    </view>-->
   </view>
 </view>
 

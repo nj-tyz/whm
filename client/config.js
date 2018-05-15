@@ -7,6 +7,9 @@
 //tyzong正式服务
 //var host ="https://whm.wenshanshan.cn";
 
+//测试环境
+//var host ="https://t0qyjxur.qcloud.la";
+
 //刀豆电脑
 //var host = 'https://a1c89d65.ngrok.io';
 var host = 'https://b00d4b96.ngrok.io';

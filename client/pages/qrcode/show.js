@@ -18,6 +18,7 @@ Page({
     this.setData({
       currentLanguage: getCurrentLanguage(),
     });
+    
     if (type === 'company'){
       wx.setNavigationBarTitle({
         title: that.data.currentLanguage.company +" "+ that.data.currentLanguage.qrcode
@@ -28,6 +29,7 @@ Page({
         qrcodeType: type
       });
     }else{
+      console.log(options);
       wx.setNavigationBarTitle({
         title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
       })

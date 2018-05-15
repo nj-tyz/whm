@@ -243,5 +243,14 @@ Page({
       url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.out_in_put + '&shopID=' + this.data.shopID + '&optionType=' + 'in'
     })
   },
+  //收银
+  cashier:function(){
+    var that = this;
+    wx.scanCode({
+      success: (res) => {
+        console.log('扫码结果', res)
+      }
+    });
+  }
 
 })
