@@ -6,7 +6,7 @@
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}" background-size="cover"></image>
 
 
-    <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="getUserInfo"> {{currentLanguage.index_logbtn}} </button>
+     <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> {{currentLanguage.index_logbtn}} </button>
 
 
 

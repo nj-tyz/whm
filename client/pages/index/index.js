@@ -21,7 +21,7 @@ Page({
     currentLanguage: {},
     height: 0,
     scrollY: true,
-    defaultShopId:""
+    defaultShopId: ""
   },
   swipeCheckX: 35, //激活检测滑动的阈值
   swipeCheckState: 0, //0未激活 1激活
@@ -33,7 +33,7 @@ Page({
   showState: 0, //0 未显示菜单 1显示菜单
   touchStartState: 0, // 开始触摸时的状态 0 未显示菜单 1 显示菜单
   swipeDirection: 0, //是否触发水平滑动 0:未触发 1:触发水平滑动 2:触发垂直滑动
-  
+
   onLoad: function () {
     var that = this;
     //获取设备的信息
@@ -44,24 +44,24 @@ Page({
     })
     this.pixelRatio = deviceInfo.pixelRatio;
     var windowHeight = deviceInfo.windowHeight;
-    var height = windowHeight *0.5 ;
-    
+    var height = windowHeight * 0.5;
+
     var defaultShopId = wx.getStorageSync('defaultShopId');
     //获取选择的语言
     var c_language = getCurrentLanguage();
     this.setData({
       currentLanguage: c_language,
-      defaultShopId: defaultShopId ||"",
+      defaultShopId: defaultShopId || "",
       height: height
     })
 
-    
+
 
     wx.setNavigationBarTitle({
       title: c_language.position_navigation_bar_title
     })
-    that.getUserInfo();
-    
+    //that.getUserInfo();
+
     //console.log(this.data.currentLanguage.name);
 
   },
@@ -101,70 +101,59 @@ Page({
 
     var that = this;
 
-    console.log("调用登陆接口qcloud.login");
-    // 调用登录接口
-    qcloud.login({
-      success(result) {
-        console.log("调用登陆接口qcloud.login over");
-        // 微信登陆完毕，请求用户信息接口获取
-        qcloud.request({
-          url: config.service.getLoginUserUrl,
-          login: true,
-          success(result1) {
-            console.log("getLoginUserUrl over");
-            //util.showSuccess('获取用户信息成功')
-            console.log("result1"+result1);
-            that.setData({
-              logged: true,
-              userInfo: result1.data.data
-            })
-            
-            if (!that.data.userInfo.company_name) {
-              //没有公司名
-              util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.no_company, function () {
-                //  跳转到公司设置界面
-                that.settingCompany();
-              });
 
-            } else if (that.data.userInfo.company_reviewed != 1) {
-              //有公司但是未审核
-              util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.company_no_check);
-            } else {
-              util.showSuccess(that.data.currentLanguage.load_success)
-              
-              var defaultShopId = wx.getStorageSync('defaultShopId');
-              console.log("defaultShopId____" + defaultShopId)
-              if ( defaultShopId != "") {
-                wx.hideNavigationBarLoading() //完成停止加载
-                wx.stopPullDownRefresh() //停止下拉刷新
-                wx.navigateTo({
-                  url: '../shop/shop?navigationBarTitle= &shopID=' + defaultShopId
-                })
-              }
-                //获取门店
-                that.getUserShop();
-              
-              
-            }
-
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.stopPullDownRefresh() //停止下拉刷新
-          },
-
-          fail(error) {
-            util.showModel(that.data.currentLanguage.request_fail, error)
-            console.log('request fail', error)
-
-
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.stopPullDownRefresh() //停止下拉刷新
-          }
+    // 微信登陆完毕，请求用户信息接口获取
+    qcloud.request({
+      url: config.service.getLoginUserUrl,
+      login: true,
+      success(result1) {
+        console.log("getLoginUserUrl over");
+        //util.showSuccess('获取用户信息成功')
+        console.log("result1" + result1);
+        that.setData({
+          logged: true,
+          userInfo: result1.data.data
         })
+
+        if (!that.data.userInfo.company_name) {
+          //没有公司名
+          util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.no_company, function () {
+            //  跳转到公司设置界面
+            that.settingCompany();
+          });
+
+        } else if (that.data.userInfo.company_reviewed != 1) {
+          //有公司但是未审核
+          util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.company_no_check);
+        } else {
+          util.showSuccess(that.data.currentLanguage.load_success)
+
+          var defaultShopId = wx.getStorageSync('defaultShopId');
+          console.log("defaultShopId____" + defaultShopId)
+          if (defaultShopId != "") {
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
+            wx.navigateTo({
+              url: '../shop/shop?navigationBarTitle= &shopID=' + defaultShopId
+            })
+          }
+          //获取门店
+          that.getUserShop();
+
+
+        }
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
 
       fail(error) {
-        util.showModel(that.data.currentLanguage.load_fail, error)
-        console.log('登录失败', error)
+        util.showModel(that.data.currentLanguage.request_fail, error)
+        console.log('request fail', error)
+
+
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     })
 
@@ -172,7 +161,7 @@ Page({
   //获取用户门店
   getUserShop: function () {
     var that = this
-    
+
     util.showBusy(that.data.currentLanguage.loading)
     var options = {
       url: config.service.shopList,
@@ -196,7 +185,7 @@ Page({
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
 
-        
+
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
@@ -237,10 +226,10 @@ Page({
     })
   },
   //修改app语言
-  changeLanguage:function(e){
-   // console.log(JSON.stringify(this));
-   var _that = this;
-   // console.log('picker发送选择改变，携带值为', e.detail.value)
+  changeLanguage: function (e) {
+    // console.log(JSON.stringify(this));
+    var _that = this;
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     _that.setData({
       index: e.detail.value
     })
@@ -275,20 +264,20 @@ Page({
     var companyId = that.data.userInfo.company_id;
     console.log(that.data.userInfo);
     wx.navigateTo({
-      url: '../setting/setting?&openId=' + openId + '&img=' + img +'&username='+username+'&companyName=' + companyName + '&companyId=' + companyId + "&navigationBarTitle=" + that.data.currentLanguage.settings
+      url: '../setting/setting?&openId=' + openId + '&img=' + img + '&username=' + username + '&companyName=' + companyName + '&companyId=' + companyId + "&navigationBarTitle=" + that.data.currentLanguage.settings
     })
 
   },
   //修改店铺
-  updateShop:function(e){
-    var that = this;   
+  updateShop: function (e) {
+    var that = this;
     wx.navigateTo({
-      url: '../shop/addShop?navigationBarTitle=' + that.data.currentLanguage.shop_modify + "&shopId=" + e.currentTarget.dataset.shopid+"&cz=1"
+      url: '../shop/addShop?navigationBarTitle=' + that.data.currentLanguage.shop_modify + "&shopId=" + e.currentTarget.dataset.shopid + "&cz=1"
     })
   },
   //设置默认店铺
-  setDefaultShop:function(e){
-    
+  setDefaultShop: function (e) {
+
     var id = e.currentTarget.dataset.shopid;
     console.log(id);
     try {
@@ -298,7 +287,7 @@ Page({
       })
     } catch (e) {
     }
-    
+
   },
   // 以下为左移删除模块js
   ontouchstart: function (e) {
@@ -411,7 +400,7 @@ Page({
       url: '../msg/delWarn?shopName=' + e.currentTarget.dataset.shopname + '&shopID=' + e.currentTarget.dataset.shopid
     })
     //this.deleteMsgItem(e);
-  }, 
+  },
   onDeleteMsgLongtap: function (e) {
     console.log(e);
   },
@@ -462,7 +451,7 @@ Page({
     param[indexString] = animation.export();
     this.setData(param);
   },
-  onScroll:function(){
+  onScroll: function () {
 
   }
 
