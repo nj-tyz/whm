@@ -102,7 +102,7 @@
 }
 .menu-mark2 {
   position: absolute;
-  width: 100rpx;
+  width: 150rpx;
   height: 148rpx;
   top:1rpx;
   right: 200rpx;

@@ -18,6 +18,7 @@ Page({
     currentLanguage: {},
     height: 0,
     scrollY: true,
+    defaultPosition :""
   },
 
   /**
@@ -167,6 +168,32 @@ Page({
 
     })
   },
+  //设置默认仓位
+  setDefault:function(e){
+    console.log(e);
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    try {
+      wx.setStorageSync('defaultPosition', id)
+      this.setData({
+        defaultPosition: id
+      })
+    } catch (e) {
+    }
+
+  },
+  cancelDefault: function () {
+    try {
+      wx.setStorageSync('defaultPosition', "")
+      this.setData({
+        defaultPosition: ""
+      })
+    } catch (e) {
+    }
+
+  },
+
+
   swipeCheckX: 35, //激活检测滑动的阈值
   swipeCheckState: 0, //0未激活 1激活
   maxMoveLeft: 185, //消息列表项最大左滑距离

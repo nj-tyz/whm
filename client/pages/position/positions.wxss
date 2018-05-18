@@ -46,7 +46,7 @@
 .msg-menu {
   position: absolute;
   width: 100%;
-  height: 150rpx;
+  height: 120rpx;
   left:0;
   top:0;
   z-index: 0;
@@ -55,34 +55,34 @@
 .menu-delete {
   position: absolute;
   width: 100rpx;
-  height: 148rpx;
+  height: 118rpx;
   top:1rpx;
   right: 0;
   background-color: rgb(255, 58, 50);
   color:#FFF;
   text-align: center;
-  line-height:150rpx;
+  line-height:125rpx;
 }
 
 .menu-mark {
   position: absolute;
   width: 100rpx;
-  height: 148rpx;
+  height: 118rpx;
   top:1rpx;
   right: 100rpx;
   background-color: rgb(200, 199, 205);
   color:#FFF;
   text-align: center;
-  line-height:150rpx;
+  line-height:125rpx;
 }
 .menu-mark2 {
   position: absolute;
-  width: 100rpx;
-  height: 148rpx;
+  width: 150rpx;
+  height: 118rpx;
   top:1rpx;
   right: 200rpx;
   background-color: #78c3ea;
   color:#FFF;
   text-align: center;
-  line-height:150rpx;
+  line-height:125rpx;
 }

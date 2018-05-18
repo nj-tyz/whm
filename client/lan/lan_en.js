@@ -7,7 +7,10 @@ var lan_en = {
   in_put: "Store",
   out_put: "Deliver",
   company:"Company",
-
+  smodify: "Mod",
+  sdelete: "Del",
+  set_default: "Set",
+  sdefault: "Def",
   
   address: "Address",
   out_in_put: "Transfer In/Out",
@@ -32,6 +35,7 @@ var lan_en = {
   input_name: "Please Enter a Name",
   input_price: "Please Enter the Price",
   input_address: "Please Enter the Address",
+  input_username: "Please Enter the Username",
   price: "Price",
   submit: "Submit",
   submiting: "Submiting...",
@@ -167,8 +171,12 @@ var lan_en = {
   audit:"Audit",
   staffing:"Staffing",
   add: "Add",
-  remove: "Remove"
+  remove: "Remove",
 
+  modify_username:"Modify Username",
+  username: "Username",
+
+  end_of_list:"End of List"
 }
 
 module.exports = lan_en;

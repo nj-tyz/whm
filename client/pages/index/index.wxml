@@ -23,7 +23,7 @@
 
       <!--昵称,公司-->
       <view class="bcenter">
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <text class="userinfo-nickname">{{userInfo.username||userInfo.nickName}}</text>
       </view>
 
       <!--有公司-->
@@ -90,16 +90,16 @@
             <view class='msg-menu'>
               
                 <view id='{{item.id}}' data-shopid="{{item.id}}" data-shopname="{{item.name}}" class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
-                    删除
+                    {{currentLanguage.sdelete}}
                 </view>
                 <view id='{{item.id}}' data-shopid="{{item.id}}" class='menu-mark' bindtap='updateShop' bindlongtap='onMarkMsgLongtap'>
-                    修改
+                    {{currentLanguage.smodify}}
                 </view>
-                <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-shopid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
-                   已默认
+                <view id='{{item.id}}' wx:if='{{item.id == defaultShopId}}'data-shopid="{{item.id}}" class='menu-mark2' bindtap='cancelDefault' bindlongtap='onMarkMsgLongtap'>
+                   {{currentLanguage.sdefault}}
                 </view>
                 <view id='{{item.id}}' wx:else data-shopid="{{item.id}}" class='menu-mark2' bindtap='setDefaultShop' bindlongtap='onMarkMsgLongtap'>
-                   设默认
+                   {{currentLanguage.set_default}}
                 </view>
             </view>
           </view>

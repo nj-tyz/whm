@@ -35,18 +35,20 @@ Page({
     })
     this.pixelRatio = deviceInfo.pixelRatio;
     
+    var defaultStoreId = wx.getStorageSync("defaultStore")
 
     this.setData({
       shopID: options.shopID,
       shopName: options.shopName,
       currentLanguage: currentLanguage(),
-     
+      defaultStoreId: defaultStoreId
     });
     var that= this;
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle  || this.data.currentLanguage.position_navigation_bar_title
     })
 
+    
 
     //获取门店下的所有仓库数据
     this.getAllStore();
@@ -150,6 +152,7 @@ Page({
         console.log(height+"hhhhh"+that.data.height);
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({ scrollY: true })
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.fail, error);
@@ -190,11 +193,24 @@ Page({
   },
   loadmore: function () {
     var that = this;
+    that.setData({ scrollY:false})
     that.setData({
       pageNo: that.data.pageNo + 1
     })
     //重新查询后台
     that.getAllStore();
+  },
+  nomoreData:function(){
+    var that = this;
+    wx.showModal({
+      content: that.data.currentLanguage.end_of_list,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+         
+        }
+      }
+    });
   },
   findStore: function () {
     var that = this;
@@ -219,10 +235,17 @@ Page({
       url: '../store/addStore?cz=1&navigationBarTitle=' + that.data.currentLanguage.store_modify + '&storeID=' + e.currentTarget.dataset.storeid
     })  
   },
+  setDefaultStroe:function(e){
+    wx.setStorageSync("defaultStore", e.currentTarget.dataset.storeid);
+    console.log(e.currentTarget.dataset.storeid);
+    this.setData({
+      defaultStoreId: e.currentTarget.dataset.storeid
+    })
+  },
   swipeCheckX: 35, //激活检测滑动的阈值
   swipeCheckState: 0, //0未激活 1激活
-  maxMoveLeft: 185, //消息列表项最大左滑距离
-  correctMoveLeft: 175, //显示菜单时的左滑距离
+  maxMoveLeft: 110, //消息列表项最大左滑距离
+  correctMoveLeft: 120, //显示菜单时的左滑距离
   thresholdMoveLeft: 75,//左滑阈值，超过则显示菜单
   lastShowMsgId: '', //记录上次显示菜单的消息id
   moveX: 0,  //记录平移距离

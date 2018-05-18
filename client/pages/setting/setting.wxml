@@ -16,15 +16,16 @@
                   <image class="userinfo-avatar" src="{{userimg}}"   background-size="cover"></image>  
                   <view>
                     <text class="userinfo-nickname">{{username}}</text>
-                    <image  style='width:20rpx;height:20rpx;'  src="{{userimg}}" bindtap="modifyUsername"  background-size="cover"></image>  
+                    <text class="iconfont icon-icon-xiugai wx-text-primary" bindtap='modifyUsername' style='width:10rpx;height:10rpx;' ></text> 
+                   
                   </view>
-
+                <!--
                   <view class="usermotto">
                     <view class="weui-btn-area">
                         <button type="primary" >OK</button>
                     </view>
                   </view>
-
+                -->
         </view>
 
         <view class="" hidden="{{activeIndex != 1}}">
@@ -53,7 +54,7 @@
                     </view>
                   -->
           <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell" wx:for="{{userList}}" wx:for-index="uindex">
+            <view class="weui-cell" wx:for="{{userList}}"wx:key="{{item.open_id}}" wx:for-index="uindex">
               <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                 <image src="{{item.user_info.avatarUrl}}" style="width: 50px; height: 50px; display: block" />
               </view>
@@ -92,7 +93,7 @@
                   </view>
                  -->
           <view class="weui-cells weui-cells_after-title">
-            <navigator url="settingUser?&shopId={{item.id}}" wx:for="{{shopList}}" wx:for-index="uindex" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="settingUser?&shopId={{item.id}}" wx:key="{{item.id}}" wx:for="{{shopList}}" wx:for-index="uindex" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
               <view class="weui-cell__hd">
                 <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
               </view>
