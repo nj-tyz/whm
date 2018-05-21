@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: "操作成功",
+    title: "Warning",
     content: "删除后以下库存将消失",
     btn: "点击返回",
     shopID:"",
@@ -19,18 +19,20 @@ Page({
     inventoryList: [],
     storeMap: {},
     positionId:"",
-    cz:""
+    cz:"",
+    currentLanguage:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var cz = options.cz
+    var cz = options.cz;
+    var language = getCurrentLanguage();
     var parmas = {
-      currentLanguage: getCurrentLanguage(),
-      content: options.content || "删除后以下库存将消失",
-      btn: options.btn || "删除",
+      currentLanguage: language,
+      content: options.content || language.delete_warn_1,
+      btn: options.btn || language.sdelete,
     }
     
     if(cz == '1'){
@@ -146,7 +148,7 @@ Page({
           inventoryList: result.data.data,
           storeMap: storeMap
         })
-        console.log("22222222222222222222222222")
+        
 
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
@@ -182,10 +184,10 @@ Page({
       params.positionID = that.data.positionId;
     }
     wx.showModal({
-      title: '警告',
-      content: '删除后不可恢复,是否需要继续删除',
-      confirmText: "我已确定",
-      cancelText: "再想想",
+      title: that.data.currentLanguage.warning,
+      content: that.data.currentLanguage.delete_warn_2,
+      confirmText: that.data.currentLanguage.delete_confirm,
+      cancelText: that.data.currentLanguage.delete_cancel,
       success: function (res) {
         console.log(res);
         if (res.confirm) {

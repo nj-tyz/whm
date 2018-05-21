@@ -4,8 +4,8 @@ var lan_en = {
   product: "Product",
   serial_number: "NO.",
 
-  in_put: "Store",
-  out_put: "Deliver",
+  in_put: "In",
+  out_put: "Out",
   company:"Company",
   smodify: "Mod",
   sdelete: "Del",
@@ -77,11 +77,11 @@ var lan_en = {
   index_in_shop: "Enter a Shop",
 
   out_put_type: "Type",
-  out_put_warehouse: "Warehouse",
+  out_put_warehouse: "Storage",
   out_put_position: "Position",
 
-  warehouse: "Warehouse",
-  warehouse_add: " Add Warehouse",
+  warehouse: "Storage",
+  warehouse_add: " Add Storage",
   warehouse_detail:"Detail",
 
   position_navigation_bar_title: "Barcode Inventory Management",
@@ -146,26 +146,26 @@ var lan_en = {
   shop_get_fail: "Fail to Get Shop Data",
 
 
-  store: "Warehouse",
-  store_modify: "Modify Warehouse",
-  store_modify_success: "Modify Warehouse Successfully",
-  store_modify_fail: "Fail to Modify Warehouse",
-  store_add: "Add Warehouse",
-  store_add_success: "Add Warehouse Successfully",
-  store_add_fail: "Fail to Add Warehouse",
-  store_load_local: "Get a List of This Warehouse",
-  store_loading: "Getting Warehouse Data",
-  store_load_error1: "The warehouse is not in this shop, please choose the other shop!",
-  store_all: "All Warehouse",
+  store: "Storage",
+  store_modify: "Modify Storage",
+  store_modify_success: "Modify Storage Successfully",
+  store_modify_fail: "Fail to Modify Storage",
+  store_add: "Add Storage",
+  store_add_success: "Add Storage Successfully",
+  store_add_fail: "Fail to Add Storage",
+  store_load_local: "Get a List of This Storage",
+  store_loading: "Getting Storage Data",
+  store_load_error1: "The Storage is not in this shop, please choose the other shop!",
+  store_all: "All Storage",
 
 
   shelf_distribution: "Shelf Distribution",
-  warehouse_distribution: "Warehouse Distribution",
+  warehouse_distribution: "Storage Distribution",
   shop_distribution: "Shop Distribution",
 
   setting_tabs: ["Personal", "Company", "Shop", "Position"],
   no_result: "No Result",
-  this_warehouse: "This Warehouse",
+  this_warehouse: "This Storage",
   this_position: "This Position",
 
   audit:"Audit",
@@ -176,7 +176,13 @@ var lan_en = {
   modify_username:"Modify Username",
   username: "Username",
 
-  end_of_list:"End of List"
+  end_of_list:"End of List",
+  warning: "Warning!",
+  delete_warn_1: "After deleting, the following inventory will be emptied",
+  delete_warn_2: "Inventory can not be restored, whether to continue to delete",
+  delete_confirm: "Comfirm",
+  delete_cancel: "Cancel",
+
 }
 
 module.exports = lan_en;

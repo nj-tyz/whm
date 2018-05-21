@@ -1,0 +1,14 @@
+.barcode > canvas {
+    width: 680rpx;
+    height: 200rpx;  
+}
+.barnum {
+    width: 670rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 38rpx;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 10rpx;
+    white-space: nowrap;
+}

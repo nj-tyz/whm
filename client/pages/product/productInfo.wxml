@@ -16,6 +16,12 @@
             <view class="wx-40-text wx-text-success">{{currentProduct.currencyType}} {{currentProduct.price}}</view>
           </view>
         </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd barcode" bindtap='previewImg'>
+            <canvas canvas-id="barcode" />
+            <view class="barnum">{{barcode}}</view>
+          </view>
+        </view>
       </view>
 
 

@@ -3,6 +3,7 @@ var config = require('../../config')
 var util = require('../../utils/util.js')
 var Charts = require('../../lib/wxcharts.js');
 var currentLanguage = require('../../lan/currentLanguage')
+var barcode = require('../../lib/barcode.js');
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var inventorySum = 0;
 Page({
@@ -17,7 +18,9 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     currentLanguage: {},
-    currencyType:'$'
+    currencyType:'$',
+    barcode:"",
+    barcodePath:""
   },
 
   changeChartType: function (event) {
@@ -50,6 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var width = wx.getSystemInfoSync().windowWidth * 0.9;
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth * 0.9,
       imageHeight: wx.getSystemInfoSync().windowWidth * 1.2,
@@ -75,6 +79,14 @@ Page({
     });
     //传入查询参数,直接查询
     if (options.barcode) {
+      //创建条码
+      barcode.barcode('barcode', options.barcode, width , 100);
+      //this.canvasToTempImage();
+      setTimeout(() => { this.canvasToTempImage(); }, 1000);
+      this.setData({
+        barcode: options.barcode
+      })
+
       var event = {
         currentTarget: {
           dataset: {
@@ -348,5 +360,31 @@ Page({
       }
 
     })
-  }
+  },
+  canvasToTempImage: function () {
+    var that = this;
+    wx.canvasToTempFilePath({
+      canvasId: 'barcode',
+      success: function (res) {
+        var tempFilePath = res.tempFilePath;
+        console.log(tempFilePath);
+        that.setData({
+          barcodePath: tempFilePath,
+          // canvasHidden:true
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
+  },
+  //点击barcode进行预览，长按保存分享barcode
+  previewImg: function (e) {
+    var img = this.data.barcodePath;
+    console.log(img);
+    wx.previewImage({
+      current: img, // 当前显示图片的http链接
+      urls: [img] // 需要预览的图片http链接列表
+    })
+  },
 });

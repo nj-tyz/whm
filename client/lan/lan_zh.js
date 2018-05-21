@@ -173,7 +173,13 @@ var lan_zh = {
   modify_username: "修改用户名",
   username:"用户名",
 
-  end_of_list: "没有更多了!"
+  end_of_list: "没有更多了!",
+
+  warning:"警告!",
+  delete_warn_1:"删除后以下库存将被清空",
+  delete_warn_2:"删除后不可恢复,是否需要继续删除",
+  delete_confirm:"我已确定",
+  delete_cancel:"再想想"
 }
 
 module.exports = lan_zh;
