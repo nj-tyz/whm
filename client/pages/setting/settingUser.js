@@ -90,6 +90,7 @@ Page({
       inputVal: "",
       inputShowed: false
     });
+    this.shopUsers();
   },
   clearInput: function () {
     this.setData({

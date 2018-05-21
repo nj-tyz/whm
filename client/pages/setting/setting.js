@@ -11,7 +11,6 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    sliderWidth:16,
     c_openId:"",
     pageHeight: 0,
     inputShowed: false,

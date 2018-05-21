@@ -30,11 +30,12 @@
 
         <view class="" hidden="{{activeIndex != 1}}">
           <view class="doc-title">{{companyName}}
-            
-              <image bindtap="openQr" style="position:absolute;top: 20px;right:0px"class="icon-image" src="../../img/scan.png"></image>
+              <text class="iconfont icon-erweima wx-text-primary" bindtap='openQr' style="font-size:35px;position:absolute;top: 20px;right:0px" ></text> 
+
             
           
           </view>
+          <scroll-view scroll-y style="height: {{pageHeight-56}}px;">
           <!-- 
                     <view class="weui-search-bar">
                       <view class="weui-search-bar__form">
@@ -70,7 +71,7 @@
 
 
 
-
+        </scroll-view>
         </view>
         <view class="" hidden="{{activeIndex != 2}}">
 
@@ -92,6 +93,7 @@
                       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
                   </view>
                  -->
+          <scroll-view scroll-y style="height: {{pageHeight}}px">
           <view class="weui-cells weui-cells_after-title">
             <navigator url="settingUser?&shopId={{item.id}}" wx:key="{{item.id}}" wx:for="{{shopList}}" wx:for-index="uindex" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
               <view class="weui-cell__hd">
@@ -104,7 +106,7 @@
           </view>
 
 
-
+          </scroll-view>
         </view>
 
         <scroll-view scroll-y style="height: {{pageHeight}}px;" class="" hidden="{{activeIndex != 3}}">

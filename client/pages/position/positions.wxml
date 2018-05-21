@@ -20,8 +20,7 @@
               <view id='{{item.id}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend' data-id="{{item.id}}" data-name="{{item.name}}" data-positionid="{{item.id}}" data-shopname="{{item.shopName}}" data-storename="{{item.storeName}}" data-positionname="{{item.no}}" bindtap='showQrCode'>
                   
                   <text class='user-name'>{{item.no}}</text>
-                  <image class='msg-img' src="../../img/scan.png"/>
-                  
+                  <text class="msg-img iconfont icon-erweima wx-text-primary" style='font-size:25px;' bindtap='openQr'  ></text> 
               </view>
               <view class='msg-menu'>
                 
