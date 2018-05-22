@@ -23,7 +23,7 @@
                       <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                           <image src="{{item.user_info.avatarUrl}}" style="width: 50px; height: 50px; display: block"/>
                       </view>
-                      <view class="weui-cell__bd">{{item.user_info.nickName}}</view>
+                      <view class="weui-cell__bd">{{item.username||item.user_info.nickName}}</view>
                       <view class="weui-cell__ft">
                         
                         <button class="weui-btn mini-btn" type="primary" data-openid= "{{item.open_id}}"bindtap="addUser" size="mini">{{currentLanguage.add}}</button>
@@ -40,7 +40,7 @@
           <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
               <image src="{{item.userInfo.avatarUrl}}" style="width: 50px; height: 50px; display: block"/>
           </view>
-          <view class="weui-cell__bd">{{item.userInfo.nickName}}</view>
+          <view class="weui-cell__bd">{{item.userInfo.username||item.userInfo.nickName}}</view>
           <view class="weui-cell__ft">
             
             <button class="weui-btn mini-btn" type="warn" data-id="{{item.id}}" bindtap="removeUser" size="mini">{{currentLanguage.remove}}</button>

@@ -78,7 +78,7 @@ async function deleteShop(ctx, next) {
 
 async function shopUsers(ctx, next) {
   var shopId = ctx.query.shopId;
-  var result = await query("SELECT us.*,cs.user_info AS userInfo from tb_user_shop us LEFT JOIN csessioninfo  cs on  us.open_id = cs.open_id  where us.shop = ?", [shopId]);
+  var result = await query("SELECT us.*,cs.user_info AS userInfo,cs.username from tb_user_shop us LEFT JOIN csessioninfo  cs on  us.open_id = cs.open_id  where us.shop = ?", [shopId]);
   ctx.state.data = result;
 }
 
@@ -104,7 +104,7 @@ async function outShopUser(ctx, next) {
   var userinfo = await userutil.get(ctx, next);
   var company = userinfo.company_id;
   var username = "%" + ctx.query.username + "%";
-  var result = await query("SELECT cs.* FROM csessioninfo cs WHERE cs.company_id =? AND cs.company_reviewed=1 AND cs.user_info like ? and cs.open_id NOT IN (SELECT us.open_id FROM tb_user_shop us WHERE us.shop = ?) ", [company, username,shopid]);;
+  var result = await query("SELECT cs.* FROM csessioninfo cs WHERE cs.company_id =? AND cs.company_reviewed=1 AND (cs.user_info like ? or cs.username like ?)and cs.open_id NOT IN (SELECT us.open_id FROM tb_user_shop us WHERE us.shop = ?) ", [company, username,username,shopid]);;
   
   ctx.state.data = result;
 }

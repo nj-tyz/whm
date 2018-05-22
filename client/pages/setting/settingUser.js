@@ -123,7 +123,9 @@ Page({
         for (; i < userList.length; i++) {
 
           userList[i].userInfo = JSON.parse(userList[i].userInfo);
+          userList[i].userInfo.username = userList[i].username;
         }
+        console.log(userList)
         that.setData({
           userList: userList
         })
@@ -180,7 +182,9 @@ Page({
         that.shopUsers();
         that.hideInput();
         util.showSuccess(that.data.currentLanguage.success)
-
+        that.setData({
+          searchList: []
+        })
       },
       fail(error) {
         util.showModel(that.data.currentLanguage.request_fail, error);
@@ -206,6 +210,7 @@ Page({
         var searhcList = result.data.data
         for (; i < searhcList.length; i++) {
           searhcList[i].user_info = JSON.parse(searhcList[i].user_info);
+        
         }
         
         
