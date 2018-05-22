@@ -123,6 +123,7 @@ Page({
         for (; i < userList.length;i++){
           
           userList[i].user_info = JSON.parse(userList[i].user_info);
+          userList[i].user_info.username = userList[i].username;
         }
         that.setData({
           userList: userList
