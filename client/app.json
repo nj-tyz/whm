@@ -1,5 +1,5 @@
 {
-  "pages": [
+  "pages": [  
     "pages/index/index",
     "pages/setting/modifyUsername",
     "pages/msg/delWarn",
@@ -22,10 +22,11 @@
     "pages/inventory/inventorys",
     "pages/inventory/outPut",
     
+    "pages/qrcode/show",
+
     "pages/msg/success",
     "pages/msg/faile",
     
-    "pages/qrcode/show",
     
     "pages/setting/settingCompany",
     "pages/setting/checkCompanyName",

@@ -183,6 +183,8 @@ var lan_en = {
   delete_confirm: "Comfirm",
   delete_cancel: "Cancel",
 
+  check_update:"updating..",
+
 }
 
 module.exports = lan_en;

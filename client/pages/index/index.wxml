@@ -2,7 +2,7 @@
 
 
   <!-- 用户登录测试 -->
-  <view class="userinfo" bindtap="login">
+  <view class="userinfo" wx:if="{{ischecked}}" bindtap="login">
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}" background-size="cover"></image>
 
 

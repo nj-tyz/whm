@@ -179,7 +179,9 @@ var lan_zh = {
   delete_warn_1:"删除后以下库存将被清空",
   delete_warn_2:"删除后不可恢复,是否需要继续删除",
   delete_confirm:"我已确定",
-  delete_cancel:"再想想"
+  delete_cancel:"再想想",
+
+  check_update: "更新中..",
 }
 
 module.exports = lan_zh;
