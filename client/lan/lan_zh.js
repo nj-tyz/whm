@@ -194,7 +194,9 @@ var lan_zh = {
 
   
   check_update: "更新中..",
-  no_permission:"没有权限"
+  no_permission:"没有权限",
+
+  no_select:"请至少选择一条数据"
 }
 
 module.exports = lan_zh;

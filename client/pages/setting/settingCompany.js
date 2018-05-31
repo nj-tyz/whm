@@ -101,7 +101,7 @@ Page({
         })
 
         //检查名称
-        checkname();
+        //checkname();
       }
     })
   },

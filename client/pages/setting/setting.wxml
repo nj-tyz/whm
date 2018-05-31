@@ -59,7 +59,7 @@
                       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
                     </view>
                   -->
-          <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cells weui-cells_after-title" wx:if="{{usermanage}}">
             <view class="weui-cell" wx:for="{{userList}}"wx:key="{{item.open_id}}" wx:for-index="uindex">
               <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                 <image src="{{item.user_info.image||item.user_info.avatarUrl}}" style="width: 50px; height: 50px; display: block" />
@@ -71,6 +71,9 @@
               </view>
             </view>
 
+          </view>
+          <view style="margin-top:30px;text-align:center;" wx:else>
+            <text class="userinfo-nickname">{{currentLanguage.no_permission}}</text>
           </view>
 
 
@@ -99,7 +102,7 @@
                   </view>
                  -->
           <scroll-view scroll-y style="height: {{pageHeight}}px">
-          <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cells weui-cells_after-title" wx:if="{{usermanage}}">
             <navigator url="settingUser?&shopId={{item.id}}" wx:key="{{item.id}}" wx:for="{{shopList}}" wx:for-index="uindex" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
               <view class="weui-cell__hd">
                 <image src="{{icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
@@ -109,12 +112,15 @@
             </navigator>
 
           </view>
-
+          <view style="margin-top:30px;text-align:center;" wx:else>
+            <text class="userinfo-nickname">{{currentLanguage.no_permission}}</text>
+          </view>
 
           </scroll-view>
         </view>
 
         <scroll-view scroll-y style="height: {{pageHeight}}px;" class="" hidden="{{activeIndex != 3}}">
+          <view wx:if="{{positionmanage}}">
           <view class="weui-panel__hd weui-flex">{{currentLanguage.add}}
             <image bindtap='addRole' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
           </view>
@@ -130,6 +136,11 @@
           <view class="weui-panel__hd weui-flex" wx:if="{{roleList.length>0}}" style="text-align:center">{{currentLanguage.setting_tip1}}
            
           </view>
+          </view>
+          <view style="margin-top:30px;text-align:center;" wx:else>
+            <text class="userinfo-nickname">{{currentLanguage.no_permission}}</text>
+          </view>
+
           <!-- 
           <view class="page__bd page__bd_spacing">
             <view class="weui-flex">

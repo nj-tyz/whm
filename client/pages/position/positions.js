@@ -142,23 +142,69 @@ Page({
   //增加仓位
   addPosition: function () {
     var that = this;
+    //3为全局变量中menulist 的id
+    var hasPm = util.hasMenu("3");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../position/addPosition?navigationBarTitle=' + that.data.currentLanguage.position_add + '&storeID=' + that.data.storeID + "&shopID=" + that.data.shopID
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
 
-    wx.navigateTo({
-      url: '../position/addPosition?navigationBarTitle=' + that.data.currentLanguage.position_add+'&storeID=' + that.data.storeID + "&shopID=" + that.data.shopID
-    })
+          }
+        }
+      });
+
+    }
+    
   },
   updatePosition:function(e){
-    var that = this
-    wx.navigateTo({
-      url: '../position/addPosition?cz=1&navigationBarTitle=' + that.data.currentLanguage.position_add + '&id=' + e.currentTarget.dataset.id + "&no=" + e.currentTarget.dataset.no + '&storeID=' + that.data.storeID
-    })
+    var that = this;
+    //3为全局变量中menulist 的id
+    var hasPm = util.hasMenu("3");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../position/addPosition?cz=1&navigationBarTitle=' + that.data.currentLanguage.position_add + '&id=' + e.currentTarget.dataset.id + "&no=" + e.currentTarget.dataset.no + '&storeID=' + that.data.storeID
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
   },
   deletePosition:function(e){
-    var that = this
-    console.log(that.data.storeName);
-    wx.navigateTo({
-      url: '../msg/delWarn?cz=2&navigationBarTitle=' + that.data.currentLanguage.position_add + '&id=' + e.currentTarget.dataset.id + "&no=" + e.currentTarget.dataset.no + '&storeName=' + that.data.storeName
-    })
+    var that = this;
+    //3为全局变量中menulist 的id
+    var hasPm = util.hasMenu("3");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../msg/delWarn?cz=2&navigationBarTitle=' + that.data.currentLanguage.position_add + '&id=' + e.currentTarget.dataset.id + "&no=" + e.currentTarget.dataset.no + '&storeName=' + that.data.storeName
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
   },
   //显示二维码
   showQrCode: function (event) {

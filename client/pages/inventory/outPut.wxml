@@ -68,8 +68,11 @@
 
 
 
-    <view class="weui-btn-area">
+    <view class="weui-btn-area" wx:if="{{cansubmit}}">
       <button style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">{{currentLanguage.submit}}</button>
+    </view>
+    <view class="weui-btn-area" wx:else>
+      <button style="width:90%;margin:50rpx;" bindtap='submitForm' disabled="true" type="primary">{{currentLanguage.no_permission}}</button>
     </view>
   </view>
 </view>

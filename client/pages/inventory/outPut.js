@@ -25,6 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var cansubmit = util.hasMenu("7");
     var that = this;
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
@@ -33,7 +34,8 @@ Page({
     this.setData({
       shopID: options.shopID,
       optionType: options.optionType,
-      currentLanguage: getCurrentLanguage()
+      currentLanguage: getCurrentLanguage(),
+      cansubmit: cansubmit
     });
     var position = wx.getStorageSync("defaultPosition");
     if (position != ''){

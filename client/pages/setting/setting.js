@@ -40,10 +40,17 @@ Page({
     roleList:[],
     roleList2: [],
     c_roleOpenId:'',
-    c_menuRoleId:''
-   
+    c_menuRoleId:'',
+    usermanage:false,
+    positionmanage:false
   },
   onLoad: function (options) {
+   //人员管理权限
+    var usermanage =  util.hasMenu("5");
+
+    //岗位管理权限
+    var positionmanage = util.hasMenu("6");
+    console.log(usermanage + "______" + positionmanage);
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
     })
@@ -56,7 +63,9 @@ Page({
       c_openId: options.openId,
       companyId: options.companyId,
       username: options.username,
-      userimg: options.img
+      userimg: options.img,
+      usermanage: usermanage,
+      positionmanage: positionmanage
     })
     //console.log(options.companyName);  
     this.companyUsers();
@@ -78,7 +87,12 @@ Page({
 
 
   },
-  
+  onPullDownRefresh: function () {
+
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,

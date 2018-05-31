@@ -190,6 +190,43 @@ Page({
       }
     })
 
+  },
+  openscan:function(){
+    var that = this;
+    wx.scanCode({
+      success: (res) => {
+        console.log(res);
+        var name = "";
+        var codeType = "";
+        try {
+          codeType = res.result.split(":")[0];
+          name = res.result.split(":")[1];
+        } catch (e) {
+          console.error(e);
+          name = "";
+        }
+
+        if (!codeType || codeType != 'companyName' || !name || name == "") {
+          console.log(that.data.currentLanguage.qrcode_error);
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.qrcode_error);
+          return;
+        }
+
+        // console.log('公司扫码得到', name)
+        // // this.setData({
+        // //   "name": name
+        // // })
+
+        if (!name || util.trim(name) == "") {
+          util.showModel(that.data.currentLanguage.hint, that.data.currentLanguage.missing_data);
+          return;
+        } else {
+          wx.navigateTo({
+            url: '../setting/checkCompanyName?name=' + name
+          })
+        }
+      }
+    })
   }
 
 

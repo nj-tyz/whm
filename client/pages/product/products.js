@@ -16,7 +16,7 @@ Page({
 
     inputShowed: false,
     inputVal: "",
-    c_index:5,
+    c_index:-1,
     showMod:false,
     //当前页面是否是一个选择器
     isselect: false,
@@ -207,9 +207,25 @@ Page({
   //增加商品
   addProduct: function () {
     var that = this;
-    wx.navigateTo({
-      url: '../product/addProduct?navigationBarTitle=' + that.data.currentLanguage.product_add + "&shopID=" + this.data.shopID
-    })
+    //4为全局变量中menulist 的id
+    var hasPm = util.hasMenu("4");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../product/addProduct?navigationBarTitle=' + that.data.currentLanguage.product_add + "&shopID=" + this.data.shopID
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
   },
   //获取所有产品
   getAllProduct: function () {
@@ -271,10 +287,26 @@ Page({
     that.getAllProduct();
   },
   modifyP:function(){
-    var status = this.data.showMod ==true? false:true;
-    this.setData({
-      showMod: status
-    })
+    var that = this;
+    //4为全局变量中menulist 的id
+    var hasPm = util.hasMenu("4");
+    if (hasPm) {
+      var status = this.data.showMod ==true? false:true;
+      this.setData({
+        showMod: status
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
   },
   cancelBtn:function(){
     this.setData({
@@ -282,13 +314,25 @@ Page({
     })
   },
   modifyProduct:function(){
-    console.log(this.data.c_index);
-    var productid = this.data.productList[this.data.c_index].id;
-    
     var that = this;
-    wx.navigateTo({
-      url: '../product/addProduct?cz=1&navigationBarTitle=' + that.data.currentLanguage.product_add + "&shopID=" + this.data.shopID + "&productId= " + productid 
-    })
+    
+    if (this.data.c_index < 0){
+      wx.showModal({
+        content: that.data.currentLanguage.no_select,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+          }
+        }
+      });
+    } else {
+
+      var productid = this.data.productList[this.data.c_index].id;
+      var that = this;
+      wx.navigateTo({
+        url: '../product/addProduct?cz=1&navigationBarTitle=' + that.data.currentLanguage.product_add + "&shopID=" + this.data.shopID + "&productId= " + productid 
+      })
+    }
 
   }
 })

@@ -292,74 +292,94 @@ Page({
     var that = this;
     var product = that.data.currentProduct;
     console.log(that.data.currentProduct);
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        util.showBusy(that.data.currentLanguage.loading)
-        var filePath = res.tempFilePaths[0]
-        console.log(filePath);
-        // 上传图片
-        wx.uploadFile({
-          url: config.service.uploadUrl,
-          filePath: filePath,
-          name: 'file',
+    
+    
+    //4为全局变量中menulist 的id
+    var hasPm = util.hasMenu("4");
+    if (hasPm) {
+       // 选择图片
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {
+          util.showBusy(that.data.currentLanguage.loading)
+          var filePath = res.tempFilePaths[0]
+          console.log(filePath);
+          // 上传图片
+          wx.uploadFile({
+            url: config.service.uploadUrl,
+            filePath: filePath,
+            name: 'file',
 
-          success: function (res) {
-            //console.log(res)
-            res = JSON.parse(res.data)
+            success: function (res) {
+              //console.log(res)
+              res = JSON.parse(res.data)
 
-            var id = that.data.currentProduct.id;
-            var img = res.data.imgUrl;
-            console.log("id+img" + id + "__________" + img)
-            var options = {
-              url: config.service.updateProduct,
-              login: true,
-              data: {
-                id: id,
-                img: img
-              },
-              success(result) {
+              var id = that.data.currentProduct.id;
+              var img = res.data.imgUrl;
+              console.log("id+img" + id + "__________" + img)
+              var options = {
+                url: config.service.updateProduct,
+                login: true,
+                data: {
+                  id: id,
+                  img: img
+                },
+                success(result) {
 
-                util.showSuccess(that.data.currentLanguage.img_upload_success)
-                console.log('修改成功', result);
-                // wx.navigateTo({
-                //   url: '../msg/success?title=系统提示&content=添加商品成功&bt点击返回'
-                // })
+                  util.showSuccess(that.data.currentLanguage.img_upload_success)
+                  console.log('修改成功', result);
+                  // wx.navigateTo({
+                  //   url: '../msg/success?title=系统提示&content=添加商品成功&bt点击返回'
+                  // })
 
 
 
-              },
-              fail(error) {
-                util.showModel(that.data.currentLanguage.submit_fail, error);
-                console.log('修改商品失败', error);
+                },
+                fail(error) {
+                  util.showModel(that.data.currentLanguage.submit_fail, error);
+                  console.log('修改商品失败', error);
+                }
               }
+              qcloud.request(options)
+
+
+
+              product.img = res.data.imgUrl
+              that.setData({
+                currentProduct: product
+              })
+
+
+            },
+
+            fail: function (e) {
+              util.showModel(that.data.currentLanguage.img_upload_fail)
             }
-            qcloud.request(options)
+          })
 
+        },
+        fail: function (e) {
+          console.error(e)
+        }
 
+      })
+    } 
+    // else {
+    //   wx.showModal({
+    //     content: that.data.currentLanguage.no_permission,
+    //     showCancel: false,
+    //     success: function (res) {
+    //       if (res.confirm) {
 
-            product.img = res.data.imgUrl
-            that.setData({
-              currentProduct: product
-            })
+    //       }
+    //     }
+    //   });
 
-
-          },
-
-          fail: function (e) {
-            util.showModel(that.data.currentLanguage.img_upload_fail)
-          }
-        })
-
-      },
-      fail: function (e) {
-        console.error(e)
-      }
-
-    })
+    // }
+   
+   
   },
   canvasToTempImage: function () {
     var that = this;

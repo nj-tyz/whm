@@ -26,7 +26,7 @@ Page({
       })
       this.setData({
         text: options.companyName,
-        placeholder: "companyId:" + options.companyId,
+        placeholder: "companyName:" + options.companyName,
         qrcodeType: type
       });
     } else {
