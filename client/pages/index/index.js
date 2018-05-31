@@ -6,9 +6,11 @@ var getCurrentLanguage = require('../../lan/currentLanguage')
 var deviceInfo;
 //获取应用实例
 const app = getApp();
+const updateManager = wx.getUpdateManager()
 
 Page({
   data: {
+    ischecked:false,
     pageSize: 5,
     pageNo: 1,
     nomore: false,
@@ -60,11 +62,44 @@ Page({
     wx.setNavigationBarTitle({
       title: c_language.position_navigation_bar_title
     })
+
     that.getUserInfo();
 
-    //console.log(this.data.currentLanguage.name);
+
+
+
+    //启动时先检测更新
+    
+    util.showBusy(that.data.currentLanguage.check_update)
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      if(res.hasUpdate){
+
+      }else{
+        that.setData({
+          ischecked: true
+        })
+        util.showSuccess(that.data.currentLanguage.success)
+      }
+    })
+
+    updateManager.onUpdateReady(function () {
+      // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      updateManager.applyUpdate()
+    })
+
+    updateManager.onUpdateFailed(function () {
+      // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      updateManager.applyUpdate()
+    })
+
+
+
+
+
 
   },
+ 
   /**
   * 生命周期函数--监听页面显示
   */
@@ -325,8 +360,8 @@ Page({
     }
 
   },
-  cancelDefault:function(){
-    
+  cancelDefault: function () {
+
     try {
       wx.setStorageSync('defaultShopId', '')
       this.setData({

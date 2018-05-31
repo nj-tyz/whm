@@ -181,6 +181,7 @@ var lan_zh = {
   delete_confirm:"我已确定",
   delete_cancel:"再想想",
 
+
   quit_company_warn: "退出后不可查看本公司信息",
 
   enter_position_name:"请输入职位名称!",
@@ -190,6 +191,8 @@ var lan_zh = {
   tip:"提示",
   confirm: "确定",
   setting_success_info: "职位添加成功,是否立刻设置职位权限",
+  
+  check_update: "更新中..",
 
 }
 

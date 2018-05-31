@@ -1,10 +1,8 @@
 {
-  "pages": [
+  "pages": [  
     "pages/login/login",
-    
     "pages/index/index",
     "pages/setting/setting",
-    
     "pages/setting/modifyUsername",
     "pages/msg/delWarn",
     "pages/shop/shop",
@@ -20,9 +18,12 @@
     "pages/product/products",
     "pages/inventory/inventorys",
     "pages/inventory/outPut",
+
     "pages/msg/success",
     "pages/msg/faile",
     "pages/qrcode/show",
+
+    
     "pages/setting/settingCompany",
     "pages/setting/checkCompanyName",
     "pages/setting/settingUser",

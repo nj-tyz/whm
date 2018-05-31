@@ -1,5 +1,6 @@
 // pages/main/index.js
 var QR = require("../../lib/qrcode.js");
+var util = require('../../utils/util.js')
 var getCurrentLanguage = require('../../lan/currentLanguage')
 Page({
 
@@ -9,8 +10,8 @@ Page({
     imagePath: '',
     text: "",
     placeholder: '',//默认二维码生成文本
-    currentLanguage:{},
-    qrcodeType:""
+    currentLanguage: {},
+    qrcodeType: ""
   },
   onLoad: function (options) {
     var type = options.qrcodeType;
@@ -18,17 +19,17 @@ Page({
     this.setData({
       currentLanguage: getCurrentLanguage(),
     });
-    
-    if (type === 'company'){
+
+    if (type === 'company') {
       wx.setNavigationBarTitle({
-        title: that.data.currentLanguage.company +" "+ that.data.currentLanguage.qrcode
+        title: that.data.currentLanguage.company + " " + that.data.currentLanguage.qrcode
       })
       this.setData({
         text: options.companyName,
         placeholder: "companyId:" + options.companyId,
         qrcodeType: type
       });
-    }else{
+    } else {
       console.log(options);
       wx.setNavigationBarTitle({
         title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title

@@ -2,8 +2,10 @@
 
 
   <!-- 用户登录测试 -->
+
   <view class="userinfo" bindtap="login">
      <image class="userinfo-avatar" src="{{userInfo.image||userInfo.avatarUrl}}" background-size="cover"></image>
+
 
 
      <!-- <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> {{currentLanguage.index_logbtn}} </button> -->

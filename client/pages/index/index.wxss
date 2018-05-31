@@ -16,6 +16,7 @@
   color: #aaa;
 }
 
+
 .userinfo-companyname {
   color: #ddd;
    font-size: 30rpx;

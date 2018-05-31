@@ -183,6 +183,7 @@ var lan_en = {
   delete_confirm: "Comfirm",
   delete_cancel: "Cancel",
 
+
   quit_company_warn: "No information can be viewed after exiting",
 
   enter_position_name:"Enter a Position",
@@ -192,6 +193,10 @@ var lan_en = {
   tip:"Tip",
   confirm:"confirm",
   setting_success_info:"The position has been added successfully. Do you want to set up the position immediately?",
+
+  check_update:"updating..",
+
+
 }
 
 module.exports = lan_en;
