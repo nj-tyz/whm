@@ -186,7 +186,7 @@ var lan_zh = {
 
   enter_position_name:"请输入职位名称!",
   setting_tip1: "Tips:长按设置岗位",
-
+  setting_tip2:"稍后可长按设置岗位",
 
   tip:"提示",
   confirm: "确定",

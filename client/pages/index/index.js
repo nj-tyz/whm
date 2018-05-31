@@ -481,6 +481,7 @@ Page({
   //删除店铺按钮
   onDeleteMsgTap: function (e) {
     console.log(e.currentTarget.dataset.shopname + '&shopID=' + e.currentTarget.dataset.shopid);
+    var that = this;
     var hasPm = util.hasMenu("1");
     if (hasPm){
       wx.navigateTo({
