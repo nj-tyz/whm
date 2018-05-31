@@ -43,7 +43,7 @@
           <view class="weui-cell__bd">{{item.userInfo.username||item.userInfo.nickName}}</view>
           <view class="weui-cell__ft">
             
-            <button class="weui-btn mini-btn" type="warn" data-id="{{item.id}}" bindtap="removeUser" size="mini">{{currentLanguage.remove}}</button>
+            <button class="weui-btn mini-btn" type="warn" data-id="{{item.open_id}}" bindtap="removeUser" size="mini">{{currentLanguage.remove}}</button>
           </view>
       </view>
   </view>

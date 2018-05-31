@@ -191,9 +191,10 @@ var lan_zh = {
   tip:"提示",
   confirm: "确定",
   setting_success_info: "职位添加成功,是否立刻设置职位权限",
+
   
   check_update: "更新中..",
-
+  no_permission:"没有权限"
 }
 
 module.exports = lan_zh;

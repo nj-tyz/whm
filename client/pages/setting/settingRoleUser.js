@@ -2,6 +2,7 @@ var getcurrentLanguage = require('../../lan/currentLanguage')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+const app = getApp();
 
 Page({
 
@@ -94,7 +95,7 @@ Page({
       inputVal: "",
       inputShowed: false
     });
-    this.shopUsers();
+    this.roleUsers();
   },
   clearInput: function () {
     this.setData({
@@ -146,19 +147,19 @@ Page({
   },
   removeUser: function (event) {
     var that = this;
-    var userroleid = event.currentTarget.dataset.id;
+    var openId = event.currentTarget.dataset.id;
     util.showBusy(that.data.currentLanguage.loading);
     var options = {
-      url: config.service.updateShopUser,
+      url: config.service.updateUserRole,
       login: true,
       data: {
-
-        userroleid: userroleid,
-        status: 0,
+        flag: 2,
+        openId: openId,
+        roleId: that.data.roleid
       },
       success(result) {
-
-        that.shopUsers();
+        app.globalData.needRefresh = false;
+        that.roleUsers();
         util.showSuccess(that.data.currentLanguage.success)
 
       },
@@ -183,6 +184,7 @@ Page({
         roleId: that.data.roleid
       },
       success(result) {
+        app.globalData.needRefresh = false;
         //修改页面
         that.roleUsers();
         that.hideInput();
@@ -219,7 +221,7 @@ Page({
           searhcList[i].user_info = JSON.parse(searhcList[i].user_info);
 
         }
-
+        
 
 
         that.setData({

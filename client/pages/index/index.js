@@ -342,9 +342,24 @@ Page({
   //修改店铺
   updateShop: function (e) {
     var that = this;
-    wx.navigateTo({
-      url: '../shop/addShop?navigationBarTitle=' + that.data.currentLanguage.shop_modify + "&shopId=" + e.currentTarget.dataset.shopid + "&cz=1"
-    })
+    //1位全局变量中menulist 的id
+    var hasPm = util.hasMenu("1");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../shop/addShop?navigationBarTitle=' + that.data.currentLanguage.shop_modify + "&shopId=" + e.currentTarget.dataset.shopid + "&cz=1"
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
   },
   //设置默认店铺
   setDefaultShop: function (e) {
@@ -490,7 +505,7 @@ Page({
 
     }else{
       wx.showModal({
-        content: that.data.currentLanguage.setting_tip2,
+        content: that.data.currentLanguage.no_permission,
         showCancel: false,
         success: function (res) {
           if (res.confirm) {

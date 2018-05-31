@@ -179,9 +179,26 @@ Page({
   //增加仓库
   addStore: function () {
     var that = this;
-    wx.navigateTo({
-      url: '../store/addStore?navigationBarTitle=' + that.data.shopName + that.data.currentLanguage.warehouse_add+'&shopID=' + that.data.shopID
-    })
+    //2为全局变量中menulist 的id
+    var hasPm = util.hasMenu("2");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../store/addStore?navigationBarTitle=' + that.data.shopName + that.data.currentLanguage.warehouse_add + '&shopID=' + that.data.shopID
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
+    
   },
   //跳转到仓库明细
   showStoreInfo: function (event) {
@@ -222,18 +239,50 @@ Page({
   },
   //删除仓库
   deleteStore:function(e){
-    console.log(e.currentTarget.dataset.storename + '&storeID=' + e.currentTarget.dataset.storeid);
-    wx.navigateTo({
-      url: '../msg/delWarn?cz=1&storeName=' + e.currentTarget.dataset.storename + '&storeID=' + e.currentTarget.dataset.storeid
-    })
-    //this.deleteMsgItem(e);
+   // console.log(e.currentTarget.dataset.storename + '&storeID=' + e.currentTarget.dataset.storeid);
+    var that = this;
+    //2为全局变量中menulist 的id
+    var hasPm = util.hasMenu("2");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../msg/delWarn?cz=1&storeName=' + e.currentTarget.dataset.storename + '&storeID=' + e.currentTarget.dataset.storeid
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+   
   },
+  //修改仓库信息
   updateStoreInfo:function(e){
     var that = this;
+    //2为全局变量中menulist 的id
+    var hasPm = util.hasMenu("2");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../store/addStore?cz=1&navigationBarTitle=' + that.data.currentLanguage.store_modify + '&storeID=' + e.currentTarget.dataset.storeid
+      })  
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
     
-    wx.navigateTo({
-      url: '../store/addStore?cz=1&navigationBarTitle=' + that.data.currentLanguage.store_modify + '&storeID=' + e.currentTarget.dataset.storeid
-    })  
   },
   setDefaultStroe:function(e){
     wx.setStorageSync("defaultStore", e.currentTarget.dataset.storeid);

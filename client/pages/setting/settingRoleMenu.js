@@ -3,6 +3,7 @@ var getcurrentLanguage = require('../../lan/currentLanguage')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+
 Page({
 
   /**
@@ -144,6 +145,7 @@ Page({
         roleId: that.data.roleid
       },
       success(result) {
+        app.globalData.needRefresh = false;
         //修改页面
         that.setData({
           menuList: menuList,

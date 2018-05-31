@@ -195,7 +195,7 @@ var lan_en = {
   setting_success_info:"The position has been added successfully. Do you want to set up the position immediately?",
 
   check_update:"updating..",
-
+  no_permission:"No Permission!"
 
 }
 
