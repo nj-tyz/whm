@@ -22,9 +22,9 @@ Page({
   },
   onLoad: function () {
      var that = this;
-    // this.setData({
-    //   currentLanguage: getCurrentLanguage()
-    // })
+    this.setData({
+      currentLanguage: getCurrentLanguage()
+    })
     // that.getUserInfo();
     //console.log(this.data.currentLanguage.name);
 

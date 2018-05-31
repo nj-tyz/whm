@@ -31,6 +31,7 @@ var lan_en = {
   cargo_position: "Cargo Position",
 
   input_company_name: "Please Enter Company Name",
+  no_company: "Please Join a Company.",
   input_no: "Please Enter the Number",
   input_name: "Please Enter a Name",
   input_price: "Please Enter the Price",
@@ -72,6 +73,7 @@ var lan_en = {
 
 
   index_logbtn: "Login",
+  unlogin:"unlogin",
   index_check_pending: "Check Pending",
   index_no_company_name: "Please Complement the Company's Information",
   index_in_shop: "Enter a Shop",
@@ -84,7 +86,7 @@ var lan_en = {
   warehouse_add: " Add Storage",
   warehouse_detail:"Detail",
 
-  position_navigation_bar_title: "Barcode Inventory Management",
+  position_navigation_bar_title: "B I M",
   position_search: "Search Position",
   position_modify: "Modify Position",
   position_modify_success: "Modify Position Successfully",
@@ -197,8 +199,11 @@ var lan_en = {
   check_update:"updating..",
   no_permission:"No Permission!",
 
-  no_select: "Please Select One"
+  no_select: "Please Select One",
 
+  input_with_scan:"Scan to Join",
+  input_with_type: "Input to Join",
+  cancel_check:"Cancel Checking"
 }
 
 module.exports = lan_en;

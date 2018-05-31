@@ -70,6 +70,7 @@ var lan_zh = {
 
 
   index_logbtn:"登录",
+  unlogin:"未登录",
   index_check_pending:"待审核",
   index_no_company_name:"请补充公司信息",
   index_in_shop:"进入店铺",
@@ -82,7 +83,7 @@ var lan_zh = {
   warehouse_add:"增加仓库",
   warehouse_detail:"仓库明细",
 
-  position_navigation_bar_title:"条码库存管理",
+  position_navigation_bar_title:"惠店管",
   position_search:"查找仓位",
   position_modify: "修改仓位",
   position_modify_success: "修改仓位成功",
@@ -196,7 +197,11 @@ var lan_zh = {
   check_update: "更新中..",
   no_permission:"没有权限",
 
-  no_select:"请至少选择一条数据"
+  no_select:"请至少选择一条数据",
+
+  input_with_scan: "扫描绑定公司",
+  input_with_type: "手动输入",
+  cancel_check:"撤销审核"
 }
 
 module.exports = lan_zh;
