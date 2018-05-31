@@ -4,6 +4,7 @@ const { query } = require('../mysql')
 
 let get = async function( ctx, next ) {
   var userinfo = ctx.state.$wxInfo.userinfo;
+ 
 	var company =await query("select u.*,c.name as company_name from cSessionInfo u left join tb_company c on u.company_id = c.id where open_id = ?",[userinfo.openId]);
    
    	//查询用户的公司信息
@@ -13,7 +14,7 @@ let get = async function( ctx, next ) {
 	userinfo.company_name=company[0].company_name;
 	userinfo.company_reviewed=company[0].company_reviewed;
 	userinfo.company_id=company[0].company_id;
-
+  console.log(userinfo);
     return userinfo;
 }
 

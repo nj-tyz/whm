@@ -179,7 +179,18 @@ var lan_zh = {
   delete_warn_1:"删除后以下库存将被清空",
   delete_warn_2:"删除后不可恢复,是否需要继续删除",
   delete_confirm:"我已确定",
-  delete_cancel:"再想想"
+  delete_cancel:"再想想",
+
+  quit_company_warn: "退出后不可查看本公司信息",
+
+  enter_position_name:"请输入职位名称!",
+  setting_tip1: "Tips:长按设置岗位",
+
+
+  tip:"提示",
+  confirm: "确定",
+  setting_success_info: "职位添加成功,是否立刻设置职位权限",
+
 }
 
 module.exports = lan_zh;

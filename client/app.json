@@ -1,36 +1,34 @@
 {
   "pages": [
+    "pages/login/login",
+    
     "pages/index/index",
+    "pages/setting/setting",
+    
     "pages/setting/modifyUsername",
     "pages/msg/delWarn",
     "pages/shop/shop",
     "pages/shop/addShop",
-    
     "pages/store/stores",
     "pages/store/addStore",
     "pages/store/findStore",
     "pages/store/storeInfo",
-
     "pages/position/positions",
     "pages/position/addPosition",
-    
-   
     "pages/product/addProduct",
     "pages/product/productInfo",
     "pages/product/products",
-    
     "pages/inventory/inventorys",
     "pages/inventory/outPut",
-    
     "pages/msg/success",
     "pages/msg/faile",
-    
     "pages/qrcode/show",
-    
     "pages/setting/settingCompany",
     "pages/setting/checkCompanyName",
-    "pages/setting/setting",
-    "pages/setting/settingUser"
+    "pages/setting/settingUser",
+    "pages/setting/settingRoleUser",
+    "pages/setting/settingRoleMenu"
+    
   ],
   "window1": {
     "backgroundColor": "#F6F6F6",
@@ -40,8 +38,7 @@
     "enablePullDownRefresh": true,
     "navigationBarTextStyle": "black"
   },
-
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#37373b",
     "navigationBarTextStyle": "#fff",
     "navigationBarTitleText": "",

@@ -21,7 +21,8 @@ Page({
     currentLanguage: {},
     height: 0,
     scrollY: true,
-    defaultShopId: ""
+    defaultShopId: "",
+    canAddShop:false
   },
   swipeCheckX: 35, //激活检测滑动的阈值
   swipeCheckState: 0, //0未激活 1激活
@@ -34,7 +35,7 @@ Page({
   touchStartState: 0, // 开始触摸时的状态 0 未显示菜单 1 显示菜单
   swipeDirection: 0, //是否触发水平滑动 0:未触发 1:触发水平滑动 2:触发垂直滑动
 
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
     //获取设备的信息
     wx.getSystemInfo({
@@ -43,8 +44,7 @@ Page({
       }
     })
     this.pixelRatio = deviceInfo.pixelRatio;
-    var windowHeight = deviceInfo.windowHeight;
-    var height = windowHeight * 0.5;
+    
 
     var defaultShopId = wx.getStorageSync('defaultShopId');
     //获取选择的语言
@@ -52,7 +52,7 @@ Page({
     this.setData({
       currentLanguage: c_language,
       defaultShopId: defaultShopId || "",
-      height: height
+      
     })
 
 
@@ -60,7 +60,7 @@ Page({
     wx.setNavigationBarTitle({
       title: c_language.position_navigation_bar_title
     })
-    //that.getUserInfo();
+    that.getUserInfo();
 
     //console.log(this.data.currentLanguage.name);
 
@@ -79,6 +79,7 @@ Page({
         shopList: []
       })
       that.getUserInfo();
+
     }
   },
   /**
@@ -139,7 +140,7 @@ Page({
           }
           //获取门店
           that.getUserShop();
-
+          that.getMenus();
 
         }
 
@@ -177,9 +178,20 @@ Page({
         })
         util.showSuccess(that.data.currentLanguage.success)
         console.log('门店获取成功', result.data.data)
+        
+        
         that.setData({
           shopList: that.data.shopList.concat(result.data.data),
           nomore: result.data.data.length < that.data.pageSize ? true : false
+        })
+
+        //设置页面scroll-view 的高度
+        var windowHeight = deviceInfo.windowHeight;
+        var windowWidth = (deviceInfo.windowWidth / 750);
+        console.log(deviceInfo);
+        var height = (deviceInfo.windowWidth / 750) * 150 * that.data.shopList.length
+        that.setData({
+          height: height >= windowHeight * 0.5 ? windowHeight * 0.5 : height
         })
 
         wx.hideNavigationBarLoading() //完成停止加载
@@ -194,7 +206,31 @@ Page({
     }
     qcloud.request(options)
   },
-
+  getMenus:function(){
+    var that = this;
+    var options = {
+      url: config.service.allMenus,
+      login: true,
+      data: {
+      },
+      success(result) {
+        var menuids = [];
+        for (var i = 0, mLen = result.data.data.length; i < mLen;i++){
+          menuids.push(result.data.data[i].menu);
+        }
+        console.log(menuids);
+        app.globalData.userMenuids = menuids;
+        that.setData({
+          canAddShop: util.hasMenu("1")
+        })
+      },
+      fail(error) {
+        
+        console.log('request fail', error);
+      }
+    }
+    qcloud.request(options)
+  },
 
   //打开操作页面
   openOptions(event) {
@@ -259,7 +295,7 @@ Page({
     var that = this;
     var openId = that.data.userInfo.openId;
     var username = that.data.userInfo.username || that.data.userInfo.nickName;
-    var img = that.data.userInfo.avatarUrl
+    var img = that.data.userInfo.image || that.data.userInfo.avatarUrl
     var companyName = that.data.userInfo.company_name;
     var companyId = that.data.userInfo.company_id;
     console.log(that.data.userInfo);
@@ -299,8 +335,6 @@ Page({
     } catch (e) {
     }
   },
-
-
 
 
 
@@ -409,11 +443,28 @@ Page({
     this.translateXMsgItem(e.currentTarget.id, this.moveX, 500);
     //this.translateXMsgItem(e.currentTarget.id, 0, 0);
   },
+  //删除店铺按钮
   onDeleteMsgTap: function (e) {
     console.log(e.currentTarget.dataset.shopname + '&shopID=' + e.currentTarget.dataset.shopid);
-    wx.navigateTo({
-      url: '../msg/delWarn?shopName=' + e.currentTarget.dataset.shopname + '&shopID=' + e.currentTarget.dataset.shopid
-    })
+    var hasPm = util.hasMenu("1");
+    if (hasPm){
+      wx.navigateTo({
+        url: '../msg/delWarn?shopName=' + e.currentTarget.dataset.shopname + '&shopID=' + e.currentTarget.dataset.shopid
+      })
+
+    }else{
+      wx.showModal({
+        content: that.data.currentLanguage.setting_tip2,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
     //this.deleteMsgItem(e);
   },
   onDeleteMsgLongtap: function (e) {

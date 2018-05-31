@@ -1,0 +1,29 @@
+<view class='logintop'>
+  <image class="listimg fl" src="../../img/icon.png"></image>
+  <view class='fl logintext'>条码库存管理</view>
+</view>
+<view class="userinfo ">
+  <view class='userbox2'><image class="userinfo-avatar2 usershadow" src="{{userInfo.avatarUrl||'../../img/user-unlogin.png'}}" background-size="cover"></image></view>
+    
+</view>
+<view class='c45 tc f16 mt20'>{{userInfo.nickName||'用户尚未登录'}}</view>
+  <view class='c8 tc f14 gray  cpminfo'>
+    <view class='pr'wx:if="{{!userInfo.company_id&&userInfo.openId}}">首次登录完成将绑定公司<image class='edit' src='../image/edit.png' bindtap='settingCompany'></image></view>
+      <view class='pr'wx:if="{{userInfo.company_id&&userInfo.company_reviewed==0}}">等待公司审核</view>
+    </view>
+  <view class='sltbtn' style='background-color:#f8f8f8;'wx:if="{{!userInfo.openId}}">
+  <view class="weui-btn-area" >
+     <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="weui-btn" class="maincolor">一键登录</button>
+  </view>
+</view>  
+<view class='sltbtn2' style='background-color:#f8f8f8;' wx:if="{{!userInfo.company_id&&userInfo.openId}}">
+  <view class="weui-btn-area">
+      <button class="weui-btn maincolor">扫码绑定公司</button>
+      <button class="weui-btn weui-btn_default mt10" bindtap='settingCompany' >手动输入</button>    
+  </view>
+</view>
+<view class='sltbtn2' style='background-color:#f8f8f8;' wx:if="{{userInfo.company_id&&userInfo.company_reviewed==0}}">
+  <view class="weui-btn-area">
+      <button class="weui-btn maincolor" bindtap='revocationCompany'>撤销审核</button>
+  </view>
+</view>  

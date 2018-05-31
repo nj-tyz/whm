@@ -78,7 +78,7 @@ async function deleteShop(ctx, next) {
 
 async function shopUsers(ctx, next) {
   var shopId = ctx.query.shopId;
-  var result = await query("SELECT us.*,cs.user_info AS userInfo,cs.username from tb_user_shop us LEFT JOIN csessioninfo  cs on  us.open_id = cs.open_id  where us.shop = ?", [shopId]);
+  var result = await query("SELECT us.*,cs.user_info AS userInfo,cs.username,cs.image from tb_user_shop us LEFT JOIN csessioninfo  cs on  us.open_id = cs.open_id  where us.shop = ?", [shopId]);
   ctx.state.data = result;
 }
 

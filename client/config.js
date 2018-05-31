@@ -12,7 +12,7 @@
 
 //刀豆电脑
 //var host = 'https://a1c89d65.ngrok.io';
-var host = 'https://b00d4b96.ngrok.io';
+var host = 'https://25bf04e6.ngrok.io';
 
 var config = {
 
@@ -26,7 +26,9 @@ var config = {
     // 获取当前用户信息，用于测试会话
     getLoginUserUrl: `${host}/weapp/user/userInfo`,
     modifyUsername: `${host}/weapp/user/modifyUsername`,
-
+    modifyUserImage: `${host}/weapp/user/modifyUserImage`,
+    deleteUserCompany: `${host}/weapp/user/deleteUserCompany`,
+    
     // 上传图片接口
     uploadUrl: `${host}/weapp/upload`,
 
@@ -48,6 +50,9 @@ var config = {
     addProduct: `${host}/weapp/product/add`,
     searchProduct: `${host}/weapp/product/search`,
     updateProduct: `${host}/weapp/product/updateProduct`,
+    getById: `${host}/weapp/product/getById`,
+    updateProductInfo: `${host}/weapp/product/updateProductInfo`,
+    
 
     // 仓库接口
     getStoreById: `${host}/weapp/store/getById`,
@@ -77,6 +82,19 @@ var config = {
     auditUser: `${host}/weapp/company/auditUser`,
     removeUser: `${host}/weapp/company/removeUser`,
 
+    //角色接口
+    addRole: `${host}/weapp/role/addRole`,
+    roleList: `${host}/weapp/role/roleList`,
+    findRoleByOpenid: `${host}/weapp/role/findRoleByOpenid`,
+    updateUserRole: `${host}/weapp/role/updateUserRole`,
+    findRoleMenuByRole: `${host}/weapp/role/findRoleMenuByRole`,
+    updateRoleMenu: `${host}/weapp/role/updateRoleMenu`,
+
+    findRoleUser: `${host}/weapp/role/findRoleUser`,
+    outRoleUsers: `${host}/weapp/role/outRoleUsers`,
+
+    //菜单接口
+    allMenus: `${host}/weapp/menu/allMenus`
   }
 };
 

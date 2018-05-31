@@ -14,7 +14,8 @@ Page({
     price:0,
     shopID:0,
     currencyType:'$',
-    currentLanguage: {}
+    currentLanguage: {},
+    id:""
   },
 
   /**
@@ -27,11 +28,16 @@ Page({
     wx.setNavigationBarTitle({
       title: options.navigationBarTitle || "条码库存管理"
     })
+    
     this.setData({
       shopID: options.shopID || 0,
       currencyType: options.currencyType || '$',
-
+      cz : options.cz
     });
+    if (options.cz == 1) {
+      var productId = options.productId;
+      this.loadproduct(productId);
+    }
   },
 
   /**
@@ -154,40 +160,72 @@ Page({
       return;
     }
 
-
-
     //提交
     util.showBusy(that.data.currentLanguage.submiting)
+      var options;
+      if(that.data.cz == 1){
+        //修改的options
+        options = {
+          url: config.service.updateProductInfo,
+          login: true,
+          data: {
+            name: that.data.name,
+            barcode: that.data.barcode,
+            img: that.data.img,
+            price: that.data.price,
+            currencyType: that.data.currencyType,
+            id: that.data.id
+          },
+          success(result) {
+            if (result.data.data.errocode == 1) {
+              
+              util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.Product_existed);
+            } else {
+              wx.navigateTo({
+                url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.product_add_success + '&btn=' + that.data.currentLanguage.click_return
+              })
+            }
 
-    var options = {
-      url: config.service.addProduct,
-      login: true,
-      data: {
-        name: that.data.name,
-        barcode: that.data.barcode,
-        img: that.data.img,
-        price:that.data.price,
-        shopID: that.data.shopID,
-        currencyType: that.data.currencyType
-      },
-      success(result) {
-        if (result.data.data.errocode == 1) {
-          console.log(result);
-          util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.Product_existed);
-        } else {
-          console.log('添加商品成功', that.data.currencyType);
-          wx.navigateTo({
-          url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.product_add_success + '&btn=' + that.data.currentLanguage.click_return
-          })
+
+          },
+          fail(error) {
+            util.showModel(that.data.currentLanguage.submit_fail, error);
+            
+          }
         }
+      }else{
+        //新建的options
+        options = {
+          url: config.service.addProduct,
+          login: true,
+          data: {
+            name: that.data.name,
+            barcode: that.data.barcode,
+            img: that.data.img,
+            price:that.data.price,
+            shopID: that.data.shopID,
+            currencyType: that.data.currencyType
+          },
+          success(result) {
+            if (result.data.data.errocode == 1) {
+              console.log(result);
+              util.showModel(that.data.currentLanguage.submit_fail, that.data.currentLanguage.Product_existed);
+            } else {
+              console.log('添加商品成功', that.data.currencyType);
+              wx.navigateTo({
+              url: '../msg/success?title=' + that.data.currentLanguage.system_prompt + '&content=' + that.data.currentLanguage.product_add_success + '&btn=' + that.data.currentLanguage.click_return
+              })
+            }
 
 
-      },
-      fail(error) {
-        util.showModel(that.data.currentLanguage.submit_fail, error);
-        console.log('添加商品失败', error);
-      }
-    }
+          },
+          fail(error) {
+            util.showModel(that.data.currentLanguage.submit_fail, error);
+            console.log('添加商品失败', error);
+          }
+        }
+      }    
+
     qcloud.request(options)
 
   },
@@ -209,5 +247,35 @@ Page({
         })
       }
     })
+  },
+  loadproduct:function(id){
+    var that = this;
+
+    var options = {
+      url: config.service.getById,
+      login: true,
+      data: {
+        id:id
+      },
+      success(result) {
+        console.log(result.data.data);
+        var obj = result.data.data
+        that.setData({
+          name: obj.name,
+          barcode: obj.barcode,
+          img: obj.img,
+          price: obj.price,
+          id: obj.id,
+          currencyType: obj.currencyType
+        })
+
+
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.submit_fail, error);
+        console.log('添加商品失败', error);
+      }
+    }
+    qcloud.request(options)
   },
 })

@@ -156,7 +156,19 @@ async function updateProduct(ctx, next) {
 
   ctx.state.data = result;
 }
+async function updateProductInfo(ctx, next) {
+  console.log(ctx);
+  var id = ctx.query.id;
+  var imgurl = ctx.query.img;
+  var barcode = ctx.query.barcode;
+  var name = ctx.query.name;
+  var price = ctx.query.price;
+  var currencyType = ctx.query.currencyType;
 
+  var result = await query("update tb_product set img = ?,barcode =?,name =? ,price=?,currencyType=?where id = ?", [imgurl, barcode, name, price,currencyType,id]);
+
+  ctx.state.data = result;
+}
 
 
 module.exports = {
@@ -165,5 +177,6 @@ module.exports = {
   getone,
   getByBarCode,
   search,
-  updateProduct
+  updateProduct,
+  updateProductInfo
 }

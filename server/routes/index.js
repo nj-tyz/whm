@@ -16,6 +16,9 @@ router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态）
 router.get('/user/userInfo', validationMiddleware, controllers.user.userInfo)
 router.get('/user/modifyUsername',  controllers.user.modifyUsername)
+router.get('/user/modifyUserImage', controllers.user.modifyUserImage)
+router.get('/user/deleteUserCompany', validationMiddleware,controllers.user.deleteUserCompany)
+
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中
@@ -52,6 +55,8 @@ router.get('/product/getByBarCode', validationMiddleware,controllers.product.get
 router.get('/product/add', validationMiddleware,controllers.product.add)
 router.get('/product/search', controllers.product.search)
 router.get('/product/updateProduct', controllers.product.updateProduct)
+router.get('/product/getById', controllers.product.getone)
+router.get('/product/updateProductInfo', controllers.product.updateProductInfo)
 
 // --- 仓库接口 --- //
 router.get('/store/getListByShop', controllers.store.getListByShop)
@@ -81,5 +86,19 @@ router.get('/company/companyUsers', validationMiddleware, controllers.company.co
 router.get('/company/auditUser', validationMiddleware, controllers.company.auditUser)
 router.get('/company/removeUser',validationMiddleware, controllers.company.removeUser)
 
+
+// --- 角色接口 --- //
+router.get('/role/addRole', validationMiddleware, controllers.role.add)
+router.get('/role/roleList', validationMiddleware, controllers.role.list)
+router.get('/role/findRoleByOpenid', validationMiddleware, controllers.role.findRoleByOpenid)
+router.get('/role/updateUserRole', controllers.role.updateUserRole)
+router.get('/role/findRoleMenuByRole', controllers.role.findRoleMenuByRole)
+router.get('/role/updateRoleMenu', controllers.role.updateRoleMenu)
+
+router.get('/role/findRoleUser', controllers.role.findRoleUser)
+router.get('/role/outRoleUsers', validationMiddleware,controllers.role.outRoleUsers)
+
+//--- 菜单接口 ---//
+router.get('/menu/allMenus', validationMiddleware, controllers.menu.allMenus)
 
 module.exports = router

@@ -46,3 +46,9 @@ page,
     line-height: 2.3em;
     color: #cfcfcf;
 }
+
+.userinfo-companyname {
+  color: #ddd;
+   font-size: 30rpx;
+   text-align:center
+}

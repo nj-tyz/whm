@@ -13,7 +13,7 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+const app = getApp();
 
 // 显示繁忙提示
 var showBusy = text => wx.showLoading({
@@ -71,6 +71,19 @@ var getSystemInfo = function(){
   return info;
 }
 
+var hasMenu = (id) => {
 
-module.exports = { formatTime, showBusy, hideBusy, showSuccess, showModel, showLoadding, hideLoadding, trim }
+  var menuids = app.globalData.userMenuids;
+  var flag = false;
+  for (var i = 0, len = menuids.length; i < len ;i++){
+    if (id == menuids[i]){
+      
+        flag = true;
+        break;
+      }
+  }
+  return flag;
+}
+
+module.exports = { formatTime, showBusy, hideBusy, showSuccess, showModel, showLoadding, hideLoadding, trim, hasMenu }
 

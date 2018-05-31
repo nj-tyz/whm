@@ -16,8 +16,8 @@ Page({
 
     inputShowed: false,
     inputVal: "",
-
-
+    c_index:5,
+    showMod:false,
     //当前页面是否是一个选择器
     isselect: false,
 
@@ -131,7 +131,8 @@ Page({
       this.setData({
         pageNo: 1,
         nomore: false,
-        productList: []
+        productList: [],
+        showMod:false
       });
       that.getAllProduct();
     }
@@ -160,7 +161,8 @@ Page({
     this.setData({
       pageNo: 1,
       nomore: false,
-      productList: []
+      productList: [],
+      showMod: false
     });
     that.getAllProduct();
   },
@@ -181,7 +183,11 @@ Page({
   //产品库存
   showProductInfo: function (event) {
     var that = this;
-
+    if (that.data.showMod){
+      this.setData({
+        c_index: event.currentTarget.dataset.cindex
+      })
+    }else{
     //如果当前页面是为了选择商品打开的,则跳回上个页面,并把当前选中的barcode放入全局变量中
     if (this.data.isselect) {
       //通知上个页面刷新
@@ -193,6 +199,7 @@ Page({
       wx.navigateTo({
         url: '../product/productInfo?navigationBarTitle=' + that.data.currentLanguage.product_inventory +'&shopID=' + that.data.shopID + '&barcode=' + event.currentTarget.dataset.barcode
       })
+    }
     }
   },
 
@@ -262,5 +269,26 @@ Page({
     })
     //重新查询后台
     that.getAllProduct();
+  },
+  modifyP:function(){
+    var status = this.data.showMod ==true? false:true;
+    this.setData({
+      showMod: status
+    })
+  },
+  cancelBtn:function(){
+    this.setData({
+      showMod: false
+    })
+  },
+  modifyProduct:function(){
+    console.log(this.data.c_index);
+    var productid = this.data.productList[this.data.c_index].id;
+    
+    var that = this;
+    wx.navigateTo({
+      url: '../product/addProduct?cz=1&navigationBarTitle=' + that.data.currentLanguage.product_add + "&shopID=" + this.data.shopID + "&productId= " + productid 
+    })
+
   }
 })

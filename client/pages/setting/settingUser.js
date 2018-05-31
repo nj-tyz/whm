@@ -124,6 +124,7 @@ Page({
 
           userList[i].userInfo = JSON.parse(userList[i].userInfo);
           userList[i].userInfo.username = userList[i].username;
+          userList[i].userInfo.image = userList[i].image;
         }
         console.log(userList)
         that.setData({

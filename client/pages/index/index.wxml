@@ -3,14 +3,14 @@
 
   <!-- 用户登录测试 -->
   <view class="userinfo" bindtap="login">
-    <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '../../img/user-unlogin.png'}}" background-size="cover"></image>
+     <image class="userinfo-avatar" src="{{userInfo.image||userInfo.avatarUrl}}" background-size="cover"></image>
 
 
-     <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> {{currentLanguage.index_logbtn}} </button>
+     <!-- <button wx:if="{{!logged}}" class="weui-btn mini-btn" type="primary" size="mini" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> {{currentLanguage.index_logbtn}} </button> -->
 
 
 
-    <view wx:else>
+    <view >
       <!--语言设置-->
       <picker bindchange="changeLanguage" value="{{index}}" range="{{array}}">
         <view style='position:absolute;top:30rpx;left:30rpx' wx:if="{{currentLanguage.lan=='中文'}}">
@@ -27,17 +27,13 @@
       </view>
 
       <!--有公司-->
-      <view wx:if="{{userInfo.company_name}}">
+      <view>
 
 
-        <!--有公司,未审核-->
-        <view wx:if="{{userInfo.company_reviewed!=1}}" class="weui-flex userinfo-companyname">
-          <icon type="waiting" style="margin-right:5rpx" size="15" color="#FFBE00"></icon>
-          ({{currentLanguage.index_check_pending}}){{userInfo.company_name}}
-        </view>
+      
 
         <!--有公司,已审核-->
-        <view wx:else class="userinfo-companyname">
+        <view class="userinfo-companyname">
           {{userInfo.company_name}}
 
           <!--设置按钮-->
@@ -52,18 +48,15 @@
 
       </view>
 
-      <!--无公司-->
-      <view wx:else bindtap="settingCompany">
-        <text style='color:#FFBE00' class="userinfo-companyname">{{currentLanguage.index_no_company_name}}</text>
-        <image style="margin-left:10rpx" class="icon-35" src="../../img/edit.png" />
-      </view>
+     
+  
     </view>
 
   </view>
   <view class="page__bd">
     <view class="weui-panel weui-panel_access" wx:if="{{!waiting}}">
-      <view class="weui-panel__hd weui-flex">{{currentLanguage.index_in_shop}}
-        <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx" class="icon-35" src="../../img/add.png" />
+      <view class="weui-panel__hd weui-flex" >{{currentLanguage.index_in_shop}}
+        <image bindtap='addStore' style="position:absolute;top:30rpx;right:30rpx"  wx:if="{{canAddShop}}" class="icon-35" src="../../img/add.png" />
       </view>
       <view class="weui-panel__bd" wx:if="{{shopList.length>0}}">
         <!--
