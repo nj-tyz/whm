@@ -86,7 +86,7 @@ var lan_en = {
   warehouse_add: " Add Storage",
   warehouse_detail:"Detail",
 
-  position_navigation_bar_title: "B I M",
+  position_navigation_bar_title: "",
   position_search: "Search Position",
   position_modify: "Modify Position",
   position_modify_success: "Modify Position Successfully",
