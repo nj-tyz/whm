@@ -83,7 +83,7 @@ var lan_zh = {
   warehouse_add:"增加仓库",
   warehouse_detail:"仓库明细",
 
-  position_navigation_bar_title:"惠店管",
+  position_navigation_bar_title:"",
   position_search:"查找仓位",
   position_modify: "修改仓位",
   position_modify_success: "修改仓位成功",
