@@ -201,7 +201,28 @@ var lan_zh = {
 
   input_with_scan: "扫描绑定公司",
   input_with_type: "手动输入",
-  cancel_check:"撤销审核"
+  cancel_check:"撤销审核",
+
+  overstock:"过剩仓",
+  damage: "报废仓",
+  receive:"领取",
+  receiving:"领取中",
+
+  overstock_list:"过剩仓列表",
+  receive_list:"领取列表",
+  damage_list: "报废仓列表",
+
+  deliver:"发货",
+  delivering:"发货中",
+  complete:"完成",
+
+  input_receive:"请输入领取数量",
+
+  not_enough_overstock_amount:"数量过多!当前为",
+
+  damage_confirm:"废弃完成",
+  damage_cancel: "废弃取消",
+
 }
 
 module.exports = lan_zh;

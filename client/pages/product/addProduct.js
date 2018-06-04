@@ -136,7 +136,11 @@ Page({
       "name": e.detail.value
     })
   },
-
+  bindChangebarcode:function(e){
+    this.setData({
+      "barcode": e.detail.value
+    })
+  },
   bindChangePrice: function (e) {
     this.setData({
       "price": e.detail.value

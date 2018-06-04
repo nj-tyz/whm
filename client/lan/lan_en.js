@@ -203,7 +203,27 @@ var lan_en = {
 
   input_with_scan:"Scan to Join",
   input_with_type: "Input to Join",
-  cancel_check:"Cancel Checking"
+  cancel_check:"Cancel Checking",
+
+  overstock: "Overstock",
+  damage: "Damage",
+  receive:"Receive",
+  receiving:"Receiving",
+
+  overstock_list: "List of Overstock",
+  receive_list: "List of Receive",
+  damage_list: "List of Damage",
+
+  deliver: "Deliver",
+  delivering: "Delivering",
+  complete: "Complete",
+
+  input_receive:"Please Enter the Number of Receive",
+
+  not_enough_overstock_amount: "Not Enough Overstock Amount! Current:",
+
+  damage_confirm: "Damage Confirmed",
+  damage_cancel: "Damage Cancel",
 }
 
 module.exports = lan_en;

@@ -83,6 +83,12 @@ Page({
       //设置全局app.globalData.selectedBarcode为空
       app.globalData.selectedBarcode = "";
     }
+    if (app.globalData.selectedPositionId && app.globalData.selectedPositionId != ""){
+      that.getPositionById(app.globalData.selectedPositionId);
+      app.globalData.selectedPositionId = "";
+    }
+
+
   },
 
   /**
@@ -289,7 +295,7 @@ Page({
     }
 
     //校验出库数量是否大于库存数量
-    if (this.data.optionType == "out") {
+    if (this.data.optionType == "out"  ) {
       //出库判断库存
       var maxCount = this.data.currentInventory.count;
       if (this.data.optionCount > maxCount) {
@@ -343,8 +349,121 @@ Page({
       url: '../product/products?navigationBarTitle=SKU&shopID=' + that.data.shopID + "&isselect=" + true
     })
   },
+  //overstock
+  addOverstock:function(){
+    var that = this;
+    console.log(this.data)
+    //校验数据完整
+    if (this.data.optionCount == 0 || !this.data.currentStore.id || !this.data.currentProduct.id) {
+      util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.missing_data);
+      return;
+    }
+
+    //校验出库数量是否大于库存数量
+    if (this.data.optionType == "overstock") {
+      //出库判断库存
+      var maxCount = this.data.currentInventory.count;
+      if (this.data.optionCount > maxCount) {
+        util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.cant_more);
+        return;
+      }
+    }
 
 
+    //提交
+    util.showBusy(this.data.currentLanguage.loading)
+
+    var options = {
+      url: config.service.addOverStock,
+      login: true,
+      data: {
+        shopId: that.data.shopID,
+        storeId: that.data.currentStore.id,
+        positionId: that.data.currentStore.positionId,
+        productId: that.data.currentProduct.id,
+        total: that.data.optionCount
+      },
+      success(result) {
+         if (result.data.data.errocode == 1) {
+          util.showModel(that.data.currentLanguage.submit_fail, result.data.data.msg);
+        //   //重新查库存
+        //   that.getInventory();
+         } else {
+           util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.request_success);
+        //   console.log('更新库存提交成功', result);
+        //   //提交成功后初始化数据
+        //   that.init()
+        //   //提交成功后,标识需要刷新
+        //   app.globalData.needRefresh = true;
+         }
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.submit_fail, error);
+        console.log('更新库存提交失败', error);
+      }
+    }
+    qcloud.request(options)
+  },
+  //damage
+  addDamage:function(){
+    var that = this;
+    //校验数据完整
+    if (this.data.optionCount == 0 || !this.data.currentStore.id || !this.data.currentProduct.id) {
+      util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.missing_data);
+      return;
+    }
+
+    //校验出库数量是否大于库存数量
+    if (this.data.optionType == "damage") {
+      //出库判断库存
+      var maxCount = this.data.currentInventory.count;
+      if (this.data.optionCount > maxCount) {
+        util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.cant_more);
+        return;
+      }
+    }
+
+
+    //提交
+    util.showBusy(this.data.currentLanguage.loading)
+
+    var options = {
+      url: config.service.addDamage,
+      login: true,
+      data: {
+        shopId: that.data.shopID,
+        storeId: that.data.currentStore.id,
+        positionId: that.data.currentStore.positionId,
+        productId: that.data.currentProduct.id,
+        amount: that.data.optionCount
+      },
+      success(result) {
+        if (result.data.data.errocode == 1) {
+          util.showModel(that.data.currentLanguage.submit_fail, result.data.data.msg);
+          //   //重新查库存
+          //   that.getInventory();
+        } else {
+          util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.request_success);
+          //   console.log('更新库存提交成功', result);
+          //   //提交成功后初始化数据
+          //   that.init()
+          //   //提交成功后,标识需要刷新
+          //   app.globalData.needRefresh = true;
+        }
+      },
+      fail(error) {
+        util.showModel(that.data.currentLanguage.submit_fail, error);
+        console.log('更新库存提交失败', error);
+      }
+    }
+    qcloud.request(options)
+  },
+  selectPositon:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '../position/positionList?shopID=' + that.data.shopID + "&isselect=" + true
+    })
+  }
 
 
 })

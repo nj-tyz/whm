@@ -21,6 +21,7 @@ Page({
     currentLanguage: {},
     height: 0,
     scrollY: true,
+    downtip:false
   },
 
   /**
@@ -219,15 +220,25 @@ Page({
   },
   nomoreData:function(){
     var that = this;
-    wx.showModal({
-      content: that.data.currentLanguage.end_of_list,
-      showCancel: false,
-      success: function (res) {
-        if (res.confirm) {
-         
+    var status = this.data.downtip;
+    console.log(status);
+    if (status == false){
+      that.setData({
+        downtip: true
+      })
+      wx.showModal({
+        content: that.data.currentLanguage.end_of_list,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            that.setData({
+              downtip: false
+            })
+          }
         }
-      }
-    });
+      });
+    }
+    
   },
   findStore: function () {
     var that = this;

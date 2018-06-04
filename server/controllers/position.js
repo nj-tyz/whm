@@ -23,6 +23,19 @@ async function add(ctx, next) {
   ctx.state.data = result;
 }
 
+async function findAllByShop(ctx, next) {
+
+  var userinfo = await userutil.get(ctx, next);
+  var company = userinfo.company_id;
+  
+
+
+  var shopId = ctx.query.shopId;
+  var result = await query("SELECT   sposition.*, shop.id shopId,  store. NAME storeName,  shop. NAME shopName FROM  tb_store_position sposition LEFT JOIN tb_store store ON sposition.store = store.id LEFT JOIN tb_shop shop ON store.shop = shop.id WHERE   sposition.company =?  and shop.id =?  ORDER BY  sposition.id,    shop.id ", [company, shopId]);
+
+  ctx.state.data = result;
+}
+
 
 //搜索某个店铺下的仓库,必须传入shopid
 async function find(ctx, next) {
@@ -99,5 +112,6 @@ module.exports = {
   list,
   find,
   get,
-  update
+  update,
+  findAllByShop
 }

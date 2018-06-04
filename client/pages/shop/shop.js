@@ -243,6 +243,52 @@ Page({
       url: '../inventory/outPut?navigationBarTitle=' + that.data.currentShop.name + that.data.currentLanguage.out_in_put + '&shopID=' + this.data.shopID + '&optionType=' + 'in'
     })
   },
+  //overstock
+  openovestock:function(){
+    var that = this;
+    var hasPm = util.hasMenu("8");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../overstock/overstockList?shopID=' + that.data.shopID + "&shopName=" + that.data.currentShop.name
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
+  },
+  //damage
+  opendamage: function () {
+    var that = this;
+    var that = this;
+    var hasPm = util.hasMenu("8");
+    if (hasPm) {
+      wx.navigateTo({
+        url: '../damage/damageList?shopID=' + that.data.shopID + "&shopName=" + that.data.currentShop.name
+      })
+    } else {
+      wx.showModal({
+        content: that.data.currentLanguage.no_permission,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+
+          }
+        }
+      });
+
+    }
+    
+  },
+
   //收银
   cashier:function(){
     var that = this;

@@ -71,6 +71,7 @@ router.get('/position/add', validationMiddleware,controllers.position.add)
 router.get('/position/find',validationMiddleware, controllers.position.find)
 router.get('/position/get',validationMiddleware, controllers.position.get)
 router.get('/position/update', controllers.position.update)
+router.get('/position/findAllByShop', validationMiddleware, controllers.position.findAllByShop)
 
 // --- 库存接口 --- //
 router.get('/inventory/getBySidAndPid', controllers.inventory.getBySidAndPid)
@@ -100,5 +101,20 @@ router.get('/role/outRoleUsers', validationMiddleware,controllers.role.outRoleUs
 
 //--- 菜单接口 ---//
 router.get('/menu/allMenus', validationMiddleware, controllers.menu.allMenus)
+
+//--- overstock接口 ---//
+router.get('/overstock/add', validationMiddleware, controllers.overstock.add)
+router.get('/overstock/list', validationMiddleware, controllers.overstock.list)
+router.get('/overstock/getById', controllers.overstock.getById)  
+router.get('/overstock/addDetail', controllers.overstock.addDetail)  
+router.get('/overstock/updateUseableAmt', controllers.overstock.updateUseableAmt)  
+router.get('/overstock/updateDetailStatus', controllers.overstock.updateDetailStatus)  
+
+//--- damage接口 ---//
+router.get('/damage/add', validationMiddleware, controllers.damage.add) 
+router.get('/damage/list', validationMiddleware, controllers.damage.list)  
+router.get('/damage/updateStatus', controllers.damage.updateStatus)  
+router.get('/damage/cancel', validationMiddleware,controllers.damage.cancel)  
+
 
 module.exports = router

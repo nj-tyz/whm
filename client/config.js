@@ -12,8 +12,8 @@
 
 //刀豆电脑
 
-//var host = 'https://a1c89d65.ngrok.io';
-var host = 'https://25bf04e6.ngrok.io';
+var host = 'https://fa950a7b.ngrok.io';
+//var host = 'http://tuanzi.ngrok.wenshanshan.cn';
 
 
 var config = {
@@ -70,6 +70,8 @@ var config = {
     findPosition: `${host}/weapp/position/find`,
     getPosition: `${host}/weapp/position/get`,
     updatePositionNo: `${host}/weapp/position/update`,
+    findAllPositionByShop: `${host}/weapp/position/findAllByShop`,
+
     // 库存接口
     getInventoryBySidAndPid: `${host}/weapp/inventory/getBySidAndPid`,
     listInventory: `${host}/weapp/inventory/list`,
@@ -96,7 +98,22 @@ var config = {
     outRoleUsers: `${host}/weapp/role/outRoleUsers`,
 
     //菜单接口
-    allMenus: `${host}/weapp/menu/allMenus`
+    allMenus: `${host}/weapp/menu/allMenus`,
+
+    //
+    findOverStock: `${host}/weapp/overstock/list`,
+    addOverStock: `${host}/weapp/overstock/add`,
+    getOverstockById: `${host}/weapp/overstock/getById`,
+    addDetail: `${host}/weapp/overstock/addDetail`,
+    updateUseableAmt: `${host}/weapp/overstock/updateUseableAmt`,
+    updateDetailStatus: `${host}/weapp/overstock/updateDetailStatus`,
+    
+
+    //damage
+    addDamage: `${host}/weapp/damage/add`,
+    findDamage: `${host}/weapp/damage/list`,
+    updateDamageStatus: `${host}/weapp/damage/updateStatus`,
+    cancelDamage: `${host}/weapp/damage/cancel`,
   }
 };
 

@@ -24,6 +24,10 @@ App({
         name: "岗位管理", id: 6
       },{
         name: "出入库", id: 7
+      }, {
+        name: "overstock", id: 8
+      }, {
+        name: "damage", id: 9
       }]
       
     }

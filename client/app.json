@@ -1,5 +1,5 @@
 {
-  "pages": [  
+  "pages": [
     "pages/login/login",
     "pages/index/index",
     "pages/setting/setting",
@@ -18,18 +18,19 @@
     "pages/product/products",
     "pages/inventory/inventorys",
     "pages/inventory/outPut",
-
     "pages/msg/success",
     "pages/msg/faile",
     "pages/qrcode/show",
-
-    
     "pages/setting/settingCompany",
     "pages/setting/checkCompanyName",
     "pages/setting/settingUser",
     "pages/setting/settingRoleUser",
-    "pages/setting/settingRoleMenu"
-    
+    "pages/setting/settingRoleMenu",
+    "pages/overstock/overstockList",
+    "pages/overstock/receiveOverstock",
+    "pages/overstock/receiveProduct",
+    "pages/damage/damageList",
+    "pages/position/positionList"
   ],
   "window1": {
     "backgroundColor": "#F6F6F6",

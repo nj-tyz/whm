@@ -7,10 +7,9 @@
           <view class="weui-label">{{currentLanguage.out_put_type}}:</view>
         </view>
         <view class="weui-cell__bd">
-            <text wx:if = "{{optionType=='overstock'}}">overstock</text>
-            <text wx:if = "{{optionType=='damage'}}">damage</text>
-            <text wx:if = "{{optionType=='in'}}">{{currentLanguage.in_put}}</text>
-            <text wx:if = "{{optionType=='out'}}">{{currentLanguage.out_put}}</text>
+           
+            <text >{{currentLanguage.in_put}}</text>
+            
         </view>
       </view>
 
@@ -44,7 +43,7 @@
         <view class="weui-cell__hd">
           <view class="weui-label">{{currentLanguage.product}}:</view>
         </view>
-        <view class="weui-cell__bd" bindtap='scanProduct'>
+        <view class="weui-cell__bd" >
           <view>
             <image wx:if="{{currentProduct.img}}" class="icon-image" src="{{currentProduct.img}}"></image>
             <text class="wx-30-text" wx:if="{{currentProduct.name}}">{{currentProduct.name}}</text>
@@ -52,9 +51,8 @@
           </view>
 
         </view>
-        <view class="weui-cell__ft weui-cell__ft_in-access " bindtap='selectProduct'>
-          <image class="icon-image" src="../../img/find.png"></image>
-        </view>
+        
+       
       </view>
 
 
@@ -65,21 +63,19 @@
           <view class="weui-label">{{currentLanguage.quantity}}:</view>
         </view>
         <view class="weui-cell__bd">
-          <input bindinput="bingOptionCount" value="{{optionCount}}" class="weui-input" maxlength="3" type="number" bindfocus="checkNumber"  placeholder="{{currentLanguage.enter_quantity}}" />
+          {{optionCount}}
         </view>
       </view>
     </view>
-    <view class="weui-cells__tips" wx:if="{{currentInventory&&currentInventory.id}}">({{currentLanguage.current}}:{{currentInventory.count}})</view>
+   
 
 
+    <view class="weui-btn-area" >
+      <button  style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">{{currentLanguage.submit}}</button>
 
-    <view class="weui-btn-area" wx:if="{{cansubmit}}">
-      <button wx:if="{{optionType!='overstock'&&optionType!='damage'}}" style="width:90%;margin:50rpx;" bindtap='submitForm' type="primary">{{currentLanguage.submit}}</button>
-      <button wx:if="{{optionType=='overstock'}}" style="width:90%;margin:50rpx;" bindtap='addOverstock' type="primary">{{currentLanguage.submit}}</button>
-      <button wx:if="{{optionType=='damage'}}" style="width:90%;margin:50rpx;" bindtap='addDamage' type="primary">{{currentLanguage.submit}}</button>
     </view>
-    <view class="weui-btn-area" wx:else>
+    <!-- <view class="weui-btn-area" wx:else>
       <button style="width:90%;margin:50rpx;" bindtap='submitForm' disabled="true" type="primary">{{currentLanguage.no_permission}}</button>
-    </view>
+    </view> -->
   </view>
 </view>
