@@ -5,15 +5,17 @@
 // 此处主机域名修改成腾讯云解决方案分配的域名
 
 //tyzong正式服务
-//var host ="https://whm.wenshanshan.cn";
+var host ="https://whm.wenshanshan.cn";
 
 //测试环境
 //var host ="https://t0qyjxur.qcloud.la";
 
 //刀豆电脑
 
+
 var host = 'https://fa950a7b.ngrok.io';
 //var host = 'http://tuanzi.ngrok.wenshanshan.cn';
+
 
 
 var config = {

@@ -1,5 +1,5 @@
-<view class='logintop'>
-  <image class="listimg fl" src="../../img/icon.png"></image>
+<view class='logintop' style="display:none">
+  <image class="listimg fr" src="../../img/icon.png"></image>
   <view class='fl logintext'>{{currentLanguage.position_navigation_bar_title}}</view>
 </view>
 <view class="userinfo ">
