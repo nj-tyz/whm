@@ -1,0 +1,41 @@
+CREATE TABLE `tb_damage` (
+  `id` int(64) NOT NULL AUTO_INCREMENT,
+  `company` int(64) DEFAULT NULL,
+  `shop` int(64) DEFAULT NULL,
+  `product` int(64) DEFAULT NULL,
+  `amount` decimal(64,2) DEFAULT NULL,
+  `store` int(64) DEFAULT NULL,
+  `position` int(64) DEFAULT NULL,
+  `status` int(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `tb_overstock` (
+  `id` int(64) NOT NULL AUTO_INCREMENT,
+  `company` int(64) DEFAULT NULL,
+  `shop` int(64) DEFAULT NULL,
+  `store` int(64) DEFAULT NULL,
+  `position` int(64) DEFAULT NULL,
+  `product` int(64) DEFAULT NULL,
+  `total` decimal(64,2) DEFAULT NULL,
+  `useable` decimal(64,2) DEFAULT NULL,
+  `status` int(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `tb_overstock_detail` (
+  `id` int(64) NOT NULL AUTO_INCREMENT,
+  `company` int(64) DEFAULT NULL,
+  `shop` int(64) DEFAULT NULL,
+  `status` int(64) DEFAULT NULL,
+  `amount` decimal(64,0) DEFAULT NULL,
+  `osid` int(64) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+
+
