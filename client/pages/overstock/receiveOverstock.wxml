@@ -2,20 +2,28 @@
   
   <view class="page__bd">
     
-      <view class="weui-panel__hd weui-flex" >{{currentLanguage.add}}
-        <image bindtap='addOverstock' style="position:absolute;top:30rpx;right:30rpx"  class="icon-35" src="../../img/add.png" />
+      <view class="weui-panel__hd weui-flex" >{{currentLanguage.receive}}
+        <!-- <image bindtap='addOverstock' style="position:absolute;top:30rpx;right:30rpx"  class="icon-35" src="../../img/add.png" /> -->
+        <text  bindtap='addOverstock' style="position:absolute;top:30rpx;right:30rpx" class="iconfont icon-closed icon-35 wx-text-primary"></text>
       </view>
       <modal hidden="{{hiddenmodalput}}" title="{{currentLanguage.input_receive}}" confirm-text="{{currentLanguage.submit}}" cancel-text="{{currentLanguage.cancel}}" bindcancel="cancelDetail" bindconfirm="comfirmDetail">  
-        <input type='text'placeholder="" onblur="setAmount" />  
+        <input type='text'placeholder="" value="{{amount}}" onblur="setAmount" />  
       </modal>
       <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell" wx:for="{{overStock.detail}}">
               <view class="weui-cell__hd">
-                  <image src="{{item.shopImg}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                  <image src="{{item.shopImg}}" style="margin-right: 5px;vertical-align: middle;width:30px; height: 30px;"></image>
               </view>
               <view class="weui-cell__bd">
-                <view class="wx-30-text">{{item.shopName}}</view>
-                <view class="wx-30-text wx-text-primary">{{item.amount}}</view>
+                <view class="wx-30-text">
+                  <text class='c8'>{{currentLanguage.shop}} : </text>
+                  {{item.shopName}}
+                </view>
+                <view class="wx-30-text wx-text-primary">
+                  <text class='c8'>{{currentLanguage.application_number}} : </text>
+                  
+                  {{item.amount}}
+                </view>
               </view>
               <view class="weui-cell__ft" wx:if="{{isOwner}}">
                   <view wx:if="{{item.status == 0}}">

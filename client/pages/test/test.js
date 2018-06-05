@@ -1,9 +1,11 @@
 var deviceInfo ;
+var barcode = require('../../lib/barcode.js');
 Page({
   data: {
     msgList: [],
     height: 0,
-    scrollY: true
+    scrollY: true,
+    code:"https://www.baidu.com/"
   },
   swipeCheckX: 35, //激活检测滑动的阈值
   swipeCheckState: 0, //0未激活 1激活
@@ -21,6 +23,7 @@ Page({
         deviceInfo = res;
       }
     })
+    barcode.barcode('barcode', 'barcode', 340, 100);
     this.pixelRatio = deviceInfo.pixelRatio;
     var windowHeight = deviceInfo.windowHeight;
     var height = windowHeight;

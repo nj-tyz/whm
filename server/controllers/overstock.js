@@ -6,7 +6,7 @@ const inventory = require('./inventory.js')
 async function list(ctx, next) {
   var userinfo = await userutil.get(ctx, next);
   var companyId = userinfo.company_id;
-  var result = await query("select os.*, p.name AS productName ,p.img AS img from tb_overstock os left join tb_product p on p.id = os.product where os.company = ? ", [companyId]);
+  var result = await query("select os.*, p.name AS productName ,p.img AS img,s.name AS shopName from tb_overstock os left join tb_product p on p.id = os.product left join tb_shop s on s.id = os.shop where os.company = ? order by os.id desc ", [companyId]);
   ctx.state.data = result;
 }
 
@@ -46,9 +46,9 @@ async function getById(ctx, next) {
   var result2;
   //若果是发布人进入分发页面 能看到所有店铺的订单
   if (inShopId == outShopId){
-    result2 = await query("select osd.*,s.name AS shopName,s.img AS shopImg from tb_overstock_detail osd left join tb_shop s on osd.shop = s.id where  osid = ?", [id]);
+    result2 = await query("select osd.*,s.name AS shopName,s.img AS shopImg from tb_overstock_detail osd left join tb_shop s on osd.shop = s.id where  osid = ? order by osd.id desc", [id]);
   } else{
-    result2 = await query("select osd.*,s.name AS shopName,s.img AS shopImg from tb_overstock_detail osd left join tb_shop s on osd.shop = s.id where osd.shop = ? and osd.osid = ?", [inShopId,id]);
+    result2 = await query("select osd.*,s.name AS shopName,s.img AS shopImg from tb_overstock_detail osd left join tb_shop s on osd.shop = s.id where osd.shop = ? and osd.osid = ? order by osd.id desc", [inShopId,id]);
   }
   var finalResult = result[0];
   finalResult.detail = result2
@@ -83,9 +83,46 @@ async function updateUseableAmt(ctx, next) {
 }
 
 async function updateDetailStatus(ctx, next) {
+  //变更字表状态
   var status = ctx.query.status;
   var id = ctx.query.id;
   var result = await query("update tb_overstock_detail set status=? where id = ?", [status, id]);;
+  
+  ctx.state.data = result;
+}
+
+async function completeDetail(ctx, next) {
+  var userinfo = await userutil.get(ctx, next);
+  var companyId = userinfo.company_id;
+  var shopId = ctx.query.shopId;
+  var storeId = ctx.query.storeId;
+  var positionId = ctx.query.positionId;
+  var productId = ctx.query.productId;
+  var total = ctx.query.total;
+
+  var status = ctx.query.status;
+  var id = ctx.query.id;
+
+  //整理出库参数
+  var inventoryParmas = {};
+  inventoryParmas.shopId = shopId;
+  inventoryParmas.storeId = storeId;
+  inventoryParmas.positionId = positionId;
+  inventoryParmas.productId = productId;
+  inventoryParmas.optionCount = total;
+  inventoryParmas.optionType = "in";
+  ctx.query = inventoryParmas;
+  
+
+  //如果不选择仓位,则不操作库存
+  if (positionId != 0) {
+    await inventory.optionInventory(ctx, next);
+  }
+
+  //变更字表状态
+  
+  var result = await query("update tb_overstock_detail set status=? where id = ?", [status, id]);;
+
   ctx.state.data = result;
 }
 
@@ -96,5 +133,6 @@ module.exports = {
   getById,
   addDetail,
   updateUseableAmt,
-  updateDetailStatus
+  updateDetailStatus,
+  completeDetail
 }

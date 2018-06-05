@@ -27,10 +27,6 @@ Page({
    */
   onLoad: function (options) {
     var cansubmit = util.hasMenu("7");
-    var that = this;
-    // wx.setNavigationBarTitle({
-    //   title: options.navigationBarTitle || that.data.currentLanguage.position_navigation_bar_title
-    // })
     
     this.setData({
       shopID: options.shopId,
@@ -38,6 +34,10 @@ Page({
       detailId: options.detailId,
       optionCount: options.amt
     });
+    var that = this;
+     wx.setNavigationBarTitle({
+       title: that.data.currentLanguage.receive
+    })
 
     this.loadProductById(options.productId);
   },
@@ -170,8 +170,9 @@ Page({
   submitForm: function () {
     var that = this;
     console.log(this.data)
+    var detaiId = that.data.detailId;
     //校验数据完整
-    if (this.data.optionCount == 0 || !this.data.currentStore.id || !this.data.currentProduct.id) {
+    if (this.data.optionCount == 0 || !this.data.currentProduct.id) {
       util.showModel(this.data.currentLanguage.hint, this.data.currentLanguage.missing_data);
       return;
     }
@@ -179,17 +180,18 @@ Page({
 
     //提交
     util.showBusy(this.data.currentLanguage.loading)
-
+    console.log(detaiId);
     var options = {
-      url: config.service.optionInventory,
+      url: config.service.completeOverstockDetail,
       login: true,
       data: {
         shopId: that.data.shopID,
-        storeId: that.data.currentStore.id,
-        positionId: that.data.currentStore.positionId,
+        storeId: that.data.currentStore.id || 0,
+        positionId: that.data.currentStore.positionId || 0,
         productId: that.data.currentProduct.id,
-        optionType: that.data.optionType,
-        optionCount: that.data.optionCount
+        total: that.data.optionCount,
+        id: detaiId,
+        status: 2
       },
       success(result) {
       if (result.data.data.errocode == 1) {
@@ -197,16 +199,18 @@ Page({
         //   //重新查库存
         //   that.getInventory();
         } else {
-           util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.request_success);
-           that.receiveOver();
+          // util.showModel(that.data.currentLanguage.system_prompt, that.data.currentLanguage.request_success);
+           app.globalData.needRefresh = true;
+            wx.navigateBack({
+              delta: 1
+            })
+        
+        //   that.receiveOver();
         //   console.log('更新库存提交成功', result);
         //   //提交成功后初始化数据
         //   that.init()
         //   //提交成功后,标识需要刷新
-           app.globalData.needRefresh = true;
-           wx.navigateBack({
-              delta: 1
-           })
+           
        }
       },
       fail(error) {
@@ -242,30 +246,30 @@ Page({
     }
     qcloud.request(options)
   },
-  //改变子表的状态为完成状态
-  receiveOver: function () {
-    var that = this;
-    var detaiId = that.data.detailId;
-    var options = {
-      url: config.service.updateDetailStatus,
-      login: true,
-      data: {
-        id: detaiId,
-        status: 2
-      },
-      success(result) {
-        util.showSuccess(that.data.currentLanguage.success)
-        
-        wx.navigateBack({
-          delta: 1
-        })
-      },
-      fail(error) {
-        util.showModel(that.data.currentLanguage.request_fail, error);
-      }
-    }
-    qcloud.request(options)
-  },
+  // //改变子表的状态为完成状态
+  // receiveOver: function () {
+  //   var that = this;
+  //   var detaiId = that.data.detailId;
+  //   var options = {
+  //     url: config.service.updateDetailStatus,
+  //     login: true,
+  //     data: {
+  //       id: detaiId,
+  //       status: 2
+  //     },
+  //     success(result) {
+  //       //util.showSuccess(that.data.currentLanguage.success)
+  //       app.globalData.needRefresh = true;
+  //       wx.navigateBack({
+  //         delta: 1
+  //       })
+  //     },
+  //     fail(error) {
+  //       util.showModel(that.data.currentLanguage.request_fail, error);
+  //     }
+  //   }
+  //   qcloud.request(options)
+  // },
   selectPositon: function () {
     var that = this;
     wx.navigateTo({

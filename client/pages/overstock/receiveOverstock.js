@@ -17,7 +17,7 @@ Page({
     shopId:'',  //当前店铺
     isOwner:false, //是不是overstock发布店铺
     amount:0 , //本次领取的数量
-  
+    
     hiddenmodalput:true  //添加输入框是否显示
   },
 
@@ -42,18 +42,19 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    if (app.globalData.needRefresh) {
-      app.globalData.needRefresh = false;
-      var that = this;
-      that.loadOverstock();
-    }
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(app.globalData.needRefresh);
+    if (app.globalData.needRefresh) {
+      app.globalData.needRefresh = false;
+      var that = this;
+      that.loadOverstock();
+    }
   },
 
   /**
@@ -110,7 +111,8 @@ Page({
         var isOwner = (result.data.data.shop == that.data.shopId)
         that.setData({
           overStock: result.data.data,
-          isOwner: isOwner
+          isOwner: isOwner,
+          amount: result.data.data.useable
         })
         console.log(that.data.overStock);
         wx.hideNavigationBarLoading() //完成停止加载
@@ -235,22 +237,43 @@ Page({
   sendproduct:function(e){
     var that = this;
     var detaiId = e.currentTarget.dataset.id;
-    var options = {
-      url: config.service.updateDetailStatus,
-      login: true,
-      data: {
-        id: detaiId,
-        status: 1
-      },
-      success(result) {
-        //util.showSuccess(that.data.currentLanguage.success)
-        that.loadOverstock(that.data.osId)
-      },
-      fail(error) {
-        util.showModel(that.data.currentLanguage.request_fail, error);
+   
+    wx.showModal({
+      title: that.data.currentLanguage.hint,
+      content: that.data.currentLanguage.confirm_delivery,
+      confirmText: that.data.currentLanguage.confirm,
+      cancelText: that.data.currentLanguage.cancel,
+      success: function (res) {
+
+        //确认
+        if (res.confirm) {
+          var options = {
+            url: config.service.updateDetailStatus,
+            login: true,
+            data: {
+              id: detaiId,
+              status: 1
+            },
+            success(result) {
+              //util.showSuccess(that.data.currentLanguage.success)
+              that.loadOverstock(that.data.osId)
+            },
+            fail(error) {
+              util.showModel(that.data.currentLanguage.request_fail, error);
+            }
+          }
+          qcloud.request(options)
+        } else {
+
+        }
       }
-    }
-    qcloud.request(options)
+    });
+
+    
+    
+    
+    
+    
   },
   receiveProduct:function(e){
     var amt = e.currentTarget.dataset.amt;

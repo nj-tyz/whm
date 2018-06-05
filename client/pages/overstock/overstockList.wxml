@@ -2,8 +2,9 @@
   
   <view class="page__bd">
     
-      <view class="weui-panel__hd weui-flex" >{{currentLanguage.add}}overstock
-        <image bindtap='addOverstock' style="position:absolute;top:30rpx;right:30rpx"  class="icon-35" src="../../img/add.png" />
+      <view class="weui-panel__hd weui-flex" >{{currentLanguage.release}}OverStock
+        <!-- <image bindtap='addOverstock' style="position:absolute;top:30rpx;right:30rpx"  class="icon-35" src="../../img/add.png" /> -->
+        <text  bindtap='addOverstock' style="position:absolute;top:30rpx;right:30rpx" class="iconfont icon-fabu icon-35 wx-text-primary"></text>
       </view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell" wx:for="{{overstockList}}" data-productid="{{item.product}}" data-osid="{{item.id}}" bindtap="receive">
@@ -11,8 +12,12 @@
             <image src="{{item.img}}" style="margin-right: 5px;vertical-align: middle;width:60px; height: 60px;" mode="aspectFill"></image>
           </view>
           <view class="weui-cell__bd">
-            <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
-            <view class="wx-30-text wx-text-primary">{{item.useable}}/{{item.total}}</view>
+            <view class="wx-30-text "><text class='c8'>{{currentLanguage.shop}}:</text>{{item.shopName}}</view>
+            <view class="wx-30-text"><text class='c8'>{{currentLanguage.product}}:</text>{{item.productName}}</view>
+            <view class="wx-30-text wx-text-primary">
+              <text class='c8'>{{currentLanguage.available}}/{{currentLanguage.total}} : </text>
+              <text class='wx-text-primary'>{{item.useable}}/{{item.total}}</text>
+            </view>
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access ">
               {{currentLanguage.receive}}

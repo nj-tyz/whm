@@ -208,22 +208,41 @@ var lan_en = {
   overstock: "Overstock",
   damage: "Damage",
   receive:"Receive",
-  receiving:"Receiving",
+  receiving: "Wait for Reception",
 
   overstock_list: "List of Overstock",
   receive_list: "List of Receive",
   damage_list: "List of Damage",
 
   deliver: "Deliver",
-  delivering: "Delivering",
-  complete: "Complete",
+  delivering: "Waiting for Delivery",
+  complete: "Completed",
 
   input_receive:"Please Enter the Number of Receive",
 
   not_enough_overstock_amount: "Not Enough Overstock Amount! Current:",
 
-  damage_confirm: "Damage Confirmed",
-  damage_cancel: "Damage Cancel",
+  damage_confirmed: "Confirmed",
+  damage_canceled: "Rejected",
+
+  total: "Total",
+  available: "Available",
+
+  release:"Release",
+
+  application_number: "Applications",
+  confirm_delivery: "Confirm Delivery?",
+
+  application_scrap:"Application for scrap",
+
+  auto: "Auto",
+
+  damage_confirm_btn: "Approval",
+  damage_cancel_btn: "Reject",
+  damage_confirm:"Confirm Approval?",
+  damage_cancel: "Confirm Cancel?",
+
+  input_number_warn:"Please Enter Positive Integer"
 }
 
 module.exports = lan_en;

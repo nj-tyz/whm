@@ -206,22 +206,41 @@ var lan_zh = {
   overstock:"过剩仓",
   damage: "报废仓",
   receive:"领取",
-  receiving:"领取中",
+  receiving:"等待收货",
 
   overstock_list:"过剩仓列表",
   receive_list:"领取列表",
   damage_list: "报废仓列表",
 
   deliver:"发货",
-  delivering:"发货中",
-  complete:"完成",
+  delivering:"等待发货",
+  complete:"已完成",
 
   input_receive:"请输入领取数量",
 
   not_enough_overstock_amount:"数量过多!当前为",
 
-  damage_confirm:"废弃完成",
-  damage_cancel: "废弃取消",
+  damage_confirmed:"已完成",
+  damage_canceled: "已驳回",
+
+  total:"全部",
+  available:"可领取",
+
+  release:"发布",
+
+  application_number:"申请数量",
+  confirm_delivery:"确定发货?",
+
+  application_scrap: "申请报废",
+
+  auto:"自动获取",
+
+  damage_confirm_btn:"批准",
+  damage_cancel_btn: "驳回",
+  damage_confirm: "确认批准本条报废申请么?",
+  damage_cancel: "确定驳回么?",
+
+  input_number_warn: "请输入正整数"
 
 }
 

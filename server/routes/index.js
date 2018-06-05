@@ -109,6 +109,8 @@ router.get('/overstock/getById', controllers.overstock.getById)
 router.get('/overstock/addDetail', controllers.overstock.addDetail)  
 router.get('/overstock/updateUseableAmt', controllers.overstock.updateUseableAmt)  
 router.get('/overstock/updateDetailStatus', controllers.overstock.updateDetailStatus)  
+router.get('/overstock/completeDetail', validationMiddleware,controllers.overstock.completeDetail)  
+
 
 //--- damage接口 ---//
 router.get('/damage/add', validationMiddleware, controllers.damage.add) 

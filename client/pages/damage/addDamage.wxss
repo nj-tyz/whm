@@ -1,0 +1,23 @@
+.shop-outline .weui-flex__item {
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.shop-outline image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.shop-outline view {
+  text-align: center;
+}
+
+.weui-cell__bd {
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.cell__bd image {
+  height: 50rpx;
+  width: 50rpx;
+}

@@ -2,7 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var getCurrentLanguage = require('../../lan/currentLanguage')
-
+const app = getApp();
 
 Page({
 
@@ -41,7 +41,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(app.globalData.needRefresh);
+    if (app.globalData.needRefresh) {
+      app.globalData.needRefresh = false;
+      var that = this;
+      that.loadoverstock();
+    }
   },
 
   /**
@@ -110,7 +115,7 @@ Page({
   addOverstock:function(){
     var that = this;
     wx.navigateTo({
-      url: '../inventory/outPut?navigationBarTitle=' +  that.data.currentLanguage.overstock + '&shopID=' + that.data.shopId +"&optionType=overstock"
+      url: './addOverstock?navigationBarTitle=' +  that.data.currentLanguage.overstock + '&shopID=' + that.data.shopId +"&optionType=overstock"
     })
   },
   //领取页面

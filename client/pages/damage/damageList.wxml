@@ -2,14 +2,15 @@
   
   <view class="page__bd">
     
-      <view class="weui-panel__hd weui-flex" >{{currentLanguage.add}}
-        <image bindtap='addDamage' style="position:absolute;top:30rpx;right:30rpx"  class="icon-35" src="../../img/add.png" />
+      <view class="weui-panel__hd weui-flex" >{{currentLanguage.application_scrap}}
+        <!-- <image bindtap='addDamage' style="position:absolute;top:30rpx;right:30rpx"  class="icon-35" src="../../img/add.png" /> -->     
+        <text  bindtap='addDamage' style="position:absolute;top:30rpx;right:30rpx" class="iconfont icon-lajixiang icon-35 wx-text-primary"></text>
       </view>
       
       <view class="weui-cells weui-cells_after-title">
          <view class="weui-cell" wx:for="{{damageList}}">
               <view class="weui-cell__hd">
-                  <image src="{{item.productImg}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                  <image src="{{item.productImg}}" style="margin-right: 5px;vertical-align: middle;width:35px; height: 35px;"></image>
               </view>
               <view class="weui-cell__bd">
                 <view class="wx-30-text">{{currentLanguage.product}}:{{item.productName}}</view>
@@ -17,15 +18,15 @@
               </view>
               <view class="weui-cell__ft" >
                   <view wx:if="{{item.status == 0}}">
-                    <button class="weui-btn mini-btn" data-id="{{item.id}}"  type="primary" bindtap='comfireDamage' size="mini">{{currentLanguage.confirm}}</button>
-                    <button class="weui-btn mini-btn" type="primary" data-id="{{item.id}}" d plain="true" size="mini" bindtap='cancelDamage'>{{currentLanguage.canel}}</button>
+                    <button class="weui-btn mini-btn" data-id="{{item.id}}"  type="primary" bindtap='comfireDamage' size="mini">{{currentLanguage.damage_confirm_btn}}</button>
+                    <button class="weui-btn mini-btn" type="primary" data-id="{{item.id}}"  plain="true" size="mini" bindtap='cancelDamage'>{{currentLanguage.damage_cancel_btn}}</button>
                   
                   </view>
                   <view wx:if="{{item.status == 1}}">
-                    {{currentLanguage.damage_confirm}}
+                    {{currentLanguage.damage_confirmed}}
                   </view>
                   <view wx:if="{{item.status == 2}}">
-                    {{currentLanguage.damage_cancel}}
+                    {{currentLanguage.damage_canceled}}
                   </view>
               </view>
               

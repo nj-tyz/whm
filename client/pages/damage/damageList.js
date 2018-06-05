@@ -2,7 +2,7 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var getCurrentLanguage = require('../../lan/currentLanguage')
-
+const app = getApp();
 
 Page({
 
@@ -41,7 +41,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(app.globalData.needRefresh);
+    if (app.globalData.needRefresh) {
+      app.globalData.needRefresh = false;
+      var that = this;
+      that.loadDamage();
+    }
   },
 
   /**
@@ -85,7 +90,7 @@ Page({
     
       var that = this;
       wx.navigateTo({
-        url: '../inventory/outPut?shopID=' + that.data.shopId + "&optionType=damage"
+        url: './addDamage?shopID=' + that.data.shopId + "&optionType=damage"
       })
    
   },
@@ -116,8 +121,8 @@ Page({
   comfireDamage:function(e){
     var that = this;
     wx.showModal({
-      title: "提示",
-      content: "确定要废弃么",
+      title: that.data.currentLanguage.hint,
+      content: that.data.currentLanguage.damage_confirm,
       confirmText: that.data.currentLanguage.confirm,
       cancelText: that.data.currentLanguage.cancel,
       success: function (res) {
@@ -157,8 +162,8 @@ Page({
   cancelDamage:function(e){
     var that = this;
     wx.showModal({
-      title: "提示",
-      content: "确定要取消么",
+      title: that.data.currentLanguage.hint,
+      content: that.data.currentLanguage.damage_cancel,
       confirmText: that.data.currentLanguage.confirm,
       cancelText: that.data.currentLanguage.cancel,
       success: function (res) {

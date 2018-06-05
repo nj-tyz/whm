@@ -30,7 +30,9 @@
     "pages/overstock/receiveOverstock",
     "pages/overstock/receiveProduct",
     "pages/damage/damageList",
-    "pages/position/positionList"
+    "pages/position/positionList",
+    "pages/overstock/addOverstock",
+    "pages/damage/addDamage"
   ],
   "window1": {
     "backgroundColor": "#F6F6F6",
